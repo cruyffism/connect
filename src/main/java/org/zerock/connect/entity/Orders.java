@@ -25,7 +25,7 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "planNum" ,nullable = false)
-    private Procurement_plan planNum;
+    private ProcurementPlan planNum;
 
     @Column(nullable = false,length = 50)
     private Integer orderCount;

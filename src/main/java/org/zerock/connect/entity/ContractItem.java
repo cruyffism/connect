@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Contract_item {
+public class ContractItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -32,7 +32,7 @@ public class Contract_item {
     private String contractDate;
 
     @Column(nullable = false , length = 5)
-    private String contarctYn;
+    private String contractYn;
 
     @Column(nullable = false , length = 50)
     private String contractInfo;

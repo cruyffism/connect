@@ -41,6 +41,6 @@ public class Company {
     private String comAccount;
 
     @OneToMany(mappedBy = "businessId")
-    private List<Contract_item> items = new ArrayList<>();
+    private List<ContractItem> items = new ArrayList<>();
 
 }
