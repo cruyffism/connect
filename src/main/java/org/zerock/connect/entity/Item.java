@@ -3,9 +3,7 @@ package org.zerock.connect.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,9 +70,9 @@ public class Item {
 //    private List<Contract_item> contractItems;
 
     @OneToMany(mappedBy = "itemIndex")
-    private List<Procurement_plan> procurementPlans = new ArrayList<>();
+    private List<ProcurementPlan> procurementPlans = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "itemIndex")
-    private List<Contract_item> contractItems = new ArrayList<>();
+    private List<ContractItem> contractItems = new ArrayList<>();
 }

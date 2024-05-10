@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Procurement_plan {
+public class ProcurementPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
