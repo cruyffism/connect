@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -21,111 +22,15 @@
 </head>
 
 <body>
-
-  <!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-  <!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-  <nav class="navbar fixed-top" style="background-color: #59359a;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Connect</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Connect</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li> -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                조달관리
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="part1_insert_item.html">품목정보 등록</a></li>
-                <li><a class="dropdown-item" href="part1_insert_company.html">업체 등록</a></li>
-                <li><a class="dropdown-item" href="part1_insert_contract.html">계약 등록</a></li>
-                <li><a class="dropdown-item" href="part1_insert_plan.html">조달 계획 등록</a></li>
-                <!-- <li>
-                        <hr class="dropdown-divider">
-                      </li> -->
-                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                발주관리
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="part2_purchase_order.html">구매 발주서 관리</a></li>
-                <li><a class="dropdown-item" href="part2.progress_inspection.html">진척 검수 처리</a></li>
-                <li><a class="dropdown-item" href="#">발주진행 현황 관리</a></li>
-                <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                자재관리
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="part3_stock.html">입고 관리</a></li>
-                <li><a class="dropdown-item" href="part3_out.html">출고 관리</a></li>
-                <li><a class="dropdown-item" href="part3_publish.html">거래 명세서 발행</a></li>
-                <li><a class="dropdown-item" href="part3_cal_inven.html">재고금액 현황 관리</a></li>
-                <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                회원정보
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">로그인</a></li>
-                <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-
-              </ul>
-            </li>
-          </ul>
-          <!-- <form class="d-flex mt-3" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
-        </div>
-      </div>
-    </div>
-  </nav>
-
-
-
-  <div style="margin-top: 80px; width: 99%;  margin-left: 18px;  margin-bottom: 30px;">
+<header th:replace="/fragments/common:: navbar">
+</header>
+  <div style="margin-top: 100px; width: 99%;  margin-left: 20px;  margin-bottom: 30px;">
     <br>
-
-    
-      <h4 style="margin-left: 40px; width: 500px;">입고예정품목</h4>
-      <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 98%;">
+      <h4 style="margin: 20px 0 15px 40px; width: 500px;">입고예정품목</h4>
+      <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 98%;  height: 520px;">
       <!-- 옵션 검색 -->
-      <form action="#" method="get" style="padding: 15px 0 0 10px; width: 95%">
-        <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
+      <form action="#" method="get" style="padding: 15px 0 0 25px; width: 98%;">
+        <select style="padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
           <option value="option1">품목코드</option>
           <option value="option2">품목명</option>
           <option value="option3">옵션 3</option>
@@ -134,14 +39,14 @@
         <input type="text" placeholder="검색어를 입력하세요..." style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)">
 
         <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색</button>
-        <button type="button" class="btn btn-outline-success stockbtn" style="margin: 0 0 10px 0; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 100px; float: right;">입고</button>
+        <!-- <button type="button" class="btn btn-outline-success stockbtn" style="margin: 0 0 40px 10px; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 100px; float: right;">입고</button> -->
       </form>
    
     <!-- 옵션 검색 -->
 
 
-    <div style="min-height: 300px; max-height: 400px; overflow-y: scroll; width: 98%;">
-      <table class="table" style="margin: 20px 0 10px 5px;  ">
+    <div style="min-height: 300px; max-height: 400px; overflow-y: scroll; width: 99%;">
+      <table class="table" style="margin: 0 0 10px 15px; width: 99%; ">
 
 
         <thead class="table-secondary">
@@ -291,191 +196,191 @@
 
 
 
-  <div style="margin-top: 180px; width: 100%;  margin-left: 15px;  margin-bottom: 30px;">
+  <div style="margin-top: 180px; width: 98%;  margin-left: 2px;  margin-bottom: 30px;">
     <br>
 
-    <div>
-      <h4 style="margin-left: 30px;">입고 완료 품목</h4>
-      <hr style="width: 98%; ">
-      <!-- 옵션 검색 -->
-      <form action="#" method="get" style="margin-top: 30px; width: 95%">
-        <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
-          <option value="option1">품목코드</option>
-          <option value="option2">품목명</option>
-          <option value="option3">옵션 3</option>
-        </select>
+    
+      <h4 style="margin: 0 0 15px 40px;">입고 완료 품목</h4>
+      <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); height: 500px;">
+        <!-- 옵션 검색 -->
+        <form action="#" method="get" style="padding: 15px 0 0 15px; width: 97%">
+          <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
+            <option value="option1">품목코드</option>
+            <option value="option2">품목명</option>
+            <option value="option3">옵션 3</option>
+          </select>
 
-        <input type="text" placeholder="검색어를 입력하세요..." style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)">
+          <input type="text" placeholder="검색어를 입력하세요..." style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)">
 
-        <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색</button>
-        <button type="button" class="btn btn-outline-success stockbtn" style="margin: 0 0 10px 0; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 100px; float: right;">출고</button>
-        <button type="button" class="btn stockbtn" style="margin: 0 15px 10px 0; padding: 8px; background-color: rgb(41, 41, 226);  color: white; border-radius: 5px; width: 130px; float: right;">거래명세서발행</button>
-        
-      </form>
-    </div>
-    <!-- 옵션 검색 -->
-
-
-    <div style="min-height: 300px; max-height: 400px; overflow-y: scroll; width: 98%;">
-      <table class="table" style="margin-top: 20px;  ">
+          <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색</button>
+          <button type="button" class="btn btn-outline-success stockbtn" style="margin: 0 0 10px 0; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 100px; float: right;">출고</button>
+          <button type="button" class="btn stockbtn" style="margin: 0 15px 10px 0; padding: 8px; background-color: rgb(41, 41, 226);  color: white; border-radius: 5px; width: 130px; float: right;">거래명세서발행</button>
+          
+        </form>
+    
+        <!-- 옵션 검색 -->
 
 
-        <thead class="table-secondary">
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">품목코드</th>
-            <th scope="col">품목명</th>
-            <th scope="col">발주수량</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">입고수량</th>
-            <th scope="col">입고완료일</th>
-          </tr>
-        </thead>
+        <div style="min-height: 300px; max-height: 400px; overflow-y: scroll; width: 98%; margin: 0 0 0 15px;">
+          <table class="table" style="margin-top: 10px;  ">
 
 
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
+            <thead class="table-secondary">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">품목코드</th>
+                <th scope="col">품목명</th>
+                <th scope="col">발주수량</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">입고수량</th>
+                <th scope="col">입고완료일</th>
+              </tr>
+            </thead>
 
 
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="col" style="text-align: center;">
-              <div style="display: inline-block; text-align: center;">
-                <input type="radio" name="productRadio" value="product1">
-              </div>
-            </th>
-            <th scope="col">abcdefg1</th>
-            <th scope="col">품목명</th>
-            <th scope="col">500</th>
-            <th scope="col">발주일</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col">250</th>
-            <th scope="col">24/05/09</th>
-          </tr>
-        </tbody>
-      </table>
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
 
-    </div>
+
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="col" style="text-align: center;">
+                  <div style="display: inline-block; text-align: center;">
+                    <input type="radio" name="productRadio" value="product1">
+                  </div>
+                </th>
+                <th scope="col">abcdefg1</th>
+                <th scope="col">품목명</th>
+                <th scope="col">500</th>
+                <th scope="col">발주일</th>
+                <th scope="col">조달납기일</th>
+                <th scope="col">업체명</th>
+                <th scope="col">250</th>
+                <th scope="col">24/05/09</th>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
     
 
   </div>
