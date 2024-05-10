@@ -17,11 +17,11 @@ public class Assy {
 
     @Id
     @Column(nullable = false ,length = 10)
-    private String assy_code;
+    private String assyCode;
 
 
     @Column(nullable = false ,length = 20)
-    private String assy_name;
+    private String assyName;
 
     @OneToMany(mappedBy = "assy_code")
     private List<Item> items;

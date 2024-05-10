@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,13 +21,13 @@ public class Part {
 
     @Id
     @Column(nullable = false , length = 10)
-    private String  part_code;
+    private String  partCode;
 
     @Column(nullable = false , length = 20)
-    private String part_name;
+    private String partName;
 
-    @OneToMany(mappedBy = "part_code")
-    private List<Item> items;
+    @OneToMany(mappedBy = "partCode")
+    private List<Item> items = new ArrayList<>();
 
 
 

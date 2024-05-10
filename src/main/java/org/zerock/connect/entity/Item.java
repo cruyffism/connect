@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,75 +22,75 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false , length = 20)
-    private Long item_index;
+    private Long itemIndex;
 
     @ManyToOne
-    @JoinColumn(name = "product_id" ,nullable = false)
-    private Product product_id;
+    @JoinColumn(name = "productId" ,nullable = false)
+    private Product productId;
 
     @ManyToOne
 //    @ColumnDefault("0")
-    @JoinColumn(name = "business_id" , nullable = false)
-    private Company business_id;
+    @JoinColumn(name = "businessId" , nullable = false)
+    private Company businessId;
 
     @ManyToOne
-    @JoinColumn(name = "unit_code",nullable = false)
-    private  Unit unit_code;
+    @JoinColumn(name = "unitCode",nullable = false)
+    private  Unit unitCode;
 
     @ManyToOne
-    @JoinColumn(name = "assy_code" , nullable = false)
-    private Assy assy_code;
+    @JoinColumn(name = "assyCode" , nullable = false)
+    private Assy assyCode;
 
     @ManyToOne
-    @JoinColumn(name = "part_code" , nullable = false)
-    private Part part_code;
+    @JoinColumn(name = "partCode" , nullable = false)
+    private Part partCode;
 
     @Column(nullable = false , length = 30)
-    private String item_code;
+    private String itemCode;
 
     @Column(nullable = false ,length = 100)
-    private String item_name;
+    private String itemName;
 
     @Column(nullable = false , length = 50)
-    private int item_length;
+    private int itemLength;
 
     @Column(nullable = false , length = 50)
-    private int item_width;
+    private int itemWidth;
 
     @Column(nullable = false , length = 50)
-    private int item_height;
+    private int itemHeight;
 
     @Column(nullable = false , length = 50)
-    private String item_material;
+    private String itemMaterial;
 
     @Column(nullable = false , length = 200)
-    private String item_file;
+    private String itemFile;
 
 
     @ColumnDefault("0")
     @Column
-    private String contract_file;
+    private String contractFile;
 
     @ColumnDefault("0")
     @Column
-    private String contract_date;
+    private LocalDateTime contractDate;
 
     @ColumnDefault("0")
     @Column
-    private String contract_YN;
+    private String contractYn;
 
     @ColumnDefault("0")
     @Column
-    private String contract_info;
+    private String contractInfo;
 
     @ColumnDefault("0")
     @Column
-    private String contract_price;
+    private String contractPrice;
 
 //    @OneToMany(mappedBy = "con_item_no")
 //    private List<Contract_item> contractItems;
 
-    @OneToMany(mappedBy = "item_index")
-    private List<Procurement_plan> procurementPlans;
+    @OneToMany(mappedBy = "itemIndex")
+    private List<Procurement_plan> procurementPlans = new ArrayList<>();
 
 }

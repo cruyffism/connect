@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,21 +20,23 @@ import java.util.List;
 @Getter
 public class Product {
 
-
-
     @Id
     @Column(nullable = false , length = 30)
-    private String product_id;
-    @Column(nullable = false , length = 30)
-    private String product_name;
-    @Column(nullable = false , length = 30)
-    private int product_count;
-    @Column(nullable = false)
-    private String product_startdate;
-    @Column(nullable = false)
-    private String product_enddate;
+    private String productId;
 
-    @OneToMany(mappedBy = "product_id")
-    private List<Item> items;
+    @Column(nullable = false , length = 30)
+    private String productName;
+
+    @Column(nullable = false , length = 30)
+    private Integer productCount;
+
+    @Column(nullable = false)
+    private LocalDateTime productStartdate;
+
+    @Column(nullable = false)
+    private LocalDateTime productEnddate;
+
+    @OneToMany(mappedBy = "productId")
+    private List<Item> items = new ArrayList<>();
 
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,27 +20,27 @@ import java.util.List;
 public class Company {
     @Id
     @Column(nullable = false ,length = 50)
-    private String business_id;
+    private String businessId;
 
     @Column(nullable = false ,length = 50)
-    private String com_name;
+    private String comName;
 
     @Column(nullable = false ,length = 100)
-    private String com_add;
+    private String comAdd;
 
     @Column(nullable = false ,length = 30)
-    private String com_manager;
+    private String comManager;
 
     @Column(nullable = false ,length = 30)
     private String phone;
 
     @Column(nullable = false ,length = 50)
-    private String com_email;
+    private String comEmail;
 
     @Column(nullable = false ,length = 50)
-    private String com_account;
+    private String comAccount;
 
-    @OneToMany(mappedBy = "business_id")
-    private List<Item> items;
+    @OneToMany(mappedBy = "businessId")
+    private List<Item> items = new ArrayList<>();
 
 }

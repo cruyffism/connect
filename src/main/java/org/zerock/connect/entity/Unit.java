@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,6 @@ public class Unit {
     private String unit_name;
 
     @OneToMany(mappedBy = "unit_code")
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
 }

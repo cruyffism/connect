@@ -4,6 +4,8 @@ package org.zerock.connect.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,16 +20,16 @@ public class Procurement_plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false , length = 20)
-    private Long plan_num;
+    private Long planNum;
 
     @ManyToOne
-    @JoinColumn(name = "item_index" , nullable = false)
-    private Item item_index;
+    @JoinColumn(name = "itemIndex" , nullable = false)
+    private Item itemIndex;
 
     @Column(nullable = false)
-    private String plan_date;
+    private LocalDateTime planDate;
 
 
-    @OneToMany(mappedBy = "plan_num")
-    private List<Orders> orders;
+    @OneToMany(mappedBy = "planNum")
+    private List<Orders> orders = new ArrayList<>();
 }
