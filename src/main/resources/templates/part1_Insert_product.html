@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>커넥트 - 품목 등록</title>
+    <title>커넥트 - 제품 등록</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <style>
@@ -105,64 +105,40 @@
           </div>
         </nav>
 
-
-
-<!--      <div style="margin-top: 80px; width: 1870px;  margin-left: 10px; margin-right: 70px; margin-bottom: 30px; max-height: 400px; overflow-y: scroll;">-->
-<!--        <br>-->
-<!--        <h4 style="margin: 20px 0 30px 30px;">제품 선택하기</h4>-->
-<!--        <table class="table" style="margin: 10px 0 0 8px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); ">-->
-<!--            <thead class="table-secondary">-->
-<!--              <tr>-->
-<!--                <th scope="col">제품코드</th>-->
-<!--                <th scope="col">제품명</th>-->
-<!--                <th scope="col">생산수량</th>-->
-<!--                <th scope="col">생산시작일</th>-->
-<!--                <th scope="col">생산종료일</th>-->
-<!--                <th scope="col">추가하기</th>-->
-<!--              </tr>-->
-<!--            </thead>-->
-<!--          <th:block th:each ="product : ${AllProductList}">-->
-<!--            <tbody>-->
-<!--            <tr>-->
-<!--              <th scope="col" th:text="${product.productId}"></th>-->
-<!--              <th scope="col" th:text="${product.productName}"></th>-->
-<!--              <th scope="col" th:text="${product.productCount}"></th>-->
-<!--              <th scope="col" th:text="${product.productStartdate}"></th>-->
-<!--              <th scope="col" th:text="${product.productEnddate}"></th>-->
-<!--              <th scope="col"><button type="submit" class="btn btn-outline-success">선택하기</button></th>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--          </th:block>-->
-<!--          </table>-->
-<!--    </div>-->
-
-
-
   <div class="part" style="margin: 50px 30px 0 0; height: 900px; width: 650px;">
-    <h4 style="margin: 40px 0 15px 60px; ">품목등록</h4>
-    <form action="" style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;">
+    <h4 style="margin: 40px 0 15px 60px; ">제품등록</h4>
+    <form action="/part1/insert_Product_Confirm" style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;" method="post">
       <!-- <h4 style="margin: 30px 0 15px 60px; ">품목등록</h4> -->
       <table class="table" style="margin: 0 10px 0 30px; width: 500px; ">
         <thead>
           <tr>
-            <th scope="col" style="width: 100px;">품목정보</th>
+            <th scope="col" style="width: 100px;">제품정보</th>
             <th scope="col" style="text-align: center;">입력란</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">품목코드</th>
+            <th scope="row">제품코드</th>
             <td>
               <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="productId">
             </div>
           </td>
           </tr>
           <tr>
-            <th scope="row">품목명</th>
+            <th scope="row">제품이름</th>
             <td>
               <div class="input-group">
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="productName">
+              </div>
+            </td>
+
+          </tr>
+          <tr>
+            <th scope="row">생산수량</th>
+            <td>
+              <div class="input-group">
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="productCount">
               </div>
             </td>
 
@@ -186,57 +162,7 @@
               </select>
             </td>
           </tr> -->
-          <tr>
-            <th scope="row" style="text-align: center; line-height: 150px;">규격</th>
-            <td colspan="2">              
-            <div class="input-group">
-              <div class="input-group mb-3">
-                <span class="input-group-text">가로(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">세로(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">높이(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-            </div>
-          </td>
-          </tr>
-          <tr>
-            <th scope="row" style="text-align: center; line-height: 150px;">분류</th>
-            <td colspan="2">              
-            <div class="input-group">
-              <div class="input-group mb-3">
-                <span class="input-group-text">대분류</span>
-                <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
 
-                  <th:block th:each ="Unit : ${UnitList}">
-                    <option value="${Unit.unitName}" th:text = "${Unit.unitName}"></option>
-                  </th:block>
-
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">중분류</span>
-                <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
-                  <th:block th:each ="Assy : ${AssyList}">
-                    <option value="${Assy.assyName}" th:text = "${Assy.assyName}"></option>
-                  </th:block>
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">소분류</span>
-                <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
-                  <th:block th:each ="Part : ${PartList}">
-                    <option value="${Part.partName}" th:text = "${Part.partName}"></option>
-                  </th:block>
-                </select>
-              </div>
-            </div>
-          </td>
           </tr>
           <!-- <tr>
             <th scope="row">도면번호</th>
@@ -244,12 +170,7 @@
               <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
             </div></td>
           </tr> -->
-          <tr>
-            <th scope="row">도면파일</th>
-            <td colspan="2">              <div class="input-group">
-              <input type="file" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-            </div></td>
-          </tr>
+
           <!-- <tr>
             <th scope="row">중량</th>
             <td colspan="2">              <div class="input-group">
@@ -257,16 +178,23 @@
             </div></td>
           </tr> -->
           <tr>
-            <th scope="row">재질</th>
+            <th scope="row">생산시작일</th>
             <td colspan="2">              <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+              <input type="datetime-local" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="productStartdate">
+            </div></td>
+          </tr>
+
+          <tr>
+            <th scope="row">생산종료일</th>
+            <td colspan="2">              <div class="input-group">
+              <input type="datetime-local" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="productEnddate">
             </div></td>
           </tr>
 
         </tbody>
       </table>
       <div style="margin: 40px 0 0 220px;">
-      <button type="submit" class="btn btn-outline-success">품목정보 등록</button>
+      <button type="submit" class="btn btn-outline-success">제품정보 등록</button>
       <br>
       <br>  
     </div>
@@ -278,35 +206,31 @@
 
     <div style=" overflow-y: scroll; width: 1200px; height: 1000px;"  class="part">
       <br>
-      <h4 style="margin: 60px 0 20px 70px;">등록된 품목정보</h4>
+      <h4 style="margin: 60px 0 20px 70px;">등록된 제품정보</h4>
       <form style="width: 1150px; margin-left: 10px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); height: 800px; padding: 1px 2px;">
         <table class="table" style="margin-top: 2px; width: 1145px; " >
             <thead class="table-secondary">
               <tr>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">가로</th>
-                <th scope="col">세로</th>
-                <th scope="col">높이</th>
-<!--                <th scope="col">도면파일</th>-->
-                <th scope="col">재질</th>
+                <th scope="col">제품ID</th>
+                <th scope="col">제품명</th>
+                <th scope="col">생산수량</th>
+                <th scope="col">생산시작일</th>
+                <th scope="col">생산종료일</th>
               </tr>
             </thead>
+          <th:block th:each ="product : ${AllProductList}">
             <tbody>
               <tr>
                 <!-- for문돌리기 -->
-                <th:block th:each ="ItemList : ${ItemList}">
-                  <th scope="col" th:text = "${ItemList.itemCode}"></th>
-                  <th scope="col" th:text = "${ItemList.itemName}"></th>
-                  <th scope="col" th:text = "${ItemList.itemLength}"></th>
-                  <th scope="col" th:text = "${ItemList.itemWidth}"></th>
-                  <th scope="col" th:text = "${ItemList.itemHeight}"></th>
-<!--                  <th scope="col" th:text = "${ItemList.itemFIle}">-->
-                  <th scope="col" th:text = "${ItemList.itemMaterial}">
-                </th:block>
-
+                  <th scope="col" th:text="${product.productId}"></th>
+                <th scope="col" th:text="${product.productName}"></th>
+                <th scope="col" th:text="${product.productCount}"></th>
+                <th scope="col" th:text="${product.productStartdate}"></th>
+                <th scope="col" th:text="${product.productEnddate}"></th>
               </tr>
             </tbody>
+          </th:block>
+
           </table>
         </form>
     </div>

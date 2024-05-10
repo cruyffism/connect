@@ -21,10 +21,10 @@ public class Unit {
 
     @Id
     @Column(nullable = false ,length = 10)
-    private String  unit_code;
+    private String  unitCode;
 
     @Column(nullable = false ,length = 20)
-    private String unit_name;
+    private String unitName;
 
     @OneToMany(mappedBy = "unitCode")
     private List<Item> items = new ArrayList<>();
