@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.connect.Service.Part1Service;
 import org.zerock.connect.entity.*;
 
-import javax.sound.sampled.Port;
 import java.util.List;
 
 @Controller
@@ -42,7 +41,7 @@ public class Part1Controller {
 //        model.addAttribute("AllProductList",AllProductList);
 
 
-        return "/part1_Insert_item";
+        return "/part1_insert_item";
     }
 //  신규 품목 등록
     @PostMapping("/insert_Item_Confirm")
@@ -60,7 +59,7 @@ public class Part1Controller {
         List<Product> AllProductList = part1Service.AllProductlist();
 //        System.out.println(AllProductList);
         model.addAttribute("AllProductList",AllProductList);
-        return "/part1_Insert_product";
+        return "part1_insert_product";
     }
 
     
