@@ -186,7 +186,10 @@
                           <th scope="col" th:text="${product.productCount}"></th>
                           <th scope="col" th:text="${product.productStartdate}"></th>
                           <th scope="col" th:text="${product.productEnddate}"></th>
-                          <th scope="col"><button type="submit" class="btn btn-outline-success">선택하기</button></th>
+<!--                          <th scope="col"><a th:href="@{select_product_confirm}"  th:value ="${product.productId}" th:name="productId">선택하기</a></th>-->
+                          <th scope="col"><a th:href="@{insert_Item(productId=${product.productId})}">선택하기</a></th>
+<!--                          <button type="submit" class="btn btn-outline-success" >선택하기</button>-->
+
                         </tr>
                         </tbody>
                       </th:block>

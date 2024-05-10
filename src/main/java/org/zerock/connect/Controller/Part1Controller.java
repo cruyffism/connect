@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.connect.Service.Part1Service;
 import org.zerock.connect.entity.*;
 
@@ -24,7 +25,7 @@ public class Part1Controller {
 
 //    Part1_insert_item 품목등록화면
     @GetMapping("/insert_Item")
-    public String part1_insert(Model model){
+    public String part1_insert(Model model, @RequestParam("productId")String productId , Product product){
 
         List<Unit> UnitList = part1Service.findUnitList();
         List<Part> PartList = part1Service.findPartList();
@@ -36,6 +37,13 @@ public class Part1Controller {
 
         List<Item> ItemList = part1Service.findItemList();
         model.addAttribute("ItemList",ItemList);
+
+        System.out.println("선택된 productId : " + productId);
+
+        Product product1 = part1Service.findByProductId(productId);
+
+        model.addAttribute("selectproduct",product1);
+        System.out.println(product1);
 
 //        List<Product> AllProductList = part1Service.AllProductlist();
 //        System.out.println(AllProductList);
@@ -82,6 +90,12 @@ public class Part1Controller {
 
         return "/part1_select_product";
     }
+
+//    @GetMapping("/select_product_confirm")
+//    public String select_product_confirm(@RequestParam("productId")String productId , Product product){
+//        System.out.println(productId);
+//        return "redirect:/part1/insert_Item";
+//    }
 
 
 

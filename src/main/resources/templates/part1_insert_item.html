@@ -107,34 +107,34 @@
 
 
 
-<!--      <div style="margin-top: 80px; width: 1870px;  margin-left: 10px; margin-right: 70px; margin-bottom: 30px; max-height: 400px; overflow-y: scroll;">-->
-<!--        <br>-->
-<!--        <h4 style="margin: 20px 0 30px 30px;">제품 선택하기</h4>-->
-<!--        <table class="table" style="margin: 10px 0 0 8px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); ">-->
-<!--            <thead class="table-secondary">-->
-<!--              <tr>-->
-<!--                <th scope="col">제품코드</th>-->
-<!--                <th scope="col">제품명</th>-->
-<!--                <th scope="col">생산수량</th>-->
-<!--                <th scope="col">생산시작일</th>-->
-<!--                <th scope="col">생산종료일</th>-->
-<!--                <th scope="col">추가하기</th>-->
-<!--              </tr>-->
-<!--            </thead>-->
-<!--          <th:block th:each ="product : ${AllProductList}">-->
-<!--            <tbody>-->
-<!--            <tr>-->
-<!--              <th scope="col" th:text="${product.productId}"></th>-->
-<!--              <th scope="col" th:text="${product.productName}"></th>-->
-<!--              <th scope="col" th:text="${product.productCount}"></th>-->
-<!--              <th scope="col" th:text="${product.productStartdate}"></th>-->
-<!--              <th scope="col" th:text="${product.productEnddate}"></th>-->
-<!--              <th scope="col"><button type="submit" class="btn btn-outline-success">선택하기</button></th>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--          </th:block>-->
-<!--          </table>-->
-<!--    </div>-->
+      <div style="margin-top: 80px; width: 1870px;  margin-left: 10px; margin-right: 70px; margin-bottom: 30px; max-height: 400px; overflow-y: scroll;">
+        <br>
+        <h4 style="margin: 20px 0 30px 30px;">선택한 제품 목록</h4>
+        <table class="table" style="margin: 10px 0 0 8px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); ">
+            <thead class="table-secondary">
+              <tr>
+                <th scope="col">제품코드</th>
+                <th scope="col">제품명</th>
+                <th scope="col">생산수량</th>
+                <th scope="col">생산시작일</th>
+                <th scope="col">생산종료일</th>
+
+              </tr>
+            </thead>
+          <th:block th:each ="product : ${selectproduct}">
+            <tbody>
+            <tr>
+              <th scope="col" th:text="${product.productId}"></th>
+              <th scope="col" th:text="${product.productName}"></th>
+              <th scope="col" th:text="${product.productCount}"></th>
+              <th scope="col" th:text="${product.productStartdate}"></th>
+              <th scope="col" th:text="${product.productEnddate}"></th>
+
+            </tr>
+            </tbody>
+          </th:block>
+          </table>
+    </div>
 
 
 
