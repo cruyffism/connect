@@ -2,11 +2,7 @@ package org.zerock.connect.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -17,7 +13,7 @@ import java.util.List;
 @ToString
 @DynamicUpdate //값이 있는 것만 업데이트
 
-public class member {
+public class Member {
 
     @Id
     @Column
