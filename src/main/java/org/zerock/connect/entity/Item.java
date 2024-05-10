@@ -26,10 +26,10 @@ public class Item {
     @JoinColumn(name = "product_id" ,nullable = false)
     private Product product_id;
 
-    @ManyToOne
-//    @ColumnDefault("0")
-    @JoinColumn(name = "business_id" , nullable = false)
-    private Company business_id;
+//    @ManyToOne
+////    @ColumnDefault("0")
+//    @JoinColumn(name = "business_id" , nullable = false)
+//    private Company business_id;
 
     @ManyToOne
     @JoinColumn(name = "unit_code",nullable = false)
@@ -65,25 +65,6 @@ public class Item {
     private String item_file;
 
 
-    @ColumnDefault("0")
-    @Column
-    private String contract_file;
-
-    @ColumnDefault("0")
-    @Column
-    private String contract_date;
-
-    @ColumnDefault("0")
-    @Column
-    private String contract_YN;
-
-    @ColumnDefault("0")
-    @Column
-    private String contract_info;
-
-    @ColumnDefault("0")
-    @Column
-    private String contract_price;
 
 //    @OneToMany(mappedBy = "con_item_no")
 //    private List<Contract_item> contractItems;
@@ -91,4 +72,7 @@ public class Item {
     @OneToMany(mappedBy = "item_index")
     private List<Procurement_plan> procurementPlans;
 
+
+    @OneToMany(mappedBy = "item_index")
+    private List<Contract_item> contractItems;
 }

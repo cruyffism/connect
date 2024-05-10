@@ -40,6 +40,6 @@ public class Company {
     private String com_account;
 
     @OneToMany(mappedBy = "business_id")
-    private List<Item> items;
+    private List<Contract_item> contractItems;
 
 }
