@@ -17,13 +17,13 @@ public class Member {
 
     @Id
     @Column
-    private String MemberId;
+    private String memberId;
 
     @Column
-    private String MemberDep;
+    private String memberDep;
 
     @Column
-    private String MemberPw;
+    private String memberPw;
 
 
 }
