@@ -21,15 +21,12 @@ public class Progress {
     @Column(length = 20)
     private Long progressNum;
 
-    @OneToMany(mappedBy = "Progress", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "progress", fetch = FetchType.LAZY)
     private List<Receive> receives = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="orderNum")
     private Orders orders;
-
-    @Column
-    private Long orderNum;
 
     @Column
     private Integer progressCount;

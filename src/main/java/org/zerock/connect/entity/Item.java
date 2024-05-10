@@ -75,6 +75,6 @@ public class Item {
     private List<Procurement_plan> procurementPlans = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "item_index")
-    private List<Contract_item> contractItems;
+    @OneToMany(mappedBy = "itemIndex")
+    private List<Contract_item> contractItems = new ArrayList<>();
 }

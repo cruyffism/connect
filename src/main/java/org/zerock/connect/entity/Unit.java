@@ -26,7 +26,7 @@ public class Unit {
     @Column(nullable = false ,length = 20)
     private String unit_name;
 
-    @OneToMany(mappedBy = "unit_code")
+    @OneToMany(mappedBy = "unitCode")
     private List<Item> items = new ArrayList<>();
 
 }

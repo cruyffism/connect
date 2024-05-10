@@ -4,6 +4,7 @@ package org.zerock.connect.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,6 @@ public class Assy {
     @Column(nullable = false ,length = 20)
     private String assyName;
 
-    @OneToMany(mappedBy = "assy_code")
-    private List<Item> items;
+    @OneToMany(mappedBy = "assyCode")
+    private List<Item> items = new ArrayList<>();
 }

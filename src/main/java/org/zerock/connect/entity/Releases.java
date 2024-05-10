@@ -3,7 +3,6 @@ package org.zerock.connect.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 
-public class Release {
+public class Releases {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +23,6 @@ public class Release {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="receiveNum")
     private Receive receive;
-
-    @Column
-    private Long receiveNum;
 
     @Column
     private Integer releaseCount;

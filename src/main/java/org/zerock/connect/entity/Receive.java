@@ -26,7 +26,7 @@ public class Receive {
     private Progress progress;
 
     @OneToMany(mappedBy = "receive", fetch = FetchType.LAZY)
-    private List<Release> releases = new ArrayList<>();
+    private List<Releases> releases = new ArrayList<>();
 
     @Column
     private Integer receiveCount;
