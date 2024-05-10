@@ -5,16 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/Con")
-public class MemberController {
+@RequestMapping("Part2")
+public class Part2Controller {
 
-    @GetMapping("/login")
-    public String login(){
-        System.out.println("로그인페이지 이동");
-        return "/login";
+    @GetMapping("purchase_order")
+    public String purchases_order(){
+        return "/part2_purchase_order";
     }
-
-
-
-
 }
