@@ -12,7 +12,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @NoArgsConstructor
 @ToString
 @DynamicUpdate //값이 있는 것만 업데이트
-
 public class Member {
 
     @Id

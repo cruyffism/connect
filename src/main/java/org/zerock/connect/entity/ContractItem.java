@@ -3,6 +3,7 @@ package org.zerock.connect.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @ToString
@@ -11,6 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
+@DynamicUpdate
 public class ContractItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

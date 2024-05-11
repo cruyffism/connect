@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.repository.Modifying;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@DynamicUpdate
 public class Company {
     @Id
     @Column(nullable = false ,length = 50)
@@ -32,7 +35,7 @@ public class Company {
     private String comManager;
 
     @Column(nullable = false ,length = 30)
-    private String phone;
+    private String comPhone;
 
     @Column(nullable = false ,length = 50)
     private String comEmail;
