@@ -71,21 +71,26 @@ public class Part1Controller {
 //    }
 
     @PostMapping("/insert_Item_Confirm")
-    public String insert_Item_Confirm(@ModelAttribute("item") Item item ,@ModelAttribute("assy") Assy assy ,
-                                      @ModelAttribute("part") Part part ,@ModelAttribute("unit") Unit unit ,
-                                      @ModelAttribute("productId") Product product, Model model){
+    public String insert_Item_Confirm(Item item,@RequestParam("file")  MultipartFile file,@RequestParam("productId")String productId,
+                                       Model model){
 
-        Item insertItem = part1Service.saveItem(item);
-        System.out.println("insertItem222 = " + insertItem);
+
+//        System.out.println("insertItem222 = " + insertItem);
 //        String savedFile = uploadFileService.upload(file);
 //        item.setItemFile(savedFile);
 //        Product selectProduct = part1Service.findByProductId(productId);
 //        item.setProductId(selectProduct);
 
+        String savedFile = uploadFileService.upload(file);
 
+        item.setItemFile(savedFile);
+        Product selectProduct = part1Service.findByProductId(productId);
+        item.setProduct(selectProduct);
 
-        List<Item> itemList = part1Service.findItemList();
-        model.addAttribute("itemList",itemList);
+        Item insertItem = part1Service.saveItem(item);
+//
+//        List<Item> itemList = part1Service.findItemList();
+//        model.addAttribute("itemList",itemList);
         return "redirect:/part1/insert_Item";
     }
 
