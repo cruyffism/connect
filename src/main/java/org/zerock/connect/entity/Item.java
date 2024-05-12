@@ -69,4 +69,115 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<ContractItem> contractItems = new ArrayList<>();
 
+    public Long getItemIndex() {
+        return itemIndex;
+    }
+
+    public void setItemIndex(Long itemIndex) {
+        this.itemIndex = itemIndex;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public Assy getAssy() {
+        return assy;
+    }
+
+    public void setAssy(Assy assy) {
+        this.assy = assy;
+    }
+
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
+    }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getItemLength() {
+        return itemLength;
+    }
+
+    public void setItemLength(int itemLength) {
+        this.itemLength = itemLength;
+    }
+
+    public int getItemWidth() {
+        return itemWidth;
+    }
+
+    public void setItemWidth(int itemWidth) {
+        this.itemWidth = itemWidth;
+    }
+
+    public int getItemHeight() {
+        return itemHeight;
+    }
+
+    public void setItemHeight(int itemHeight) {
+        this.itemHeight = itemHeight;
+    }
+
+    public String getItemMaterial() {
+        return itemMaterial;
+    }
+
+    public void setItemMaterial(String itemMaterial) {
+        this.itemMaterial = itemMaterial;
+    }
+
+    public String getItemFile() {
+        return itemFile;
+    }
+
+    public void setItemFile(String itemFile) {
+        this.itemFile = itemFile;
+    }
+
+    public List<ProcurementPlan> getProcurementPlans() {
+        return procurementPlans;
+    }
+
+    public void setProcurementPlans(List<ProcurementPlan> procurementPlans) {
+        this.procurementPlans = procurementPlans;
+    }
+
+    public List<ContractItem> getContractItems() {
+        return contractItems;
+    }
+
+    public void setContractItems(List<ContractItem> contractItems) {
+        this.contractItems = contractItems;
+    }
 }
