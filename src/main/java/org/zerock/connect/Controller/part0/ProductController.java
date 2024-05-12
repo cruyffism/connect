@@ -38,7 +38,7 @@ public class ProductController {
     //제품 등록 리스트 아작스 + 검색
     @GetMapping("/productListAjax")
     public String productListAjax(@RequestParam("searchText") String searchText, Model model,
-                                   @PageableDefault(size = 10, sort = "productId", direction = Sort.Direction.ASC) Pageable pageable) {
+                                  @PageableDefault(size = 10, sort = "productId", direction = Sort.Direction.ASC) Pageable pageable) {
         logger.info("searchText : {}", searchText);
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -54,8 +54,8 @@ public class ProductController {
 
         return "/part0/productListAjax";
     }
-    
-    
+
+
 
     //신규 제품 등록
     @PostMapping("/saveProduct")

@@ -57,7 +57,7 @@ public class ItemController {
     }
 
 
-//    품목 등록 화면폼
+    //    품목 등록 화면폼
     @GetMapping("/itemForm")
     public String itemForm(Model model, @RequestParam("productId")String productId){
 
@@ -124,8 +124,8 @@ public class ItemController {
 
         Part part = new Part();
         part.setPartCode(partCode);
-        
-        
+
+
         Item item = new Item(); //객체 생성
         item.setProduct(product);
         item.setUnit(unit);
@@ -144,7 +144,7 @@ public class ItemController {
 
         //item 저장
         Item result = itemService.saveItem(item);
-        
+
         // 상단 제품값 뿌려줘야해서
         Product product1 = itemService.findByProductId(productId);
         model.addAttribute("product",product1);

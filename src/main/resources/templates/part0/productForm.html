@@ -25,9 +25,9 @@
 
 <div class="part" style="margin: 50px 30px 0 0; height: 900px; width: 650px;">
     <h4 style="margin: 40px 0 15px 60px; ">제품등록</h4>
-    <form action="/part1/saveProduct"
+    <form th:action="@{/part0/saveProduct}"
           style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;"
-          method="post">
+          th:method="post">
         <!-- <h4 style="margin: 30px 0 15px 60px; ">품목등록</h4> -->
         <table class="table" style="margin: 0 10px 0 30px; width: 500px; ">
             <thead>
@@ -43,7 +43,7 @@
                     <div class="d-flex justify-content-between">
                         <div style="position: relative; display: flex; flex-wrap: wrap; align-items: stretch;">
                             <input type="text" class="form-control" id="productId"
-                                   aria-label="Dollar amount (with dot and two decimal places)" name="productId">
+                                   aria-label="Dollar amount (with dot and two decimal places)" name="productId" required>
                         </div>
                         <div>
                             <button id="productIdCheck" type="button" class="btn btn-outline-success" onclick="return productIdCheckAjax()">중복체크</button>
@@ -56,7 +56,7 @@
                 <td>
                     <div class="input-group">
                         <input type="text" class="form-control"
-                               aria-label="Dollar amount (with dot and two decimal places)" id="productName" name="productName">
+                               aria-label="Dollar amount (with dot and two decimal places)" id="productName" name="productName" required>
                     </div>
                 </td>
             </tr>
@@ -66,7 +66,7 @@
                 <td>
                     <div class="input-group">
                         <input type="text" class="form-control"
-                               aria-label="Dollar amount (with dot and two decimal places)"  id="productCount" name="productCount">
+                               aria-label="Dollar amount (with dot and two decimal places)"  id="productCount" name="productCount" required>
                     </div>
                 </td>
 
@@ -76,7 +76,7 @@
                 <td colspan="2">
                     <div class="input-group">
                         <input type="datetime-local" class="form-control"
-                               aria-label="Dollar amount (with dot and two decimal places)" id="productStartdate" name="productStartdate">
+                               aria-label="Dollar amount (with dot and two decimal places)" id="productStartdate" name="productStartdate" required>
                     </div>
                 </td>
             </tr>
@@ -86,7 +86,7 @@
                 <td colspan="2">
                     <div class="input-group">
                         <input type="datetime-local" class="form-control"
-                               aria-label="Dollar amount (with dot and two decimal places)" id="productEnddate" name="productEnddate">
+                               aria-label="Dollar amount (with dot and two decimal places)" id="productEnddate" name="productEnddate" required>
                     </div>
                 </td>
             </tr>

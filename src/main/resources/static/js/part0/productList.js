@@ -42,7 +42,7 @@ function productIdCheckAjax() {
             type: 'GET',//get매핑이니까 get 타입
             cache: false,
             data: {productId : productId}, //프론트엔드에서 백엔드로 보내주는 값(signup.html >> UserController)
-                                         // 이제 username 에 alsrl가 들어가서 백엔드에서 @RequestParam String username 요렇게 매개변수로 받을수잇져!
+            // 이제 username 에 alsrl가 들어가서 백엔드에서 @RequestParam String username 요렇게 매개변수로 받을수잇져!
             dataType:'json',   //return 타입을 의미한다!
             // 여기까지 api 쏠 준비 완료
             async: true,

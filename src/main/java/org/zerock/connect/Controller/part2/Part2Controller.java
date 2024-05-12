@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("Part2")
+@RequestMapping("part2")
 public class Part2Controller {
 
     @GetMapping("purchase_order")
