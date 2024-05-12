@@ -69,7 +69,7 @@ if (selectedRadio) {
 var selectedValue = selectedRadio.value;
 
 // 선택된 값으로 URL을 만들어서 다음 페이지로 이동
-window.location.href = 'part3_publish.html?selected=' + encodeURIComponent(selectedValue);
+window.location.href = 'publishForm.html?selected=' + encodeURIComponent(selectedValue);
 } else {
 alert('품목을 선택해주세요!');
 }

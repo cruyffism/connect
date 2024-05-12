@@ -24,7 +24,7 @@ public class Item {
     @Column(nullable = false , length = 20)
     private Long itemIndex;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "productId" ,nullable = false)
     private Product product;
 

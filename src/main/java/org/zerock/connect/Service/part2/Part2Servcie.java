@@ -1,4 +1,4 @@
-package org.zerock.connect.Service;
+package org.zerock.connect.Service.part2;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.zerock.connect.Service;
+package org.zerock.connect.Service.part1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.zerock.connect.repository.*;
 import java.util.List;
 
 @Service
-public class Part1Service {
+public class ItemService {
 
     @Autowired
     ProductRepository productRepository;
@@ -33,13 +33,12 @@ public class Part1Service {
         return productRepository.findByProductCount(productCount);
     }
 
-    public List<Product> AllProductlist(){
-        return productRepository.findAll();
+    //제품선택화면 AJAX + 검색
+    //제품 등록 리스트 아작스 + 검색
+    public List<Product> productListAjax(String searchText){
+        return productRepository.findByProductIdContainingOrderByProductId(searchText);
     }
 
-    public Product saveProduct(Product product){
-        return productRepository.save(product);
-    }
 
     public List<Unit> findUnitList(){
         return unitRepository.findAll();
@@ -59,7 +58,8 @@ public class Part1Service {
         return itemRepository.save(item);
     }
 
-
-
-
+    // 품목 리스트 아작스
+    public List<Item> itemListAjax(String productId) {
+        return itemRepository.findByProductProductId(productId);
+    }
 }
