@@ -1,233 +1,233 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>커넥트 - 품목 등록</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!--임포트: jquery를 js에서 사용하기 위해서 -->
+    <script type="text/javascript" th:src="@{/js/part1_insert_item.js}"></script>
     <style>
-.part{
-  float: left;
-}
-.part::-webkit-scrollbar{
-  display: none;
-}
+        .part {
+            float: left;
+        }
+
+        .part::-webkit-scrollbar {
+            display: none;
+        }
 
     </style>
-  </head>
-  <body>
-  <header th:replace="/fragments/common:: navbar">
-  </header>
+</head>
+<body>
+<header th:replace="/fragments/common:: navbar">
+</header>
 
-      <div style="margin-top: 80px; width: 1870px;  margin-left: 10px; margin-right: 70px; margin-bottom: 30px; max-height: 400px; overflow-y: scroll;">
-        <br>
-        <h4 style="margin: 20px 0 30px 30px;">선택한 제품 목록</h4>
-        <table class="table" style="margin: 10px 0 0 8px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); ">
-            <thead class="table-secondary">
-              <tr>
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">생산수량</th>
-                <th scope="col">생산시작일</th>
-                <th scope="col">생산종료일</th>
+<div style="margin-top: 80px; width: 1870px;  margin-left: 10px; margin-right: 70px; margin-bottom: 30px; max-height: 400px; overflow-y: scroll;">
+    <br>
+    <h4 style="margin: 20px 0 30px 30px;">선택한 제품 목록</h4>
+    <table class="table" style="margin: 10px 0 0 8px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); ">
+        <thead class="table-secondary">
+        <tr>
+            <th scope="col">제품코드</th>
+            <th scope="col">제품명</th>
+            <th scope="col">생산수량</th>
+            <th scope="col">생산시작일</th>
+            <th scope="col">생산종료일</th>
 
-              </tr>
-            </thead>
-          <th:block th:each ="product : ${selectproduct}">
+        </tr>
+        </thead>
+        <th:block th:each="product : ${selectproduct}">
             <tbody>
             <tr>
-              <th scope="col" th:text="${product.productId}"></th>
-              <th scope="col" th:text="${product.productName}"></th>
-              <th scope="col" th:text="${product.productCount}"></th>
-              <th scope="col" th:text="${product.productStartdate}"></th>
-              <th scope="col" th:text="${product.productEnddate}"></th>
+                <th scope="col" th:text="${product.productId}"></th>
+                <th scope="col" th:text="${product.productName}"></th>
+                <th scope="col" th:text="${product.productCount}"></th>
+                <th scope="col" th:text="${product.productStartdate}"></th>
+                <th scope="col" th:text="${product.productEnddate}"></th>
 
             </tr>
             </tbody>
-          </th:block>
-          </table>
-    </div>
+        </th:block>
+    </table>
+</div>
 
 
-
-  <div class="part" style="margin: 50px 30px 0 0; height: 900px; width: 650px;">
+<div class="part" style="margin: 50px 30px 0 0; height: 900px; width: 650px;">
     <h4 style="margin: 40px 0 15px 60px; ">품목등록</h4>
-    <form action="" style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;">
-      <!-- <h4 style="margin: 30px 0 15px 60px; ">품목등록</h4> -->
-      <table class="table" style="margin: 0 10px 0 30px; width: 500px; ">
-        <thead>
-          <tr>
-            <th scope="col" style="width: 100px;">품목정보</th>
-            <th scope="col" style="text-align: center;">입력란</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">품목코드</th>
-            <td>
-              <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-            </div>
-          </td>
-          </tr>
-          <tr>
-            <th scope="row">품목명</th>
-            <td>
-              <div class="input-group">
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-            </td>
+    <form th:action="@{/part1/insert_Item_Confirm}"
+          style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;"
+          th:method="post">
+        <!-- <h4 style="margin: 30px 0 15px 60px; ">품목등록</h4> -->
+        <input type="hidden" id="productId" name="productId" th:value="${selectproduct.productId}">
+        <table class="table" style="margin: 0 10px 0 30px; width: 500px; ">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 100px;">품목정보</th>
+                <th scope="col" style="text-align: center;">입력란</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">제품코드</th>
+                <td>
+                    <div class="input-group">
+                    </div>
+                    <!--            <th:block th:each ="product : ${selectproduct}">-->
+                    <!--            <input type="text" disabled  class="form-control"  aria-label="Dollar amount (with dot and two decimal places)" th:value="${selectproduct.productId}" th:name="productId">-->
+                    <span th:text="${selectproduct.productId}" th:value="${selectproduct.productId}"
+                          th:name="productId" ></span>
 
-          </tr>
-          <!-- <tr>
-            <th scope="row">약칭</th>
-            <td colspan="2">
-              <div class="input-group">
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-            </td>
-          </tr> -->
-          <!-- <tr>
-            <th scope="row">품목구분</th>
-            <td colspan="2">             
-              <select class="form-select" aria-label="Default select example" style="width: 400px;">
-                <option selected>품목정보를 선택하세요</option>
-                <option value="1">선택1</option>
-                <option value="2">선택2</option>
-                <option value="3">선택3</option>
-              </select>
-            </td>
-          </tr> -->
-          <tr>
-            <th scope="row" style="text-align: center; line-height: 150px;">규격</th>
-            <td colspan="2">              
-            <div class="input-group">
-              <div class="input-group mb-3">
-                <span class="input-group-text">가로(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">세로(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">높이(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-              </div>
-            </div>
-          </td>
-          </tr>
-          <tr>
-            <th scope="row" style="text-align: center; line-height: 150px;">분류</th>
-            <td colspan="2">              
-            <div class="input-group">
-              <div class="input-group mb-3">
-                <span class="input-group-text">대분류</span>
-                <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
 
-                  <th:block th:each ="Unit : ${UnitList}">
-                    <option value="${Unit.unitName}" th:text = "${Unit.unitName}"></option>
-                  </th:block>
+                    <!--            </th:block>-->
+                    <!--            placeholder="${selectproduct.productId}"-->
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">품목코드</th>
+                <td>
+                    <div class="input-group">
+                    </div>
+                    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)"
+                           name="itemCode">
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">품목명</th>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                               aria-label="Dollar amount (with dot and two decimal places)" name="itemName">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" style="text-align: center; line-height: 150px;">규격</th>
+                <td colspan="2">
+                    <div class="input-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">가로(mm)</span>
+                            <input type="text" class="form-control"
+                                   aria-label="Dollar amount (with dot and two decimal places)" name="itemLength">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">세로(mm)</span>
+                            <input type="text" class="form-control"
+                                   aria-label="Dollar amount (with dot and two decimal places)" name="itemWidth">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">높이(mm)</span>
+                            <input type="text" class="form-control"
+                                   aria-label="Dollar amount (with dot and two decimal places)" name="itemHeight">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" style="text-align: center; line-height: 150px;">분류</th>
+                <td colspan="2">
+                    <div class="input-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">대분류</span>
+                            <select id="unitSelect" name="unit" style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); " onchange="updateUnitSelectedOption()">
+                                <option value="none">== 대분류 선택 ==</option>
+                                <th:block th:each="Unit : ${UnitList}">
+                                    <option th:value="${Unit.unitCode}" th:text="${Unit.unitName}"></option>
+                                </th:block>
 
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">중분류</span>
-                <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
-                  <th:block th:each ="Assy : ${AssyList}">
-                    <option value="${Assy.assyName}" th:text = "${Assy.assyName}"></option>
-                  </th:block>
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">소분류</span>
-                <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
-                  <th:block th:each ="Part : ${PartList}">
-                    <option value="${Part.partName}" th:text = "${Part.partName}"></option>
-                  </th:block>
-                </select>
-              </div>
-            </div>
-          </td>
-          </tr>
-          <!-- <tr>
-            <th scope="row">도면번호</th>
-            <td colspan="2">              <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-            </div></td>
-          </tr> -->
-          <tr>
-            <th scope="row">도면파일</th>
-            <td colspan="2">              <div class="input-group">
-              <input type="file" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-            </div></td>
-          </tr>
-          <!-- <tr>
-            <th scope="row">중량</th>
-            <td colspan="2">              <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-            </div></td>
-          </tr> -->
-          <tr>
-            <th scope="row">재질</th>
-            <td colspan="2">              <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-            </div></td>
-          </tr>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">중분류</span>
+                            <select id="assySelect" name="assy" style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); " onchange="updateAssySelectedOption()">
+                                <option value="none">== 중분류 선택 ==</option>
+                                <th:block th:each="Assy : ${AssyList}">
+                                    <option th:value="${Assy.assyCode}" th:text="${Assy.assyName}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">소분류</span>
+                            <select id="partSelect" name="part" style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); " onchange="updatePartSelectedOption()">
+                                <option value="none">== 소분류 선택 ==</option>
+                                <th:block th:each="Part : ${PartList}">
+                                    <option th:value="${Part.partCode}" th:text="${Part.partName}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">도면파일</th>
+                <td colspan="2">
+                    <div class="input-group">
+                        <input type="file" class="form-control"
+                               aria-label="Dollar amount (with dot and two decimal places)" name="file">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">재질</th>
+                <td colspan="2">
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                               aria-label="Dollar amount (with dot and two decimal places)" name="itemMaterial">
+                    </div>
+                </td>
+            </tr>
 
-        </tbody>
-      </table>
-      <div style="margin: 40px 0 0 220px;">
-      <button type="submit" class="btn btn-outline-success">품목정보 등록</button>
-      <br>
-      <br>  
-    </div>
+            </tbody>
+        </table>
+        <div style="margin: 40px 0 0 220px;">
+            <button type="submit" class="btn btn-outline-success">품목정보 등록</button>
+            <br>
+            <br>
+        </div>
     </form>
-  </div>
+</div>
 
 
-
-
-    <div style=" overflow-y: scroll; width: 1200px; height: 1000px;"  class="part">
-      <br>
-      <h4 style="margin: 60px 0 20px 70px;">등록된 품목정보</h4>
-      <form style="width: 1150px; margin-left: 10px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); height: 800px; padding: 1px 2px;">
-        <table class="table" style="margin-top: 2px; width: 1145px; " >
+<div style=" overflow-y: scroll; width: 1200px; height: 1000px;" class="part">
+    <br>
+    <h4 style="margin: 60px 0 20px 70px;">등록된 품목정보</h4>
+    <form style="width: 1150px; margin-left: 10px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); height: 800px; padding: 1px 2px;">
+        <table class="table" style="margin-top: 2px; width: 1145px; ">
             <thead class="table-secondary">
-              <tr>
+            <tr>
                 <th scope="col">품목코드</th>
                 <th scope="col">품목명</th>
                 <th scope="col">가로</th>
                 <th scope="col">세로</th>
                 <th scope="col">높이</th>
-<!--                <th scope="col">도면파일</th>-->
+                <!--                <th scope="col">도면파일</th>-->
                 <th scope="col">재질</th>
-              </tr>
+            </tr>
             </thead>
             <tbody>
-              <tr>
+            <tr>
                 <!-- for문돌리기 -->
-                <th:block th:each ="ItemList : ${ItemList}">
-                  <th scope="col" th:text = "${ItemList.itemCode}"></th>
-                  <th scope="col" th:text = "${ItemList.itemName}"></th>
-                  <th scope="col" th:text = "${ItemList.itemLength}"></th>
-                  <th scope="col" th:text = "${ItemList.itemWidth}"></th>
-                  <th scope="col" th:text = "${ItemList.itemHeight}"></th>
-<!--                  <th scope="col" th:text = "${ItemList.itemFIle}">-->
-                  <th scope="col" th:text = "${ItemList.itemMaterial}">
+                <th:block th:each="ItemList : ${itemList}">
+                    <th scope="col" th:text="${ItemList.itemCode}"></th>
+                    <th scope="col" th:text="${ItemList.itemName}"></th>
+                    <th scope="col" th:text="${ItemList.itemLength}"></th>
+                    <th scope="col" th:text="${ItemList.itemWidth}"></th>
+                    <th scope="col" th:text="${ItemList.itemHeight}"></th>
+                    <!--                  <th scope="col" th:text = "${ItemList.itemFIle}">-->
+                    <th scope="col" th:text="${ItemList.itemMaterial}">
                 </th:block>
 
-              </tr>
+            </tr>
             </tbody>
-          </table>
-        </form>
-    </div>
+        </table>
+    </form>
+</div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <script ></script>
-  </body>
+<script></script>
+</body>
 </html>

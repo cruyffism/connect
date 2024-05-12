@@ -1,10 +1,7 @@
 package org.zerock.connect.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -38,7 +35,7 @@ public class Product {
     @Column(nullable = false)
     private LocalDateTime productEnddate;
 
-    @OneToMany(mappedBy = "productId")
+    @OneToMany(mappedBy = "product")
     private List<Item> items = new ArrayList<>();
 
 }

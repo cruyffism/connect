@@ -24,26 +24,22 @@ public class Item {
     @Column(nullable = false , length = 20)
     private Long itemIndex;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "productId" ,nullable = false)
-    private Product productId;
+    private Product product;
 
-//    @ManyToOne
-////    @ColumnDefault("0")
-//    @JoinColumn(name = "business_id" , nullable = false)
-//    private Company business_id;
 
     @ManyToOne
     @JoinColumn(name = "unitCode",nullable = false)
-    private  Unit unitCode;
+    private  Unit unit;
 
     @ManyToOne
     @JoinColumn(name = "assyCode" , nullable = false)
-    private Assy assyCode;
+    private Assy assy;
 
     @ManyToOne
     @JoinColumn(name = "partCode" , nullable = false)
-    private Part partCode;
+    private Part part;
 
     @Column(nullable = false , length = 30)
     private String itemCode;
@@ -66,15 +62,11 @@ public class Item {
     @Column(nullable = false , length = 200)
     private String itemFile;
 
-
-
-//    @OneToMany(mappedBy = "con_item_no")
-//    private List<Contract_item> contractItems;
-
-    @OneToMany(mappedBy = "itemIndex")
+    @OneToMany(mappedBy = "item")
     private List<ProcurementPlan> procurementPlans = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "itemIndex")
+    @OneToMany(mappedBy = "item")
     private List<ContractItem> contractItems = new ArrayList<>();
+
 }

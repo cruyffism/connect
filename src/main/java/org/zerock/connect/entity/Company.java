@@ -43,7 +43,7 @@ public class Company {
     @Column(nullable = false ,length = 50)
     private String comAccount;
 
-    @OneToMany(mappedBy = "businessId")
-    private List<ContractItem> items = new ArrayList<>();
+    @OneToMany(mappedBy = "company")
+    private List<ContractItem> contractItems = new ArrayList<>();
 
 }
