@@ -140,8 +140,9 @@
 
   <div class="part" style="margin: 50px 30px 0 0; height: 900px; width: 650px;">
     <h4 style="margin: 40px 0 15px 60px; ">품목등록</h4>
-    <form action="" style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;">
+    <form action="/part1/insert_Item_Confirm" style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;" method="post" enctype="multipart/form-data">
       <!-- <h4 style="margin: 30px 0 15px 60px; ">품목등록</h4> -->
+
       <table class="table" style="margin: 0 10px 0 30px; width: 500px; ">
         <thead>
           <tr>
@@ -150,19 +151,33 @@
           </tr>
         </thead>
         <tbody>
+        <tr>
+          <th scope="row">제품코드</th>
+          <td>
+            <div class="input-group">
+            </div>
+<!--            <th:block th:each ="product : ${selectproduct}">-->
+<!--            <input type="text" disabled  class="form-control"  aria-label="Dollar amount (with dot and two decimal places)" th:value="${selectproduct.productId}" th:name="productId">-->
+            <span th:text="${selectproduct.productId}" th:value="${selectproduct.productId}" th:name="productId"></span>
+
+
+<!--            </th:block>-->
+<!--            placeholder="${selectproduct.productId}"-->
+          </td>
+        </tr>
           <tr>
             <th scope="row">품목코드</th>
             <td>
               <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
             </div>
-          </td>
+              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="itemCode">
+            </td>
           </tr>
           <tr>
             <th scope="row">품목명</th>
             <td>
               <div class="input-group">
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="itemName">
               </div>
             </td>
 
@@ -192,15 +207,15 @@
             <div class="input-group">
               <div class="input-group mb-3">
                 <span class="input-group-text">가로(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="itemLength">
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">세로(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="itemWidth">
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">높이(mm)</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="itemHeight">
               </div>
             </div>
           </td>
@@ -214,7 +229,7 @@
                 <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
 
                   <th:block th:each ="Unit : ${UnitList}">
-                    <option value="${Unit.unitName}" th:text = "${Unit.unitName}"></option>
+                    <option value="${Unit.unitName}" th:text = "${Unit.unitName}" name="unitCode"></option>
                   </th:block>
 
                 </select>
@@ -222,8 +237,8 @@
               <div class="input-group mb-3">
                 <span class="input-group-text">중분류</span>
                 <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
-                  <th:block th:each ="Assy : ${AssyList}">
-                    <option value="${Assy.assyName}" th:text = "${Assy.assyName}"></option>
+                  <th:block th:each ="Assay : ${AssyList}">
+                    <option value="${Assay.assyName}" th:text = "${Assay.assyName}" name="assyCode"></option>
                   </th:block>
                 </select>
               </div>
@@ -231,7 +246,7 @@
                 <span class="input-group-text">소분류</span>
                 <select style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
                   <th:block th:each ="Part : ${PartList}">
-                    <option value="${Part.partName}" th:text = "${Part.partName}"></option>
+                    <option value="${Part.partName}" th:text = "${Part.partName}" name="partCode"></option>
                   </th:block>
                 </select>
               </div>
@@ -247,7 +262,7 @@
           <tr>
             <th scope="row">도면파일</th>
             <td colspan="2">              <div class="input-group">
-              <input type="file" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+              <input type="file" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="file">
             </div></td>
           </tr>
           <!-- <tr>
@@ -259,7 +274,7 @@
           <tr>
             <th scope="row">재질</th>
             <td colspan="2">              <div class="input-group">
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="itemMaterial">
             </div></td>
           </tr>
 
@@ -295,7 +310,7 @@
             <tbody>
               <tr>
                 <!-- for문돌리기 -->
-                <th:block th:each ="ItemList : ${ItemList}">
+                <th:block th:each ="ItemList : ${itemList}">
                   <th scope="col" th:text = "${ItemList.itemCode}"></th>
                   <th scope="col" th:text = "${ItemList.itemName}"></th>
                   <th scope="col" th:text = "${ItemList.itemLength}"></th>

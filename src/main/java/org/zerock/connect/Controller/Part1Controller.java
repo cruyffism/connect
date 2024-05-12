@@ -4,11 +4,10 @@ package org.zerock.connect.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.zerock.connect.Service.Part1Service;
+import org.zerock.connect.Service.UploadFileService;
 import org.zerock.connect.entity.*;
 
 import javax.sound.sampled.Port;
@@ -20,6 +19,9 @@ public class Part1Controller {
 
     @Autowired
     Part1Service part1Service;
+
+    @Autowired
+    UploadFileService uploadFileService;
 
 
 
@@ -52,10 +54,37 @@ public class Part1Controller {
 
         return "/part1_Insert_item";
     }
-//  신규 품목 등록
-    @PostMapping("/insert_Item_Confirm")
-    public String insert_Item_Confirm(Item item){
 
+
+
+//  신규 품목 등록
+//    @PostMapping("/insert_Item_Confirm")
+//    public String insert_Item_Confirm(Item item , @RequestParam("file") MultipartFile file){
+//
+//        Item insertItem = part1Service.saveItem(item);
+//
+//        String savedFile = uploadFileService.upload(file);
+//
+//
+//
+//
+//        return "redirect:/part1/insert_Item";
+//    }
+
+    @PostMapping("/insert_Item_Confirm")
+    public String insert_Item_Confirm(Item item , @RequestParam("productId") String productId , @RequestParam("file") MultipartFile file , Model model){
+
+        Item insertItem = part1Service.saveItem(item);
+
+        String savedFile = uploadFileService.upload(file);
+        item.setItemFile(savedFile);
+        Product selectProduct = part1Service.findByProductId(productId);
+        item.setProductId(selectProduct);
+
+
+
+        List<Item> itemList = part1Service.findItemList();
+        model.addAttribute("itemList",itemList);
         return "redirect:/part1/insert_Item";
     }
 

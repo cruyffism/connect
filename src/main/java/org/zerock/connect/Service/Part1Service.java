@@ -55,4 +55,11 @@ public class Part1Service {
         return itemRepository.findAll();
     }
 
+    public Item saveItem(Item item){
+        return itemRepository.save(item);
+    }
+
+
+
+
 }
