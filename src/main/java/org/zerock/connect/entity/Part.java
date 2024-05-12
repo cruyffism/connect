@@ -26,7 +26,7 @@ public class Part {
     @Column(nullable = false , length = 20)
     private String partName;
 
-    @OneToMany(mappedBy = "partCode")
+    @OneToMany(mappedBy = "part")
     private List<Item> items = new ArrayList<>();
 
 

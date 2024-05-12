@@ -18,7 +18,6 @@ import java.util.List;
 public class Product {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false , length = 30)
     private String productId;
 
@@ -34,7 +33,7 @@ public class Product {
     @Column(nullable = false)
     private LocalDateTime productEnddate;
 
-    @OneToMany(mappedBy = "productId")
+    @OneToMany(mappedBy = "product")
     private List<Item> items = new ArrayList<>();
 
 }

@@ -19,11 +19,11 @@ public class ContractItem {
 
     @ManyToOne
     @JoinColumn(name = "businessId")
-    private Company businessId;
+    private Company company;
 
     @ManyToOne
     @JoinColumn(name = "itemIndex")
-    private Item itemIndex;
+    private Item item;
 
     @Column(nullable = false , length = 200)
     private String contractFile;

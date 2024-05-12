@@ -24,12 +24,12 @@ public class ProcurementPlan {
 
     @ManyToOne
     @JoinColumn(name = "itemIndex" , nullable = false)
-    private Item itemIndex;
+    private Item item;
 
     @Column(nullable = false)
     private LocalDateTime planDate;
 
 
-    @OneToMany(mappedBy = "planNum")
+    @OneToMany(mappedBy = "procurementPlan")
     private List<Orders> orders = new ArrayList<>();
 }
