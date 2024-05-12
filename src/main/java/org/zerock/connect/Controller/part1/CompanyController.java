@@ -1,4 +1,4 @@
-package org.zerock.connect.Controller;
+package org.zerock.connect.Controller.part1;
 
 
 import groovy.util.logging.Slf4j;
@@ -10,7 +10,7 @@ import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.zerock.connect.Service.Part1CompanyService;
+import org.zerock.connect.Service.part1.CompanyService;
 import org.zerock.connect.entity.Company;
 import org.springframework.ui.Model;
 
@@ -21,24 +21,24 @@ import java.util.List;
 @Controller
 @RequestMapping("/part1")
 @Slf4j //로그찍기
-public class Part1CompanyController {
+public class CompanyController {
 
-    Logger logger = LoggerFactory.getLogger(Part1CompanyController.class);
+    Logger logger = LoggerFactory.getLogger(CompanyController.class);
 
     @Autowired
-    Part1CompanyService part1CompanyService;
+    CompanyService companyService;
 
     //단순 업체 등록 화면 조회
     @GetMapping("/companyForm")
     public String companyForm() {
-        return "/part1_insert_company";
+        return "/part1/companyForm";
     }
 
     //신규 업체 등록
     @PostMapping("/saveCompany")
     public String saveCompany(@ModelAttribute Company company, HttpServletResponse response) throws IOException {
         logger.info("company : {}", company);
-        Company result = part1CompanyService.saveCompany(company);
+        Company result = companyService.saveCompany(company);
         logger.info("result : {}", result); //
 
         if (result != null) {
@@ -53,7 +53,7 @@ public class Part1CompanyController {
             writer.flush();
         }
 
-        return "/part1_insert_company";
+        return "/part1/companyForm";
     }
 
     //등록된 모든 업체 리스트를 보여주는 아작스 구현
@@ -63,7 +63,7 @@ public class Part1CompanyController {
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
-        List<Company> companyList = part1CompanyService.companyListAjax(searchText);
+        List<Company> companyList = companyService.companyListAjax(searchText);
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 10으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
         int end = Math.min((start + pageable.getPageSize()), companyList.size()); // 10을 계산한 구문
 
@@ -72,7 +72,7 @@ public class Part1CompanyController {
         List<Company> pageContent = companyList.subList(start, end); // 데이터가 30개 쌓여있으면  1~10, 11~20, 21~30 이렇게 짤라라
         Page<Company> company = new PageImpl<>(pageContent, pageable, companyList.size()); //현재페이지의 보여줄 리스트, 페이지러블 객체, 전체 리스트 개수(예를 들면 글 30개)
         model.addAttribute("companyList", company);//리스트 객체를 페이징 처리 후  보냄
-        return "/part1_insert_company_ajax";
+        return "/part1/companyListAjax";
     }
 
 }

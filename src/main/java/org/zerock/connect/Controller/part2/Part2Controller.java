@@ -1,4 +1,4 @@
-package org.zerock.connect.Controller;
+package org.zerock.connect.Controller.part2;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

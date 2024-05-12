@@ -1,4 +1,4 @@
-package org.zerock.connect.Service;
+package org.zerock.connect.Service.part1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.zerock.connect.repository.CompanyRepository;
 import java.util.List;
 
 @Service
-public class Part1CompanyService {
+public class CompanyService {
     @Autowired
     CompanyRepository companyRepository;
 
