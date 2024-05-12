@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,102 +18,13 @@
     </style>
   </head>
   <body>
-
-    <!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-        <!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-        <nav class="navbar fixed-top" style="background-color: #59359a;">
-          <div class="container-fluid"  >
-            <a class="navbar-brand" href="#">Connect</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Connect</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li> -->
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      조달관리
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="part1_insert_item.html">품목정보 등록</a></li>
-                      <li><a class="dropdown-item" href="part1_insert_company.html">업체 등록</a></li>
-                      <li><a class="dropdown-item" href="part1_insert_contract.html">계약 등록</a></li>
-                      <li><a class="dropdown-item" href="part1_insert_plan.html">조달 계획 등록</a></li>
-                      <!-- <li>
-                        <hr class="dropdown-divider">
-                      </li> -->
-                      <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        발주관리
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="part2_purchase_order.html">구매 발주서 관리</a></li>
-                        <li><a class="dropdown-item" href="part2_purchase_orderList.html">진척 검수 처리</a></li>
-                        <li><a class="dropdown-item" href="#">발주진행 현황 관리</a></li>
-                        <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                      </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        자재관리
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="part3_stock.html">입고 관리</a></li>
-                        <li><a class="dropdown-item" href="part3_out.html">출고 관리</a></li>
-                        <li><a class="dropdown-item" href="part3_publish.html">거래 명세서 발행</a></li>
-                        <li><a class="dropdown-item" href="part3_cal_inven.html">재고금액 현황 관리</a></li>
-                        <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                      </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        회원정보
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">로그인</a></li>
-                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                        <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                        
-                      </ul>
-                    </li>
-                </ul>
-                <!-- <form class="d-flex mt-3" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
-              </div>
-            </div>
-          </div>
-        </nav>
-
-
-      
+  <header th:replace="/fragments/common:: navbar">
+  </header>
       <div style="margin: 50px 10px 30px 15px; width: 98%;">
         <br>
-        <h4 style="margin: 30px 0 20px 30px;">선택한 제품정보</h4>
-        <hr>
-        <table class="table" style="margin: 20px 0 0 15px; width: 98%;">          
+        <h4 style="margin: 30px 0 5px 50px;">선택한 제품정보</h4>
+        
+        <table class="table" style="margin: 15px 0 0 15px; width: 98%; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4);">          
           <thead class="table-secondary">
             <tr>
               <th scope="col">제품코드</th>
@@ -139,154 +51,156 @@
 
     <!-- 거래명세서 작성 -->
     <form action="#" method="get">
-    <h4 style="margin: 120px 0 20px 50px;">거래명세서 작성</h4>
-    <hr style="width: 98%; margin-left: 20px;">
-    <div id="orderList" style="width: 85%; margin: 40px 0 0 100px;">
-      <table class="table table-bordered text-center">
-          <thead>
-            <tr class="table-secondary">
-              <th scope="col" colspan="4">거래명세서</th>
-            </tr>
+    <h4 style="margin: 120px 0 15px 70px;">거래명세서 작성</h4>
+    <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 96%; margin-left: 30px;">
+        <div id="orderList" style="width: 85%; margin: 15px 0 0 100px; padding: 2px 0 0 0 ;">
+          <table class="table table-bordered text-center">
+              <thead>
+                <tr class="table-secondary">
+                  <th scope="col" colspan="4">거래명세서</th>
+                </tr>
+                <colgroup>
+                  <col width="25%">
+                  <col width="25%">
+                  <col width="25%">
+                  <col width="25%">
+                </colgroup>
+                <tr>
+                  <th>거래명세서 번호</th>
+                  <td>123456</td>
+                  <th>발행일</th>
+                  <td>24/05/09</td>
+                </tr>
+              </thead>
+          </table>
+
+          <table class="table table-bordered text-center">
             <colgroup>
               <col width="25%">
               <col width="25%">
               <col width="25%">
               <col width="25%">
             </colgroup>
-            <tr>
-              <th>거래명세서 번호</th>
-              <td>123456</td>
-              <th>발행일</th>
-              <td>24/05/09</td>
-            </tr>
-          </thead>
-      </table>
+            <thead>
+              <tr class="table-secondary">
+                <th scope="col" colspan="4">공급자</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">발주일</th>
+                <td>2024-05-01</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">업체명</th>
+                <td>(주)MIT</td>
+                <th scope="row">사업자 번호</th>
+                <td>123-45-6789</td>
+              </tr>
+              <tr>
+                <th scope="row">주소</th>
+                <td>경기도 수원시 123</td>
+                <th scope="row">담당자</th>
+                <td>담당자1</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <table class="table table-bordered text-center">
+            <colgroup>
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+            </colgroup>
+            <thead>
+              <tr class="table-secondary">
+                <th scope="col" colspan="4">공급받는자</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">발주일</th>
+                <td>2024-05-01</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">업체명</th>
+                <td>(주)MIT</td>
+                <th scope="row">사업자 번호</th>
+                <td>123-45-6789</td>
+              </tr>
+              <tr>
+                <th scope="row">주소</th>
+                <td>경기도 수원시 123</td>
+                <th scope="row">담당자</th>
+                <td>담당자1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <table class="table table-bordered text-center">
-        <colgroup>
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
-        </colgroup>
-        <thead>
-          <tr class="table-secondary">
-            <th scope="col" colspan="4">공급자</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">발주일</th>
-            <td>2024-05-01</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">업체명</th>
-            <td>(주)MIT</td>
-            <th scope="row">사업자 번호</th>
-            <td>123-45-6789</td>
-          </tr>
-          <tr>
-            <th scope="row">주소</th>
-            <td>경기도 수원시 123</td>
-            <th scope="row">담당자</th>
-            <td>담당자1</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <table class="table table-bordered text-center">
-        <colgroup>
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
-        </colgroup>
-        <thead>
-          <tr class="table-secondary">
-            <th scope="col" colspan="4">공급받는자</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">발주일</th>
-            <td>2024-05-01</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">업체명</th>
-            <td>(주)MIT</td>
-            <th scope="row">사업자 번호</th>
-            <td>123-45-6789</td>
-          </tr>
-          <tr>
-            <th scope="row">주소</th>
-            <td>경기도 수원시 123</td>
-            <th scope="row">담당자</th>
-            <td>담당자1</td>
-          </tr>
-        </tbody>
-      </table>
+        <div id="itemList" style="width: 85%; margin: 0 0 0 100px;">
+          <table class="table table-bordered text-center">
+            <colgroup>
+              <col width="5%">
+              <col width="5%">
+              <col width="10%">
+              <col width="15%">
+              <col width="8%">
+              <col width="8%">
+              <col width="10%">
+              <col width="15%">
+            </colgroup>
+            <thead>
+              <tr class="table-secondary">
+                <th scope="col" colspan="10">품목정보</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"></th>
+                <th>순번</th>
+                <th>품목코드</th>
+                <th>품목명</th>
+                <th>수량</th>
+                <th>단가</th>
+                <th>총액</th>
+                <th>비고</th>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
+                <td>1</td>
+                <td>ABC_10</td>
+                <td>테스트 품목</td>
+                <td>500</td>
+                <td>150,000</td>
+                <td>75,000,000</td>
+                <td><input type="text"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="text-align: center; margin: 30px 0 0 0;">
+          <button type="submit" class="btn btn-outline-success">발행</button>
+          <button type="print" class="btn btn-outline-success">인쇄</button>
+          <br>
+          <br>  
+        </div>
+      </form>
     </div>
 
-    <div id="itemList" style="width: 85%; margin: 0 0 0 100px;">
-      <table class="table table-bordered text-center">
-        <colgroup>
-          <col width="5%">
-          <col width="5%">
-          <col width="10%">
-          <col width="15%">
-          <col width="8%">
-          <col width="8%">
-          <col width="10%">
-          <col width="15%">
-        </colgroup>
-        <thead>
-          <tr class="table-secondary">
-            <th scope="col" colspan="10">품목정보</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"></th>
-            <th>순번</th>
-            <th>품목코드</th>
-            <th>품목명</th>
-            <th>수량</th>
-            <th>단가</th>
-            <th>총액</th>
-            <th>비고</th>
-          </tr>
-          <tr>
-            <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
-            <td>1</td>
-            <td>ABC_10</td>
-            <td>테스트 품목</td>
-            <td>500</td>
-            <td>150,000</td>
-            <td>75,000,000</td>
-            <td><input type="text"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="text-align: center; margin: 30px 0 0 0;">
-      <button type="submit" class="btn btn-outline-success">발행</button>
-      <button type="print" class="btn btn-outline-success">인쇄</button>
-      <br>
-      <br>  
-    </div>
-</form>
 <!-- 거래명세서 작성 -->
 
 
-<div style=" overflow-y: scroll; width: 98%;  margin: 100px 30px 30px 10px; height: 800px;"  class="part">
+<div style=" overflow-y: scroll; width: 98%;  margin: 100px 30px 30px 5px; height: 800px;"  class="part">
   <br>
-  <h4 style="margin-bottom: 20px; margin-left: 50px;">거래명세서 발행 완료 품목</h4>
-  <hr style="margin-left: 20px; width: 100%;">
-  <table class="table" style="margin: 20px 0 0 27px; width: 98%;">
+  <h4 style="margin-bottom: 15px; margin-left: 70px;">거래명세서 발행 완료 품목</h4>
+  
+  <table class="table" style="margin: 15px 0 0 27px; width: 98%; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); ">
       <thead class="table-secondary">
         <tr>
           <th scope="col">품목코드</th>
@@ -370,6 +284,7 @@
           <th scope="col">등록된 재질</th>
         </tr>
       </tbody>
+      
     </table>
 </div>
 

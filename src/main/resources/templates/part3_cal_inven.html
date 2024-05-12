@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,95 +18,8 @@
     </style>
   </head>
   <body>
-
-    <!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-        <!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-        <nav class="navbar fixed-top" style="background-color: #59359a;">
-          <div class="container-fluid"  >
-            <a class="navbar-brand" href="#">Connect</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Connect</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li> -->
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      조달관리
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="part1_insert_item.html">품목정보 등록</a></li>
-                      <li><a class="dropdown-item" href="part1_insert_company.html">업체 등록</a></li>
-                      <li><a class="dropdown-item" href="part1_insert_contract.html">계약 등록</a></li>
-                      <li><a class="dropdown-item" href="part1_insert_plan.html">조달 계획 등록</a></li>
-                      <!-- <li>
-                        <hr class="dropdown-divider">
-                      </li> -->
-                      <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        발주관리
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="part2_purchase_order.html">구매 발주서 관리</a></li>
-                        <li><a class="dropdown-item" href="part2_purchase_orderList.html">진척 검수 처리</a></li>
-                        <li><a class="dropdown-item" href="#">발주진행 현황 관리</a></li>
-                        <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                      </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        자재관리
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="part3_stock.html">입고 관리</a></li>
-                        <li><a class="dropdown-item" href="part3_out.html">출고 관리</a></li>
-                        <li><a class="dropdown-item" href="part3_publish.html">거래 명세서 발행</a></li>
-                        <li><a class="dropdown-item" href="part3_cal_inven.html">재고금액 현황 관리</a></li>
-                        <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                      </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        회원정보
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">로그인</a></li>
-                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                        <!-- <li>
-                          <hr class="dropdown-divider">
-                        </li> -->
-                        
-                      </ul>
-                    </li>
-                </ul>
-                <!-- <form class="d-flex mt-3" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
-              </div>
-            </div>
-          </div>
-        </nav>
-
+  <header th:replace="/fragments/common:: navbar">
+  </header>
 
 <div style="margin-top: 80px; " >
     <ul class="nav nav-underline justify-content-center">
@@ -121,69 +35,57 @@
       </ul>
     </div>
 
-    <div style=" overflow-y: scroll; width: 1800px; margin-left: 50px; margin-right: 30px;  height: 700px;"  class="part">
+    <div style=" overflow-y: scroll; width: 99%; margin-left: 20px; margin-right: 30px; height: 1000px;"  class="part">
         
       <br>
       
-      <h4 style="margin-bottom: 50px; margin-top: 40px; ">재고 월별 금액</h4>
+      <h4 style="margin: 40px 0 10px 40px; ">재고 월별 금액</h4>
 
-      <!-- 업체 검색 -->
-      <form class="d-flex"  action="#" role="search" style="margin-top: 60px; width: 500px; margin-left: 10px;">
-        <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search" id="start_date"> ~ 
-        <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search" id="end_date">
-        <button class="btn btn-outline-success" type="submit" style="width: 120px;" onclick="caldate()">검색</button>
-      </form>
+      <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 98%; margin-left: 5px; height: 880px;">
+        <!-- 업체 검색 -->
+        <form class="d-flex"  action="#" role="search" style="margin-top: 10px; width: 500px; margin-left: 10px; padding: 15px 0 0 20px;">
+          <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search" id="start_date"> ~ 
+          <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search" id="end_date">
+          <button class="btn btn-outline-success" type="submit" style="width: 120px;" onclick="caldate()">검색</button>
+        </form>
 
-      <script>
-        function caldate(){
-            var start_date = document.getElementById("start_date").value;
-            var end_date =document.getElementById("end_date").value;
+        <script>
+          function caldate(){
+              var start_date = document.getElementById("start_date").value;
+              var end_date =document.getElementById("end_date").value;
 
-            if(start_date <= end_date){
-            }
-            else if(start_date > end_date){
-              alert("종료날짜를 시작날짜보다 크게 입력하세요");
-            }
-            else{
-              alert("날짜를 입력하세요");
-            }
-        }
-      </script>
-    <div style="margin-top: 15px; margin-left: 10px;">
-      <a href="#"><button class="btn btn-outline-success">전체보기</button></a>
-    </div>
+              if(start_date <= end_date){
+              }
+              else if(start_date > end_date){
+                alert("종료날짜를 시작날짜보다 크게 입력하세요");
+              }
+              else{
+                alert("날짜를 입력하세요");
+              }
+          }
+        </script>
+        <div style="margin-top: 15px; margin-left: 30px;">
+          <a href="#"><button class="btn btn-outline-success">전체보기</button></a>
+        </div>
 
-      <!-- 업체 검색 태그 종료 -->
+        <!-- 업체 검색 태그 종료 -->
 
       
-      <table class="table" style="margin-top: 20px; ">
-          <thead class="table-secondary">
-            <tr>
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <!-- for문돌리기 -->
-              <th scope="col">제품코드</th>
-              <th scope="col">제품명</th>
-              <th scope="col">품목코드</th>
-              <th scope="col">품목명</th>
-              <th scope="col">입고수량</th>
-              <th scope="col">출고수량</th>
-              <th scope="col">개당가격</th>
-              <th scope="col">금액</th>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr>
+        <table class="table" style=" width: 99%; margin: 10px 0 0 8px;">
+            <thead class="table-secondary">
+              <tr>
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
                 <!-- for문돌리기 -->
                 <th scope="col">제품코드</th>
                 <th scope="col">제품명</th>
@@ -194,203 +96,220 @@
                 <th scope="col">개당가격</th>
                 <th scope="col">금액</th>
               </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
-          <tbody>
-            <tr>
-                <!-- for문돌리기 -->
-                <th scope="col">제품코드</th>
-                <th scope="col">제품명</th>
-                <th scope="col">품목코드</th>
-                <th scope="col">품목명</th>
-                <th scope="col">입고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">개당가격</th>
-                <th scope="col">금액</th>
-              </tr>
-          </tbody>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+                        <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                  <!-- for문돌리기 -->
+                  <th scope="col">제품코드</th>
+                  <th scope="col">제품명</th>
+                  <th scope="col">품목코드</th>
+                  <th scope="col">품목명</th>
+                  <th scope="col">입고수량</th>
+                  <th scope="col">출고수량</th>
+                  <th scope="col">개당가격</th>
+                  <th scope="col">금액</th>
+                </tr>
+            </tbody>
+
+          
+
         </table>
+      </div>
     </div>
 
 
