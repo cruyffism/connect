@@ -21,4 +21,9 @@ public class CompanyService {
     public List<Company> companyListAjax(String searchText) {
         return companyRepository.findByComNameContainingOrderByComName(searchText); //리스트 타입의 값을 조회할때 기본 메서드
     }
+
+    //업체 사업자번호 중복 체크
+    public Integer businessIdCheck(String businessId) {
+        return companyRepository.businessIdCheck(businessId);
+    }
 }

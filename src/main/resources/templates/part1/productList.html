@@ -56,7 +56,7 @@
 
         <!-- 품목코드 품목명 조건 검색 -->
         <div id="searchBox" style="height: 40px; margin: 20px 0 10px 12px; width:100%">
-            <form th:action="@{/part1/productListAjax}" id="form1" th:method="POST">
+            <form th:action="@{/part1/productListAjax}" id="form1" th:method="post">
                 <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
                 <input type="text" id="searchText" name="searchText" placeholder="제품코드를 입력하세요" style="width: 248px;">
                 <!-- <button id="btn3" type="button">검색</button> -->
