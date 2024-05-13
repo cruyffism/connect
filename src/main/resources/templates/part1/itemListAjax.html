@@ -47,7 +47,7 @@
             <a th:onclick="${itemList.first} ? '' : 'javascript:itemListAjax('+${itemList.number}+')'"
                aria-label="Previous">
                 <span aria-hidden="true">&lt;</span>
-            </a> <!--삼항 연산자를 통해 첫번째 페이지면 그대로 냅두고 그게 아니라면 해당 페이지보다 -1 페이지로 가게끔 (저 number에 -1값으로 자동으로 되어있음)-->
+            </a> <!--삼항 연산자를 통해 첫번째 페이지면 그대로 냅두고 그게 아니라면 해당 페이지itemListAjax보다 -1 페이지로 가게끔 (저 number에 -1값으로 자동으로 되어있음)-->
             <!--클릭 시 아작스 호출해서 벡엔드로 값을 전달-->
         </td>
 

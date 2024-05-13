@@ -25,6 +25,9 @@ public class ItemService {
     @Autowired
     ItemRepository itemRepository;
 
+//    @Autowired
+//    ContractItem contractItem;
+
     public Product findByProductId(String productId) {
         return productRepository.findByProductId(productId);
     }
@@ -62,4 +65,11 @@ public class ItemService {
     public List<Item> itemListAjax(String productId) {
         return itemRepository.findByProductProductId(productId);
     }
+
+
+    public List<Item> NocontractItem() {
+        return itemRepository.NocontractItem();
+    }
+
+
 }

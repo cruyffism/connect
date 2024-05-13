@@ -116,6 +116,7 @@ public class ItemController {
         Product product = new Product(); //객체 생성
         product.setProductId(productId); //객체로 만들어서 조인 값을 저장
 
+
         Unit unit = new Unit();
         unit.setUnitCode(unitCode);
 

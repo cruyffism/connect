@@ -17,8 +17,13 @@ public class CompanyService {
         return companyRepository.save(company);
     }
 
+
     // 등록된 업체 리스트를 보여줌, 검색도 구현(업체명으로 찾고 업체명으로 정렬)
     public List<Company> companyListAjax(String searchText) {
         return companyRepository.findByComNameContainingOrderByComName(searchText); //리스트 타입의 값을 조회할때 기본 메서드
+    }
+
+    public List<Company> findAllCompany(){
+        return companyRepository.findAll();
     }
 }
