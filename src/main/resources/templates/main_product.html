@@ -105,7 +105,10 @@
       height: 400px;
       margin: 250px 0 0 750px;
     }
-
+    a {
+      color: white;
+      text-decoration: none;
+    }
   </style>
 
 
@@ -163,14 +166,15 @@
 
 
     <div class="tap1" >
-      <form th:action="@{/Con/main_product}"  method="post">
+<!--      <form th:action="@{/Con/main_product}"  method="post">-->
         <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">제품 등록</h1>
 
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-top: 70px;">제품정보등록</button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-top: 70px;">
+          <a th:href="@{/part0/productForm}">제품정보등록</a></button>
 
         <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
-      </form>
+<!--      </form>-->
     </div>
 
 

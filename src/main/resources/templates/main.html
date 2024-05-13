@@ -113,6 +113,10 @@
       border-radius: 5px;
       height: 400px;
     }
+    a {
+      color: white;
+      text-decoration: none;
+    }
   </style>
 
 
@@ -170,41 +174,52 @@
   <div style="display: inline-block; width: 100%; margin: 250px 0 0 250px;">
 
     <div class="tap1" >
-      <form action="/Con/main"  method="post">
+<!--      <form action="/part1"  method="post">-->
         <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">조달관리</h1>
 
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">품목정보등록</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">업체등록</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">계약등록</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">조달계획등록</button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;" >
+          <a th:href="@{/part1/productList}">품목정보등록</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part1/companyForm}">업체등록</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part1/}">계약등록</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part1/}">조달계획등록</a></button>
         <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
-      </form>
+<!--      </form>-->
     </div>
 
     <div class="tap1">
-      <form action="/Con/main"  method="post" >
+<!--      <form action="/Con/main"  method="post" >-->
         <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">발주관리</h1>
 
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">구매발주서관리</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">진척검수처리</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">발주진행 현황 관리</button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part2/}">구매발주서관리</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part2/}">진척검수처리</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part2/}">발주진행 현황 관리</a></button>
         <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
-      </form>
+<!--      </form>-->
     </div>
 
     <div class="tap1 tap0">
-      <form action="/Con/main"  method="post">
+<!--      <form action="/Con/main"  method="post">-->
         <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">자재관리</h1>
 
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">입고관리</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">출고관리</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">거래명세서 발행</button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">재고금액 현황 관리</button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part3/}">입고관리</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part3/}">출고관리</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part3/}">거래명세서 발행</a></button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
+          <a th:href="@{/part3/}">재고금액 현황 관리</a></button>
         <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
-      </form>
+<!--      </form>-->
     </div>
 
   </div>
