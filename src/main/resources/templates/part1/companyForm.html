@@ -27,7 +27,8 @@
 
     <h4 style="margin: 20px 0 10px 80px; width: 190px; height: 40px; padding: 5px 5px 5px 11px;">
         신규 업체 등록</h4>
-    <form th:action="@{/part1/saveCompany}" th:method="post" style="width: 600px; height: 750px; margin-left: 30px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); padding: 85px 5px 5px 11px;">
+    <form th:action="@{/part1/saveCompany}" th:method="post"
+          style="width: 600px; height: 750px; margin-left: 30px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); padding: 85px 5px 5px 11px;">
 
         <table class="table" style="margin: 10px 0 0 30px; width: 500px; ">
             <thead>
@@ -48,12 +49,18 @@
             <tr>
                 <th scope="row">사업자번호</th>
                 <td>
-                    <div class="input-group">
-                        <input id="businessId" name="businessId" type="text" class="form-control"
-                               aria-label="Dollar amount (with dot and two decimal places)" required>
+                    <div class="d-flex justify-content-between">
+                        <div style="position: relative; display: flex; flex-wrap: wrap; align-items: stretch;">
+                            <input id="businessId" name="businessId" type="text" class="form-control"
+                                   aria-label="Dollar amount (with dot and two decimal places)" required>
+                        </div>
+                        <div>
+                            <button id="businessIdCheck" type="button" class="btn btn-outline-success"
+                                    onclick="return businessIdCheckAjax()">중복체크
+                            </button>
+                        </div>
                     </div>
                 </td>
-
             </tr>
             <tr>
                 <th scope="row" style="width: 150px;">사업장 주소</th>
@@ -130,10 +137,12 @@
             <div class="d-flex justify-content-between" style="width: 300px;">
                 <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
                 <input id="searchText" name="searchText" class="form-control me-2" type="text" placeholder="업체명으로 검색">
-                <button class="btn btn-outline-success" type="button" onclick="return companyListAjax(1);" style="width: 120px;">검색</button>
+                <button class="btn btn-outline-success" type="button" onclick="return companyListAjax(1);"
+                        style="width: 120px;">검색
+                </button>
             </div>
             <!-- 업체 검색 태그 종료 -->
-            <div id="companyList" ></div>
+            <div id="companyList"></div>
         </form>
     </div>
 </div>
