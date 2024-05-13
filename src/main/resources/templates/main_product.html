@@ -96,13 +96,23 @@
     .bd-mode-toggle .dropdown-menu .active .bi {
       display: block !important;
     }
+    .tap1 {
+      float: left;
+      width: 25%;
+      box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4);
+      padding: 20px 20px;
+      border-radius: 5px;
+      height: 400px;
+      margin: 250px 0 0 750px;
+    }
+
   </style>
 
 
   <!-- Custom styles for this template -->
   <link href="/css/sign-in.css" rel="stylesheet">
 </head>
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
+<body >
 <header th:replace="/fragments/common:: navbar">
 </header>
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -148,32 +158,25 @@
   </ul>
 </div>
 
+<!--메인페이지-->
+<main style="width: 1600px; ">
 
-<main class="form-signin w-100 m-auto">
-  <form action="/Con/login"  method="post">
-    <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
-    <!-- 로그인 실패 시 메시지 표시 -->
-    <div th:if="${error}">
-      <p style="color: red;">로그인에 실패하였습니다. 다시 시도해주세요.</p>
+    <div class="tap1" >
+      <form th:action="@{/Con/main_product}"  method="post">
+        <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">제품 등록</h1>
+
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-top: 70px;">제품정보등록</button>
+
+        <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
+      </form>
     </div>
 
-    <div class="form-floating">
-      <input type="text" class="form-control" id="memberId" name="memberId" placeholder="ID를 입력하세요">
-      <label for="memberId">ID를 입력하세요</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="비밀번호를 입력하세요">
-      <label for="memberPw">비밀번호를 입력하세요</label>
-    </div>
 
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-
-    <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
-
-  </form>
 </main>
+
+
 <script src="/css/assets/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
