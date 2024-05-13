@@ -26,6 +26,8 @@ public class CompanyService {
     //업체 사업자번호 중복 체크
     public Integer businessIdCheck(String businessId) {
         return companyRepository.businessIdCheck(businessId);
+
+    }
     public List<Company> findAllCompany(){
         return companyRepository.findAll();
     }
