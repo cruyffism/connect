@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ProcurementPlan {
     private Item item;
 
     @Column(nullable = false)
-    private LocalDateTime planDate;
+    private LocalDate planDate;
 
 
     @OneToMany(mappedBy = "procurementPlan")
