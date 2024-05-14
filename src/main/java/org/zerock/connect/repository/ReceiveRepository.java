@@ -6,4 +6,6 @@ import org.zerock.connect.entity.Receive;
 
 @Repository
 public interface ReceiveRepository extends JpaRepository<Receive, Long> {
+
+
 }
