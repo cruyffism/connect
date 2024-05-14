@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -29,5 +30,5 @@ public class Releases {
     private Integer releaseCount;
 
     @Column
-    private LocalDateTime releaseDate;
+    private LocalDate releaseDate;
 }

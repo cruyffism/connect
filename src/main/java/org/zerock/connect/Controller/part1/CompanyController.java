@@ -78,7 +78,7 @@ public class CompanyController {
     //업체 등록 중복체크
     @GetMapping("/businessIdCheck")
     @ResponseBody
-    public Integer businessIdCheck(@RequestParam String businessId) {
+    public Integer businessIdCheck(@RequestParam("businessId") String businessId) {
         Integer cnt = companyService.businessIdCheck(businessId);
         return cnt; // 1이면 중복이라서 안되고 0이면 등록 가능하게끔 리턴
     }

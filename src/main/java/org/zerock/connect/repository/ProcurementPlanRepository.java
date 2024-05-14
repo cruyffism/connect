@@ -13,10 +13,11 @@ import java.util.List;
 public interface ProcurementPlanRepository extends JpaRepository<ProcurementPlan, Long> {
 
     //발주 품목 선택 아작스 구현
-    @Query("select p,i,ci,c from Item i inner join ProcurementPlan p on i.itemIndex = p.item.itemIndex " +
-            "inner join ContractItem ci on i.itemIndex= ci.item.itemIndex " +
+    @Query("select p,i,ci,c from ProcurementPlan p " +
+            "inner join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "inner join Company c on ci.company.businessId = c.businessId " +
-            "where p.planDate between :startDate and :endDate and c.comName like concat('%',:comName,'%') and i.itemName like concat('%',:itemName,'%')")
+            "where p.planDate between :startDate and :endDate and c.comName like concat('%',:comName,'%') and i.itemName like concat('%',:itemName ,'%')")
     List<ProcurementPlan> procurementPlanListAjax(@Param("comName") String comName, @Param("itemName") String itemName, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
 }

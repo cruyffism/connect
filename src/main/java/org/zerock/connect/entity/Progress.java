@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "receives")
 @DynamicUpdate
 public class Progress {
 
@@ -33,6 +34,6 @@ public class Progress {
     private Integer progressCount;
 
     @Column
-    private LocalDateTime progressDate;
+    private LocalDate progressDate;
 
 }

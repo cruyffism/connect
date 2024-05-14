@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@ToString
+@ToString(exclude = "items")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

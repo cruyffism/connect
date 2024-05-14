@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @Setter
 @Getter
 @DynamicUpdate
+@ToString(exclude = "items")
 public class Product {
 
     @Id
@@ -26,14 +28,11 @@ public class Product {
     @Column(nullable = false , length = 30)
     private String productName;
 
-    @Column(nullable = false , length = 30)
-    private Integer productCount;
+    @Column(nullable = false)
+    private LocalDate productStartdate;
 
     @Column(nullable = false)
-    private LocalDateTime productStartdate;
-
-    @Column(nullable = false)
-    private LocalDateTime productEnddate;
+    private LocalDate productEnddate;
 
     @OneToMany(mappedBy = "product")
     private List<Item> items = new ArrayList<>();

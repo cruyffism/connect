@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "orders")
 @DynamicUpdate
 public class ProcurementPlan {
 
@@ -25,9 +25,9 @@ public class ProcurementPlan {
     @Column(nullable = false , length = 20)
     private Long planNum;
 
-    @ManyToOne
-    @JoinColumn(name = "itemIndex" , nullable = false)
-    private Item item;
+    @OneToOne
+    @JoinColumn(name = "conitemNo" , nullable = false)
+    private ContractItem contractItem;
 
     @Column(nullable = false)
     private LocalDate planDate;

@@ -1,8 +1,8 @@
 //js를 통해 리스트와 아작스를 연결
 $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실행
     console.log("ready!");
-    document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);
-    document.getElementById('endDate').value = new Date().toISOString().substring(0, 10);
+    document.getElementById('startDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
+    document.getElementById('endDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
     procurementPlanListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
 });
 
@@ -36,9 +36,23 @@ function caldate() {
     var endDate = document.getElementById("endDate").value;
 
     if (startDate <= endDate) {
+        procurementPlanListAjax(1);
     } else if (startDate > endDate) {
         alert("종료날짜를 시작날짜보다 크게 입력하세요");
+        $("#endDate").focus();
     } else {
         alert("날짜를 입력하세요");
+        $("#startDate").focus();
+    }
+}
+
+
+function show(orderPart) {
+
+    if (document.getElementById(orderPart).style.display == "none") {
+        document.getElementById(orderPart).style.display = "block"; //표시하게 하기
+    } else {
+        document.getElementById(orderPart).style.display = "none"; //안보이게 하기
+
     }
 }

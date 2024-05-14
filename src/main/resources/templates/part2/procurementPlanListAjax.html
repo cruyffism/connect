@@ -17,15 +17,15 @@
     </thead>
     <tbody>
     <th:block th:if="${procurementPlanList.totalElements != 0}">
-        <th:block th:each="procurementPlan:${procurementPlanList}">
-            <tr th:each="contractItem:${procurementPlan.item.contractItems}">
-                <td th:text="${procurementPlan.planNum}"></td>
-                <td th:text="${contractItem.company.comName}"></td>
-                <td th:text="${procurementPlan.item.itemName}"></td>
-                <td th:text="${procurementPlan.planDate}"></td>
-                <td><button type="button" class="btn btn-sm btn-primary">선택</button></td>
-            </tr>
-        </th:block>
+        <tr th:each="procurementPlan, status:${procurementPlanList}">
+            <td th:text="'plan-' +${status.index + 1}"></td>
+            <td th:text="${procurementPlan.contractItem.company.comName}"></td>
+            <td th:text="${procurementPlan.contractItem.item.itemName}"></td>
+            <td th:text="${procurementPlan.planDate}"></td>
+            <td>
+                <button type="button" class="btn btn-sm btn-primary" onclick="return show('orderPart')">선택</button>
+            </td>
+        </tr>
     </th:block>
     <th:block th:if="${procurementPlanList.totalElements == 0}">
         <tr>

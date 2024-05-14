@@ -1,4 +1,4 @@
-package org.zerock.connect.Controller;
+package org.zerock.connect.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -15,6 +15,7 @@ import org.zerock.connect.entity.Company;
 import org.zerock.connect.entity.ContractItem;
 import org.zerock.connect.entity.Item;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -175,7 +176,7 @@ public class ConatractItemController {
         String savedFile = uploadFileService.upload(file);
         contractItem.setContractFile(savedFile);
 
-        contractItem.setContractDate(LocalDateTime.now());
+        contractItem.setContractDate(LocalDate.now());
         contractItem.setContractYn("1");
 
 

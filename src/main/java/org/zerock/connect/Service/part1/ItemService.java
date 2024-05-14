@@ -32,9 +32,6 @@ public class ItemService {
         return productRepository.findByProductId(productId);
     }
 
-    public Product findByProductCount(int productCount){
-        return productRepository.findByProductCount(productCount);
-    }
 
     //제품선택화면 AJAX + 검색
     //제품 등록 리스트 아작스 + 검색

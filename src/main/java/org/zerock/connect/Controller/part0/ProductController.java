@@ -69,7 +69,7 @@ public class ProductController {
     //제품 코드 중복체크
     @GetMapping("/productIdCheck")
     @ResponseBody
-    public Integer productIdCheck(@RequestParam String productId) {
+    public Integer productIdCheck(@RequestParam("productId") String productId) {
         System.out.println("productId = " + productId);
         Integer cnt = productService.productIdCheck(productId);
         return cnt; // 1이면 중복이라서 안되고 0이면 등록 가능하게끔 리턴

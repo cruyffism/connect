@@ -3,10 +3,11 @@ package org.zerock.connect.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 @Entity
-@ToString
+@ToString(exclude = "procurementPlan")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,11 +28,14 @@ public class ContractItem {
     @JoinColumn(name = "itemIndex")
     private Item item;
 
+    @OneToOne(mappedBy = "contractItem")
+    private ProcurementPlan procurementPlan;
+
     @Column(nullable = false , length = 200)
     private String contractFile;
 
     @Column(nullable = false)
-    private LocalDateTime contractDate;
+    private LocalDate contractDate;
 
     @Column(nullable = false , length = 5)
     private String contractYn;

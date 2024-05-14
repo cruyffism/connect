@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "releases")
 @DynamicUpdate
 public class Receive {
 
@@ -40,7 +41,7 @@ public class Receive {
     private String receiveInfo;
 
     @Column
-    private LocalDateTime receiveDate;
+    private LocalDate receiveDate;
 
 
 }

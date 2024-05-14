@@ -3,7 +3,6 @@
     <tr>
         <th scope="col">제품코드</th>
         <th scope="col">제품명</th>
-        <th scope="col">생산수량</th>
         <th scope="col">생산시작일</th>
         <th scope="col">생산종료일</th>
     </tr>
@@ -14,14 +13,13 @@
             <!-- for문돌리기 -->
             <td scope="col" th:text="${product.productId}"></td>
             <td scope="col" th:text="${product.productName}"></td>
-            <td scope="col" th:text="${product.productCount}"></td>
             <td scope="col" th:text="${product.productStartdate}"></td>
             <td scope="col" th:text="${product.productEnddate}"></td>
         </tr>
     </th:block>
     <th:block th:if="${productList.totalElements == 0}">
         <tr>
-            <td colspan="7">제품 내역이 없습니다.</td>
+            <td colspan="4">제품 내역이 없습니다.</td>
         </tr>
     </th:block>
     </tbody>
