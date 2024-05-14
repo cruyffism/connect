@@ -18,6 +18,14 @@ public interface CompanyRepository extends JpaRepository<Company, String> {
     @Query("select count(*) from Company  where businessId =:businessId")
     Integer businessIdCheck(@Param("businessId") String businessId);
 
+
+    @Query("select C from Company C where C.businessId =:CompanyId")
+    Company selectCompany(@Param("CompanyId") String CompanyId);
+
+//    Company findByBusinessId(String businessId);
+
+    Company findByBusinessId(String businessId);
+//    Company findByBusinessId(String businessId);
 }
 
 

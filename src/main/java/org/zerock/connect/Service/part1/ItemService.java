@@ -74,4 +74,8 @@ public class ItemService {
     public Item findByItemIndex(Long itemIndex){
         return itemRepository.findByItemIndex(itemIndex);
     }
+
+    public List<Item> ContractItemList() {
+        return itemRepository.ContractItemList();
+    }
 }

@@ -135,7 +135,7 @@ public class ConatractItemController {
 
 //   제품선택하기
     @GetMapping("selectContractItem")
-    public String selectContractItem(@RequestParam("selectItemIndex")Long itemIndex ,Company company , Item item , Model model ,@PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String selectContractItem(@RequestParam("selectItemIndex")Long itemIndex , Model model ,@PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
         System.out.println(itemIndex);
 
         Item selectItem = itemService.findByItemIndex(itemIndex);
@@ -143,6 +143,7 @@ public class ConatractItemController {
 
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
+        System.out.println(AllCompany);
 
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
@@ -157,17 +158,28 @@ public class ConatractItemController {
         return "/part1/selectcontractForm";
     }
 
-    @PostMapping("saveContractitem")
-    public String saveContractitem(@RequestParam("itemIndex") Long itemIndex , ContractItem contractItem , @RequestParam("file")MultipartFile file){
+    @PostMapping("/saveContractitem")
+    public String saveContractitem(@RequestParam("itemIndex") Long itemIndex , @RequestParam(value = "CompanyId") String businessId , ContractItem contractItem , @RequestParam("file")MultipartFile file){
 
         Item selectItem = itemService.findByItemIndex(itemIndex);
         contractItem.setItem(selectItem);
+
+//        Company selectCompany = companyService.findByBusinessId(businessId);
+//        Company company = new Company();
+//        company.setBusinessId(businessId);
+//        contractItem.setCompany(company);
+
+        Company selectCompany = companyService.findByBusinessId(businessId);
+        contractItem.setCompany(selectCompany);
 
         String savedFile = uploadFileService.upload(file);
         contractItem.setContractFile(savedFile);
 
         contractItem.setContractDate(LocalDateTime.now());
         contractItem.setContractYn("1");
+
+
+
         ContractItem resultContract = contractItemService.saveContractItem(contractItem);
 
 

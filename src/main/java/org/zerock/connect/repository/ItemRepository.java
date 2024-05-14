@@ -18,12 +18,19 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByProductProductId(String productId);
 
     Item findByItemIndex(Long itemIndex);
-//    @SQLSelect("SELECT * FROM Item WHERE itemIndex != ANY (SELECT itemIndex FROM ContractItem)")
+
+
 
 //   계약 품목테이블에서 계약 안된애들만 보여지게
     @Query(value = "SELECT I FROM Item I WHERE I.itemIndex != all (SELECT C.item.itemIndex FROM ContractItem C)")
     List<Item> NocontractItem();
 
+
+    @Query(value = "SELECT p.productStartdate , p.productEnddate , p.productId , p.productName ,I.itemCode , I.itemName ,C.conitemNo " +
+            "FROM Item I JOIN Product p ON I.product.productId = p.productId " +
+            "JOIN ContractItem C ON I.itemIndex=C.item.itemIndex " +
+            "JOIN Company com ON C.company.businessId=com.businessId")
+    List<Item> ContractItemList();
 
 
 }
