@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.connect.Service.part3.ReceiveService;
 import org.zerock.connect.entity.Progress;
+import org.zerock.connect.entity.Receive;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +25,13 @@ public class Part3Controller {
     @Autowired
     ReceiveService receiveService;
 
-    //입고관리
     @GetMapping("/receiveList")
-    public String getReceiveList(Model model, @RequestParam(value = "progressNum", defaultValue = "0") Long progressNum) {
-        System.out.println("(입고 관리) progressNum = " + progressNum);
-        List<Progress> receiveList = receiveService.getProgressListByProgressNum(progressNum);
+    public String getReceiveList(Model model, @RequestParam(value = "receiveYn", defaultValue = "0") String receiveYn) {
+        System.out.println("(입고 관리) receiveYn = " + receiveYn);
+        List<Receive> receiveList = receiveService.getReceiveListByReceiveYn(receiveYn);
         model.addAttribute("receiveList", receiveList);
         return "part3/receiveList"; // 해당 뷰로 이동
     }
-
 
     //출고관리
     @GetMapping("/releaseList")
