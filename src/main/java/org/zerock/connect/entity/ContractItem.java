@@ -1,9 +1,9 @@
 package org.zerock.connect.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import java.time.LocalDateTime;
 
 @Entity
 @ToString
@@ -31,7 +31,7 @@ public class ContractItem {
     private String contractFile;
 
     @Column(nullable = false)
-    private String contractDate;
+    private LocalDateTime contractDate;
 
     @Column(nullable = false , length = 5)
     private String contractYn;

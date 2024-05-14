@@ -6,4 +6,6 @@ import org.zerock.connect.entity.ContractItem;
 
 @Repository
 public interface ContractItemRepository extends JpaRepository <ContractItem, Long> {
+
+
 }

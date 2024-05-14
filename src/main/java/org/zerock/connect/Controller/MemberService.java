@@ -13,15 +13,15 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     //로그인
-    public boolean login(String memberId, String memberPw) {
+    public Member login(String memberId, String memberPw) {
         // MemberRepository를 사용하여 해당 userID로 회원 정보를 조회
         Member member = memberRepository.findByMemberIdAndMemberPw(memberId, memberPw);
 
         // 회원 정보가 존재하고, 입력된 비밀번호가 회원의 비밀번호와 일치하는지 확인
         if (member != null && member.getMemberPw().equals(memberPw)) {
-            return true; // 로그인 성공
+            return member; // 로그인 성공
         } else {
-            return false; // 로그인 실패
+            return null; // 로그인 실패
         }
     }
 
