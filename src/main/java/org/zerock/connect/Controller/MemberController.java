@@ -1,5 +1,6 @@
 package org.zerock.connect.Controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,18 +25,22 @@ public class MemberController {
 
     @PostMapping("/login")
     // @RequestParam String memberDep,
-    public String login(@RequestParam String memberId, @RequestParam String memberPw, Model model) {
+    public String login(@RequestParam("memberId") String memberId, @RequestParam("memberPw") String memberPw, Model model , HttpSession session) {
         // 로그인 처리
-        boolean loginResult = memberService.login(memberId, memberPw);
+        Member loginResult = memberService.login(memberId, memberPw);
         String memberDep = memberService.getMemberDep(memberId); // memberId에 해당하는 member_dep 가져오기
 
-        if(loginResult) {
+        if(loginResult != null) {
             // 로그인 성공
             System.out.println("로그인 성공");
             if ("1".equals(memberDep)) {
+                session.setAttribute("loginedUser",loginResult);
+                session.setMaxInactiveInterval(60*30);
                 // member_dep가 1인 경우
                 return "redirect:/Con/main_product";
             } else if ("2".equals(memberDep)) {
+                session.setAttribute("loginedUser",loginResult);
+                session.setMaxInactiveInterval(60*30);
                 // member_dep가 2인 경우
                 return "redirect:/Con/main";
             } else {
