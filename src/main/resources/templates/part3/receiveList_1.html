@@ -30,59 +30,61 @@
 </header>
 
 <!--&lt;!&ndash;th:action="${progressNum == 0}"&ndash;&gt;-->
-<h4 style="margin: 100px 0 15px 60px; width: 500px;" >입고 예정 품목</h4>
-<div style="margin: 10px 0 30px 20px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 98%; height: 520px">
-  <br>
-    <div>
-      <!-- 옵션 검색 -->
-      <form action="" method="get" style="padding: 0 0 15px 25px; width: 98%;">
-        <select style="padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">
-          <option value="option1">품목코드</option>
-          <option value="option2">품목명</option>
-          <option value="option3">옵션 3</option>
-        </select>
+<!--<h4 style="margin: 100px 0 15px 60px; width: 500px;" >입고 예정 품목</h4>-->
+<!--<div style="margin: 10px 0 30px 20px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 98%; height: 520px">-->
+<!--  <br>-->
+<!--    <div>-->
+<!--      &lt;!&ndash; 옵션 검색 &ndash;&gt;-->
+<!--      <form action="" method="get" style="padding: 0 0 15px 25px; width: 98%;">-->
+<!--        <select style="padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189); ">-->
+<!--          <option value="option1">품목코드</option>-->
+<!--          <option value="option2">품목명</option>-->
+<!--          <option value="option3">옵션 3</option>-->
+<!--        </select>-->
 
-        <input type="text" placeholder="검색어를 입력하세요..." style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)">
+<!--        <input type="text" placeholder="검색어를 입력하세요..." style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)">-->
 
-        <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색</button>
-        <!-- <button type="button" class="btn btn-outline-success stockbtn" style="margin: 0 0 40px 10px; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 100px; float: right;">입고</button> -->
-      </form>
-    </div>
-    <!-- 옵션 검색 -->
+<!--        <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색</button>-->
+<!--        &lt;!&ndash; <button type="button" class="btn btn-outline-success stockbtn" style="margin: 0 0 40px 10px; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 100px; float: right;">입고</button> &ndash;&gt;-->
+<!--      </form>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; 옵션 검색 &ndash;&gt;-->
 
 
-    <div  style="min-height: 400px; max-height: 500px; overflow-y: scroll; width: 99%;">
-      <table class="table" style="margin: 0 0 10px 15px; width: 99%; ">
+<!--    <div  style="min-height: 400px; max-height: 500px; overflow-y: scroll; width: 99%;">-->
+<!--      <table class="table" style="margin: 0 0 10px 15px; width: 99%; ">-->
 
-        <thead class="table-secondary">
-          <tr>
-            <th scope="col">품목코드</th>
-            <th scope="col">품목명</th>
-            <th scope="col">발주수량</th>
-            <th scope="col">발주번호</th>
-            <th scope="col">조달납기일</th>
-            <th scope="col">업체명</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
+<!--        <thead class="table-secondary">-->
+<!--          <tr>-->
+<!--            <th scope="col">품목코드</th>-->
+<!--            <th scope="col">품목명</th>-->
+<!--            <th scope="col">발주수량</th>-->
+<!--            <th scope="col">발주번호</th>-->
+<!--            <th scope="col">조달납기일</th>-->
+<!--            <th scope="col">업체명</th>-->
+<!--            <th scope="col"></th>-->
+<!--          </tr>-->
+<!--        </thead>-->
 
-        <tbody>
-          <tr th:each="progress : ${progressList}" th:if="${progress.receiveYn == n}">
-            <th th:text="${progress.item.itemcode}"></th>
-            <th th:text="${progress.item.itemname}"></th>
-            <th th:text="${progress.orders.orderCount}"></th>
-            <th th:text="${progress.orders.orderNum}"></th>
-            <th th:text="${progress.procurementPlan.planDate}"></th>
-            <th th:text="${progress.Company.comName}"></th>
-            <th>
-                <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">
-                  <a th:href="@{/part3/publishForm}">입고</a></button>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<!--        <tbody>-->
+<!--          <tr th:each="progress : ${progressList}" th:if="${progress.progressNum == 0}">-->
+<!--            <th th:text="${progress.item.itemcode}"></th>-->
+<!--            <th th:text="${progress.item.itemname}"></th>-->
+<!--            <th th:text="${progress.orders.orderCount}"></th>-->
+<!--            <th th:text="${progress.orders.orderNum}"></th>-->
+<!--            <th th:text="${progress.procurementPlan.planDate}"></th>-->
+<!--            <th th:text="${progress.Company.comName}"></th>-->
+<!--            <th scope="col" style="text-align: center;">-->
+<!--              <div style="display: inline-block; text-align: center;">-->
+<!--                <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">-->
+<!--                  <a th:href="@{/part3/publishForm}">입고</a></button>-->
+<!--              </div>-->
+<!--            </th>-->
+<!--          </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
 
 
 <!--th:action="${progressNum == 1}"-->
@@ -126,7 +128,7 @@
       </thead>
 
       <tbody>
-      <tr th:each="progress : ${progressList}" th:if="${progress.receiveYn == y}">
+      <tr th:each="progress : ${progressList}" th:if="${progress.progressNum == 1}">
         <th th:text="${progress.item.itemcode}"></th>
         <th th:text="${progress.item.itemname}"></th>
         <th th:text="${progress.orders.orderCount}"></th>
@@ -134,8 +136,10 @@
         <th th:text="${progress.procurementPlan.planDate}"></th>
         <th th:text="${progress.Company.comName}"></th>
         <th scope="col" style="text-align: center;">
+          <div style="display: inline-block; text-align: center;">
             <button type="button" class="btn stockbtn" style="margin: 0 15px 10px 0; padding: 8px; background-color: rgb(41, 41, 226);  color: white; border-radius: 5px; width: 130px; float: right;">
               <a th:href="@{/part3/publishForm}">거래명세서발행</a></button>
+          </div>
         </th>
       </tr>
       </tbody>
