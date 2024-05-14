@@ -19,32 +19,32 @@
 
   </style>
 
-  <script>
-    function NocontractListAjax(page) { // 위에서 보낸 매개변수 1을 받아 준다!
-      const innerHtml = $("#contractList"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
-      const f = document.getElementById("form1"); //part1_insert_company.html의 form1과연결
-      f.page.value = page;
+<!--  <script>-->
+<!--    function NocontractListAjax(page) { // 위에서 보낸 매개변수 1을 받아 준다!-->
+<!--      const innerHtml = $("#contractList"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)-->
+<!--      const f = document.getElementById("form1"); //part1_insert_company.html의 form1과연결-->
+<!--      f.page.value = page;-->
 
-      $.ajax({
-        url: "/part1/NocontractItemListAjax", //백엔드 경로
-        type: 'GET',
-        cache: false,
-        data: $('#form1').serialize(),
-        dataType: "html",
-        async: false,
-        //성공 시에 part1_insert_company.html의 form태그 위치에 백엔드 경로(part1_insert_company_ajax)에 연결 된 리턴 값인 프론트 cartListAjax.html을 넣어서 보여줌
-        success: function (data) {
-          $(innerHtml).html(data)
+<!--      $.ajax({-->
+<!--        url: "/part1/NocontractItemListAjax", //백엔드 경로-->
+<!--        type: 'GET',-->
+<!--        cache: false,-->
+<!--        data: $('#form1').serialize(),-->
+<!--        dataType: "html",-->
+<!--        async: false,-->
+<!--        //성공 시에 part1_insert_company.html의 form태그 위치에 백엔드 경로(part1_insert_company_ajax)에 연결 된 리턴 값인 프론트 cartListAjax.html을 넣어서 보여줌-->
+<!--        success: function (data) {-->
+<!--          $(innerHtml).html(data)-->
 
-          setTimeout(function () {
-          }, 1000)
-        },
-        error: function (e) {
-          $(innerHtml).html("")
-        }
-      })
-    }
-  </script>
+<!--          setTimeout(function () {-->
+<!--          }, 1000)-->
+<!--        },-->
+<!--        error: function (e) {-->
+<!--          $(innerHtml).html("")-->
+<!--        }-->
+<!--      })-->
+<!--    }-->
+<!--  </script>-->
 </head>
 <body>
 <header th:replace="/fragments/common:: navbar">
@@ -70,12 +70,16 @@
     </thead>
     <tbody>
     <tr>
-      <th scope="col">품목을 선택하세요</th>
-<!--      <th scope="col">선택한 품목명</th>-->
-<!--      <th scope="col">선택한 생산수량</th>-->
-<!--      <th scope="col">선택한 생산시작일</th>-->
-<!--      <th scope="col">선택한 생산종료일</th>-->
-<!--      <th scope="col">선택한 투입공정</th>-->
+      <th scope="col" th:text="${selectItem.itemIndex}"></th>
+      <th scope="col" th:text="${selectItem.itemName}"></th>
+      <th scope="col" th:text="${selectItem.itemLength}"></th>
+      <th scope="col" th:text="${selectItem.itemWidth}"></th>
+      <th scope="col" th:text="${selectItem.itemHeight}"></th>
+      <th scope="col" th:text="${selectItem.unit.unitCode}"></th>
+      <th scope="col" th:text="${selectItem.assy.assyCode}"></th>
+      <th scope="col" th:text="${selectItem.part.partCode}"></th>
+      <th scope="col" th:text="${selectItem.itemMaterial}"></th>
+
     </tr>
     </tbody>
   </table>
@@ -85,8 +89,8 @@
 
 <div class="part">
   <h4 style="margin: 115px 0 0 60px; ">신규 계약 등록</h4>
-  <form action="" style="width: 600px; margin: 10px 0 30px 30px; padding: 50px 0 10px 30px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); height: 470px;">
-
+  <form th:action="@{/part1/saveContractitem}" style="width: 600px; margin: 10px 0 30px 30px; padding: 50px 0 10px 30px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); height: 470px;" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:name="itemIndex" th:value="${selectItem.itemIndex}">
     <table class="table" style="margin-top: 15px;  margin-left: 20px; width: 500px;">
       <thead>
       <tr>
@@ -99,7 +103,8 @@
         <th scope="row">계약서</th>
         <td>
           <div class="input-group">
-            <input type="file" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+<!--            <input type="hidden" name="">-->
+            <input type="file" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:name="file">
           </div>
         </td>
       </tr>
@@ -132,13 +137,13 @@
       <tr>
         <th scope="row">비고</th>
         <td colspan="2">              <div class="input-group">
-          <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+          <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:name="contractInfo">
         </div></td>
       </tr>
       <tr>
         <th scope="row">품목 가격</th>
         <td colspan="2">              <div class="input-group">
-          <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+          <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:name="contractPrice">
         </div></td>
       </tr>
 

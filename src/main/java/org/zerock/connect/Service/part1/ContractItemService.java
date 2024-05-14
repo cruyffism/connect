@@ -22,6 +22,10 @@ public class ContractItemService {
         return contractItemRepository.findAll();
     }
 
+    public ContractItem saveContractItem(ContractItem contractItem){
+        return contractItemRepository.save(contractItem);
+    }
+
 
 }
 

@@ -116,6 +116,14 @@ public class ItemController {
         Product product = new Product(); //객체 생성
         product.setProductId(productId); //객체로 만들어서 조인 값을 저장
 
+        List<Unit> unitList = itemService.findUnitList();
+        List<Part> partList = itemService.findPartList();
+        List<Assy> assyList = itemService.findAssyList();
+
+        model.addAttribute("unitList",unitList);
+        model.addAttribute("partList",partList);
+        model.addAttribute("assyList",assyList);
+
 
         Unit unit = new Unit();
         unit.setUnitCode(unitCode);

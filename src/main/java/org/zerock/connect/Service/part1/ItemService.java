@@ -71,5 +71,7 @@ public class ItemService {
         return itemRepository.NocontractItem();
     }
 
-
+    public Item findByItemIndex(Long itemIndex){
+        return itemRepository.findByItemIndex(itemIndex);
+    }
 }
