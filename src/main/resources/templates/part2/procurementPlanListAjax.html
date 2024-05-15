@@ -23,7 +23,7 @@
             <td th:text="${procurementPlan.contractItem.item.itemName}"></td>
             <td th:text="${procurementPlan.planDate}"></td>
             <td>
-                <button type="button" class="btn btn-sm btn-primary" onclick="return show('orderPart')">선택</button>
+                <button type="button" class="btn btn-sm btn-primary" th:onclick="|location.href='@{/part2/purchaseOrderChoice(planNum=${procurementPlan.planNum})}'|">선택</button>
             </td>
         </tr>
     </th:block>

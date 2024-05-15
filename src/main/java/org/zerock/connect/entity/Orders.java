@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,9 @@ public class Orders {
 
     @Column(nullable = false,length = 5)
     private String orderYn;
+
+    @Column(nullable = false)
+    private LocalDate orderDate;
 
 
 

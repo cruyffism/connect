@@ -20,4 +20,11 @@ public interface ProcurementPlanRepository extends JpaRepository<ProcurementPlan
             "where p.planDate between :startDate and :endDate and c.comName like concat('%',:comName,'%') and i.itemName like concat('%',:itemName ,'%')")
     List<ProcurementPlan> procurementPlanListAjax(@Param("comName") String comName, @Param("itemName") String itemName, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
+    //발주 품목 선택 api
+    @Query("Select p,i,ci,c from ProcurementPlan p " +
+           "inner join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
+           "inner join Item i on ci.item.itemIndex = i.itemIndex " +
+           "inner join Company c on ci.company.businessId = c.businessId " +
+           "where p.planNum =:planNum ")
+    ProcurementPlan purchaseOrderChoice(@Param("planNum")Integer planNum);
 }

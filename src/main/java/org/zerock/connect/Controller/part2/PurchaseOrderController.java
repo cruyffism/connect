@@ -70,4 +70,12 @@ public class PurchaseOrderController {
         return "/part2/procurementPlanListAjax";
     }
 
+    //발주 품목 선택 api
+    @GetMapping("/purchaseOrderChoice")
+    public String purchaseOrderChoice(@RequestParam("planNum") Integer planNum, Model model) {
+        ProcurementPlan procurementPlan = purchaseOrderService.purchaseOrderChoice(planNum);
+        model.addAttribute("procurementPlan",procurementPlan);
+        return "/part2/purchaseOrderForm";
+    }
+
 }

@@ -3,6 +3,7 @@ $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실�
     console.log("ready!");
     document.getElementById('startDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
     document.getElementById('endDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
+    document.getElementById('orderDate').textContent = new Date().toISOString().substring(0, 10);
     procurementPlanListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
 });
 
@@ -47,12 +48,29 @@ function caldate() {
 }
 
 
-function show(orderPart) {
+// function show(orderPart) {
+//
+//     if (document.getElementById(orderPart).style.display == "none") {
+//
+//         document.getElementById(orderPart).style.display = "block"; //표시하게 하기
+//     } else {
+//         document.getElementById(orderPart).style.display = "none"; //안보이게 하기
+//
+//     }
+//
+// }
 
-    if (document.getElementById(orderPart).style.display == "none") {
-        document.getElementById(orderPart).style.display = "block"; //표시하게 하기
-    } else {
-        document.getElementById(orderPart).style.display = "none"; //안보이게 하기
+//가격 계산
+function updateTotalPrice() {
+    console.log("가격")
+    // 단가가격
+    const onePrice = document.getElementById('orderPrice').textContent;
+    // 수량
+    const amount = document.getElementById('orderCount').value;
+    console.log("onePrice",onePrice)
+    console.log("amount",amount)
 
-    }
+    // 보여주는 값
+    document.getElementById('totalPrice1').textContent = onePrice * amount;
+    document.getElementById('totalPrice2').textContent = onePrice * amount;
 }
