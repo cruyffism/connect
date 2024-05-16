@@ -75,12 +75,13 @@
         </div>
         <hr>
         <!-- 발주서 작성 -->
-        <form id="form2" method="post">
+        <form  id="form2" method="post">
+            <input type="hidden" id="orderDate" name="orderDate" value="">  <!--js를 통해 현재날짜로 발주일을 넣어서 히든으로 값을 백엔드로 보낸다. -->
             <div style="float: right; margin: 5px 0px 5px 0;">
-                <button id="btn4" type="button" class="btn btn-sm btn-success">
+                <button id="btn4" type="button" class="btn btn-sm btn-success" onclick="return saveOrder()">
                     발주
                 </button>
-                <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger">
+                <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger" onclick="return updateTotalPrice(0)">
                     취소
                 </button>
             </div>
@@ -147,51 +148,43 @@
 
             <form action="#" method="get">
 
-                <div style="float: right; margin: 5px 0px 5px 0;">
-                    <button id="btn4" type="button" class="btn btn-sm btn-success">
-                        마감
-                    </button>
-                    <button id="cancleBtn" type="button" class="btn btn-sm btn-danger">
-                        삭제
-                    </button>
-                </div>
-
                 <div id="orderList">
                     <table class="table table-bordered text-center">
                         <colgroup>
                             <col width="5%">
+                            <col width="10%">
                             <col width="15%">
-                            <col width="20%">
-                            <col width="20%">
-                            <col width="20%">
-                            <col width="20%">
+                            <col width="15%">
+                            <col width="5%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="10%">
+                            <col width="10%">
                         </colgroup>
                         <thead>
                         <tr class="table-secondary">
-                            <th scope="col"></th>
+                            <th scope="col">순번</th>
                             <th scope="col">발주번호</th>
                             <th scope="col">업체명</th>
                             <th scope="col">품목명</th>
+                            <th scope="col">수량</th>
                             <th scope="col">발주일</th>
-                            <th scope="col">발주 마감</th>
+                            <th scope="col">입고예정일</th>
+                            <th scope="col">마감 여부</th>
+                            <th scope="col">발주 삭제</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
+                            <th scope="row">1</th>
                             <td>abc-01</td>
                             <td>(주)MIT</td>
                             <td>테스트 품목</td>
+                            <td>100</td>
                             <td>2024-05-01</td>
-                            <td>완료</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
-                            <td>abc-01</td>
-                            <td>(주)MIT</td>
-                            <td>테스트 품목</td>
-                            <td>2024-05-01</td>
-                            <td>완료</td>
+                            <td>2024-05-12</td>
+                            <td><button type="button" class="btn btn-sm btn-success">마감</button></td>
+                            <td><button type="button" class="btn btn-sm btn-danger">삭제</button></td>
                         </tr>
                         </tbody>
                     </table>

@@ -22,9 +22,15 @@ public interface ProcurementPlanRepository extends JpaRepository<ProcurementPlan
 
     //발주 품목 선택 api
     @Query("Select p,i,ci,c from ProcurementPlan p " +
-           "inner join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
-           "inner join Item i on ci.item.itemIndex = i.itemIndex " +
-           "inner join Company c on ci.company.businessId = c.businessId " +
-           "where p.planNum =:planNum ")
-    ProcurementPlan orderChoiceAjax(@Param("planNum")Integer planNum);
+            "inner join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
+            "inner join Company c on ci.company.businessId = c.businessId " +
+            "where p.planNum =:planNum ")
+    ProcurementPlan orderChoiceAjax(@Param("planNum") Long planNum);
+
+    @Query("Select p,i,ci,c from ProcurementPlan p " +
+            "inner join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
+            "inner join Company c on ci.company.businessId = c.businessId")
+    List<ProcurementPlan> findPlanList();
 }

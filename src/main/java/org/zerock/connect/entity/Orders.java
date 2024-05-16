@@ -33,7 +33,7 @@ public class Orders {
     @Column(nullable = false,length = 50)
     private Integer orderCount;
 
-    @Column(nullable = false ,length = 50)
+    @Column(length = 50)
     private String orderInfo;
 
     @Column(nullable = false,length = 5)
@@ -41,6 +41,9 @@ public class Orders {
 
     @Column(nullable = false)
     private LocalDate orderDate;
+
+    @Column(nullable = false)
+    private LocalDate receiveDueDate;
 
 
 

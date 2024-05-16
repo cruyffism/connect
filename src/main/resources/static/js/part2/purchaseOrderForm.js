@@ -1,11 +1,11 @@
 //js를 통해 리스트와 아작스를 연결
 $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실행
     console.log("ready!");
-    document.getElementById('startDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
-    document.getElementById('endDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
+    /*document.getElementById('startDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
+    document.getElementById('endDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅*/
     procurementPlanListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
     orderChoiceAjax(0, 0);
-    document.getElementById('orderDate').textContent = new Date().toISOString().substring(0, 10);
+    document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10);
 });
 
 function procurementPlanListAjax(page) { // 위에서 보낸 매개변수 1을 받아 준다!
@@ -51,8 +51,31 @@ function orderChoiceAjax(planNum, index) {
             if (index > 0) {
                 document.getElementById('index' + index).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
             }
-            document.getElementById('orderDate').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
-            updateTotalPrice(); // 가격계산 메소드 실행
+            document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
+            updateTotalPrice(1); // 가격계산 메소드 실행
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
+
+function saveOrder() {
+    const innerHtml = $("#orderRegister");
+    document.getElementById('orderDate').value = new Date().toISOString().substring(0, 10);
+    $.ajax({
+        url: "/part2/saveOrder", //백엔드 경로
+        type: 'POST',
+        cache: false,
+        data: $('#form2').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data); // 발주폼 뿌리기
+            document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
+            updateTotalPrice(0); // 가격계산 메소드 실행
             setTimeout(function () {
             }, 1000)
         },
@@ -91,15 +114,22 @@ function caldate() {
 // }
 
 //가격 계산
-function updateTotalPrice() {
+function updateTotalPrice(isCheck) {
     // 단가가격
     const onePrice = document.getElementById('onePrice').value;
     // 수량
     const amount = document.getElementById('orderCount').value;
+    if(isCheck === 0){ //취소 버튼 눌렀을때 1개 가격으로 초기화
+        document.getElementById('totalPrice1').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
+        document.getElementById('totalPrice2').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
 
-    // 단가 * 수량 계산 및 합계/공급가격 금액 형식 추가
-    document.getElementById('totalPrice1').textContent = (onePrice * amount).toLocaleString("ko-KR") + '원';
-    document.getElementById('totalPrice2').textContent = (onePrice * amount).toLocaleString("ko-KR") + '원';
-    // 단가 금액 형식 추가
-    document.getElementById('orderPrice').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
+    } else { // 가격 계산 해주는 코드
+
+        // 단가 * 수량 계산 및 합계/공급가격 금액 형식 추가
+        document.getElementById('totalPrice1').textContent = (onePrice * amount).toLocaleString("ko-KR") + '원';
+        document.getElementById('totalPrice2').textContent = (onePrice * amount).toLocaleString("ko-KR") + '원';
+        // 단가 금액 형식 추가
+        document.getElementById('orderPrice').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
+    }
+
 }
