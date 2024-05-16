@@ -6,4 +6,6 @@ import org.zerock.connect.entity.Releases;
 
 @Repository
 public interface ReleasesRepository extends JpaRepository<Releases, Long> {
+
+
 }

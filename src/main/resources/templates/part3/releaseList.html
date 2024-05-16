@@ -39,9 +39,9 @@
         <input type="text" placeholder="검색어를 입력하세요..." style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)">
 
         <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색</button>
-        <button type="button" class="btn deletebtn" style="margin: 0 0 10px 0; padding: 8px; background-color: rgb(212, 47, 18);  color: white; border-radius: 5px; width: 80px; float: right;">삭제</button>
-        <button type="button" class="btn btn-outline-success modifybtn" style="margin: 0 10px 10px 0; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 80px; float: right;">수정</button>
-        <button type="button" class="btn btn-outline-success savebtn" style="margin: 0 10px 10px 0; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 80px; float: right;">저장</button>
+<!--        <button type="button" class="btn deletebtn" style="margin: 0 0 10px 0; padding: 8px; background-color: rgb(212, 47, 18);  color: white; border-radius: 5px; width: 80px; float: right;">삭제</button>
+        <button type="button" class="btn btn-outline-success modifybtn" style="margin: 0 10px 10px 0; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 80px; float: right;">수정</button>-->
+<!--        <button type="button" class="btn btn-outline-success savebtn" style="margin: 0 10px 10px 0; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 80px; float: right;">출고</button>-->
       </form>
     
       <!-- 옵션 검색 -->
@@ -50,42 +50,35 @@
       <!-- <div style="min-height: 300px; max-height: 400px; overflow-y: scroll; width: 98%;"> -->
       <div style="min-height: 300px; width: 99%; margin-left: 10px;">
         <table class="table" style="margin-top: 15px;  ">
-
-
           <thead class="table-secondary">
             <tr>
-              <th scope="col"></th>
               <th scope="col">제품명</th>
               <th scope="col">품목코드</th>
               <th scope="col">품목명</th>
               <th scope="col">조달납기일</th>
               <th scope="col">생산시작일</th>
               <th scope="col">생산종료일</th>
-              <th scope="col">투입공정</th>
               <th scope="col">입고수량</th>
               <th scope="col">출고일자</th>
               <th scope="col">출고수량</th>
+              <th scope="col"></th>
             </tr>
           </thead>
 
-
           <tbody>
-            <tr>
-              <th scope="col" style="text-align: center; width: 80px;">
-                <div style="display: inline-block; text-align: center;">
-                  <input type="radio" name="productRadio" value="product1">
-                </div>
-              </th>
-              <th scope="col">제품명</th>
-              <th scope="col">abcdefg1</th>
-              <th scope="col">품목명</th>
-              <th scope="col">24/05/09</th>
-              <th scope="col">24/05/09</th>
-              <th scope="col">24/05/09</th>
-              <th scope="col">공정A</th>
-              <th scope="col">500</th>
-              <th scope="col">24/05/09</th>
-              <th scope="col"><input type="text" style="width: 80px;"></th>
+            <tr th:each="releasesList:${releasesList}">
+              <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.product.productName}"></td>
+              <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.itemIndex}"></td>
+              <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.itemName}"></td>
+              <td th:text="${releasesList.receive.progress.orders.procurementPlan.planDate}"></td>
+              <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.product.productStartdate}"></td>
+              <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.product.productEnddate}"></td>
+              <td th:text="${releasesList.receive.receiveCount}"></td>
+              <td th:text="${releasesList.releaseDate}"></td>
+              <td><input type="number" style="width: 100px"></td>
+              <td>
+                <button type="button" class="btn btn-outline-success rel_save" style="margin-right: 10px; padding: 8px; background-color: green;  color: white; border-radius: 5px; width: 80px; float: right;">출고</button>
+              </td>
             </tr>
           </tbody>
         </table>
