@@ -19,5 +19,8 @@ public class ReceiveService {
     public List<Receive> getReceiveListByReceiveYn(String receiveYn) {
         return receiveRepository.findByReceiveYn(receiveYn);
     }
+public List<Receive> getAllReceive(){
+        return receiveRepository.getAllReceive();
+}
 
 }

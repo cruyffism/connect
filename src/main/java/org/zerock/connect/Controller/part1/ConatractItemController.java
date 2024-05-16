@@ -156,6 +156,7 @@ public class ConatractItemController {
         List<Item> pageContent = NocontractItem.subList(start, end);
         Page<Item> NocontractItems = new PageImpl<>(pageContent, pageable, NocontractItem.size());
         model.addAttribute("NocontractItems", NocontractItems);
+
         return "/part1/selectcontractForm";
     }
 
