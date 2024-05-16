@@ -26,5 +26,5 @@ public interface ProcurementPlanRepository extends JpaRepository<ProcurementPlan
            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
            "inner join Company c on ci.company.businessId = c.businessId " +
            "where p.planNum =:planNum ")
-    ProcurementPlan purchaseOrderChoice(@Param("planNum")Integer planNum);
+    ProcurementPlan orderChoiceAjax(@Param("planNum")Integer planNum);
 }

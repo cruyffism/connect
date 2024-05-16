@@ -47,17 +47,19 @@ public class PurchaseOrderController {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
 
-        //동적 쿼리 만들기 위해 서치타입이 comName 이면 comName에다가 넘어온 searchText 값을 넣어서 만들어주기
-        String comName = "";
-        String itemName = "";
-        if(searchType.equals("comName")){
-            comName = searchText;
-        }
-        if(searchType.equals("itemName")){
-            itemName = searchText;
-        }
+
+            //동적 쿼리 만들기 위해 서치타입이 comName이면 comName에다가 넘어온 searchText 값을 넣어서 만들어주기
+            String comName = "";
+            String itemName = "";
+            if (searchType.equals("comName")) {
+                comName = searchText;
+            }
+            if (searchType.equals("itemName")) {
+                itemName = searchText;
+            }
 
         List<ProcurementPlan> procurementPlanList = purchaseOrderService.procurementPlanListAjax(comName, itemName, startDate, endDate);
+
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
         int end = Math.min((start + pageable.getPageSize()), procurementPlanList.size()); // 5을 계산한 구문
 
@@ -70,12 +72,13 @@ public class PurchaseOrderController {
         return "/part2/procurementPlanListAjax";
     }
 
-    //발주 품목 선택 api
-    @GetMapping("/purchaseOrderChoice")
-    public String purchaseOrderChoice(@RequestParam("planNum") Integer planNum, Model model) {
-        ProcurementPlan procurementPlan = purchaseOrderService.purchaseOrderChoice(planNum);
-        model.addAttribute("procurementPlan",procurementPlan);
-        return "/part2/purchaseOrderForm";
+    //발주 품목 선택 아작스 api
+    @GetMapping("/orderChoiceAjax")
+    public String orderChoiceAjax(@RequestParam("planNum") Integer planNum, Model model) {
+        System.out.println("planNum = " + planNum);
+        ProcurementPlan procurementPlan = purchaseOrderService.orderChoiceAjax(planNum);
+        model.addAttribute("procurementPlan", procurementPlan);
+        return "/part2/orderChoiceAjax";
     }
 
 }

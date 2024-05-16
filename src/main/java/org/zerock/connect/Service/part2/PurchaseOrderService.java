@@ -19,7 +19,7 @@ public class PurchaseOrderService {
     }
 
     //발주 품목 선택 api
-    public ProcurementPlan purchaseOrderChoice(Integer planNum) {
-        return procurementPlanRepository.purchaseOrderChoice(planNum);
+    public ProcurementPlan orderChoiceAjax(Integer planNum) {
+        return procurementPlanRepository.orderChoiceAjax(planNum);
     }
 }
