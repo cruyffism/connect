@@ -66,6 +66,14 @@ public class MemberController {
         System.out.println("part0페이지");
         return "/main_product"; // main.html 페이지로 이동
     }
+//로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        System.out.println("로그아웃 성공");
+        return "redirect:/Con/login";
+    }
+    
 
 
 }

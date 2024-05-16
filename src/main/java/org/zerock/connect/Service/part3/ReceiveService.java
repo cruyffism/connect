@@ -18,4 +18,8 @@ public class ReceiveService {
     public List<Receive> getAllReceive() {
         return receiveRepository.findAll();
     }
+public List<Receive> getAllReceive(){
+        return receiveRepository.getAllReceive();
+}
+
 }

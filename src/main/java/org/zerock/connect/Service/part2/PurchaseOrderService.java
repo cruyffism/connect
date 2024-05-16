@@ -17,4 +17,9 @@ public class PurchaseOrderService {
     public List<ProcurementPlan> procurementPlanListAjax(String comName, String itemName, LocalDate startDate, LocalDate endDate) {
         return procurementPlanRepository.procurementPlanListAjax(comName, itemName, startDate, endDate);
     }
+
+    //발주 품목 선택 api
+    public ProcurementPlan orderChoiceAjax(Integer planNum) {
+        return procurementPlanRepository.orderChoiceAjax(planNum);
+    }
 }

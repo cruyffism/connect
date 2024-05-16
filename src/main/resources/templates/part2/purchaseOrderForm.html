@@ -27,148 +27,64 @@
         <div id="titleBox" class="d-flex justify-content-between">
             <h3>발주품목 선택</h3>
         </div>
-
+        <hr>
         <!-- 발주서 선택 기능 -->
         <form id="form1">
+            <input type="hidden" id="planNum" name="planNum" value="">
             <input type="hidden" id="page" name="page" value="1">
-            <div id="totalBox" class="d-flex justify-content-between">
-                <div id="dateBox">
-                    <div id="totalBox" class="d-flex justify-content-between">
-                        <div id="dateBox">
-                            <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
-                                   id="startDate" name="startDate"> ~
-                            <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
-                                   id="endDate" name="endDate">
-                            <button type="button" class="btn btn-outline-success" style="width: 150px;"
-                                    onclick="return caldate()">조회
-                            </button>
-                        </div>
+            <div class="d-flex justify-content-between">
+                <div id="totalBox" class="d-flex justify-content-between">
+                    <div id="dateBox">
+                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색"
+                               aria-label="Search"
+                               id="startDate" name="startDate"> ~
+                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색"
+                               aria-label="Search"
+                               id="endDate" name="endDate">
+                        <button type="button" class="btn btn-sm btn-success" style="width: 120px;"
+                                onclick="return caldate()">조회
+                        </button>
                     </div>
                 </div>
 
                 <!-- 업체명 품목명 조건 검색 -->
-                <div id="searchBox" style="height: 40px; margin: 30px 10px 0 10px;">
-                    <select id="selectBox" name="searchType">
-                        <option value="comName">업체명</option>
-                        <option value="itemName">품목명</option>
-                    </select>
-                    <input type="text" id="searchText" name="searchText">
-                    <button type="button" class="btn btn-outline-success" onclick="return procurementPlanListAjax(1)">
-                        검색
-                    </button>
+                <div id="searchBox">
+                    <div id="itemSearchBox">
+                        <select id="selectBox" name="searchType" class="form-select form-select-sm me-2">
+                            <option value="comName">업체명</option>
+                            <option value="itemName">품목명</option>
+                        </select>
+                        <input class="form-control form-control-sm me-2" type="text" id="searchText" name="searchText">
+                        <button type="button" class="btn btn-sm btn-success"
+                                onclick="return procurementPlanListAjax(1)">
+                            검색
+                        </button>
+                    </div>
                 </div>
-                <!-- 업체명 품목명 조건 검색 -->
             </div>
+            <!-- 업체명 품목명 조건 검색 -->
             <div id="procurementPlanList">
             </div>
         </form>
-        <!-- 발주서 선택 기능 -->
     </div>
+    <!-- 발주서 선택 기능 -->
 
-    <div id="orderPart" style="display: none">
+    <div id="orderPart">
         <div id="titlebox2" class="d-flex justify-content-between">
             <h3>발주서 작성</h3>
         </div>
-
+        <hr>
         <!-- 발주서 작성 -->
-        <form action="#" method="get">
-            <div style="float: right; margin: 5px 30px 5px 0;">
-                <button id="btn4" type="button" class="btn btn-sm btn-success" style="width: 60px; margin-left: 50px;">
+        <form id="form2" method="post">
+            <div style="float: right; margin: 5px 0px 5px 0;">
+                <button id="btn4" type="button" class="btn btn-sm btn-success">
                     발주
                 </button>
-                <button id="btn4" type="button" class="btn btn-sm btn-danger" style="width: 60px; margin-left: 50px;">
+                <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger">
                     취소
                 </button>
             </div>
-
-            <div id="orderList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="25%">
-                        <col width="25%">
-                        <col width="25%">
-                        <col width="25%">
-                    </colgroup>
-                    <thead>
-                    <tr class="table-secondary">
-                        <th scope="col" colspan="4">공급자정보</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">발주일</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">업체명</th>
-                        <td>(주)MIT</td>
-                        <th scope="row">사업자 번호</th>
-                        <td>123-45-6789</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">주소</th>
-                        <td>경기도 수원시 123</td>
-                        <th scope="row">담당자</th>
-                        <td>담당자1</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="itemList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="15%">
-                        <col width="10%">
-                        <col width="13%">
-                        <col width="7%">
-                        <col width="5%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="5%">
-                    </colgroup>
-                    <thead>
-                    <tr class="table-secondary">
-                        <th scope="col" colspan="10">품목정보</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>순번</td>
-                        <td>품목코드</td>
-                        <td>품목명</td>
-                        <td>규격</td>
-                        <td>재질</td>
-                        <td>수량</td>
-                        <td>단가</td>
-                        <td>공급 가격</td>
-                        <td>입고 예정일</td>
-                        <td>비고</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>ABC_10</td>
-                        <td>테스트 품목</td>
-                        <td>10*20*30</td>
-                        <td>플라스틱</td>
-                        <td><input class="form-control" type="text" width="50%" ;></td>
-                        <td>500</td>
-                        <td>250,000</td>
-                        <td><input class="form-control" type="date"></td>
-                        <td><input class="form-control" type="text"></td>
-                    </tr>
-                    <tr>
-                        <td scope="col" colspan="7"></td>
-                        <td>합계</td>
-                        <td>250,000</td>
-                        <td scope="col" colspan="2"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div id="orderRegister"></div>
         </form>
         <!-- 발주서 작성 -->
 
@@ -179,15 +95,16 @@
         <div id="titleBox" class="d-flex justify-content-between">
             <h3>구매 발주 관리</h3>
         </div>
+        <hr>
         <div>
             <div id="totalBox" class="d-flex justify-content-between">
                 <form action="#" method="get" style="padding: 20px 0 0 0 ;">
                     <div id="dateBox">
-                        <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
+                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
                                id="start_date1"> ~
-                        <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
+                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
                                id="end_date1">
-                        <button type="button" class="btn btn-outline-success" style="width: 150px;"
+                        <button type="button" class="btn btn-success btn-sm" style="width: 150px;"
                                 onclick="caldate1()">조회
                         </button>
                     </div>
@@ -210,31 +127,33 @@
 
                 <!-- 업체명 품목명 리스트 검색 -->
 
-
-                <form action="#" method="get" style="padding: 20px 0 0 0 ;">
                     <div id="searchBox">
-                        <select id="selectBox">
-                            <option>업체명</option>
-                            <option>품목명</option>
-                        </select>
-                        <input type="text" id="searchText">
-                        <button type="button" class="btn btn-outline-success">검색</button>
-                        <!-- <button id="btn3" type="button">검색</button> -->
+                        <div id="itemSearchBox">
+                            <select id="selectBox" name="searchType" class="form-select form-select-sm me-2">
+                                <option value="comName">업체명</option>
+                                <option value="itemName">품목명</option>
+                            </select>
+                            <input class="form-control form-control-sm me-2" type="text" id="searchText" name="searchText">
+                            <button type="button" class="btn btn-sm btn-success"
+                                    onclick="">
+                                검색
+                            </button>
+                        </div>
                     </div>
-                </form>
-
 
                 <!-- 업체명 품목명 리스트 검색 -->
 
-
             </div>
-
 
             <form action="#" method="get">
 
-                <div style="margin: 5px 15px 10px 0; float: right;">
-                    <button id="btn7" type="button">마감</button>
-                    <button id="btn5" type="button">삭제</button>
+                <div style="float: right; margin: 5px 0px 5px 0;">
+                    <button id="btn4" type="button" class="btn btn-sm btn-success">
+                        마감
+                    </button>
+                    <button id="cancleBtn" type="button" class="btn btn-sm btn-danger">
+                        삭제
+                    </button>
                 </div>
 
                 <div id="orderList">
@@ -280,7 +199,6 @@
             </form>
         </div>
     </div>
-</div>
 </div>
 <!— 본문 —>
 </body>

@@ -1,6 +1,5 @@
 package org.zerock.connect.Service.part3;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.connect.entity.Progress;
@@ -16,9 +15,5 @@ public class ProgressService {
 
     public List<Progress> noReceiveList(){
         return progressRepository.noReceiveList();
-};
-
-
-
-
+    }
 }

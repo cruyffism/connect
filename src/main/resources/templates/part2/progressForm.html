@@ -21,287 +21,285 @@
 <!--본문 -->
 <div class="container">
     <!-- 내용 -->
-    <div class="col-12" id="bodyBox">
-
+    <div id="bodyBox">
         <!--검수 예정 품목 리스트-->
         <div id="titleBox" class="d-flex justify-content-between">
             <h3>검수 예정 품목</h3>
         </div>
         <hr>
-        <div id="totalBox" class="d-flex justify-content-between">
-            <form action="#" method="get">
+        <div class="d-flex justify-content-between">
+            <div id="totalBox" class="d-flex justify-content-between">
                 <div id="dateBox">
-                    <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
+                    <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색"
+                           aria-label="Search"
                            id="start_date"> ~
-                    <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
+                    <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색"
+                           aria-label="Search"
                            id="end_date">
 
                     <button type="button" class="btn btn-sm btn-success" style="width: 120px;"
                             onclick="caldate()">조회
                     </button>
                 </div>
-            </form>
+                <script>
+                    function caldate() {
+                        var start_date = document.getElementById("start_date").value;
+                        var end_date = document.getElementById("end_date").value;
 
-            <script>
-                function caldate() {
-                    var start_date = document.getElementById("start_date").value;
-                    var end_date = document.getElementById("end_date").value;
-
-                    if (start_date <= end_date) {
-                    } else if (start_date > end_date) {
-                        alert("종료날짜를 시작날짜보다 크게 입력하세요");
-                    } else {
-                        alert("날짜를 입력하세요");
+                        if (start_date <= end_date) {
+                        } else if (start_date > end_date) {
+                            alert("종료날짜를 시작날짜보다 크게 입력하세요");
+                        } else {
+                            alert("날짜를 입력하세요");
+                        }
                     }
-                }
-            </script>
-        </div>
+                </script>
+            </div>
 
-        <!-- 품목코드 품목명 조건 검색 -->
-        <div id="searchBox" class="d-flex justify-content-between">
-            <form action="">
+            <!-- 품목코드 품목명 조건 검색 -->
+            <div id="searchBox">
                 <div id="itemSearchBox">
-                    <select id="selectBox" class="form-select form-select-sm me-2">
+                    <select id="selectBox" name="searchType" class="form-select form-select-sm me-2">
                         <option value="">품목코드</option>
                         <option value="">품목명</option>
                     </select>
                     <input class="form-control form-control-sm me-2" type="text" id="searchText" style="width: 225px;">
                     <button type="button" class="btn btn-sm btn-success">검색</button>
                 </div>
-            </form>
-        </div>
-        <!-- 품목코드 품목명 조건 검색 -->
-
-        <!-- 발주리스트 -->
-        <form action="#" method="get">
-            <div id="orderList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="10%">
-                        <col width="15%">
-                        <col width="15%">
-                        <col width="15%">
-                        <col width="15%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
-                    </colgroup>
-                    <thead>
-                    <tr class="table-secondary">
-                        <th scope="col">발주번호</th>
-                        <th scope="col">발주일자</th>
-                        <th scope="col">입고예정일</th>
-                        <th scope="col">품목코드</th>
-                        <th scope="col">품목명</th>
-                        <th scope="col">발주수량</th>
-                        <th scope="col">검수현황</th>
-                        <th scope="col">진척검수</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>abc-01</td>
-                        <td>2024-05-01 00:00:00</td>
-                        <td>2024-05-16 00:00:00</td>
-                        <td>ABC_01</td>
-                        <td>테스트 품목</td>
-                        <td>500</td>
-                        <td>0/1</td>
-                        <td>
-                            <button type="button" onclick="location.href='part2_progress_inspection.html'"
-                                    class="btn btn-primary  btn-sm">검수
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
-        </form>
-
-
-        <!--검수 계획-->
-        <div id="titleBox" class="d-flex justify-content-between">
-            <h3>검수 계획</h3>
-            <button type="button" class="btn btn-sm btn-success">저장</button>
         </div>
-        <hr>
+    </div>
+    <!-- 품목코드 품목명 조건 검색 -->
+
+    <!-- 발주리스트 -->
+    <form action="#" method="get">
+        <div id="orderList">
+            <table class="table table-bordered text-center">
+                <colgroup>
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="15%">
+                    <col width="15%">
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                <tr class="table-secondary">
+                    <th scope="col">발주번호</th>
+                    <th scope="col">발주일자</th>
+                    <th scope="col">입고예정일</th>
+                    <th scope="col">품목코드</th>
+                    <th scope="col">품목명</th>
+                    <th scope="col">발주수량</th>
+                    <th scope="col">검수현황</th>
+                    <th scope="col">진척검수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>abc-01</td>
+                    <td>2024-05-01 00:00:00</td>
+                    <td>2024-05-16 00:00:00</td>
+                    <td>ABC_01</td>
+                    <td>테스트 품목</td>
+                    <td>500</td>
+                    <td>0/1</td>
+                    <td>
+                        <button type="button" onclick="location.href='part2_progress_inspection.html'"
+                                class="btn btn-primary  btn-sm">검수
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+
+    <!--검수 계획-->
+    <div id="titleBox" class="d-flex justify-content-between">
+        <h3>검수 계획</h3>
+        <button type="button" class="btn btn-sm btn-success">저장</button>
+    </div>
+    <hr>
+    <div>
+        <div id="orderList">
+            <table class="table table-bordered text-center">
+                <colgroup>
+                    <col width="30%">
+                    <col width="70%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td style="font-weight: bold;">발주번호</td>
+                    <td>abc-01</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">발주일자</td>
+                    <td>2024-05-01 00:00:00</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">입고예정일자</td>
+                    <td>2024-05-16 00:00:00</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">업체명</td>
+                    <td>(주)MIT</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">사업자번호</td>
+                    <td>123-45-6789</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="orderList">
+            <table class="table table-bordered text-center">
+                <colgroup>
+                    <col width="30%">
+                    <col width="40%">
+                    <col width="30%">
+                </colgroup>
+                <tbody>
+                <tr class="table-secondary">
+                    <td style="font-weight: bold;">품목코드</td>
+                    <td style="font-weight: bold;">품목명</td>
+                    <td style="font-weight: bold;">발주수량</td>
+                </tr>
+                <tr>
+                    <td>ABC_10</td>
+                    <td>테스트 품목</td>
+                    <td>500</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="orderList">
+            <table class="table table-bordered text-center">
+                <colgroup>
+                    <col width="30%">
+                    <col width="40%">
+                    <col width="15%">
+                    <col width="15%">
+                </colgroup>
+                <tbody>
+                <tr class="table-secondary" style="font-weight: bold;">
+                    <td>차수</td>
+                    <td>검수일자</td>
+                    <td scope="col" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>1차</td>
+                    <td><input id="inspectDate" class="form-control form-control-sm" type="date"></td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-primary">추가</button>
+                    </td>
+                    <td>
+                        <button  type="button" class="btn btn-sm btn-danger">삭제</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div id="titleBox" class="d-flex justify-content-between">
+        <h3>검수 처리</h3>
+        <button type="button" class="btn btn-sm btn-success">저장</button>
+    </div>
+    <hr>
+    <div>
+        <div id="orderList">
+            <table class="table table-bordered text-center">
+                <colgroup>
+                    <col width="30%">
+                    <col width="70%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td style="font-weight: bold;">발주번호</td>
+                    <td>abc-01</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">발주일자</td>
+                    <td>2024-05-01 00:00:00</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">입고예정일자</td>
+                    <td>2024-05-16 00:00:00</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">업체명</td>
+                    <td>(주)MIT</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">사업자번호</td>
+                    <td>123-45-6789</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="orderList">
+            <table class="table table-bordered text-center">
+                <colgroup>
+                    <col width="30%">
+                    <col width="40%">
+                    <col width="30%">
+                </colgroup>
+                <tbody>
+                <tr class="table-secondary" style="font-weight: bold;">
+                    <td>품목코드</td>
+                    <td>품목명</td>
+                    <td>발주수량</td>
+                </tr>
+                <tr>
+                    <td>ABC_10</td>
+                    <td>테스트 품목</td>
+                    <td>500</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div>
-            <div id="orderList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="30%">
-                        <col width="70%">
-                    </colgroup>
-                    <tbody>
-                    <tr>
-                        <td style="font-weight: bold;">발주번호</td>
-                        <td>abc-01</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">발주일자</td>
-                        <td>2024-05-01 00:00:00</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">입고예정일자</td>
-                        <td>2024-05-16 00:00:00</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">업체명</td>
-                        <td>(주)MIT</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">사업자번호</td>
-                        <td>123-45-6789</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="orderList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="30%">
-                        <col width="40%">
-                        <col width="30%">
-                    </colgroup>
-                    <tbody>
-                    <tr class="table-secondary">
-                        <td style="font-weight: bold;">품목코드</td>
-                        <td style="font-weight: bold;">품목명</td>
-                        <td style="font-weight: bold;">발주수량</td>
-                    </tr>
-                    <tr>
-                        <td>ABC_10</td>
-                        <td>테스트 품목</td>
-                        <td>500</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="orderList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="30%">
-                        <col width="40%">
-                        <col width="15%">
-                        <col width="15%">
-                    </colgroup>
-                    <tbody>
-                    <tr class="table-secondary" style="font-weight: bold;">
-                        <td>차수</td>
-                        <td>검수일자</td>
-                        <td scope="col" colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td>1차</td>
-                        <td><input id="inspectDate" class="form-control form-control-sm" type="date"></td>
-                        <td>
-                            <button id="btn3" type="button" class="btn btn-sm btn-primary">추가</button>
-                        </td>
-                        <td>
-                            <button id="btn7" type="button" class="btn btn-sm btn-danger">삭제</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-        <div id="titleBox" class="d-flex justify-content-between">
-            <h3>검수 처리</h3>
-            <button type="button" class="btn btn-sm btn-success">저장</button>
-        </div>
-        <hr>
-        <div>
-            <div id="orderList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="30%">
-                        <col width="70%">
-                    </colgroup>
-                    <tbody>
-                    <tr>
-                        <td style="font-weight: bold;">발주번호</td>
-                        <td>abc-01</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">발주일자</td>
-                        <td>2024-05-01 00:00:00</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">입고예정일자</td>
-                        <td>2024-05-16 00:00:00</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">업체명</td>
-                        <td>(주)MIT</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;">사업자번호</td>
-                        <td>123-45-6789</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="orderList">
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="30%">
-                        <col width="40%">
-                        <col width="30%">
-                    </colgroup>
-                    <tbody>
-                    <tr class="table-secondary" style="font-weight: bold;">
-                        <td>품목코드</td>
-                        <td>품목명</td>
-                        <td>발주수량</td>
-                    </tr>
-                    <tr>
-                        <td>ABC_10</td>
-                        <td>테스트 품목</td>
-                        <td>500</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <table class="table table-bordered text-center">
-                    <colgroup>
-                        <col width="15%">
-                        <col width="20%">
-                        <col width="15%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="10%">
-                    </colgroup>
-                    <tbody>
-                    <tr class="table-secondary"  style="font-weight: bold;">
-                        <td>차수</td>
-                        <td>검수일자</td>
-                        <td>완료수량</td>
-                        <td>검수결과</td>
-                        <td>보완사항</td>
-                        <td>진척도</td>
-                    </tr>
-                    <tr>
-                        <td>1차</td>
-                        <td>2024-05-22</td>
-                        <td>100</td>
-                        <td>검수완료</td>
-                        <td>없음</td>
-                        <td>20%</td>
-                    </tr>
-                    <tr>
-                        <td>1차</td>
-                        <td>2024-05-22</td>
-                        <td>100</td>
-                        <td>검수완료</td>
-                        <td>없음</td>
-                        <td>20%</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="table table-bordered text-center">
+                <colgroup>
+                    <col width="15%">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="10%">
+                </colgroup>
+                <tbody>
+                <tr class="table-secondary" style="font-weight: bold;">
+                    <td>차수</td>
+                    <td>검수일자</td>
+                    <td>완료수량</td>
+                    <td>검수결과</td>
+                    <td>보완사항</td>
+                    <td>진척도</td>
+                </tr>
+                <tr>
+                    <td>1차</td>
+                    <td>2024-05-22</td>
+                    <td>100</td>
+                    <td>검수완료</td>
+                    <td>없음</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>1차</td>
+                    <td>2024-05-22</td>
+                    <td>100</td>
+                    <td>검수완료</td>
+                    <td>없음</td>
+                    <td>20%</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div> <!-- 본문 -->
 </div>

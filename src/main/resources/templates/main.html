@@ -178,14 +178,25 @@
         <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">조달관리</h1>
 
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;" >
-          <a th:href="@{/part1/productList}">품목정보등록</a></button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
-          <a th:href="@{/part1/companyForm}">업체등록</a></button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
-          <a th:href="@{/part1/}">계약등록</a></button>
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">
-          <a th:href="@{/part1/}">조달계획등록</a></button>
+
+
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
+                th:onclick="|location.href='@{/part1/productList}'|">품목정보등록
+        </button>
+
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
+                th:onclick="|location.href='@{/part1/contractItem}'|">계약등록
+        </button>
+        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
+                th:onclick="|location.href='@{/part1/procurementPlan}'|">조달계획등록
+        </button>
+
+
+
+<!--        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">-->
+<!--          <a th:href="@{/part1/}">계약등록</a></button>-->
+<!--        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;">-->
+<!--          <a th:href="@{/part1/}">조달계획등록</a></button>-->
         <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
 <!--      </form>-->
     </div>

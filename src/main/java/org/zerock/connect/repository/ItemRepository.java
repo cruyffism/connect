@@ -26,11 +26,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> NocontractItem();
 
 
-    @Query(value = "SELECT p.productStartdate , p.productEnddate , p.productId , p.productName ,I.itemCode , I.itemName ,C.conitemNo " +
-            "FROM Item I JOIN Product p ON I.product.productId = p.productId " +
-            "JOIN ContractItem C ON I.itemIndex=C.item.itemIndex " +
-            "JOIN Company com ON C.company.businessId=com.businessId")
-    List<Item> ContractItemList();
+
 
 
 }

@@ -1,0 +1,86 @@
+<div id="orderList">
+    <table class="table table-bordered text-center">
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <thead>
+        <tr class="table-secondary">
+            <th scope="col" colspan="4">공급자정보</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">발주일</th>
+            <td id="orderDate"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">업체명</th>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.company.comName}"></td>
+            <th scope="row">사업자 번호</th>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.company.businessId}"></td>
+        </tr>
+        <tr>
+            <th scope="row">주소</th>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.company.comAdd}"></td>
+            <th scope="row">담당자</th>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.company.comName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="itemList">
+    <input type="hidden" id="onePrice" name="onePrice" th:value="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.contractPrice}">
+    <table class="table table-bordered text-center">
+        <colgroup>
+            <col width="5%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="15%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+        </colgroup>
+        <thead>
+        <tr class="table-secondary">
+            <th scope="col" colspan="9">품목정보</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>순번</td>
+            <td>품목코드</td>
+            <td>품목명</td>
+            <td>규격</td>
+            <td>재질</td>
+            <td>수량</td>
+            <td>단가</td>
+            <td>공급 가격</td>
+            <td>입고 예정일</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.item.itemCode}"></td>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.item.itemName}"></td>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.item.itemWidth}+'*'+${procurementPlan.contractItem.item.itemLength}+'*'+${procurementPlan.contractItem.item.itemHeight}"></td>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.item.itemMaterial}"></td>
+            <td><input id="orderCount" name="orderCount" value="1" class="form-control form-control-sm" type="number" onchange="updateTotalPrice()"></td>
+            <td id="orderPrice" th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.contractPrice}"></td>
+            <td id="totalPrice1"></td>
+            <td><input class="form-control form-control-sm" type="date"></td>
+        </tr>
+        <tr>
+            <td>비고</td>
+            <td scope="col" colspan="6"><input class="form-control form-control-sm" type="text"></td>
+            <td>합계</td>
+            <td id="totalPrice2"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -72,7 +72,5 @@ public class ItemService {
         return itemRepository.findByItemIndex(itemIndex);
     }
 
-    public List<Item> ContractItemList() {
-        return itemRepository.ContractItemList();
-    }
+
 }

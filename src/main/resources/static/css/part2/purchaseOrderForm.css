@@ -25,7 +25,7 @@ h3{
 }
 
 #totalBox {
-  margin: 15px 15px;
+  margin: 15px 0px;
 }
 
 #dateBox {
@@ -52,8 +52,13 @@ h3{
   width: 100px;
 }
 
+#itemSearchBox {
+  margin: 15px 0px;
+  display: flex;
+}
+
 #searchText {
-  margin: 0px 20px;
+  width: 180px;
 }
 
 #btn3 {
@@ -72,9 +77,12 @@ h3{
 }
 
 #btn4 {
-  /* background-color: #00AFFF; */
-  /* border-style: none; */
-  /* color: white; */
+  margin-left: 50px;
+  width: 50px;
+}
+
+#cancleBtn {
+
   width: 50px;
 }
 
