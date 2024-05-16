@@ -170,8 +170,17 @@
         <img class="mb-4" src="/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">제품 등록</h1>
 
-        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-top: 70px;">
-          <a th:href="@{/part0/productForm}">제품정보등록</a></button>
+<!--        <button class="btn btn-primary w-100 py-2" type="submit" style="margin-top: 70px;">-->
+<!--          <a th:href="@{/part0/productForm}">제품정보등록</a></button>-->
+
+      <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
+              th:onclick="|location.href='@{/part0/productForm}'|">제품정보등록
+      </button>
+      <div style="margin-top: 30px;">
+      <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
+              th:onclick="|location.href='@{/part1/companyForm}'|">업체등록
+      </button>
+      </div>
 
         <!-- <button class="btn btn-danger w-100 py-2" type="submit" style="margin-top: 10px;">되돌리기</button> -->
 <!--      </form>-->

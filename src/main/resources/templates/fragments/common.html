@@ -22,9 +22,18 @@
     <nav class="navbar fixed-top" style="background-color: #59359a;" th:fragment="navbar">
         <div class="container-fluid"  >
             <a class="navbar-brand" href="#">Connect</a>
+            <!--            네브바 사용자 정보출력-->
+            <th:block>
+                <span style="margin-left: 800px; color: white; font-weight: bolder;" th:if="${session.loginedUser.getMemberDep() == '1'}">제품등록 , 업체등록 계정입니다</span>
+                <span style="margin-left: 900px; color: white; font-weight: bolder;" th:if="${session.loginedUser.getMemberDep() == '2'}">품목등록 계정입니다</span>
+            </th:block>
+
+            <!--            네브바 사용자 정보출력-->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Connect</h5>
@@ -35,13 +44,15 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
+                        <th:block th:if="${session.loginedUser.getMemberDep() == '2'}" >
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 조달관리
                             </a>
                             <ul class="dropdown-menu">
+
                                 <li><a class="dropdown-item" th:href="@{/part1/productList}">품목정보 등록</a></li>
-                                <li><a class="dropdown-item" th:href="@{/part1/companyForm}">업체 등록</a></li>
+<!--                                <li><a class="dropdown-item" th:href="@{/part1/companyForm}">업체 등록</a></li>-->
                                 <li><a class="dropdown-item" th:href="@{/part1/contractItem}">계약 등록</a></li>
                                 <li><a class="dropdown-item" th:href="@{/part1/procurementPlan}">조달 계획 등록</a></li>
                             </ul>
@@ -67,13 +78,14 @@
                                 <li><a class="dropdown-item" th:href="@{/part3/stockList}">재고금액 현황 관리</a></li>
                             </ul>
                         </li>
+                        </th:block>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 회원정보
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">로그인</a></li>
-                                <li><a class="dropdown-item" href="#">로그아웃</a></li>
+<!--                                <li><a class="dropdown-item" href="#">로그인</a></li>-->
+                                <li><a class="dropdown-item" th:href="@{/Con/logout}">로그아웃</a></li>
                             </ul>
                         </li>
                     </ul>

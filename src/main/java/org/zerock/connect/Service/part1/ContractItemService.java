@@ -26,6 +26,16 @@ public class ContractItemService {
         return contractItemRepository.save(contractItem);
     }
 
+    public List<ContractItem> ContractItemList(){
+        return contractItemRepository.ContractItemList();
+    }
 
+    public List<ContractItem> selectByConitemNo(Long conitemNo){
+        return contractItemRepository.selectByConitemNo(conitemNo);
+    }
+
+    public ContractItem findByConitemNo(Long conitemNo){
+        return contractItemRepository.findByConitemNo(conitemNo);
+    }
 }
 

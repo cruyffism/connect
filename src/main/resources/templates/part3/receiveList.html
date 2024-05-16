@@ -53,7 +53,6 @@
 
     <div  style="min-height: 400px; max-height: 500px; overflow-y: scroll; width: 99%;">
       <table class="table" style="margin: 0 0 10px 15px; width: 99%; ">
-
         <thead class="table-secondary">
           <tr>
             <th scope="col">품목코드</th>
@@ -62,22 +61,21 @@
             <th scope="col">발주번호</th>
             <th scope="col">조달납기일</th>
             <th scope="col">업체명</th>
-            <th scope="col"></th>
+            <th scope="col"버튼></th>
           </tr>
         </thead>
-
         <tbody>
-          <tr th:each="progress : ${progressList}" th:if="${progress.receiveYn == n}">
-            <th th:text="${progress.item.itemcode}"></th>
-            <th th:text="${progress.item.itemname}"></th>
-            <th th:text="${progress.orders.orderCount}"></th>
-            <th th:text="${progress.orders.orderNum}"></th>
-            <th th:text="${progress.procurementPlan.planDate}"></th>
-            <th th:text="${progress.Company.comName}"></th>
-            <th>
+          <tr th:each="progress:${progressList}">
+            <td th:text="${progress.orders.procurementPlan.contractItem.item.itemIndex}"></td>
+            <td th:text="${progress.orders.procurementPlan.contractItem.item.itemName}"></td>
+            <td th:text="${progress.orders.orderCount}"></td>
+            <td th:text="${progress.orders.orderNum}"></td>
+            <td th:text="${progress.orders.procurementPlan.planDate}"></td>
+            <td th:text="${progress.orders.procurementPlan.contractItem.company.comName}"></td>
+            <td>
                 <button type="button" class="btn btn-outline-success" style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">
                   <a th:href="@{/part3/publishForm}">입고</a></button>
-            </th>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -121,22 +119,22 @@
           <th scope="col">발주번호</th>
           <th scope="col">조달납기일</th>
           <th scope="col">업체명</th>
-          <th scope="col"></th>
+          <th scope="col"버튼></th>
         </tr>
       </thead>
 
       <tbody>
-      <tr th:each="progress : ${progressList}" th:if="${progress.receiveYn == y}">
-        <th th:text="${progress.item.itemcode}"></th>
-        <th th:text="${progress.item.itemname}"></th>
-        <th th:text="${progress.orders.orderCount}"></th>
-        <th th:text="${progress.orders.orderNum}"></th>
-        <th th:text="${progress.procurementPlan.planDate}"></th>
-        <th th:text="${progress.Company.comName}"></th>
-        <th scope="col" style="text-align: center;">
+      <tr th:each="receiveList:${receiveList}">
+        <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.item.itemIndex}"></td>
+        <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.item.itemName}"></td>
+        <td th:text="${receiveList.progress.orders.orderCount}"></td>
+        <td th:text="${receiveList.progress.orders.orderNum}"></td>
+        <td th:text="${receiveList.progress.orders.procurementPlan.planDate}"></td>
+        <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.company.comName}"></td>
+        <td scope="col" style="text-align: center;">
             <button type="button" class="btn stockbtn" style="margin: 0 15px 10px 0; padding: 8px; background-color: rgb(41, 41, 226);  color: white; border-radius: 5px; width: 130px; float: right;">
               <a th:href="@{/part3/publishForm}">거래명세서발행</a></button>
-        </th>
+        </td>
       </tr>
       </tbody>
     </table>
