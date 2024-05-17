@@ -6,10 +6,7 @@ import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.zerock.connect.Service.part1.ContractItemService;
 import org.zerock.connect.Service.part1.ItemService;
 import org.zerock.connect.Service.part1.ProcurementPlanService;
@@ -87,6 +84,26 @@ public class ProcurementPlanController {
 
 
         return "redirect:/part1/procurementPlan";
+    }
+
+    @GetMapping("/searchItem")
+    public String searchItem(@RequestParam("itemName") String itemName , @PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable , Model model){
+
+
+        System.out.println(itemName + "으로 검색");
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
+        List<ContractItem> searchItemList = contractItemService.selectByConitemName(itemName);
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), searchItemList.size());
+
+
+        List<ContractItem> pageContent = searchItemList.subList(start, end);
+        Page<ContractItem> ContractItemLists = new PageImpl<>(pageContent, pageable, searchItemList.size());
+        model.addAttribute("ContractItemLists", ContractItemLists);
+
+
+        return "/part1/ProcurementplanForm";
     }
 
 }

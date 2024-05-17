@@ -2,6 +2,7 @@ package org.zerock.connect.Controller.part1;
 
 
 import groovy.util.logging.Slf4j;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.connect.Service.DownloadFileService;
 import org.zerock.connect.Service.part1.ItemService;
 import org.zerock.connect.Service.UploadFileService;
 import org.zerock.connect.entity.*;
@@ -29,6 +31,9 @@ public class ItemController {
 
     @Autowired
     UploadFileService uploadFileService;
+
+    @Autowired
+    DownloadFileService downloadFileService;
 
 
     //    제품선택화면폼
@@ -159,6 +164,13 @@ public class ItemController {
         model.addAttribute("product",product1);
 
         return "/part1/itemForm";
+    }
+
+    @GetMapping("/download")
+    public String downloadFile(@RequestParam("downloadfile") String fileName, HttpServletResponse response) {
+        downloadFileService.download(fileName, response);
+        System.out.println("파일다운로드");
+        return "redirect:/part1/itemForm";
     }
 
 

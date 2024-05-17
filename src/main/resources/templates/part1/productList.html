@@ -16,57 +16,27 @@
 </head>
 
 <body>
-<header th:replace="/fragments/common:: navbar">
+<header th:replace="~{/fragments/common::navbar}">
 </header>
 
 <!--본문 -->
-<div class="container">
-    <!-- <form action="" style="width: 100%; margin-left: 50px;"> -->
-    <div class="row"></div>
-
-    <div id="titleBox" class="d-flex justify-content-between">
-        <h3 style="font-weight: bold; margin: 40px 0 0 40px;">제품 선택</h3>
-    </div>
-
-    <!-- 내용 -->
-    <div class="col-12" id="bodyBox">
-
-        <!--<div id="totalBox" class="d-flex justify-content-between">
-            <div id="dateBox">
-                &lt;!&ndash; &#45;&#45;&#45;&#45;날짜별로 조회-&#45;&#45; &ndash;&gt;
-                <div id="totalBox" class="d-flex justify-content-between">
-
-
-                    <script>
-                        function caldate() {
-                            var start_date = document.getElementById("start_date").value;
-                            var end_date = document.getElementById("end_date").value;
-
-                            if (start_date <= end_date) {
-                            } else if (start_date > end_date) {
-                                alert("종료날짜를 시작날짜보다 크게 입력하세요");
-                            } else {
-                                alert("날짜를 입력하세요");
-                            }
-                        }
-                    </script>
-                </div>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="row w-100">
+        <div class="row w-100 mb-4">
+            <div id="searchContainer" class="d-flex align-items-center mx-auto" style="width: 800px;">
+                <h3 style="font-weight: bold; margin-right: 40px; white-space: nowrap;">제품 선택</h3>
+                <form th:action="@{/part1/productListAjax}" id="form1" th:method="post" class="d-flex w-100">
+                    <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
+                    <input type="text" id="searchText" name="searchText" placeholder="제품코드를 입력하세요" class="form-control" style="margin-right: 10px; width: 250px;">
+                    <button type="button" class="btn btn-outline-success" onclick="return productListAjax(1)">검색</button>
+                </form>
             </div>
-        </div>-->
+        </div>
 
-        <!-- 품목코드 품목명 조건 검색 -->
-        <div id="searchBox" style="height: 40px; margin: 20px 0 10px 12px; width:100%">
-            <form th:action="@{/part1/productListAjax}" id="form1" th:method="post">
-                <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
-                <input type="text" id="searchText" name="searchText" placeholder="제품코드를 입력하세요" style="width: 248px;">
-                <!-- <button id="btn3" type="button">검색</button> -->
-                <button type="button" class="btn btn-outline-success" onclick="return productListAjax(1)" >검색</button>
-                <div id="productList">
-                </div>
-            </form>
+        <div id="productList" class="mx-auto" style="margin-top: 50px; width: 800px;">
+            <!-- Add your table or other content here -->
         </div>
     </div>
 </div>
-<!-- 본문 -->
 </body>
 </html>

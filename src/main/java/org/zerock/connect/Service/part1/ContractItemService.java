@@ -37,5 +37,8 @@ public class ContractItemService {
     public ContractItem findByConitemNo(Long conitemNo){
         return contractItemRepository.findByConitemNo(conitemNo);
     }
+    public List<ContractItem> selectByConitemName(String itemName){
+        return contractItemRepository.selectByConitemName(itemName);
+    }
 }
 

@@ -19,9 +19,10 @@
 <!--네브바 및 사이드바 -->
 <header id="header" class="bd-header py-3 d-flex align-items-stretch border-bottom" th:fragment="navbar">
     <!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-    <nav class="navbar fixed-top" style="background-color: #59359a;" th:fragment="navbar">
+    <nav class="navbar fixed-top" style="background-color: #01164D;" th:fragment="navbar">
         <div class="container-fluid"  >
-            <a class="navbar-brand" href="#">Connect</a>
+<!--            <a class="navbar-brand" href="#">Connect</a>-->
+            <img src="/img/connect_logo.png" style="width: 40px;" height="40px;" alt="">
             <!--            네브바 사용자 정보출력-->
             <th:block>
                 <span style="margin-left: 800px; color: white; font-weight: bolder;" th:if="${session.loginedUser.getMemberDep() == '1'}">제품등록 , 업체등록 계정입니다</span>
