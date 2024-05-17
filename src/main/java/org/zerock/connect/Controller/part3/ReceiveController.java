@@ -35,14 +35,7 @@ public class ReceiveController {
         List<Progress> progressList = progressService.noReceiveList();
         model.addAttribute("progressList",progressList);
 
-
         System.out.println(progressList);
-
-/*        List<Receive> receiveListN = receiveService.getReceiveByReceiveYn("n");
-        List<Receive> receiveListY = receiveService.getReceiveByReceiveYn("y");
-
-        model.addAttribute("receiveListN", receiveListN);
-        model.addAttribute("receiveListY", receiveListY);*/
 
         return "part3/receiveList"; // 해당 뷰로 이동
     }

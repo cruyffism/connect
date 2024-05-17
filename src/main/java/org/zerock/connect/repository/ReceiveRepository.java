@@ -10,9 +10,7 @@ import java.util.List;
 @Repository
 public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
-
     List<Receive> findByReceiveYn(String receiveYn);
-
 
     @Query(value = "SELECT r " +
             "FROM Receive r join Progress pr on r.progress.progressNum = pr.progressNum " +
@@ -24,4 +22,6 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
             "JOIN Product P ON I.product.productId = P.productId ")
     List<Receive> getAllReceive();
 
+
+    Receive findByReceiveNum(Long receiveNum);
 }

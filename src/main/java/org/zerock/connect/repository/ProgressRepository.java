@@ -15,30 +15,6 @@ public interface ProgressRepository extends JpaRepository<Progress, Long> {
     @Query(value = "SELECT P FROM Progress P WHERE P.progressNum  != All (SELECT R.progress.progressNum FROM Receive R )")
     List<Progress> noReceiveList();*/
 
-
-
-    @Query(value = "SELECT pr " +
-            "FROM Progress pr " +
-            "JOIN Orders o ON pr.orders.orderNum=o.orderNum " +
-            "JOIN ProcurementPlan plan ON o.procurementPlan.planNum = plan.planNum " +
-            "JOIN ContractItem con ON plan.contractItem.conitemNo = con.conitemNo " +
-            "JOIN Company comp ON con.company.businessId = comp.businessId " +
-            "JOIN Item I ON con.item.itemIndex = I.itemIndex " +
-            "JOIN Product P ON I.product.productId = P.productId " +
-            "where pr.progressNum != All (select R.progress.progressNum from Receive R)")
-    List<Progress> noReceiveList();
-
-
-
-//    @Query(value = "SELECT I.itemCode , I.itemName , o.orderCount , o.orderNum , plan.planDate , com.comName " +
-//            "FROM Progress pro " +
-//            "JOIN Orders o ON pro.orders.orderNum=o.orderNum " +
-//            "JOIN ProcurementPlan plan ON o.procurementPlan.planNum = plan.planNum " +
-//            "JOIN ContractItem con ON plan.contractItem.conitemNo = con.conitemNo " +
-//            "JOIN Company com ON con.company.businessId = com.businessId " +
-//            "JOIN Item I ON con.item.itemIndex = I.itemIndex " +
-//            "JOIN Product P ON I.product.productId = P.productId")
-
     @Query(value = "SELECT pr " +
             "FROM Progress pr " +
             "JOIN Orders o ON pr.orders.orderNum=o.orderNum " +

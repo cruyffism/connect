@@ -2,9 +2,7 @@ package org.zerock.connect.Service.part3;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.connect.entity.Progress;
 import org.zerock.connect.entity.Receive;
-import org.zerock.connect.repository.ProgressRepository;
 import org.zerock.connect.repository.ReceiveRepository;
 
 import java.util.List;
@@ -18,8 +16,9 @@ public class ReceiveService {
     public List<Receive> getAllReceive() {
         return receiveRepository.findAll();
     }
-public List<Receive> getAllReceive(){
-        return receiveRepository.getAllReceive();
-}
+
+    public Receive findByReceiveNum(Long receiveNum){
+        return receiveRepository.findByReceiveNum(receiveNum);
+    }
 
 }

@@ -8,4 +8,5 @@ import org.zerock.connect.entity.Releases;
 public interface ReleasesRepository extends JpaRepository<Releases, Long> {
 
 
+/*    Releases findByreleaseNum(Long releaseNum);*/
 }
