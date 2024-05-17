@@ -5,7 +5,9 @@ $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실�
     document.getElementById('endDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅*/
     procurementPlanListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
     orderChoiceAjax(0, 0);
+    orderListAjax(1,0); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
     document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10);
+
 });
 
 function procurementPlanListAjax(page) { // 위에서 보낸 매개변수 1을 받아 준다!
@@ -53,6 +55,7 @@ function orderChoiceAjax(planNum, index) {
             }
             document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
             updateTotalPrice(1); // 가격계산 메소드 실행
+            orderListAjax(1,planNum);
             setTimeout(function () {
             }, 1000)
         },
@@ -65,6 +68,7 @@ function orderChoiceAjax(planNum, index) {
 function saveOrder() {
     const innerHtml = $("#orderRegister");
     document.getElementById('orderDate').value = new Date().toISOString().substring(0, 10);
+    const f = document.getElementById("form2");
     $.ajax({
         url: "/part2/saveOrder", //백엔드 경로
         type: 'POST',
@@ -75,7 +79,8 @@ function saveOrder() {
         success: function (data) {
             $(innerHtml).html(data); // 발주폼 뿌리기
             document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
-            updateTotalPrice(0); // 가격계산 메소드 실행
+            updateTotalPrice(0); // 가격계산 메소드 실행/
+            orderListAjax(1,f.planNum.value);
             setTimeout(function () {
             }, 1000)
         },
@@ -85,6 +90,33 @@ function saveOrder() {
     })
 }
 
+function orderListAjax(page,planNum) {
+    const innerHtml = $("#orderListForm"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
+    const f = document.getElementById("form3");
+    f.page.value = page;
+    if(planNum !== -1){ // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
+        f.planNum.value = planNum;
+    }
+    $.ajax({
+        url: "/part2/orderListAjax",
+        type: 'GET',
+        cache: false,
+        data: $('#form3').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data)
+
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
+
+//날짜 계산
 function caldate() {
     var startDate = document.getElementById("startDate").value;
     var endDate = document.getElementById("endDate").value;
@@ -100,18 +132,22 @@ function caldate() {
     }
 }
 
+//날짜 계산
+function caldate2() {
+    var startDate = document.getElementById("startDate3").value;
+    var endDate = document.getElementById("endDate3").value;
+    const f = document.getElementById("form3");
+    if (startDate <= endDate) {
+        orderListAjax(1,f.planNum.value)
+    } else if (startDate > endDate) {
+        alert("종료날짜를 시작날짜보다 크게 입력하세요");
+        $("#endDate").focus();
+    } else {
+        alert("날짜를 입력하세요");
+        $("#startDate").focus();
+    }
+}
 
-// function show(orderPart) {
-//
-//     if (document.getElementById(orderPart).style.display == "none") {
-//
-//         document.getElementById(orderPart).style.display = "block"; //표시하게 하기
-//     } else {
-//         document.getElementById(orderPart).style.display = "none"; //안보이게 하기
-//
-//     }
-//
-// }
 
 //가격 계산
 function updateTotalPrice(isCheck) {
@@ -119,7 +155,7 @@ function updateTotalPrice(isCheck) {
     const onePrice = document.getElementById('onePrice').value;
     // 수량
     const amount = document.getElementById('orderCount').value;
-    if(isCheck === 0){ //취소 버튼 눌렀을때 1개 가격으로 초기화
+    if (isCheck === 0) { //취소 버튼 눌렀을때 1개 가격으로 초기화
         document.getElementById('totalPrice1').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
         document.getElementById('totalPrice2').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
 
@@ -133,3 +169,16 @@ function updateTotalPrice(isCheck) {
     }
 
 }
+
+
+// function show(orderPart) {
+//
+//     if (document.getElementById(orderPart).style.display == "none") {
+//
+//         document.getElementById(orderPart).style.display = "block"; //표시하게 하기
+//     } else {
+//         document.getElementById(orderPart).style.display = "none"; //안보이게 하기
+//
+//     }
+//
+// }

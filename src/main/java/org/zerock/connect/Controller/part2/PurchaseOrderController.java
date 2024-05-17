@@ -41,10 +41,10 @@ public class PurchaseOrderController {
 
     //조달계획리스트 아작스 구현
     @GetMapping("/procurementPlanListAjax")
-    public String procurementPlanListAjax(@RequestParam(value="searchText", required = false) String searchText,
-                                          @RequestParam(value="searchType", required = false) String searchType,
-                                          @RequestParam(value="startDate", required = false) LocalDate startDate,
-                                          @RequestParam(value="endDate", required = false) LocalDate endDate,
+    public String procurementPlanListAjax(@RequestParam(value = "searchText", required = false) String searchText,
+                                          @RequestParam(value = "searchType", required = false) String searchType,
+                                          @RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                          @RequestParam(value = "endDate", required = false) LocalDate endDate,
                                           Model model,
                                           @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable) {
 
@@ -53,21 +53,20 @@ public class PurchaseOrderController {
 
         List<ProcurementPlan> procurementPlanList = new ArrayList<>();
 
-        if (!Objects.isNull(startDate)&&!Objects.isNull(endDate)) {
+        //동적 쿼리 만들기 위해 서치타입이 comName이면 comName에다가 넘어온 searchText 값을 넣어서 만들어주기
+        String comName = "";
+        String itemName = "";
+        if (searchType.equals("comName")) {
+            comName = searchText;
+        }
+        if (searchType.equals("itemName")) {
+            itemName = searchText;
+        }
 
-            //동적 쿼리 만들기 위해 서치타입이 comName이면 comName에다가 넘어온 searchText 값을 넣어서 만들어주기
-            String comName = "";
-            String itemName = "";
-            if (searchType.equals("comName")) {
-                comName = searchText;
-            }
-            if (searchType.equals("itemName")) {
-                itemName = searchText;
-            }
-
-             procurementPlanList = purchaseOrderService.procurementPlanListAjax(comName, itemName, startDate, endDate); // 날짜가 빈값 아닐때 이쪽
-        }  else {
-            procurementPlanList = purchaseOrderService.findPlanList(); //날짜가 비었을때 전체 검색 유도
+        if (!Objects.isNull(startDate) && !Objects.isNull(endDate)) {
+            procurementPlanList = purchaseOrderService.procurementPlanListAjax(comName, itemName, startDate, endDate); // 날짜가 빈값 아닐때 이쪽
+        } else {
+            procurementPlanList = purchaseOrderService.findPlanList(comName, itemName); //날짜가 비었을때 전체 검색 유도
         }
 
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
@@ -109,8 +108,50 @@ public class PurchaseOrderController {
             writer.println("<script>alert('발주 등록에 실패 하였습니다.');</script>");
             writer.flush();
         }
-         ProcurementPlan plan = purchaseOrderService.orderChoiceAjax(procurementPlan.getPlanNum());
-         model.addAttribute("procurementPlan", plan);
+        ProcurementPlan plan = purchaseOrderService.orderChoiceAjax(procurementPlan.getPlanNum());
+        model.addAttribute("procurementPlan", plan);
         return "/part2/orderChoiceAjax";
     }
+
+    //발주 리스트 아작스 api
+    @GetMapping("/orderListAjax")
+    public String orderListAjax(@RequestParam(value = "searchText", required = false) String searchText,
+                                @RequestParam(value = "searchType", required = false) String searchType,
+                                @RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                @RequestParam(value = "endDate", required = false) LocalDate endDate,
+                                @RequestParam(value = "planNum") Long planNum,
+                                Model model,
+                                @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable) {
+
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
+
+
+        List<Orders> orders = new ArrayList<>();
+        //동적 쿼리 만들기 위해 서치타입이 comName이면 comName에다가 넘어온 searchText 값을 넣어서 만들어주기
+        String comName = "";
+        String itemName = "";
+        if (searchType.equals("comName")) {
+            comName = searchText;
+        }
+        if (searchType.equals("itemName")) {
+            itemName = searchText;
+        }
+
+        if (!Objects.isNull(startDate) && !Objects.isNull(endDate)) {
+            orders = purchaseOrderService.orderListAjax(comName, itemName, startDate, endDate, planNum); // 날짜가 빈값 아닐때 이쪽
+        } else {
+            orders = purchaseOrderService.findOrderList(planNum, comName, itemName); //날짜가 비었을때 전체 검색 유도
+        }
+
+        int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
+        int end = Math.min((start + pageable.getPageSize()), orders.size()); // 5을 계산한 구문
+
+        List<Orders> pageContent = orders.subList(start, end); // 데이터가 30개 쌓여있으면  1~10, 11~20, 21~30 이렇게 짤라라
+        Page<Orders> purchaseOrderList = new PageImpl<>(pageContent, pageable, orders.size()); //현재페이지의 보여줄 리스트, 페이지러블 객체, 전체 리스트 개수(예를 들면 글 30개)
+        model.addAttribute("purchaseOrderList", purchaseOrderList);//리스트 객체를 페이징 처리 후  보냄
+
+        return "/part2/orderListAjax";
+    }
+
 }

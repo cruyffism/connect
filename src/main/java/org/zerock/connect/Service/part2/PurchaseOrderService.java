@@ -28,12 +28,22 @@ public class PurchaseOrderService {
         return procurementPlanRepository.orderChoiceAjax(planNum);
     }
 
-    public List<ProcurementPlan> findPlanList() {
-        return procurementPlanRepository.findPlanList();
+    public List<ProcurementPlan> findPlanList(String comName, String itemName) {
+        return procurementPlanRepository.findPlanList(comName, itemName);
     }
 
     //발주 저장 api
     public Orders saveOrder(Orders orders) {
         return ordersRepository.save(orders);
+    }
+
+    //발주 리스트 아작스 구현
+    public List<Orders> orderListAjax(String comName, String itemName, LocalDate startDate, LocalDate endDate, Long planNum) {
+        return ordersRepository.orderListAjax(comName, itemName, startDate, endDate, planNum);
+    }
+
+    //발주 리스트 찾기
+    public List<Orders> findOrderList(Long planNum, String comName, String itemName) {
+        return ordersRepository.findOrderList(planNum, comName, itemName);
     }
 }
