@@ -16,9 +16,9 @@
     </tr>
     </thead>
     <tbody>
-    <th:block th:if="${procurementPlanList.totalElements != 0}">
-        <tr th:each="procurementPlan, status:${procurementPlanList}" th:id="index + ${status.index + 1}">
-            <td th:text="'plan-' +${status.index + 1}"></td>
+    <th:block th:if="${procurementPlanList.totalElements != 0}" th:with="start=${(procurementPlanList.number * procurementPlanList.size) + 1}">
+        <tr th:each="procurementPlan, status:${procurementPlanList}" th:id="index + ${start + status.index}">
+            <td th:text="'PL-' +${procurementPlan.planNum}"></td>
             <td th:text="${procurementPlan.contractItem.company.comName}"></td>
             <td th:text="${procurementPlan.contractItem.item.itemName}"></td>
             <td th:text="${procurementPlan.planDate}"></td>

@@ -2,6 +2,7 @@ package org.zerock.connect.Service.part2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.connect.entity.Orders;
 import org.zerock.connect.entity.ProcurementPlan;
 import org.zerock.connect.repository.OrdersRepository;
@@ -45,5 +46,17 @@ public class PurchaseOrderService {
     //발주 리스트 찾기
     public List<Orders> findOrderList(Long planNum, String comName, String itemName) {
         return ordersRepository.findOrderList(planNum, comName, itemName);
+    }
+
+    //발주 마감 아작스 API
+    @Transactional
+    public Integer orderDeadlineAjax(Long orderNum) {
+        return ordersRepository.orderDeadlineAjax(orderNum);
+    }
+
+    //발주서 삭제 AJAX api
+    @Transactional
+    public Integer deleteOrderAjax(Long orderNum) {
+        return ordersRepository.deleteOrderAjax(orderNum);
     }
 }

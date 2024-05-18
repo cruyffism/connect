@@ -1,6 +1,7 @@
 package org.zerock.connect.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,14 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join Company c on ci.company.businessId = c.businessId " +
             "where p.planNum =:planNum and c.comName like concat('%', :comName, '%') and i.itemName like concat('%',:itemName,'%')")
     List<Orders> findOrderList(@Param("planNum") Long planNum, @Param("comName") String comName, @Param("itemName") String itemName);
+
+    //발주 마감 아작스 API
+    @Modifying
+    @Query("update Orders set orderYn = 'Y' where orderNum =:orderNum")
+    Integer orderDeadlineAjax(@Param("orderNum")Long orderNum);
+
+    //발주서 삭제 AJAX api
+    @Modifying
+    @Query("delete from Orders where orderNum =:orderNum")
+    Integer deleteOrderAjax(@Param("orderNum")Long orderNum);
 }

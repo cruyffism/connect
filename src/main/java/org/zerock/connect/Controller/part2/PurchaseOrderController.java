@@ -154,4 +154,75 @@ public class PurchaseOrderController {
         return "/part2/orderListAjax";
     }
 
+    //발주 마감 AJAX API
+    @PostMapping("/orderDeadlineAjax")
+    public String orderDeadlineAjax(@RequestParam(value = "orderNum") Long orderNum,
+                                    @RequestParam(value = "planNum") Long planNum,
+                                    Model model,
+                                    @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable, HttpServletResponse response) throws IOException {
+
+        Integer result = purchaseOrderService.orderDeadlineAjax(orderNum);
+
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
+
+        List<Orders> orders = purchaseOrderService.findOrderList(planNum, "", "");
+
+        int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
+        int end = Math.min((start + pageable.getPageSize()), orders.size()); // 5을 계산한 구문
+
+        List<Orders> pageContent = orders.subList(start, end); // 데이터가 30개 쌓여있으면  1~10, 11~20, 21~30 이렇게 짤라라
+        Page<Orders> purchaseOrderList = new PageImpl<>(pageContent, pageable, orders.size()); //현재페이지의 보여줄 리스트, 페이지러블 객체, 전체 리스트 개수(예를 들면 글 30개)
+        model.addAttribute("purchaseOrderList", purchaseOrderList);//리스트 객체를 페이징 처리 후  보냄
+
+        if (result > 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('발주 마감이 완료되었습니다.');</script>");
+            writer.flush();
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('발주 마감에 실패 하였습니다.');</script>");
+            writer.flush();
+        }
+
+        return "/part2/orderListAjax";
+    }
+
+    //발주서 삭제 AJAX api
+    @PostMapping("/deleteOrderAjax")
+    public String deleteOrderAjax(@RequestParam(value = "orderNum") Long orderNum,
+                                  @RequestParam(value = "planNum") Long planNum,
+                                  Model model,
+                                  @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable, HttpServletResponse response) throws IOException {
+
+        Integer result = purchaseOrderService.deleteOrderAjax(orderNum);
+
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
+
+        List<Orders> orders = purchaseOrderService.findOrderList(planNum, "", "");
+
+        int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
+        int end = Math.min((start + pageable.getPageSize()), orders.size()); // 5을 계산한 구문
+
+        List<Orders> pageContent = orders.subList(start, end); // 데이터가 30개 쌓여있으면  1~10, 11~20, 21~30 이렇게 짤라라
+        Page<Orders> purchaseOrderList = new PageImpl<>(pageContent, pageable, orders.size()); //현재페이지의 보여줄 리스트, 페이지러블 객체, 전체 리스트 개수(예를 들면 글 30개)
+        model.addAttribute("purchaseOrderList", purchaseOrderList);//리스트 객체를 페이징 처리 후  보냄
+
+        if (result > 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('발주서 삭제가 완료되었습니다.');</script>");
+            writer.flush();
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('발주서 삭제에 실패 하였습니다.');</script>");
+            writer.flush();
+        }
+
+        return "/part2/orderListAjax";
+    }
 }

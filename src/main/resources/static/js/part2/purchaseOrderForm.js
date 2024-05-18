@@ -54,6 +54,7 @@ function orderChoiceAjax(planNum, index) {
                 document.getElementById('index' + index).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
             }
             document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
+            document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
             updateTotalPrice(1); // 가격계산 메소드 실행
             orderListAjax(1,planNum);
             setTimeout(function () {
@@ -79,6 +80,7 @@ function saveOrder() {
         success: function (data) {
             $(innerHtml).html(data); // 발주폼 뿌리기
             document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
+            document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
             updateTotalPrice(0); // 가격계산 메소드 실행/
             orderListAjax(1,f.planNum.value);
             setTimeout(function () {
@@ -100,6 +102,62 @@ function orderListAjax(page,planNum) {
     $.ajax({
         url: "/part2/orderListAjax",
         type: 'GET',
+        cache: false,
+        data: $('#form3').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data)
+
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
+
+//마감 펑션
+function orderDeadlineAjax(page,planNum,orderNum) {
+    const innerHtml = $("#orderListForm"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
+    const f = document.getElementById("form3");
+    f.page.value = page;
+    f.orderNum.value = orderNum;
+    if(planNum !== -1){ // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
+        f.planNum.value = planNum;
+    }
+    $.ajax({
+        url: "/part2/orderDeadlineAjax",
+        type: 'POST',
+        cache: false,
+        data: $('#form3').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data)
+
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
+
+//삭제 펑션
+function deleteOrderAjax(page,planNum,orderNum) {
+    const innerHtml = $("#orderListForm"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
+    const f = document.getElementById("form3");
+    f.page.value = page;
+    f.orderNum.value = orderNum;
+    if(planNum !== -1){ // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
+        f.planNum.value = planNum;
+    }
+    $.ajax({
+        url: "/part2/deleteOrderAjax",
+        type: 'POST',
         cache: false,
         data: $('#form3').serialize(),
         dataType: "html",

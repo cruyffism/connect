@@ -71,7 +71,7 @@
             <td><input id="orderCount" name="orderCount" value="1" class="form-control form-control-sm" type="number" onchange="updateTotalPrice(1)" required></td>
             <td id="orderPrice" th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.contractPrice}"></td>
             <td id="totalPrice1"></td>
-            <td><input id="receiveDueDate" name="receiveDueDate" class="form-control form-control-sm" type="date" required></td>
+            <td><input id="receiveDueDate" name="receiveDueDate" class="form-control form-control-sm" type="date"></td>
         </tr>
         <tr>
             <td>비고</td>
