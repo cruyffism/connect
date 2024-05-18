@@ -1,11 +1,10 @@
 <table class="table table-bordered text-center">
     <colgroup>
         <col width="20%">
-        <col width="15%">
-        <col width="15%">
         <col width="20%">
-        <col width="15%">
-        <col width="15%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
     </colgroup>
     <thead>
     <tr class="table-secondary">
@@ -14,27 +13,23 @@
         <th scope="col">품목명</th>
         <th scope="col">조달납기일</th>
         <th scope="col">선택</th>
-        <th scope="col">삭제</th>
     </tr>
     </thead>
     <tbody>
-    <th:block th:if="${procurementPlanList.totalElements != 0}">
-        <tr th:each="procurementPlan, status:${procurementPlanList}" th:id="index + ${status.index + 1}">
-            <td th:text="'plan-' +${status.index + 1}"></td>
+    <th:block th:if="${procurementPlanList.totalElements != 0}" th:with="start=${(procurementPlanList.number * procurementPlanList.size) + 1}">
+        <tr th:each="procurementPlan, status:${procurementPlanList}" th:id="index + ${start + status.index}">
+            <td th:text="'PL-' +${procurementPlan.planNum}"></td>
             <td th:text="${procurementPlan.contractItem.company.comName}"></td>
             <td th:text="${procurementPlan.contractItem.item.itemName}"></td>
             <td th:text="${procurementPlan.planDate}"></td>
             <td>
                 <button type="button" class="btn btn-sm btn-primary" th:onclick="|javascript:orderChoiceAjax(${procurementPlan.planNum},${status.index + 1})|">선택</button>
             </td>
-            <td>
-                <button type="button" class="btn btn-sm btn-danger">삭제</button>
-            </td>
         </tr>
     </th:block>
     <th:block th:if="${procurementPlanList.totalElements == 0}">
         <tr>
-            <td colspan="7">발주 품목이 없습니다.</td>
+            <td colspan="5">조달 계획이 없습니다.</td>
         </tr>
     </th:block>
     </tbody>

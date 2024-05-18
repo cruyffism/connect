@@ -76,11 +76,13 @@
         <hr>
         <!-- 발주서 작성 -->
         <form id="form2" method="post">
+            <input type="hidden" id="orderDate" name="orderDate" value="">
+            <!--js를 통해 현재날짜로 발주일을 넣어서 히든으로 값을 백엔드로 보낸다. -->
             <div style="float: right; margin: 5px 0px 5px 0;">
-                <button id="btn4" type="button" class="btn btn-sm btn-success">
+                <button id="btn4" type="button" class="btn btn-sm btn-success" onclick="return saveOrder()">
                     발주
                 </button>
-                <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger">
+                <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger" onclick="return updateTotalPrice(0)">
                     취소
                 </button>
             </div>
@@ -89,115 +91,46 @@
         <!-- 발주서 작성 -->
 
 
-        <form action=""></form>
-
-
         <div id="titleBox" class="d-flex justify-content-between">
             <h3>구매 발주 관리</h3>
         </div>
         <hr>
-        <div>
-            <div id="totalBox" class="d-flex justify-content-between">
-                <form action="#" method="get" style="padding: 20px 0 0 0 ;">
+        <form id="form3" method="post">
+            <input type="hidden" id="orderNum" name="orderNum" value="">
+            <input type="hidden" id="planNum" name="planNum" value="">
+            <input type="hidden" id="page" name="page" value="1">
+            <div class="d-flex justify-content-between">
+                <div id="totalBox" class="d-flex justify-content-between">
                     <div id="dateBox">
-                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
-                               id="start_date1"> ~
-                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search"
-                               id="end_date1">
+                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색"
+                               aria-label="Search"
+                               id="startDate3" name="startDate"> ~
+                        <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색"
+                               aria-label="Search"
+                               id="endDate3" name="endDate">
                         <button type="button" class="btn btn-success btn-sm" style="width: 150px;"
-                                onclick="caldate1()">조회
+                                onclick="return caldate2()">조회
                         </button>
                     </div>
-                </form>
-
-                <script>
-                    function caldate1() {
-                        var start_date = document.getElementById("start_date1").value;
-                        var end_date = document.getElementById("end_date1").value;
-
-                        if (start_date <= end_date) {
-                        } else if (start_date > end_date) {
-                            alert("종료날짜를 시작날짜보다 크게 입력하세요");
-                        } else {
-                            alert("날짜를 입력하세요");
-                        }
-                    }
-                </script>
-
-
+                </div>
                 <!-- 업체명 품목명 리스트 검색 -->
-
-                    <div id="searchBox">
-                        <div id="itemSearchBox">
-                            <select id="selectBox" name="searchType" class="form-select form-select-sm me-2">
-                                <option value="comName">업체명</option>
-                                <option value="itemName">품목명</option>
-                            </select>
-                            <input class="form-control form-control-sm me-2" type="text" id="searchText" name="searchText">
-                            <button type="button" class="btn btn-sm btn-success"
-                                    onclick="">
-                                검색
-                            </button>
-                        </div>
+                <div id="searchBox">
+                    <div id="itemSearchBox">
+                        <select id="selectBox" name="searchType" class="form-select form-select-sm me-2">
+                            <option value="comName">업체명</option>
+                            <option value="itemName">품목명</option>
+                        </select>
+                        <input class="form-control form-control-sm me-2" type="text" id="searchText2"
+                               name="searchText">
+                        <button type="button" class="btn btn-sm btn-success"
+                                onclick="return orderListAjax(1,-1)">
+                            검색
+                        </button>
                     </div>
-
-                <!-- 업체명 품목명 리스트 검색 -->
-
+                </div>
             </div>
-
-            <form action="#" method="get">
-
-                <div style="float: right; margin: 5px 0px 5px 0;">
-                    <button id="btn4" type="button" class="btn btn-sm btn-success">
-                        마감
-                    </button>
-                    <button id="cancleBtn" type="button" class="btn btn-sm btn-danger">
-                        삭제
-                    </button>
-                </div>
-
-                <div id="orderList">
-                    <table class="table table-bordered text-center">
-                        <colgroup>
-                            <col width="5%">
-                            <col width="15%">
-                            <col width="20%">
-                            <col width="20%">
-                            <col width="20%">
-                            <col width="20%">
-                        </colgroup>
-                        <thead>
-                        <tr class="table-secondary">
-                            <th scope="col"></th>
-                            <th scope="col">발주번호</th>
-                            <th scope="col">업체명</th>
-                            <th scope="col">품목명</th>
-                            <th scope="col">발주일</th>
-                            <th scope="col">발주 마감</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
-                            <td>abc-01</td>
-                            <td>(주)MIT</td>
-                            <td>테스트 품목</td>
-                            <td>2024-05-01</td>
-                            <td>완료</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
-                            <td>abc-01</td>
-                            <td>(주)MIT</td>
-                            <td>테스트 품목</td>
-                            <td>2024-05-01</td>
-                            <td>완료</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </form>
-        </div>
+            <div id="orderListForm"></div>
+        </form>
     </div>
 </div>
 <!— 본문 —>
