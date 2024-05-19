@@ -24,9 +24,9 @@ public class Receive {
     @Column(length = 20)
     private Long receiveNum;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="progressNum")
-    private Progress progress;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="orderNum", nullable = false)
+    private Orders orders;
 
     @OneToMany(mappedBy = "receive", fetch = FetchType.LAZY)
     private List<Releases> releases = new ArrayList<>();

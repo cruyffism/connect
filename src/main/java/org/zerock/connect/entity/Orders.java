@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "progresses")
+@ToString(exclude = "receive")
 @DynamicUpdate
 public class Orders {
 
@@ -29,6 +29,9 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "planNum" ,nullable = false)
     private ProcurementPlan procurementPlan;
+
+    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY)
+    private Receive receive;
 
     @Column(nullable = false,length = 50)
     private Integer orderCount;

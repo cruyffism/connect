@@ -13,8 +13,7 @@ public class ProgressService {
     @Autowired
     ProgressRepository progressRepository;
 
-    public List<Progress> noReceiveList(){
+/*    public List<Progress> noReceiveList(){
         return progressRepository.noReceiveList();
-    }
-
+    }*/
 }
