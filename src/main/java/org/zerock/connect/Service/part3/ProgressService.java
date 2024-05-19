@@ -16,4 +16,5 @@ public class ProgressService {
     public List<Progress> noReceiveList(){
         return progressRepository.noReceiveList();
     }
+
 }

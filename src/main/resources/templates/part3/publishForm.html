@@ -49,151 +49,151 @@
       </div>
 
 
-    <!-- 거래명세서 작성 -->
-    <form action="#" method="get">
+  <!-- 거래명세서 작성 -->
+  <form action="#" method="get">
     <h4 style="margin: 120px 0 15px 70px;">거래명세서 작성</h4>
     <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 96%; margin-left: 30px;">
-        <div id="orderList" style="width: 85%; margin: 15px 0 0 100px; padding: 2px 0 0 0 ;">
-          <table class="table table-bordered text-center">
-              <thead>
-                <tr class="table-secondary">
-                  <th scope="col" colspan="4">거래명세서</th>
-                </tr>
-                <colgroup>
-                  <col width="25%">
-                  <col width="25%">
-                  <col width="25%">
-                  <col width="25%">
-                </colgroup>
-                <tr>
-                  <th>거래명세서 번호</th>
-                  <td>123456</td>
-                  <th>발행일</th>
-                  <td>24/05/09</td>
-                </tr>
-              </thead>
-          </table>
+      <div id="orderList" style="width: 85%; margin: 15px 0 0 100px; padding: 2px 0 0 0;">
+        <table class="table table-bordered text-center">
+          <thead>
+          <tr class="table-secondary">
+            <th scope="col" colspan="4">거래명세서</th>
+          </tr>
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <tr>
+            <th>거래명세서 번호</th>
+            <td id="invoiceNumber">123456</td>
+            <th>발행일</th>
+            <td id="issueDate">24/05/09</td>
+          </tr>
+          </thead>
+        </table>
 
-          <table class="table table-bordered text-center">
-            <colgroup>
-              <col width="25%">
-              <col width="25%">
-              <col width="25%">
-              <col width="25%">
-            </colgroup>
-            <thead>
-              <tr class="table-secondary">
-                <th scope="col" colspan="4">공급자</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">발주일</th>
-                <td>2024-05-01</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">업체명</th>
-                <td>(주)MIT</td>
-                <th scope="row">사업자 번호</th>
-                <td>123-45-6789</td>
-              </tr>
-              <tr>
-                <th scope="row">주소</th>
-                <td>경기도 수원시 123</td>
-                <th scope="row">담당자</th>
-                <td>담당자1</td>
-              </tr>
-            </tbody>
-          </table>
-          
-          <table class="table table-bordered text-center">
-            <colgroup>
-              <col width="25%">
-              <col width="25%">
-              <col width="25%">
-              <col width="25%">
-            </colgroup>
-            <thead>
-              <tr class="table-secondary">
-                <th scope="col" colspan="4">공급받는자</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">발주일</th>
-                <td>2024-05-01</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">업체명</th>
-                <td>(주)MIT</td>
-                <th scope="row">사업자 번호</th>
-                <td>123-45-6789</td>
-              </tr>
-              <tr>
-                <th scope="row">주소</th>
-                <td>경기도 수원시 123</td>
-                <th scope="row">담당자</th>
-                <td>담당자1</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <table class="table table-bordered text-center">
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <thead>
+          <tr class="table-secondary">
+            <th scope="col" colspan="4">공급자</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">발주일</th>
+            <td id="OrderDate">2024-05-01</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">업체명</th>
+            <td id="comName">(주)MIT</td>
+            <th scope="row">사업자 번호</th>
+            <td id="businessId">123-45-6789</td>
+          </tr>
+          <tr>
+            <th scope="row">주소</th>
+            <td id="comAdd">경기도 수원시 123</td>
+            <th scope="row">담당자</th>
+            <td id="comManager">담당자1</td>
+          </tr>
+          </tbody>
+        </table>
 
-        <div id="itemList" style="width: 85%; margin: 0 0 0 100px;">
-          <table class="table table-bordered text-center">
-            <colgroup>
-              <col width="5%">
-              <col width="5%">
-              <col width="10%">
-              <col width="15%">
-              <col width="8%">
-              <col width="8%">
-              <col width="10%">
-              <col width="15%">
-            </colgroup>
-            <thead>
-              <tr class="table-secondary">
-                <th scope="col" colspan="10">품목정보</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row"></th>
-                <th>순번</th>
-                <th>품목코드</th>
-                <th>품목명</th>
-                <th>수량</th>
-                <th>단가</th>
-                <th>총액</th>
-                <th>비고</th>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
-                <td>1</td>
-                <td>ABC_10</td>
-                <td>테스트 품목</td>
-                <td>500</td>
-                <td>150,000</td>
-                <td>75,000,000</td>
-                <td><input type="text"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div style="text-align: center; margin: 30px 0 0 0;">
-          <button type="submit" class="btn btn-outline-success">발행</button>
-          <button type="print" class="btn btn-outline-success">인쇄</button>
-          <br>
-          <br>  
-        </div>
-       </div>
-    </form>
+        <table class="table table-bordered text-center">
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <thead>
+          <tr class="table-secondary">
+            <th scope="col" colspan="4">공급받는자</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">발주일</th>
+            <td id="recipientOrderDate">2024-05-01</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">업체명</th>
+            <td id="recipientCompanyName">(주)MIT</td>
+            <th scope="row">사업자 번호</th>
+            <td id="recipientBusinessNumber">123-45-6789</td>
+          </tr>
+          <tr>
+            <th scope="row">주소</th>
+            <td id="recipientAddress">경기도 수원시 123</td>
+            <th scope="row">담당자</th>
+            <td id="recipientResponsiblePerson">담당자1</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
-<!-- 거래명세서 작성 -->
+      <div id="itemList" style="width: 85%; margin: 0 0 0 100px;">
+        <table class="table table-bordered text-center">
+          <colgroup>
+            <col width="5%">
+            <col width="5%">
+            <col width="10%">
+            <col width="15%">
+            <col width="8%">
+            <col width="8%">
+            <col width="10%">
+            <col width="15%">
+          </colgroup>
+          <thead>
+          <tr class="table-secondary">
+            <th scope="col" colspan="10">품목정보</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row"></th>
+            <th>순번</th>
+            <th>품목코드</th>
+            <th>품목명</th>
+            <th>수량</th>
+            <th>단가</th>
+            <th>총액</th>
+            <th>비고</th>
+          </tr>
+          <tr>
+            <th scope="row"><input type="checkbox" value="" id="flexCheckDefault"></th>
+            <td>1</td>
+            <td>ABC_10</td>
+            <td>테스트 품목</td>
+            <td>500</td>
+            <td>150,000</td>
+            <td>75,000,000</td>
+            <td><input type="text"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align: center; margin: 30px 0 0 0;">
+        <!-- 발행 버튼 -->
+        <button type="button" class="btn btn-outline-success" onclick="publishInvoice()">발행</button>
+        <button type="print" class="btn btn-outline-success">인쇄</button>
+        <br>
+        <br>
+      </div>
+    </div>
+  </form>
+  <!-- 거래명세서 작성 -->
 
 
 <div style=" overflow-y: scroll; width: 98%;  margin: 100px 30px 30px 5px; height: 800px;"  class="part">
@@ -240,28 +240,28 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <script >
-      // URL에서 매개변수를 읽는 함수
-      function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-      }
+<!--    <script >-->
+<!--      // URL에서 매개변수를 읽는 함수-->
+<!--      function getParameterByName(name, url) {-->
+<!--        if (!url) url = window.location.href;-->
+<!--        name = name.replace(/[\[\]]/g, '\\$&');-->
+<!--        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),-->
+<!--            results = regex.exec(url);-->
+<!--        if (!results) return null;-->
+<!--        if (!results[2]) return '';-->
+<!--        return decodeURIComponent(results[2].replace(/\+/g, ' '));-->
+<!--      }-->
 
-      // 페이지가 로드될 때 실행되는 함수
-      window.onload = function() {
-        // URL에서 선택된 제품코드 가져오기
-        var selectedProductCode = getParameterByName('selected');
-        
-        // 선택된 제품코드가 있는 경우에만 테이블에 삽입
-        if (selectedProductCode) {
-          document.querySelector('th:nth-child(1)').textContent = selectedProductCode;
-        }
-      };
-    </script>
+<!--      // 페이지가 로드될 때 실행되는 함수-->
+<!--      window.onload = function() {-->
+<!--        // URL에서 선택된 제품코드 가져오기-->
+<!--        var selectedProductCode = getParameterByName('selected');-->
+<!--        -->
+<!--        // 선택된 제품코드가 있는 경우에만 테이블에 삽입-->
+<!--        if (selectedProductCode) {-->
+<!--          document.querySelector('th:nth-child(1)').textContent = selectedProductCode;-->
+<!--        }-->
+<!--      };-->
+<!--    </script>-->
   </body>
 </html>

@@ -27,25 +27,15 @@ public class ReceiveController {
     public String getReceiveList(Model model) {
         System.out.println("입고 관리");
 
+        // 입고 완료 품목
+        List<Receive> receiveList = receiveService.getAllReceive();
+        model.addAttribute("receiveList", receiveList);
 
         // 입고 예정 품목
         List<Progress> progressList = progressService.noReceiveList();
         model.addAttribute("progressList",progressList);
 
-
-        // 입고 완료 품목
-        List<Receive> receiveList = receiveService.getAllReceive();
-        model.addAttribute("receiveList", receiveList);
-
-
-
-//        System.out.println(progressList);
-
-/*        List<Receive> receiveListN = receiveService.getReceiveByReceiveYn("n");
-        List<Receive> receiveListY = receiveService.getReceiveByReceiveYn("y");
-
-        model.addAttribute("receiveListN", receiveListN);
-        model.addAttribute("receiveListY", receiveListY);*/
+        System.out.println(progressList);
 
         return "part3/receiveList"; // 해당 뷰로 이동
     }
