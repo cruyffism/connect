@@ -15,16 +15,13 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "receives")
+@ToString(exclude = "orders")
 @DynamicUpdate
 public class Progress {
 
     @Id
     @Column(length = 20)
     private Long progressNum;
-
-    @OneToMany(mappedBy = "progress", fetch = FetchType.LAZY)
-    private List<Receive> receives = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="orderNum")

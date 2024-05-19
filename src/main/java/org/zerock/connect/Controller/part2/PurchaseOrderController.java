@@ -197,7 +197,9 @@ public class PurchaseOrderController {
                                   Model model,
                                   @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable, HttpServletResponse response) throws IOException {
 
-        Integer result = purchaseOrderService.deleteOrderAjax(orderNum);
+        Integer planResult = purchaseOrderService.deletePlan(orderNum); //진척 검수 계획 먼저 삭제
+        Integer receiveResult = purchaseOrderService.deleteReceive(orderNum); //입고 예정 삭제
+        Integer result = purchaseOrderService.deleteOrderAjax(orderNum); // 발주서 삭제
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());

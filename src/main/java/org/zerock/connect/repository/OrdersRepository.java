@@ -14,11 +14,12 @@ import java.util.List;
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
 
     //발주 리스트 아작스 구현
-    @Query("select o,p,ci,i,c from Orders o " +
+    @Query("select o,p,ci,i,c,r from Orders o " +
             "inner join ProcurementPlan p on o.procurementPlan.planNum = p.planNum " +
             "inner join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "inner join Company c on ci.company.businessId = c.businessId " +
+            "left join Receive r on o.orderNum = r.orders.orderNum " +
             "where p.planNum =:planNum and o.orderDate between :startDate and :endDate and c.comName like concat('%', :comName, '%') and i.itemName like concat('%',:itemName,'%')")
     List<Orders> orderListAjax(@Param("comName") String comName, @Param("itemName") String itemName, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, @Param("planNum") Long planNum);
 
@@ -28,6 +29,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "inner join Company c on ci.company.businessId = c.businessId " +
+            "left join Receive r on o.orderNum = r.orders.orderNum " +
             "where p.planNum =:planNum and c.comName like concat('%', :comName, '%') and i.itemName like concat('%',:itemName,'%')")
     List<Orders> findOrderList(@Param("planNum") Long planNum, @Param("comName") String comName, @Param("itemName") String itemName);
 

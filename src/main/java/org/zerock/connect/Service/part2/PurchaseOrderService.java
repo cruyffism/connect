@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.connect.entity.Orders;
 import org.zerock.connect.entity.ProcurementPlan;
+import org.zerock.connect.entity.Progress;
 import org.zerock.connect.repository.OrdersRepository;
 import org.zerock.connect.repository.ProcurementPlanRepository;
+import org.zerock.connect.repository.ProgressRepository;
+import org.zerock.connect.repository.ReceiveRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +20,13 @@ public class PurchaseOrderService {
     ProcurementPlanRepository procurementPlanRepository;
 
     @Autowired
+    ProgressRepository progressRepository;
+
+    @Autowired
     OrdersRepository ordersRepository;
+
+    @Autowired
+    ReceiveRepository receiveRepository;
 
     //발주 품목 선택 아작스 구현
     public List<ProcurementPlan> procurementPlanListAjax(String comName, String itemName, LocalDate startDate, LocalDate endDate) {
@@ -58,5 +67,17 @@ public class PurchaseOrderService {
     @Transactional
     public Integer deleteOrderAjax(Long orderNum) {
         return ordersRepository.deleteOrderAjax(orderNum);
+    }
+
+    //진척 검수 삭제
+    @Transactional
+    public Integer deletePlan(Long orderNum) {
+        return progressRepository.deletePlan(orderNum);
+    }
+
+    //입고 예정 삭제
+    @Transactional
+    public Integer deleteReceive(Long orderNum) {
+        return receiveRepository.deleteReceive(orderNum);
     }
 }
