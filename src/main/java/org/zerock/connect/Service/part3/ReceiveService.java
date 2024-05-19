@@ -15,12 +15,13 @@ public class ReceiveService {
     ReceiveRepository receiveRepository;
 
     public List<Receive> getAllReceive() {
-        return receiveRepository.findAll();
+        return receiveRepository.getAllReceive();
     }
 
     public Receive findByReceiveNum(Long receiveNum){
         return receiveRepository.findByReceiveNum(receiveNum);
     }
+
     // 입고 예정 품목 리스트 아작스
     public List<Receive> getReceiveListAjax(String itemCode, String itemName, String receiveYn) {
         return receiveRepository.getReceiveListAjax(itemCode, itemName, receiveYn);
@@ -32,18 +33,5 @@ public class ReceiveService {
         return receiveRepository.receive(receiveNum);
     }
 
-
-
-
-
-    // receiveYn 확인 (입고예정/ 완료 각 리스트 출력)
-    public List<Receive> getReceiveListByReceiveYn(String receiveYn) {
-        return receiveRepository.findByReceiveYn(receiveYn);
-    }
-
-
-    public List<Receive> getAllReceive() {
-        return receiveRepository.getAllReceive();
-    }
 
 }

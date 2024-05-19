@@ -14,15 +14,6 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
     List<Receive> findByReceiveYn(String receiveYn);
 
-    @Query(value = "SELECT r " +
-            "FROM Receive r join Progress pr on r.progress.progressNum = pr.progressNum " +
-            "JOIN Orders o ON pr.orders.orderNum=o.orderNum " +
-            "JOIN ProcurementPlan plan ON o.procurementPlan.planNum = plan.planNum " +
-            "JOIN ContractItem con ON plan.contractItem.conitemNo = con.conitemNo " +
-            "JOIN Company comp ON con.company.businessId = comp.businessId " +
-            "JOIN Item I ON con.item.itemIndex = I.itemIndex " +
-            "JOIN Product P ON I.product.productId = P.productId ")
-
     // 입고 예정 품목 리스트 아작스
     @Query("select r,o,p,ci,c,i from Receive r " +
             "inner join Orders o on r.orders.orderNum = o.orderNum " +
@@ -33,7 +24,6 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
             "where r.receiveYn =:receiveYn and i.itemCode like concat('%', :itemCode, '%') and i.itemName like concat('%',:itemName,'%') ")
     List<Receive> getReceiveListAjax(@Param("itemCode") String itemCode, @Param("itemName") String itemName, @Param("receiveYn") String receiveYn);
 
-    List<Receive> findByReceiveYn(String receiveYn);
 
     // 입고 버튼 api
     @Modifying

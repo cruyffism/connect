@@ -90,19 +90,19 @@
             </thead>
 
             <tbody>
-              <tr th:each="receiveList:${receiveList}">
+              <tr th:each="receive:${receiveList}">
 <!--                <td th:text="${receiveList.receiveNum}" th:name="receiveNum"></td>-->
 <!--                <td><input type="hidden" th:name="receiveNum" th:value="${receiveList.receiveNum}"></td>-->
                   <td><label>
-                      <input type="radio" th:name="receiveNum" th:value="${receiveList.receiveNum}">
+                      <input type="radio" th:name="receiveNum" th:value="${receive.receiveNum}">
                   </label></td>
-                <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.item.product.productName}"></td>
-                <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.item.itemIndex}"></td>
-                <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.item.itemName}"></td>
-                <td th:text="${receiveList.progress.orders.procurementPlan.planDate}"></td>
-                <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.item.product.productStartdate}"></td>
-                <td th:text="${receiveList.progress.orders.procurementPlan.contractItem.item.product.productEnddate}"></td>
-                <td th:text="${receiveList.receiveCount}"></td>
+                <td th:text="${receive.orders.procurementPlan.contractItem.item.product.productName}"></td>
+                <td th:text="${receive.orders.procurementPlan.contractItem.item.itemIndex}"></td>
+                <td th:text="${receive.orders.procurementPlan.contractItem.item.itemName}"></td>
+                <td th:text="${receive.orders.procurementPlan.planDate}"></td>
+                <td th:text="${receive.orders.procurementPlan.contractItem.item.product.productStartdate}"></td>
+                <td th:text="${receive.orders.procurementPlan.contractItem.item.product.productEnddate}"></td>
+                <td th:text="${receive.receiveCount}"></td>
                 <td class="release-date"><input type="date" th:name="releaseDate"></td>
                 <td><label>
                     <input type="number" style="width: 120px" th:name="releaseCount">

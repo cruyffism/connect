@@ -9,17 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.zerock.connect.Service.part3.ProgressService;
 import org.zerock.connect.Service.part3.ReceiveService;
-import org.zerock.connect.entity.Orders;
-import org.zerock.connect.entity.Progress;
 import org.zerock.connect.entity.Receive;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/part3")
