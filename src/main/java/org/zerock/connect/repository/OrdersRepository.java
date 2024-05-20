@@ -42,4 +42,33 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     @Modifying
     @Query("delete from Orders where orderNum =:orderNum")
     Integer deleteOrderAjax(@Param("orderNum")Long orderNum);
+
+    //검수 예정 품목 리스트 아작스
+    @Query("select o,p,r,pl,ci,i from Orders o " +
+            "left join Progress p on o.orderNum = p.orders.orderNum " +
+            "left join Receive r on o.orderNum = r.orders.orderNum " +
+            "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
+            "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
+            "where r.receiveYn = 'N' and o.orderDate between :startDate and :endDate and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')")
+    List<Orders> progressScheduleAjax(@Param("itemCode")String itemCode, @Param("itemName")String itemName, @Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
+
+    @Query("select o,p,r,pl,ci,i from Orders o " +
+            "left join Progress p on o.orderNum = p.orders.orderNum " +
+            "left join Receive r on o.orderNum = r.orders.orderNum " +
+            "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
+            "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
+            "where i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')")
+    List<Orders> findProgressScheduleList(@Param("itemCode")String itemCode, @Param("itemName")String itemName);
+
+    //검수 선택 api
+    @Query("select o,p,r,pl,ci,i from Orders o " +
+            "left join Progress p on o.orderNum = p.orders.orderNum " +
+            "left join Receive r on o.orderNum = r.orders.orderNum " +
+            "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
+            "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
+            "where o.orderNum =:orderNum ")
+    Orders progressChoiceAjax(@Param("orderNum") Long orderNum);
 }

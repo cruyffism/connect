@@ -1,0 +1,82 @@
+<div id="orderList">
+    <table class="table table-bordered text-center">
+        <colgroup>
+            <col width="30%">
+            <col width="70%">
+        </colgroup>
+        <tbody>
+        <tr>
+            <td style="font-weight: bold;">발주번호</td>
+            <td th:text="${orders == null} ? '' : 'PN-'+${orders.orderNum}"></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">발주일자</td>
+            <td id="orderDate" th:text="${orders == null} ? '' : ${orders.orderDate}"></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">입고예정일자</td>
+            <td id="receiveDueDate" th:text="${orders == null} ? '' : ${orders.receiveDueDate}"></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">업체명</td>
+            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.company.comName}"></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">사업자번호</td>
+            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.company.businessId}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="orderList">
+    <table class="table table-bordered text-center">
+        <colgroup>
+            <col width="30%">
+            <col width="40%">
+            <col width="30%">
+        </colgroup>
+        <tbody>
+        <tr class="table-secondary">
+            <td style="font-weight: bold;">품목코드</td>
+            <td style="font-weight: bold;">품목명</td>
+            <td style="font-weight: bold;">발주수량</td>
+        </tr>
+        <tr>
+            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.item.itemCode}"></td>
+            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.item.itemName}"></td>
+            <td th:text="${orders == null} ? '' : ${orders.orderCount}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="orderList">
+    <table class="table table-bordered text-center">
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <tbody>
+        <tr class="table-secondary" style="font-weight: bold;">
+            <td>차수</td>
+            <td>검수일자</td>
+            <td>완료수량</td>
+            <td>검수결과</td>
+            <!--<td scope="col" colspan="2"></td>-->
+        </tr>
+        <tr>
+            <td>1차</td>
+            <td><input id="progressDate" name="progressDate" class="form-control form-control-sm" type="date"></td>
+            <td><input id="output" class="form-control form-control-sm" type="number"></td>
+            <td><input id="progressResult" class="form-control form-control-sm" type="text"></td>
+            <!--<td>
+                <button type="button" class="btn btn-sm btn-primary">추가</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-sm btn-danger">삭제</button>
+            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>

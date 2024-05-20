@@ -28,9 +28,12 @@ public class Progress {
     private Orders orders;
 
     @Column
-    private Integer progressCount;
+    private Integer progressAmount;
 
     @Column
     private LocalDate progressDate;
+
+    @Column(nullable = false)
+    private Integer progressCount;
 
 }
