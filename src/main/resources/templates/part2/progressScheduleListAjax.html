@@ -22,24 +22,35 @@
     </tr>
     </thead>
     <tbody>
-    <th:block th:if="${progressScheduleList.totalElements != 0}" th:with="start=${(progressScheduleList.number * progressScheduleList.size) + 1}">
-    <tr th:each="progressSchedule, status:${progressScheduleList}" th:id="index + ${start + status.index}">
-        <td th:text="'PN-'+${progressSchedule.orderNum}"></td>
-        <td th:text="${progressSchedule.orderDate}"></td>
-        <td th:text="${progressSchedule.receiveDueDate}"></td>
-        <td th:text="${progressSchedule.procurementPlan.contractItem.item.itemCode}"></td>
-        <td th:text="${progressSchedule.procurementPlan.contractItem.item.itemName}"></td>
-        <td th:text="${progressSchedule.orderCount}"></td>
-        <td>0/1</td>
-        <td>
-            <button type="button" th:onclick=""
-                    class="btn btn-primary  btn-sm">검수
-            </button>
-        </td>
-    </tr>
+    <th:block th:if="${progressScheduleList.totalElements != 0}"
+              th:with="start=${(progressScheduleList.number * progressScheduleList.size) + 1}">
+        <tr th:each="progressSchedule, status:${progressScheduleList}" th:id="index + ${start + status.index}">
+            <td th:text="'PN-'+${progressSchedule.orderNum}"></td>
+            <td th:text="${progressSchedule.orderDate}"></td>
+            <td th:text="${progressSchedule.receiveDueDate}"></td>
+            <td th:text="${progressSchedule.procurementPlan.contractItem.item.itemCode}"></td>
+            <td th:text="${progressSchedule.procurementPlan.contractItem.item.itemName}"></td>
+            <td th:text="${progressSchedule.orderCount}"></td>
+            <th:block th:if="${#lists.isEmpty(progressSchedule.progresses)}">
+                <td>미검수</td>
+            </th:block>
+            <th:block th:if="${not #lists.isEmpty(progressSchedule.progresses)}"
+                      th:each="progress:${progressSchedule.progresses}">
+                <td th:if="${progress.progressPercent == 100}">검수완료</td>
+                <td th:if="${progress.progressPercent < 100}">검수진행</td>
+            </th:block>
+
+            <td>
+                <button type="button"
+                        th:onclick="|javascript:progressChoiceAjax(${progressSchedule.orderNum},${start + status.index})|"
+                        class="btn btn-primary  btn-sm">검수
+                </button>
+            </td>
+        </tr>
+    </th:block>
     <th:block th:if="${progressScheduleList.totalElements == 0}">
         <tr>
-            <td colspan="10">검수 예정 품목이 없습니다.</td>
+            <td colspan="8">검수 예정 품목이 없습니다.</td>
         </tr>
     </th:block>
     </tbody>

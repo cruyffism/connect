@@ -17,4 +17,7 @@ public interface ProgressRepository extends JpaRepository<Progress, Long> {
     @Query("delete from Progress p where p.orders.orderNum =:orderNum")
     Integer deletePlan(@Param("orderNum") Long orderNum);
 
+    @Query("select p from Progress p where p.orders.orderNum =:orderNum order by p.progressCount DESC limit 1")
+    Progress getMaxProgress(@Param("orderNum") Long orderNum);
+
 }

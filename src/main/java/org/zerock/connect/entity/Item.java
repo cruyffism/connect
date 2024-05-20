@@ -22,7 +22,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false , length = 20)
+    @Column
     private Long itemIndex;
 
     @ManyToOne

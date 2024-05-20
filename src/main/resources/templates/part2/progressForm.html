@@ -31,6 +31,7 @@
         <hr>
         <form id="form1">
             <input type="hidden" id="page" name="page" value="1">
+            <input type="hidden" id="orderNum" name="orderNum" value="1">
             <div class="d-flex justify-content-between">
                 <div id="totalBox" class="d-flex justify-content-between">
                     <div id="dateBox">
@@ -40,8 +41,8 @@
                         <input class="form-control form-control-sm me-2" type="date" placeholder="등록된 날짜 검색"
                                aria-label="Search"
                                id="endDate" name="endDate">
-                        <button type="button" class="btn btn-sm btn-success" style="width:120px;"
-                                onclick="return caldate()">조회
+                        <button type="button" class="btn btn-sm btn-success" style="width:240px;"
+                                onclick="return caldate()">발주일 조회
                         </button>
                     </div>
                 </div>

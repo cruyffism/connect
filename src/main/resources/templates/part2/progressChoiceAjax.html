@@ -7,23 +7,23 @@
         <tbody>
         <tr>
             <td style="font-weight: bold;">발주번호</td>
-            <td th:text="${orders == null} ? '' : 'PN-'+${orders.orderNum}"></td>
+            <td th:text="${orders == null} ? '-' : 'PN-'+${orders.orderNum}"></td>
         </tr>
         <tr>
             <td style="font-weight: bold;">발주일자</td>
-            <td id="orderDate" th:text="${orders == null} ? '' : ${orders.orderDate}"></td>
+            <td id="orderDate" th:text="${orders == null} ? '-' : ${orders.orderDate}"></td>
         </tr>
         <tr>
             <td style="font-weight: bold;">입고예정일자</td>
-            <td id="receiveDueDate" th:text="${orders == null} ? '' : ${orders.receiveDueDate}"></td>
+            <td id="receiveDueDate" th:text="${orders == null} ? '-' : ${orders.receiveDueDate}"></td>
         </tr>
         <tr>
             <td style="font-weight: bold;">업체명</td>
-            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.company.comName}"></td>
+            <td th:text="${orders == null} ? '-' : ${orders.procurementPlan.contractItem.company.comName}"></td>
         </tr>
         <tr>
             <td style="font-weight: bold;">사업자번호</td>
-            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.company.businessId}"></td>
+            <td th:text="${orders == null} ? '-' : ${orders.procurementPlan.contractItem.company.businessId}"></td>
         </tr>
         </tbody>
     </table>
@@ -42,9 +42,9 @@
             <td style="font-weight: bold;">발주수량</td>
         </tr>
         <tr>
-            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.item.itemCode}"></td>
-            <td th:text="${orders == null} ? '' : ${orders.procurementPlan.contractItem.item.itemName}"></td>
-            <td th:text="${orders == null} ? '' : ${orders.orderCount}"></td>
+            <td th:text="${orders == null} ? '-' : ${orders.procurementPlan.contractItem.item.itemCode}"></td>
+            <td th:text="${orders == null} ? '-' : ${orders.procurementPlan.contractItem.item.itemName}"></td>
+            <td th:text="${orders == null} ? '-' : ${orders.orderCount}"></td>
         </tr>
         </tbody>
     </table>

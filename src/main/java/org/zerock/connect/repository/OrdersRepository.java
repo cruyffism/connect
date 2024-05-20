@@ -50,7 +50,9 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
             "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
-            "where r.receiveYn = 'N' and o.orderDate between :startDate and :endDate and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')")
+            "where (p IS NULL OR (p.progressCount = (SELECT MAX(p2.progressCount) FROM Progress p2 WHERE p2.orders.orderNum = o.orderNum))) " +
+            "and r.receiveYn != 'Y' and o.orderDate between :startDate and :endDate and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%') " +
+            "order by o.orderNum ASC")
     List<Orders> progressScheduleAjax(@Param("itemCode")String itemCode, @Param("itemName")String itemName, @Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
 
     @Query("select o,p,r,pl,ci,i from Orders o " +
@@ -59,15 +61,16 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
             "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
-            "where i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')")
+            "where (p IS NULL OR (p.progressCount = (SELECT MAX(p2.progressCount) FROM Progress p2 WHERE p2.orders.orderNum = o.orderNum))) " +
+            "and r.receiveYn != 'Y' and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')" +
+            "order by o.orderNum ASC")
     List<Orders> findProgressScheduleList(@Param("itemCode")String itemCode, @Param("itemName")String itemName);
 
     //검수 선택 api
-    @Query("select o,p,r,pl,ci,i from Orders o " +
-            "left join Progress p on o.orderNum = p.orders.orderNum " +
-            "left join Receive r on o.orderNum = r.orders.orderNum " +
+    @Query("select o,pl,c,ci,i from Orders o " +
             "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
             "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Company c on ci.company.businessId = c.businessId "+
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "where o.orderNum =:orderNum ")
     Orders progressChoiceAjax(@Param("orderNum") Long orderNum);

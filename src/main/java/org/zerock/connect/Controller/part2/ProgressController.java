@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.connect.Service.part2.ProgressService;
 import org.zerock.connect.entity.Orders;
+import org.zerock.connect.entity.Progress;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Controller
 @RequestMapping("/part2")
@@ -26,18 +25,18 @@ public class ProgressController {
 
     //빈곽 폼 조회
     @GetMapping("/progressForm")
-    public String progressForm(){
+    public String progressForm() {
         return "/part2/progressForm";
     }
 
     //검수 예정 품목 리스트 아작스
     @GetMapping("/progressScheduleAjax")
     public String progressScheduleAjax(@RequestParam(value = "searchText", required = false) String searchText,
-                                   @RequestParam(value = "searchType", required = false) String searchType,
-                                   @RequestParam(value = "startDate", required = false) LocalDate startDate,
-                                   @RequestParam(value = "endDate", required = false) LocalDate endDate,
-                                   Model model,
-                                   @PageableDefault(size = 5, sort = "orderDate", direction = Sort.Direction.ASC) Pageable pageable) {
+                                       @RequestParam(value = "searchType", required = false) String searchType,
+                                       @RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                       @RequestParam(value = "endDate", required = false) LocalDate endDate,
+                                       Model model,
+                                       @PageableDefault(size = 5, sort = "orderDate", direction = Sort.Direction.ASC) Pageable pageable) {
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -60,6 +59,15 @@ public class ProgressController {
             orders = progressService.findProgressScheduleList(itemCode, itemName); //날짜가 비었을때 전체 검색 유도
         }
 
+        // 중복 프로그래스를 리스트에 하나값만 넣기
+        orders.forEach(x -> {
+            if (!x.getProgresses().isEmpty()) {
+                x.setProgresses(Collections.singletonList(x.getProgresses().get(x.getProgresses().size() - 1)));
+            }
+        });
+
+        System.out.println("orders = " + orders);
+
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
         int end = Math.min((start + pageable.getPageSize()), orders.size()); // 5을 계산한 구문
 
@@ -74,7 +82,9 @@ public class ProgressController {
     @GetMapping("/progressChoiceAjax")
     public String progressChoiceAjax(@RequestParam("orderNum") Long orderNum, Model model) {
         Orders orders = progressService.progressChoiceAjax(orderNum);
+        // max 서비스 추가
         model.addAttribute("orders", orders);
+        // max꺼 model추가
         return "/part2/progressChoiceAjax";
     }
 
