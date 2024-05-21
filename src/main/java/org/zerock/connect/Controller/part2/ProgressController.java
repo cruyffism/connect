@@ -1,18 +1,18 @@
 package org.zerock.connect.Controller.part2;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.zerock.connect.Service.part2.ProgressService;
-import org.zerock.connect.entity.Orders;
-import org.zerock.connect.entity.Progress;
+import org.zerock.connect.entity.*;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -78,15 +78,50 @@ public class ProgressController {
         return "/part2/progressScheduleListAjax";
     }
 
-    //검수 선택 아작스 api
+    //검수 품목 선택 아작스 api
     @GetMapping("/progressChoiceAjax")
     public String progressChoiceAjax(@RequestParam("orderNum") Long orderNum, Model model) {
         Orders orders = progressService.progressChoiceAjax(orderNum);
-        // max 서비스 추가
+        Progress progress = progressService.getMaxProgress(orderNum); // max 서비스 추가
         model.addAttribute("orders", orders);
-        // max꺼 model추가
+        model.addAttribute("progress", progress);
         return "/part2/progressChoiceAjax";
     }
 
+    //검수 저장 API
+    @PostMapping("/saveProgress")
+    public String saveProgress(@ModelAttribute Progress progress, @ModelAttribute Orders orders, Model model, HttpServletResponse response) throws IOException {
+
+        progress.setOrders(orders);
+        progress.setProgressPercent(1);
+        Progress result = progressService.saveProgress(progress);
+
+        if (result != null) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('검수 처리가 완료되었습니다.');</script>");
+            writer.flush();
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('검수 처리에 실패 하였습니다.');</script>");
+            writer.flush();
+        }
+
+        Orders orders2 = progressService.progressChoiceAjax(orders.getOrderNum());
+        Progress progress2 = progressService.getMaxProgress(orders.getOrderNum()); // max 서비스 추가
+
+        model.addAttribute("orders", orders2);
+        model.addAttribute("progress", progress2);
+        return "/part2/progressChoiceAjax";
+    }
+
+    //검수 리스트 아작스
+    @GetMapping("/progressListAjax")
+    public String progressListAjax(@RequestParam("orderNum") Long orderNum, Model model) {
+        List<Progress> progress = progressService.progressListAjax(orderNum);
+        model.addAttribute("progressList", progress);
+        return "/part2/progressListAjax";
+    }
 
 }

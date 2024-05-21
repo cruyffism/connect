@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.zerock.connect.entity.Orders;
+import org.zerock.connect.entity.Progress;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -51,7 +52,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "where (p IS NULL OR (p.progressCount = (SELECT MAX(p2.progressCount) FROM Progress p2 WHERE p2.orders.orderNum = o.orderNum))) " +
-            "and r.receiveYn != 'Y' and o.orderDate between :startDate and :endDate and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%') " +
+            "and (r.receiveYn is null or r.receiveYn = 'N') and o.orderDate between :startDate and :endDate and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%') " +
             "order by o.orderNum ASC")
     List<Orders> progressScheduleAjax(@Param("itemCode")String itemCode, @Param("itemName")String itemName, @Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
 
@@ -62,7 +63,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "where (p IS NULL OR (p.progressCount = (SELECT MAX(p2.progressCount) FROM Progress p2 WHERE p2.orders.orderNum = o.orderNum))) " +
-            "and r.receiveYn != 'Y' and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')" +
+            "and (r.receiveYn is null or r.receiveYn = 'N') and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')" +
             "order by o.orderNum ASC")
     List<Orders> findProgressScheduleList(@Param("itemCode")String itemCode, @Param("itemName")String itemName);
 
@@ -74,4 +75,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "where o.orderNum =:orderNum ")
     Orders progressChoiceAjax(@Param("orderNum") Long orderNum);
+
+    @Query("select o from Orders o where o.orderNum =:orderNum")
+    List<Progress> progressListAjax(@Param("orderNum")Long orderNum);
 }

@@ -3,6 +3,8 @@ $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실�
     console.log("ready!");
     progressScheduleListAjax(1);
     progressChoiceAjax(0, 0);
+    progressListAjax();
+    document.getElementById('progressDate').textContent = new Date().toISOString().substring(0, 10);
 });
 
 
@@ -52,8 +54,7 @@ function progressChoiceAjax(orderNum, index) { // 위에서 보낸 매개변수 
             if (index > 0) {
                 document.getElementById('index' + index).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
             }
-            document.getElementById('orderDate').textContent = new Date().toISOString().substring(0, 10); // 발주일 세팅
-            document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10); // 입고예정일 세팅
+            document.getElementById('progressDate').textContent = new Date().toISOString().substring(0, 10);
             setTimeout(function () {
             }, 1000)
         },
@@ -63,7 +64,52 @@ function progressChoiceAjax(orderNum, index) { // 위에서 보낸 매개변수 
     })
 }
 
+function saveProgress() {
+    const innerHtml = $("#progressChoice");
+    document.getElementById('orderDate').value = new Date().toISOString().substring(0, 10);
+    const f = document.getElementById("form2");
+    $.ajax({
+        url: "/part2/saveProgress", //백엔드 경로
+        type: 'POST',
+        cache: false,
+        data: $('#form2').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data); // 발주폼 뿌리기
+            document.getElementById('orderDate').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
+            document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
+            progressListAjax();
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
 
+function progressListAjax() {
+    const innerHtml = $("#progressList");
+    const f = document.getElementById("form3");
+    $.ajax({
+        url: "/part2/progressListAjax", //백엔드 경로
+        type: 'GET',
+        cache: false,
+        data: $('#form2').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data); // 발주폼 뿌리기
+
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
 
 
 

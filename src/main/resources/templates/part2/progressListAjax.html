@@ -1,0 +1,29 @@
+<div>
+    <table class="table table-bordered text-center">
+        <colgroup>
+            <col width="15%">
+            <col width="30%">
+            <col width="20%">
+            <col width="20%">
+            <col width="15%">
+        </colgroup>
+        <tbody>
+        <tr class="table-secondary" style="font-weight: bold;">
+            <td>차수</td>
+            <td>검수일자</td>
+            <td>완료수량</td>
+            <td>검수결과</td>
+            <td>진척도</td>
+        </tr>
+        <th:block th:if="${progressList.totalElements != 0}">
+            <tr th:each="progress :${progressList}">
+                <td th:text="">1차</td>
+                <td>2024-05-22</td>
+                <td>100</td>
+                <td>검수완료</td>
+                <td>20%</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>

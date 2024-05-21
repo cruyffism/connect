@@ -40,4 +40,7 @@ public class Progress {
     @Column(nullable = false)
     private Integer progressPercent;
 
+    @Column(nullable = false)
+    private String progressResult;
+
 }
