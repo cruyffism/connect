@@ -3,8 +3,7 @@ $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실�
     console.log("ready!");
     progressScheduleListAjax(1);
     progressChoiceAjax(0, 0);
-    progressListAjax();
-    document.getElementById('progressDate').textContent = new Date().toISOString().substring(0, 10);
+    progressListAjax(0);
 });
 
 
@@ -54,7 +53,7 @@ function progressChoiceAjax(orderNum, index) { // 위에서 보낸 매개변수 
             if (index > 0) {
                 document.getElementById('index' + index).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
             }
-            document.getElementById('progressDate').textContent = new Date().toISOString().substring(0, 10);
+            progressListAjax(-1);
             setTimeout(function () {
             }, 1000)
         },
@@ -77,9 +76,8 @@ function saveProgress() {
         async: false,
         success: function (data) {
             $(innerHtml).html(data); // 발주폼 뿌리기
-            document.getElementById('orderDate').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
-            document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
-            progressListAjax();
+
+            progressListAjax(-1);
             setTimeout(function () {
             }, 1000)
         },
@@ -89,9 +87,12 @@ function saveProgress() {
     })
 }
 
-function progressListAjax() {
+function progressListAjax(orderNum) {
     const innerHtml = $("#progressList");
-    const f = document.getElementById("form3");
+    const f = document.getElementById("form2");
+    if(orderNum !== -1){ // -1이 아니면 매개변수로 보내준 orderNum 으루 넘어가게 , -1이면 히든으로 채워진 orderNum 넘어가게
+        f.orderNum.value = orderNum;
+    }
     $.ajax({
         url: "/part2/progressListAjax", //백엔드 경로
         type: 'GET',

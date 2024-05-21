@@ -43,6 +43,6 @@ public class ProgressService {
     }
 
     public  List<Progress> progressListAjax(Long orderNum) {
-        return ordersRepository.progressListAjax(orderNum);
+        return progressRepository.progressListAjax(orderNum);
     }
 }

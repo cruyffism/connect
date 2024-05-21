@@ -76,6 +76,5 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "where o.orderNum =:orderNum ")
     Orders progressChoiceAjax(@Param("orderNum") Long orderNum);
 
-    @Query("select o from Orders o where o.orderNum =:orderNum")
-    List<Progress> progressListAjax(@Param("orderNum")Long orderNum);
+
 }

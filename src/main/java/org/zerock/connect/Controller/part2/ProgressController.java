@@ -120,6 +120,7 @@ public class ProgressController {
     @GetMapping("/progressListAjax")
     public String progressListAjax(@RequestParam("orderNum") Long orderNum, Model model) {
         List<Progress> progress = progressService.progressListAjax(orderNum);
+        System.out.println("progress = " + progress);
         model.addAttribute("progressList", progress);
         return "/part2/progressListAjax";
     }
