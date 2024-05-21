@@ -97,17 +97,17 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">가로(mm)</span>
                             <input type="number" class="form-control"
-                                   aria-label="Dollar amount (with dot and two decimal places)" id= "itemWidth" name="itemWidth" required>
+                                   aria-label="Dollar amount (with dot and two decimal places)" id= "itemWidth" name="itemWidth" required th:min="0">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">세로(mm)</span>
                             <input type="number" class="form-control"
-                                   aria-label="Dollar amount (with dot and two decimal places)" id= "itemLength" name="itemLength" required>
+                                   aria-label="Dollar amount (with dot and two decimal places)" id= "itemLength" name="itemLength" required th:min="0">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">높이(mm)</span>
                             <input type="number" class="form-control"
-                                   aria-label="Dollar amount (with dot and two decimal places)" id= "itemHeight" name="itemHeight" required>
+                                   aria-label="Dollar amount (with dot and two decimal places)" id= "itemHeight" name="itemHeight" required th:min="0">
                         </div>
                     </div>
                 </td>
@@ -167,7 +167,7 @@
 
             </tbody>
         </table>
-        <div style="margin: 40px 0 0 220px;">
+        <div style="margin: 10px 0 0 220px;">
             <button type="submit" class="btn btn-outline-success">품목정보 등록</button>
             <br>
             <br>

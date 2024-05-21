@@ -44,7 +44,7 @@ public class ContractItem {
     private String contractInfo;
 
     @Column(nullable = false , length = 20)
-    private String contractPrice;
+    private int contractPrice;
 
 
 }

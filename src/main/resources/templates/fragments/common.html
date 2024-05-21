@@ -65,7 +65,8 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" th:href="@{/part2/purchaseOrderForm}">구매 발주서 관리</a></li>
                                 <li><a class="dropdown-item" th:href="@{/part2/progressForm}">진척 검수 처리</a></li>
-                                <li><a class="dropdown-item" href="#">발주진행 현황 관리</a></li>
+                                <li><a class="dropdown-item" th:href="@{/part2/graph}">발주진행 현황 관리</a></li>
+
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -77,6 +78,20 @@
                                 <li><a class="dropdown-item" th:href="@{/part3/releaseList}">출고 관리</a></li>
                                 <li><a class="dropdown-item" th:href="@{/part3/publishForm}">거래 명세서 발행</a></li>
                                 <li><a class="dropdown-item" th:href="@{/part3/stockList}">재고금액 현황 관리</a></li>
+                            </ul>
+                        </li>
+                        </th:block>
+                        <th:block th:if="${session.loginedUser.getMemberDep()=='1'}">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                조달관리
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li><a class="dropdown-item" th:href="@{/part0/productForm}">제품정보 등록</a></li>
+                                <li><a class="dropdown-item" th:href="@{/part1/companyForm}">업체 등록</a></li>
+<!--                                <li><a class="dropdown-item" th:href="@{/part1/contractItem}">계약 등록</a></li>-->
+<!--                                <li><a class="dropdown-item" th:href="@{/part1/procurementPlan}">조달 계획 등록</a></li>-->
                             </ul>
                         </li>
                         </th:block>

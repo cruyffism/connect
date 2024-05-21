@@ -9,12 +9,14 @@
         <th scope="col">높이</th>
         <!--                <th scope="col">도면파일</th>-->
         <th scope="col">재질</th>
+<!--        <th scope="col">삭제</th>-->
     </tr>
     </thead>
     <tbody>
     <th:block th:if="${itemList.totalElements != 0}">
         <tr th:each="item:${itemList}">
             <!-- for문돌리기 -->
+
             <td scope="col" th:text="${item.itemCode}"></td>
             <td scope="col">
                 <a th:href="@{/part1/download(downloadfile=${item.itemFile})}" th:name="downloadfile">Download</a>
@@ -25,6 +27,8 @@
             <td scope="col" th:text="${item.itemHeight}"></td>
             <!--                  <th scope="col" th:text = "${ItemList.itemFIle}">-->
             <td scope="col" th:text="${item.itemMaterial}"></td>
+<!--            <input th:name="itemIndex" th:value="${item.itemIndex}" th:type="hidden">-->
+<!--            <td><a th:href="@{deleteItem(itemIndex=${item.itemIndex})}">삭제</a></td>-->
         </tr>
     </th:block>
     <th:block th:if="${itemList.totalElements == 0}">

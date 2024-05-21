@@ -34,4 +34,9 @@ public interface ProcurementPlanRepository extends JpaRepository<ProcurementPlan
             "inner join Company c on ci.company.businessId = c.businessId "+
             "where c.comName like concat('%',:comName,'%') and i.itemName like concat('%',:itemName ,'%')")
     List<ProcurementPlan> findPlanList(@Param("comName") String comName, @Param("itemName") String itemName);
+
+
+    @Query(value = "select count(P) from ProcurementPlan P")
+    int findAllprcurementPlancount();
+
 }

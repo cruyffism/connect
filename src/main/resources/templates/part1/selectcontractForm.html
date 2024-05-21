@@ -16,35 +16,22 @@
     .part::-webkit-scrollbar{
       display: none;
     }
+    .table th, .table td {
+      width: 100px; /* 고정 너비 설정 (px 단위) */
+      white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+      text-align: center; /* 텍스트 중앙 정렬 */
+    }
+    .table th.item-index, .table td.item-index { width: 80px; }
+    .table th.item-name, .table td.item-name { width: 150px; }
+    .table th.item-length, .table td.item-length { width: 80px; }
+    .table th.item-width, .table td.item-width { width: 80px; }
+    .table th.item-height, .table td.item-height { width: 80px; }
+    .table th.unit-code, .table td.unit-code { width: 100px; }
+    .table th.assy-code, .table td.assy-code { width: 100px; }
+    .table th.part-code, .table td.part-code { width: 100px; }
+    .table th.item-material, .table td.item-material { width: 120px; }
 
   </style>
-
-<!--  <script>-->
-<!--    function NocontractListAjax(page) { // 위에서 보낸 매개변수 1을 받아 준다!-->
-<!--      const innerHtml = $("#contractList"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)-->
-<!--      const f = document.getElementById("form1"); //part1_insert_company.html의 form1과연결-->
-<!--      f.page.value = page;-->
-
-<!--      $.ajax({-->
-<!--        url: "/part1/NocontractItemListAjax", //백엔드 경로-->
-<!--        type: 'GET',-->
-<!--        cache: false,-->
-<!--        data: $('#form1').serialize(),-->
-<!--        dataType: "html",-->
-<!--        async: false,-->
-<!--        //성공 시에 part1_insert_company.html의 form태그 위치에 백엔드 경로(part1_insert_company_ajax)에 연결 된 리턴 값인 프론트 cartListAjax.html을 넣어서 보여줌-->
-<!--        success: function (data) {-->
-<!--          $(innerHtml).html(data)-->
-
-<!--          setTimeout(function () {-->
-<!--          }, 1000)-->
-<!--        },-->
-<!--        error: function (e) {-->
-<!--          $(innerHtml).html("")-->
-<!--        }-->
-<!--      })-->
-<!--    }-->
-<!--  </script>-->
 </head>
 <body>
 <header th:replace="~{/fragments/common::navbar}">
@@ -124,6 +111,7 @@
             <option value="">협력업체 선택</option>
             <th:block th:each="Company : ${AllCompany}">
               <option  th:text="${Company.comName}"  th:value="${Company.businessId}"></option>
+<!--              <input type="text" th:value="${AllCompany[selectItem.itemIndex]}">-->
             </th:block>
           </select>
         </td>

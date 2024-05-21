@@ -33,5 +33,12 @@ public class ReceiveService {
         return receiveRepository.receive(receiveNum);
     }
 
+    public int findByreceiveN(){
+        return receiveRepository.findByreceiveN();
+    }
+
+    public int findByreceiveY(){
+        return receiveRepository.findByreceiveY();
+    }
 
 }

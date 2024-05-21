@@ -42,4 +42,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     @Modifying
     @Query("delete from Orders where orderNum =:orderNum")
     Integer deleteOrderAjax(@Param("orderNum")Long orderNum);
+
+    @Query(value = "select count(o) from Orders o")
+    int findAllorderscount();
 }

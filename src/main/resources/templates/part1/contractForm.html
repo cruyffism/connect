@@ -16,6 +16,20 @@
     .part::-webkit-scrollbar{
       display: none;
     }
+    .table th, .table td {
+      width: 100px; /* 고정 너비 설정 (px 단위) */
+      white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+      text-align: center; /* 텍스트 중앙 정렬 */
+    }
+    .table th.item-index, .table td.item-index { width: 80px; }
+    .table th.item-name, .table td.item-name { width: 150px; }
+    .table th.item-length, .table td.item-length { width: 80px; }
+    .table th.item-width, .table td.item-width { width: 80px; }
+    .table th.item-height, .table td.item-height { width: 80px; }
+    .table th.unit-code, .table td.unit-code { width: 100px; }
+    .table th.assy-code, .table td.assy-code { width: 100px; }
+    .table th.part-code, .table td.part-code { width: 100px; }
+    .table th.item-material, .table td.item-material { width: 120px; }
 
   </style>
 </head>

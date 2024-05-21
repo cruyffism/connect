@@ -41,7 +41,7 @@ public class ConatractItemController {
     DownloadFileService downloadFileService;
 
     @GetMapping("/contractItem")
-    public String contractItem(Company company , Item item , Model model ,@PageableDefault(size = 10, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String contractItem(Company company , Item item , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
 //      모든 업체 리스트 출력
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
