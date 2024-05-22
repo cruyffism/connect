@@ -45,4 +45,9 @@ public class ProgressService {
     public  List<Progress> progressListAjax(Long orderNum) {
         return progressRepository.progressListAjax(orderNum);
     }
+
+
+    public Integer totalAmount(Long orderNum) {
+        return progressRepository.totalAmount(orderNum);
+    }
 }

@@ -24,4 +24,7 @@ public interface ProgressRepository extends JpaRepository<Progress, Long> {
 
     @Query("select p from Progress p where p.orders.orderNum =:orderNum")
     List<Progress> progressListAjax(@Param("orderNum") Long orderNum);
+
+    @Query("select sum(p.progressAmount) from Progress p where p.orders.orderNum =:orderNum")
+    Integer totalAmount(@Param("orderNum") Long orderNum);
 }

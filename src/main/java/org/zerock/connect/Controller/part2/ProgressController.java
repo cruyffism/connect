@@ -92,8 +92,14 @@ public class ProgressController {
     @PostMapping("/saveProgress")
     public String saveProgress(@ModelAttribute Progress progress, @ModelAttribute Orders orders, Model model, HttpServletResponse response) throws IOException {
 
+        //누적합계 계산
+        Integer totalAmount = progressService.totalAmount(orders.getOrderNum()) == null ? 0 : progressService.totalAmount(orders.getOrderNum());
+
+        //진척도 계산
+        double percent = (double)(progress.getProgressAmount() + totalAmount) / orders.getOrderCount() * 100;
+
         progress.setOrders(orders);
-        progress.setProgressPercent(1);
+        progress.setProgressPercent((int) percent);
         Progress result = progressService.saveProgress(progress);
 
         if (result != null) {
