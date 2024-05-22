@@ -35,4 +35,6 @@ public class CompanyService {
     public Company findByBusinessId(String CompanyId){
         return companyRepository.findByBusinessId(CompanyId);
     }
+
+
 }

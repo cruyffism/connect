@@ -1,12 +1,12 @@
+<!--입고완료-->
 <table class="table table-bordered text-center">
     <colgroup>
-        <col width="10%">
-        <col width="15%">
-        <col width="15%">
-        <col width="15%">
-        <col width="15%">
-        <col width="15%">
-        <col width="15%">
+        <col width="16.5%">
+        <col width="16.5%">
+        <col width="16.5%">
+        <col width="16.5%">
+        <col width="16.5%">
+        <col width="16.5%">
     </colgroup>
     <thead class="table-secondary">
     <tr>
@@ -16,7 +16,6 @@
         <th scope="col">발주번호</th>
         <th scope="col">조달납기일</th>
         <th scope="col">업체명</th>
-        <th scope="col">거래명세서 발행</th>
     </tr>
     </thead>
 
@@ -29,9 +28,6 @@
             <td th:text="${receive.orders.orderNum}"></td>
             <td th:text="${receive.orders.procurementPlan.planDate}"></td>
             <td th:text="${receive.orders.procurementPlan.contractItem.company.comName}"></td>
-            <td>
-                <button type="button" class="btn btn-sm btn-primary">발행</button>
-            </td>
         </tr>
     </th:block>
     <th:block th:if = "${yesReceiveList.totalElements == 0}">

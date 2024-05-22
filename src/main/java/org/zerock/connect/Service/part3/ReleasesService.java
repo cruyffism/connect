@@ -22,31 +22,12 @@ public class ReleasesService {
     @Autowired
     ReceiveRepository receiveRepository;
 
-    // 출고수량저장
-//    public Releases selectRelease(Long releaseNum){
-//    return releasesRepository.findByreleaseNum(releaseNum);
-//    }
-
-//    public void saveRelease(Long receiveNum, Integer releaseCount, String releaseDate) {
-//        Receive receive = receiveRepository.findById(receiveNum)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid receive number: " + receiveNum));
-//
-//        Releases release = new Releases();
-//        release.setReceive(receive);
-//
-//        release.setReleaseCount(releaseCount);
-//        release.setReleaseDate(LocalDate.parse(releaseDate));
-//
-//        releasesRepository.save(release);
-//    }
-
-
-
     // 재고 현황 리스트
     public List<Releases> getAllReleases() {
         return releasesRepository.findAll();
     }
 
+    // 출고수량저장
     public Releases save(Releases releases) {
         return releasesRepository.save(releases);
     }

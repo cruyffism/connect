@@ -18,7 +18,7 @@
     </style>
   </head>
   <body>
-  <header th:replace="/fragments/common:: navbar">
+  <header th:replace="~{/fragments/common::navbar}">
   </header>
 
     <div style="margin-top: 80px; " >
@@ -85,7 +85,7 @@
             </thead>
             <tbody>
             <th:block>
-                <tr th:each="releasesList:${releasesList}">
+                <tr th:each="releases:${releasesList}">
                     <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.product.productId}"></td>
                     <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.product.productName}"></td>
                     <td th:text="${releasesList.receive.progress.orders.procurementPlan.contractItem.item.itemIndex}"></td>

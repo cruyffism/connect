@@ -31,6 +31,9 @@ public class Receive {
     @OneToMany(mappedBy = "receive", fetch = FetchType.LAZY)
     private List<Releases> releases = new ArrayList<>();
 
+    @OneToOne(mappedBy = "receive", fetch = FetchType.LAZY)
+    private Publish publish;
+
     @Column
     private Integer receiveCount;
 

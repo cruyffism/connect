@@ -1,6 +1,7 @@
 package org.zerock.connect.Controller.part3;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.zerock.connect.repository.ReleasesRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/part3")
@@ -30,7 +32,6 @@ public class ReleaseController {
     @Autowired
     private ReleasesRepository releasesRepository;
 
-
     // 출고 리스트 뷰
     @GetMapping("/releaseList")
     public String getAllReleases(Model model) {
@@ -44,17 +45,10 @@ public class ReleaseController {
     }
 
     // 출고수량 저장
-//    @PostMapping("/part3/saveRelease")
-///*    public String saveRelease(@RequestParam("releaseNum") Long releaseNum , @RequestParam("releaseCount") Integer releaseCount , Model model)*/
-//    public String saveRelease(@ModelAttribute Releases releases) {
-//        releasesService.saveRelease(releases);
-//        return "redirect:/part3/releaseList";
-//    }
-
     @PostMapping("/saveReleases")
     public String saveRelease(@RequestParam("receiveNum") Long receiveNum, Releases releases,
                               @RequestParam("releaseCount") Integer releaseCount,
-//                              @RequestParam("releaseDate") String releaseDate,
+                              @RequestParam("releaseDate") String releaseDate,
                               Model model) {
 
         // 입고 조회
@@ -64,17 +58,9 @@ public class ReleaseController {
         releases.setReceive(selectReceive);
         // 출고테이블 인서트
         Releases resultReleases = releasesService.save(releases);
-        
-//        releasesService.saveRelease(receiveNum, releaseCount, releaseDate);
 
         return "redirect:/part3/releaseList";
     }
-
-    @GetMapping("/selectReleases")
-    public String selectReleases(){
-        return "";
-    }
-
 
 
 

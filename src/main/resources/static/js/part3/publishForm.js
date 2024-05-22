@@ -1,39 +1,131 @@
-function publishInvoice() {
-    // 거래명세서 작성 부분의 정보 가져오기
-    var invoiceNumber = document.getElementById('invoiceNumber').textContent;
-    var issueDate = document.getElementById('issueDate').textContent;
-    var supplierInfo = {
-        orderDate: document.getElementById('OrderDate').textContent,
-        companyName: document.getElementById('comName').textContent,
-        businessNumber: document.getElementById('businessId').textContent,
-        address: document.getElementById('comAdd').textContent,
-        responsiblePerson: document.getElementById('comManager').textContent
-    };
-    var recipientInfo = {
-        orderDate: document.getElementById('recipientOrderDate').textContent,
-        companyName: document.getElementById('recipientCompanyName').textContent,
-        businessNumber: document.getElementById('recipientBusinessNumber').textContent,
-        address: document.getElementById('recipientAddress').textContent,
-        responsiblePerson: document.getElementById('recipientResponsiblePerson').textContent
-    };
+//거래명세서 작성 폼
+let invoiceCounter = 1;
+function handlePublishButtonClick() {
+    // 선택된 라디오 버튼 가져오기
+    var selectedRadioButton = document.querySelector('input[name="receiveNum"]:checked');
 
-    // 새로운 행 추가
-    var newRow = '<tr>' +
-        '<td>' + invoiceNumber + '</td>' +
-        '<td>' + issueDate + '</td>' +
-        '<td>' + supplierInfo.orderDate + '</td>' +
-        '<td>' + supplierInfo.comName + '</td>' +
-        '<td>' + supplierInfo.businessId + '</td>' +
-        '<td>' + supplierInfo.comAdd + '</td>' +
-        '<td>' + supplierInfo.comManager + '</td>' +
-        '<td>' + recipientInfo.orderDate + '</td>' +
-        '<td>' + recipientInfo.companyName + '</td>' +
-        '<td>' + recipientInfo.businessNumber + '</td>' +
-        '<td>' + recipientInfo.address + '</td>' +
-        '<td>' + recipientInfo.responsiblePerson + '</td>' +
-        '</tr>';
+    if (!selectedRadioButton) {
+        alert('선택된 항목이 없습니다.');
+        return;
+    }
 
-    // 맨 아래 테이블에 행 추가
-    var tableBody = document.getElementById('invoiceTableBody');
-    tableBody.innerHTML += newRow;
+    // 선택된 라디오 버튼의 부모 tr 요소 가져오기
+    var selectedRow = selectedRadioButton.closest('tr');
+
+    // 선택된 행의 데이터 가져오기
+    var orderNum = selectedRow.querySelector('td:nth-child(2)').textContent;
+    var comName = selectedRow.querySelector('td:nth-child(3)').textContent;
+    var itemIndex = selectedRow.querySelector('td:nth-child(4)').textContent;
+    var itemName = selectedRow.querySelector('td:nth-child(5)').textContent;
+    var orderDate = selectedRow.querySelector('td:nth-child(6)').textContent;
+    var orderCount = selectedRow.querySelector('td:nth-child(7)').textContent;
+    var contractPrice = selectedRow.querySelector('td:nth-child(8)').textContent;
+
+    // // 숨겨진 입력 필드에서 값 가져오기
+    // var comAdd = document.getElementById('comAdd').value;
+    // var businessId = document.getElementById('businessId').value;
+    // var comManager = document.getElementById('comManager').value;
+
+    var receiveNum = selectedRow.querySelector('.receiveNum').value;
+    var comAdd = selectedRow.querySelector('.comAdd').value;
+    var businessId = selectedRow.querySelector('.businessId').value;
+    var comManager = selectedRow.querySelector('.comManager').value;
+
+    // // 숨겨진 입력 필드에서 값 가져오기
+    // var comAdd = selectedRow.querySelector('input[type="hidden"][name="comAdd"]').value;
+    // var businessId = selectedRow.querySelector('input[type="hidden"][name="businessId"]').value;
+    // var comManager = selectedRow.querySelector('input[type="hidden"][name="comManager"]').value;
+
+    // totalPrice 추가
+    var totalPrice = parseInt(orderCount) * parseInt(contractPrice);
+
+    // 거래명세서 폼에 데이터 출력하기
+    document.getElementById('orderNum').textContent = orderNum;
+    document.getElementById('comName').textContent = comName;
+    document.getElementById('itemIndex').textContent = itemIndex;
+    document.getElementById('itemName').textContent = itemName;
+    document.getElementById('orderDate').textContent = orderDate;
+    document.getElementById('orderCount').textContent = orderCount;
+    document.getElementById('contractPrice').textContent = contractPrice;
+
+
+    // 숨겨진 입력 필드에서 값 가져오기
+    document.getElementById('comAdd').textContent = comAdd;
+    document.getElementById('comManager').textContent = comManager;
+    document.getElementById('businessId').textContent = businessId;
+    document.getElementById('receiveNum').textContent = receiveNum;
+
+    document.getElementById('hiddenReceiveNum').value = receiveNum;
+    document.getElementById('hiddenComAdd').value = comAdd;
+    document.getElementById('hiddenBusinessId').value = businessId;
+    document.getElementById('hiddenComManager').value = comManager;
+
+    // 총액
+    document.getElementById('totalPrice').textContent = totalPrice;
+
+    // 거래명세서 번호 출력하기 - 저장이될때마다 카운트 1씩 증가
+    document.getElementById('invoiceNumber').innerText = invoiceCounter++;
+
+    // 모달 열기
+    document.getElementById('myModal').style.display = 'block';
+
+
 }
+
+// 모달 닫기
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+// 모달 외부 클릭 시 닫기
+window.onclick = function (event) {
+    if (event.target == document.getElementById('myModal')) {
+        closeModal();
+    }
+}
+
+// PDF로 저장하기
+function saveAsPDF() {
+    var element = document.getElementById('myModal');
+
+    html2canvas(element).then(canvas => {
+        var imgData = canvas.toDataURL('image/png');
+        var pdf = new jsPDF('p', 'mm', 'a4');
+        var imgWidth = 210;
+        var pageHeight = 295;
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+
+        var position = 0;
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        pdf.save('document.pdf');
+    });
+}
+
+
+
+
+// // 저장 버튼 클릭 시
+// document.getElementById('saveSuccess').addEventListener('click', function() {
+//     // 모달 닫기
+//     closeModal();
+//
+//     // 성공 메시지
+//     var successMessage = "[[${successMessage}]]";
+//     console.log("Success message: ", successMessage); // 디버깅 메시지 추가
+//     if (successMessage) {
+//         alert(successMessage);
+//     }
+// });
+
+
