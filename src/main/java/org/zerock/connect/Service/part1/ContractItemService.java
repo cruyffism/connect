@@ -40,5 +40,9 @@ public class ContractItemService {
     public List<ContractItem> selectByConitemName(String itemName){
         return contractItemRepository.selectByConitemName(itemName);
     }
+
+//    public ContractItem findByitemIndex(Long itemIndex){
+//        return contractItemRepository.findContractItemByItemItemIndex(itemIndex);
+//    }
 }
 

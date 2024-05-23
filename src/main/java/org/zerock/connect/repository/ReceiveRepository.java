@@ -5,9 +5,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.zerock.connect.Service.part3.ReleasesDTO;
 import org.zerock.connect.entity.Receive;
+import org.zerock.connect.entity.Releases;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public interface ReceiveRepository extends JpaRepository<Receive, Long> {
@@ -46,4 +50,73 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
 
     Receive findByReceiveNum(Long receiveNum);
+
+    @Query(value = "select count(r) from Receive r where r.receiveYn = 'N'")
+    int findByreceiveN();
+
+    @Query(value = "select count(r) from Receive r where r.receiveYn = 'Y'")
+    int findByreceiveY();
+
+
+
+//    @Query(value = "SELECT r,re,o " +
+//            "FROM Receive r JOIN Releases re ON r.receiveNum=re.receive.receiveNum " +
+//            "JOIN Orders o ON re.receive.orders.orderNum=o.orderNum " +
+//            "GROUP BY o.procurementPlan.planNum")
+
+    @Query("select " +
+            "new org.zerock.connect.Service.part3.ReleasesDTO" +
+            "(r.receive.orders.procurementPlan.planNum, sum(r.receive.receiveCount),sum(r.releaseCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r.receive) " +
+            "from Releases r " +
+            "group by r.receive.orders.procurementPlan.planNum")
+    List<ReleasesDTO> findReleaseSummaries();
+
+
+    @Query("select " +
+            "new org.zerock.connect.Service.part3.ReleasesDTO" +
+            "(r.receive.orders.procurementPlan.planNum,sum(r.receive.receiveCount) ,sum(r.releaseCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r.receive) " +
+            "from Releases r " +
+            "where r.releaseDate between :startDate and :endDate " +
+            "group by r.receive.orders.procurementPlan.planNum")
+    List<ReleasesDTO> searchDateStockList(@Param("startDate") LocalDate startDate , @Param("endDate") LocalDate endDate);
+
+    @Query(value = "SELECT u.unitName, SUM(r.releaseCount * c.contractPrice) as totalAmount " +
+            "FROM Releases r " +
+            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
+            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
+            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
+            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
+            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
+            "JOIN Unit u ON i.unit.unitCode = u.unitCode " +
+            "GROUP BY u.unitCode")
+
+//    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
+    List<Object[]> groupbyUnitcode();
+
+    @Query(value = "SELECT a.assyName, SUM(r.releaseCount * c.contractPrice) as totalAmount " +
+            "FROM Releases r " +
+            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
+            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
+            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
+            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
+            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
+            "JOIN Assy a ON i.assy.assyCode = a.assyCode " +
+            "GROUP BY a.assyCode")
+
+//    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
+    List<Object[]> groupbyAssycode();
+
+    @Query(value = "SELECT part.partName, SUM(r.releaseCount * c.contractPrice) as totalAmount " +
+            "FROM Releases r " +
+            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
+            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
+            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
+            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
+            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
+            "JOIN Part part ON i.part.partCode = part.partCode " +
+            "GROUP BY part.partCode")
+
+//    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
+    List<Object[]> groupbyPartcode();
 }
+

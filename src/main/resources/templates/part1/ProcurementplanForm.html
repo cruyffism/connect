@@ -14,99 +14,25 @@
         .part::-webkit-scrollbar{
             display: none;
         }
+        .table th, .table td {
+            width: 100px; /* 고정 너비 설정 (px 단위) */
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+        .table th.item-index, .table td.item-index { width: 80px; }
+        .table th.item-name, .table td.item-name { width: 150px; }
+        .table th.item-length, .table td.item-length { width: 80px; }
+        .table th.item-width, .table td.item-width { width: 80px; }
+        .table th.item-height, .table td.item-height { width: 80px; }
+        .table th.unit-code, .table td.unit-code { width: 100px; }
+        .table th.assy-code, .table td.assy-code { width: 100px; }
+        .table th.part-code, .table td.part-code { width: 100px; }
+        .table th.item-material, .table td.item-material { width: 120px; }
 
     </style>
     <header th:replace="~{/fragments/common::navbar}">
     </header>
 <body>
-
-<!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-<!--<nav class="navbar fixed-top" style="background-color: #59359a;">-->
-<!--    <div class="container-fluid"  >-->
-<!--        <a class="navbar-brand" href="#">Connect</a>-->
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">-->
-<!--            <div class="offcanvas-header">-->
-<!--                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Connect</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="offcanvas-body">-->
-<!--                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link active" aria-current="page" href="#">Home</a>-->
-<!--                    </li>-->
-<!--                    &lt;!&ndash; <li class="nav-item">-->
-<!--                      <a class="nav-link" href="#">Link</a>-->
-<!--                    </li> &ndash;&gt;-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            조달관리-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="part1_Insert_item.html">품목정보 등록</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part1_insert_company.html">업체 등록</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part1_insert_contract.html">계약 등록</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part1_insert_plan.html">조달 계획 등록</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
-<!--                            &lt;!&ndash; <li><a class="dropdown-item" href="#">Something else here</a></li> &ndash;&gt;-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            발주관리-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="part2_purchase_order.html">구매 발주서 관리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part2_purchase_orderList.html">진척 검수 처리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="#">발주진행 현황 관리</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
-<!--                            &lt;!&ndash; <li><a class="dropdown-item" href="#">Something else here</a></li> &ndash;&gt;-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            자재관리-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="part3_stock.html">입고 관리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part3_out.html">출고 관리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part3_publish.html">거래 명세서 발행</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part3_cal_inven.html">재고금액 현황 관리</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
-<!--                            &lt;!&ndash; <li><a class="dropdown-item" href="#">Something else here</a></li> &ndash;&gt;-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            회원정보-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="#">로그인</a></li>-->
-<!--                            <li><a class="dropdown-item" href="#">로그아웃</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
-
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                &lt;!&ndash; <form class="d-flex mt-3" role="search">-->
-<!--                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                  <button class="btn btn-outline-success" type="submit">Search</button>-->
-<!--                </form> &ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
-
 
 <div style=" overflow-y: scroll; width: 99%; margin: 0 30px 150px 15px; "  class="part">
 
@@ -191,6 +117,54 @@
             </th:block>
             </tbody>
         </table>
+        <div class="buttons_wrap" style="margin: 30px auto; text-align: center">
+            <tr class="pagination"
+                th:with="start=${(ContractItemLists.number div 10)*10 + 1},
+           last=${(start + 9 < ContractItemLists.totalPages ? start + 9 : ContractItemLists.totalPages)}">
+                <!--한 화면에 몇 페이지까지 보여줄지 계산한 코드-->
+                <td>
+                    <a th:onclick="|javascript:ContractItemLists(1)|" aria-label="First">
+                        <!--onclick은 비동기식이라서 ajax 거쳐서 감, companyListAjax는 js안에 펑션 이름이랑 매칭-->
+                        <span aria-hidden="true">첫 페이지</span> <!--첫 페이지 클릭 시 1페이지가 나오게 하는거-->
+                    </a>
+                </td>
+
+                <td th:class="${ContractItemLists.first} ? 'disabled'">
+                    <a th:onclick="${ContractItemLists.first} ? '' : 'javascript:ContractItemLists('+${ContractItemLists.number}+')'"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&lt;</span>
+                    </a> <!--삼항 연산자를 통해 첫번째 페이지면 그대로 냅두고 그게 아니라면 해당 페이지보다 -1 페이지로 가게끔 (저 number에 -1값으로 자동으로 되어있음)-->
+                    <!--클릭 시 아작스 호출해서 벡엔드로 값을 전달-->
+                </td>
+
+                <th:block th:if="${last != 0}"> <!--첫페이지가 아니면-->
+                    <td th:each="page: ${#numbers.sequence(start, last)}"
+                        th:class="${page == ContractItemLists.number + 1} ? 'active'">
+                        <a th:text="${page}" th:onclick="|javascript:ContractItemLists(${page})|"></a>
+                        <!--페이지 개수만큼 each문을 돌려서 페이지를 표시 >> 5페이지면 5번돌려서 5페이지 나오게 함-->
+                    </td>
+                </th:block>
+                <th:block th:if="${last == 0}"> <!--첫페이지면-->
+                    <td class="active">
+                        <a th:text="1" th:onclick="|javascript:ContractItemLists(1)|"></a> <!--무조건 숫자 1만 나오게-->
+                    </td>
+                </th:block>
+
+                <td th:class="${ContractItemLists.last} ? 'disabled'">
+                    <a th:onclick="${ContractItemLists.last} ? '' : 'javascript:ContractItemLists('+${ContractItemLists.number+2}+')'"
+                       aria-label="Next">
+                        <span aria-hidden="true">&gt;</span> <!--삼항 연산자를 통해 마지막 페이지면 그대로 냅두고 그게 아니라면 해당 페이지보다 +1 페이지로 가게끔-->
+                    </a>
+                </td>
+
+                <td>
+                    <a th:onclick="|javascript:ContractItemLists(${ContractItemLists.totalPages})|" aria-label="Last">
+                        <!--마지막 페이지 클릭 시 마지막 페이지가 나오게 하는거-->
+                        <span aria-hidden="true">마지막 페이지</span>
+                    </a>
+                </td>
+            </tr>
+        </div>
     </div>
 
 </div>

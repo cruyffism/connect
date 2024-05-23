@@ -73,4 +73,8 @@ public class ItemService {
     }
 
 
+//    public List<Item> deleteItemByItemIndex(Item itemIndex){
+//        return itemRepository.deleteItemByItemIndex(itemIndex);
+//    }
+
 }

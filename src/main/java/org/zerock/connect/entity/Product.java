@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Getter
 @DynamicUpdate
-@ToString(exclude = "items")
+//@ToString(exclude = "items")
 public class Product {
 
     @Id
@@ -34,7 +34,7 @@ public class Product {
     @Column(nullable = false)
     private LocalDate productEnddate;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product" )
     private List<Item> items = new ArrayList<>();
 
 }

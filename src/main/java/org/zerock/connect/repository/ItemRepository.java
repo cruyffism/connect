@@ -25,7 +25,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "SELECT I FROM Item I WHERE I.itemIndex != all (SELECT C.item.itemIndex FROM ContractItem C)")
     List<Item> NocontractItem();
 
-
+//    List<Item> deleteItemByItemIndex(Item itemIndex);
 
 
 

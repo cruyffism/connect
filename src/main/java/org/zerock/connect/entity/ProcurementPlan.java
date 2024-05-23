@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "orders")
+//@ToString(exclude = "orders")
 @DynamicUpdate
 public class ProcurementPlan {
 
@@ -33,6 +33,6 @@ public class ProcurementPlan {
     private LocalDate planDate;
 
 
-    @OneToMany(mappedBy = "procurementPlan")
+    @OneToMany(mappedBy = "procurementPlan" )
     private List<Orders> orders = new ArrayList<>();
 }

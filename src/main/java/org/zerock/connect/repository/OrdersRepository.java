@@ -77,4 +77,6 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     Orders progressChoiceAjax(@Param("orderNum") Long orderNum);
 
 
+    @Query(value = "select count(o) from Orders o")
+    int findAllorderscount();
 }

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.connect.Service.DownloadFileService;
+import org.zerock.connect.Service.part1.ContractItemService;
 import org.zerock.connect.Service.part1.ItemService;
 import org.zerock.connect.Service.UploadFileService;
 import org.zerock.connect.entity.*;
@@ -34,6 +35,9 @@ public class ItemController {
 
     @Autowired
     DownloadFileService downloadFileService;
+
+    @Autowired
+    ContractItemService contractItemService;
 
 
     //    제품선택화면폼
@@ -166,12 +170,25 @@ public class ItemController {
         return "/part1/itemForm";
     }
 
+    
+//    파일 다운로드 기능
     @GetMapping("/download")
     public String downloadFile(@RequestParam("downloadfile") String fileName, HttpServletResponse response) {
         downloadFileService.download(fileName, response);
         System.out.println("파일다운로드");
         return "redirect:/part1/itemForm";
     }
+
+//    @GetMapping("/deleteItem")
+//    public String deleteItem(@RequestParam("itemIndex")Long itemIndex){
+//        Item selectItem = itemService.findByItemIndex(itemIndex);
+////        ContractItem selectContract = contractItemService.findByitemIndex(itemIndex);
+//        List<Item> deleteItem = itemService.deleteItemByItemIndex(selectItem);
+////        List<ContractItem> deleteContract = contractItemService.deleteContract
+//
+//
+//        return "redirect:/part1/itemForm";
+//    }
 
 
 }

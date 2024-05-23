@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "receive")
+//@ToString(exclude = "receive")
 @DynamicUpdate
 public class Orders {
 
@@ -23,14 +23,14 @@ public class Orders {
     @Column(nullable = false , length = 20)
     private Long orderNum;
 
-    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY )
     private List<Progress> progresses = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "planNum" ,nullable = false)
     private ProcurementPlan procurementPlan;
 
-    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY )
     private Receive receive;
 
     @Column(nullable = false,length = 50)

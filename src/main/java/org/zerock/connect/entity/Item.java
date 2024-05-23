@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @Getter
 @DynamicUpdate
-@ToString(exclude = "contractItems")
+//@ToString(exclude = "contractItems")
 public class Item {
 
 
@@ -63,6 +63,6 @@ public class Item {
     @Column(nullable = false , length = 200)
     private String itemFile;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item" )
     private List<ContractItem> contractItems = new ArrayList<>();
 }
