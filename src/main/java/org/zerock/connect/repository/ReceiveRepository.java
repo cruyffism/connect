@@ -66,7 +66,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
     @Query("select " +
             "new org.zerock.connect.Service.part3.ReleasesDTO" +
-            "(r.receive.orders.procurementPlan.planNum, sum(r.releaseCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r.receive) " +
+            "(r.receive.orders.procurementPlan.planNum, sum(r.receive.receiveCount),sum(r.releaseCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r.receive) " +
             "from Releases r " +
             "group by r.receive.orders.procurementPlan.planNum")
     List<ReleasesDTO> findReleaseSummaries();
@@ -74,7 +74,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
     @Query("select " +
             "new org.zerock.connect.Service.part3.ReleasesDTO" +
-            "(r.receive.orders.procurementPlan.planNum, sum(r.releaseCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r.receive) " +
+            "(r.receive.orders.procurementPlan.planNum,sum(r.receive.receiveCount) ,sum(r.releaseCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r.receive) " +
             "from Releases r " +
             "where r.releaseDate between :startDate and :endDate " +
             "group by r.receive.orders.procurementPlan.planNum")

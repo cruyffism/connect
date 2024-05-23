@@ -7,6 +7,8 @@ import org.zerock.connect.entity.*;
 public class ReleasesDTO {
 
     private Long planNum;
+
+    private Long totalReceiveCount;
     private Long totalOrderCount;
 
     private ProcurementPlan procurementPlan;
@@ -19,8 +21,10 @@ public class ReleasesDTO {
 
     private Receive receive;
 
-    public ReleasesDTO(Long planNum, Long totalOrderCount, ProcurementPlan procurementPlan, ContractItem contractItem, Item item, Product product, Receive receive) {
+
+    public ReleasesDTO(Long planNum, Long totalReceiveCount, Long totalOrderCount, ProcurementPlan procurementPlan, ContractItem contractItem, Item item, Product product, Receive receive) {
         this.planNum = planNum;
+        this.totalReceiveCount = totalReceiveCount;
         this.totalOrderCount = totalOrderCount;
         this.procurementPlan = procurementPlan;
         this.contractItem = contractItem;
@@ -35,6 +39,14 @@ public class ReleasesDTO {
 
     public void setPlanNum(Long planNum) {
         this.planNum = planNum;
+    }
+
+    public Long getTotalReceiveCount() {
+        return totalReceiveCount;
+    }
+
+    public void setTotalReceiveCount(Long totalReceiveCount) {
+        this.totalReceiveCount = totalReceiveCount;
     }
 
     public Long getTotalOrderCount() {
