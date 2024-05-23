@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.connect.entity.Orders;
 import org.zerock.connect.entity.Progress;
+import org.zerock.connect.entity.Receive;
 import org.zerock.connect.repository.OrdersRepository;
 import org.zerock.connect.repository.ProgressRepository;
+import org.zerock.connect.repository.ReceiveRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +19,9 @@ public class ProgressService {
 
     @Autowired
     ProgressRepository progressRepository;
+
+    @Autowired
+    ReceiveRepository receiveRepository;
 
     //검수 예정 품목 리스트 아작스
     public List<Orders> progressScheduleAjax(String itemCode, String itemName, LocalDate startDate, LocalDate endDate) {
@@ -49,5 +54,9 @@ public class ProgressService {
 
     public Integer totalAmount(Long orderNum) {
         return progressRepository.totalAmount(orderNum);
+    }
+
+    public Receive save(Receive receive) {
+        return  receiveRepository.save(receive);
     }
 }

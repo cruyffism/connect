@@ -25,7 +25,7 @@
             <td th:text="${noReceive.orders.procurementPlan.contractItem.item.itemCode}"></td>
             <td th:text="${noReceive.orders.procurementPlan.contractItem.item.itemName}"></td>
             <td th:text="${noReceive.orders.orderCount}"></td>
-            <td th:text="${noReceive.orders.orderNum}"></td>
+            <td th:text="'PN-'+${noReceive.orders.orderNum}"></td>
             <td th:text="${noReceive.orders.procurementPlan.planDate}"></td>
             <td th:text="${noReceive.orders.procurementPlan.contractItem.company.comName}"></td>
             <td>

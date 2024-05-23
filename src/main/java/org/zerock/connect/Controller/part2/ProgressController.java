@@ -102,6 +102,22 @@ public class ProgressController {
         progress.setProgressPercent((int) percent);
         Progress result = progressService.saveProgress(progress);
 
+        //입고 예정 테이블에 값을 넣기
+        Receive receive = new Receive();
+
+        receive.setReceiveCount(orders.getOrderCount());
+        receive.setReceiveDate(orders.getReceiveDueDate());
+        receive.setReceiveInfo(orders.getOrderInfo());
+        receive.setReceiveYn("N");
+        receive.setOrders(orders);
+
+        if(percent == 100) {
+            Receive outcome = progressService.save(receive);
+        } else {
+            System.out.println("receive = " + receive);
+        }
+
+
         if (result != null) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
@@ -130,5 +146,8 @@ public class ProgressController {
         model.addAttribute("progressList", progress);
         return "/part2/progressListAjax";
     }
+
+    // 검수 리스트 삭제
+
 
 }

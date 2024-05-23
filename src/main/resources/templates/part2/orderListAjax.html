@@ -21,8 +21,8 @@
             <th scope="col">수량</th>
             <th scope="col">발주일</th>
             <th scope="col">입고예정일</th>
-            <th scope="col">발주 상태</th>
-            <th scope="col">마감 여부</th>
+            <th scope="col">발주상태</th>
+            <th scope="col">마감</th>
             <th scope="col">발주서 삭제</th>
         </tr>
         </thead>
@@ -38,7 +38,7 @@
                 <td th:text="${orderList.orderDate}"></td>
                 <td th:text="${orderList.receiveDueDate}"></td>
                 <th:block th:if="${orderList.receive == null}">
-                    <td>입고예정</td> <!--발주서 삭제 가능-->
+                    <td>발주진행</td> <!--발주서 삭제 가능-->
                     <td>
                         <button type="button" class="btn btn-sm btn-primary" disabled>마감
                         </button>
@@ -49,21 +49,20 @@
                         </button>
                     </td>
                 </th:block>
-                <th:block th:if="${orderList.receive != null}">
+                <th:block th:if="${orderList.receive != null}"> <!--발주서 삭제 불가-->
                     <th:block th:if="${orderList.receive.receiveYn == 'N'}">
-                        <td>입고예정</td> <!--발주서 삭제 가능-->
+                        <td>입고예정</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-primary" disabled>마감
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-danger"
-                                    th:onclick="|javascript:deleteOrderAjax(1,-1,${orderList.orderNum})|">삭제
+                            <button type="button" class="btn btn-sm btn-danger" disabled>삭제
                             </button>
                         </td>
                     </th:block>
                     <th:block th:if="${orderList.receive.receiveYn == 'Y' && orderList.orderYn == 'N'}">
-                        <td>입고완료</td> <!--발주서 마감 가능-->
+                        <td>입고마감</td> <!--발주서 마감 가능-->
                         <td>
                             <button type="button" class="btn btn-sm btn-primary"
                                     th:onclick="|javascript:orderDeadlineAjax(1,-1,${orderList.orderNum})|">마감
@@ -75,7 +74,7 @@
                         </td>
                     </th:block>
                     <th:block th:if="${orderList.receive.receiveYn == 'Y' && orderList.orderYn == 'Y'}">
-                        <td>마감완료</td>
+                        <td>발주마감</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-primary"
                                     disabled>마감
