@@ -77,6 +77,13 @@ function saveProgress() {
         success: function (data) {
             $(innerHtml).html(data); // 발주폼 뿌리기
 
+            // 검수예정품목 아작스 호출 (검수현황부분 업데이트 하려고)
+            progressScheduleListAjax(1);
+            // 검수버튼 누른상태 유지하기 (한줄 색칠된거 그대로 유지하려고 추가)
+            const f = document.getElementById("form1");
+            document.getElementById('index' + f.orderNum.value).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
+
+            // 검수리스트 아작스 호출
             progressListAjax(-1);
             setTimeout(function () {
             }, 1000)
@@ -86,7 +93,6 @@ function saveProgress() {
         }
     })
 }
-
 function progressListAjax(orderNum) {
     const innerHtml = $("#progressList");
     const f = document.getElementById("form2");
@@ -127,5 +133,17 @@ function caldate() {
     } else {
         alert("날짜를 입력하세요");
         $("#startDate").focus();
+    }
+}
+
+//수량 제한 걸기
+//수량 제한 걸기
+function limitNumber() {
+    var progressAmount = document.getElementById("progressAmount").value;
+    var orderCount = document.getElementById("orderCount").value;
+
+    if(progressAmount > orderCount) {
+        alert("발주 수량을 넘길수 없습니다.");
+        $("#progressAmount").focus();
     }
 }

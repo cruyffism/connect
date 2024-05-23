@@ -39,7 +39,6 @@
                 <td th:if="${progress.progressPercent == 100}">검수완료</td>
                 <td th:if="${progress.progressPercent < 100}">검수진행</td>
             </th:block>
-
             <td>
                 <button type="button"
                         th:onclick="|javascript:progressChoiceAjax(${progressSchedule.orderNum},${start + status.index})|"
