@@ -23,14 +23,14 @@ public class Orders {
     @Column(nullable = false , length = 20)
     private Long orderNum;
 
-    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY , cascade = CascadeType.PERSIST)
     private List<Progress> progresses = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "planNum" ,nullable = false)
     private ProcurementPlan procurementPlan;
 
-    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY , cascade = CascadeType.PERSIST)
     private Receive receive;
 
     @Column(nullable = false,length = 50)

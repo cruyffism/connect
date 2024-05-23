@@ -44,7 +44,7 @@
 <body>
 <header th:replace="~{/fragments/common::navbar}"></header>
 
-<h3 class="text-center" style="margin-top: 50px;">분류별 금액 그래프</h3>
+<h3 class="text-center" style="margin-top: 50px;">분류별 출고 금액 그래프</h3>
 
 <div style="margin-top: 30px;">
     <ul class="nav nav-underline justify-content-center">
@@ -109,7 +109,7 @@
         <table class="table table-bordered">
             <thead class="table-secondary">
             <tr>
-                <th>단위 이름</th>
+                <th>분류 이름</th>
                 <th th:each="data : ${graphData}" th:text="${data[0]}"></th>
             </tr>
             </thead>

@@ -74,13 +74,13 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
     @Query("select " +
             "new org.zerock.connect.Service.part3.ReleasesDTO" +
-            "(r.receive.orders.procurementPlan.planNum, sum(r.receive.receiveCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r) " +
+            "(r.receive.orders.procurementPlan.planNum, sum(r.releaseCount) , r.receive.orders.procurementPlan, r.receive.orders.procurementPlan.contractItem ,r.receive.orders.procurementPlan.contractItem.item, r.receive.orders.procurementPlan.contractItem.item.product , r) " +
             "from Releases r " +
             "where r.releaseDate between :startDate and :endDate " +
             "group by r.receive.orders.procurementPlan.planNum")
     List<ReleasesDTO> searchDateStockList(@Param("startDate") LocalDate startDate , @Param("endDate") LocalDate endDate);
 
-    @Query(value = "SELECT u.unitName, SUM(o.orderCount * c.contractPrice) as totalAmount " +
+    @Query(value = "SELECT u.unitName, SUM(r.releaseCount * c.contractPrice) as totalAmount " +
             "FROM Releases r " +
             "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
             "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
@@ -93,7 +93,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 //    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
     List<Object[]> groupbyUnitcode();
 
-    @Query(value = "SELECT a.assyName, SUM(o.orderCount * c.contractPrice) as totalAmount " +
+    @Query(value = "SELECT a.assyName, SUM(r.releaseCount * c.contractPrice) as totalAmount " +
             "FROM Releases r " +
             "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
             "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
@@ -106,7 +106,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 //    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
     List<Object[]> groupbyAssycode();
 
-    @Query(value = "SELECT part.partName, SUM(o.orderCount * c.contractPrice) as totalAmount " +
+    @Query(value = "SELECT part.partName, SUM(r.releaseCount * c.contractPrice) as totalAmount " +
             "FROM Releases r " +
             "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
             "JOIN Orders o ON re.orders.orderNum = o.orderNum " +

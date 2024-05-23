@@ -59,6 +59,26 @@ public class ConatractItemController {
         return "/part1/contractForm";
     }
 
+//    @GetMapping("/contractItem")
+//    public String contractItem(Company company , Item item , Model model , @PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable) {
+//        // 모든 업체 리스트 출력
+//        List<Company> AllCompany = companyService.findAllCompany();
+//        model.addAttribute("AllCompany", AllCompany);
+//
+//        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+//        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
+//        List<ContractItem> contractitemList = contractItemService.findAllContractItemList();
+//        int start = (int) pageable.getOffset();
+//        int end = Math.min((start + pageable.getPageSize()), contractitemList.size());
+//
+//        List<ContractItem> pageContent = contractitemList.subList(start, end);
+//        Page<ContractItem> contractItems = new PageImpl<>(pageContent, pageable, contractitemList.size());
+//        model.addAttribute("contractitemList", contractItems);
+//
+//        return "/part1/contractForm";
+//    }
+
+
 
 
 
