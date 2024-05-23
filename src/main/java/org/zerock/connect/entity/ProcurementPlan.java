@@ -33,6 +33,6 @@ public class ProcurementPlan {
     private LocalDate planDate;
 
 
-    @OneToMany(mappedBy = "procurementPlan" , cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "procurementPlan" )
     private List<Orders> orders = new ArrayList<>();
 }

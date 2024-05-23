@@ -34,7 +34,7 @@ public class Product {
     @Column(nullable = false)
     private LocalDate productEnddate;
 
-    @OneToMany(mappedBy = "product" , cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "product" )
     private List<Item> items = new ArrayList<>();
 
 }

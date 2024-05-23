@@ -63,6 +63,6 @@ public class Item {
     @Column(nullable = false , length = 200)
     private String itemFile;
 
-    @OneToMany(mappedBy = "item" ,cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "item" )
     private List<ContractItem> contractItems = new ArrayList<>();
 }
