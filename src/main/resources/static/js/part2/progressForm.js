@@ -76,6 +76,8 @@ function saveProgress() {
         async: false,
         success: function (data) {
             $(innerHtml).html(data); // 발주폼 뿌리기
+            // 검수리스트 아작스 호출
+            progressListAjax(-1);
 
             // 검수예정품목 아작스 호출 (검수현황부분 업데이트 하려고)
             progressScheduleListAjax(1);
@@ -83,8 +85,7 @@ function saveProgress() {
             const f = document.getElementById("form1");
             document.getElementById('index' + f.orderNum.value).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
 
-            // 검수리스트 아작스 호출
-            progressListAjax(-1);
+
             setTimeout(function () {
             }, 1000)
         },
