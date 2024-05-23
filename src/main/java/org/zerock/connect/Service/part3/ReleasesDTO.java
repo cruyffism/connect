@@ -17,16 +17,16 @@ public class ReleasesDTO {
 
     private Product product;
 
-    private Releases releases;
+    private Receive receive;
 
-    public ReleasesDTO(Long planNum, Long totalOrderCount, ProcurementPlan procurementPlan, ContractItem contractItem, Item item, Product product, Releases releases) {
+    public ReleasesDTO(Long planNum, Long totalOrderCount, ProcurementPlan procurementPlan, ContractItem contractItem, Item item, Product product, Receive receive) {
         this.planNum = planNum;
         this.totalOrderCount = totalOrderCount;
         this.procurementPlan = procurementPlan;
         this.contractItem = contractItem;
         this.item = item;
         this.product = product;
-        this.releases = releases;
+        this.receive = receive;
     }
 
     public Long getPlanNum() {
@@ -77,11 +77,11 @@ public class ReleasesDTO {
         this.product = product;
     }
 
-    public Releases getReleases() {
-        return releases;
+    public Receive getReceive() {
+        return receive;
     }
 
-    public void setReleases(Releases releases) {
-        this.releases = releases;
+    public void setReceive(Receive receive) {
+        this.receive = receive;
     }
 }

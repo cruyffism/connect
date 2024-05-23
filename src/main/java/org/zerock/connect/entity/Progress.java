@@ -20,7 +20,8 @@ import java.util.List;
 public class Progress {
 
     @Id
-    @Column(length = 20)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long progressNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,9 +29,18 @@ public class Progress {
     private Orders orders;
 
     @Column
-    private Integer progressCount;
+    private Integer progressAmount;
 
     @Column
     private LocalDate progressDate;
+
+    @Column(nullable = false)
+    private Integer progressCount;
+
+    @Column(nullable = false)
+    private Integer progressPercent;
+
+    @Column(nullable = false)
+    private String progressResult;
 
 }
