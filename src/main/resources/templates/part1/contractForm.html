@@ -16,6 +16,20 @@
     .part::-webkit-scrollbar{
       display: none;
     }
+    .table th, .table td {
+      width: 100px; /* 고정 너비 설정 (px 단위) */
+      white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+      text-align: center; /* 텍스트 중앙 정렬 */
+    }
+    .table th.item-index, .table td.item-index { width: 80px; }
+    .table th.item-name, .table td.item-name { width: 150px; }
+    .table th.item-length, .table td.item-length { width: 80px; }
+    .table th.item-width, .table td.item-width { width: 80px; }
+    .table th.item-height, .table td.item-height { width: 80px; }
+    .table th.unit-code, .table td.unit-code { width: 100px; }
+    .table th.assy-code, .table td.assy-code { width: 100px; }
+    .table th.part-code, .table td.part-code { width: 100px; }
+    .table th.item-material, .table td.item-material { width: 120px; }
 
   </style>
 </head>
@@ -111,7 +125,7 @@
       <tr>
         <th scope="row">품목 가격</th>
         <td colspan="2">              <div class="input-group">
-          <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+          <input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:min="0">
         </div></td>
       </tr>
 
@@ -280,254 +294,9 @@
           </td>
         </tr>
       </div>
-
-
-
-      <!--      <table class="table" style="margin-top: 20px; width: 1163px;">-->
-<!--        <thead class="table-secondary">-->
-<!--        <tr>-->
-<!--          <th scope="col">계약서</th>-->
-<!--          <th scope="col">업체명</th>-->
-<!--          <th scope="col">사업자 번호</th>-->
-<!--          <th scope="col">품목명</th>-->
-<!--          <th scope="col">계좌</th>-->
-<!--          <th scope="col">비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody >-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody >-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--          <th scope="col">등록된 계약서</th>-->
-<!--          <th scope="col">등록된 업체명</th>-->
-<!--          <th scope="col">등록된 사업자 번호</th>-->
-<!--          <th scope="col">등록된 품목명</th>-->
-<!--          <th scope="col">등록된 계좌</th>-->
-
-<!--          <th scope="col">등록된 비고</th>-->
-<!--          <th scope="col">계약 여부</th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <script ></script>

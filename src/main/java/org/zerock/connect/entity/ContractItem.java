@@ -28,7 +28,7 @@ public class ContractItem {
     @JoinColumn(name = "itemIndex")
     private Item item;
 
-    @OneToOne(mappedBy = "contractItem")
+    @OneToOne(mappedBy = "contractItem" , cascade = CascadeType.PERSIST)
     private ProcurementPlan procurementPlan;
 
     @Column(nullable = false , length = 200)
@@ -44,7 +44,7 @@ public class ContractItem {
     private String contractInfo;
 
     @Column(nullable = false , length = 20)
-    private String contractPrice;
+    private int contractPrice;
 
 
 }

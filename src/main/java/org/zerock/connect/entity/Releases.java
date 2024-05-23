@@ -29,7 +29,6 @@ public class Releases {
     @Column
     private Integer releaseCount;
 
-
     @Column
     private LocalDate releaseDate;
 }

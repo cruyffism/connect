@@ -24,11 +24,11 @@ public class Receive {
     @Column(length = 20)
     private Long receiveNum;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.PERSIST)
     @JoinColumn(name="orderNum", nullable = false)
     private Orders orders;
 
-    @OneToMany(mappedBy = "receive", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "receive", fetch = FetchType.LAZY , cascade = CascadeType.PERSIST)
     private List<Releases> releases = new ArrayList<>();
 
     @OneToOne(mappedBy = "receive", fetch = FetchType.LAZY)

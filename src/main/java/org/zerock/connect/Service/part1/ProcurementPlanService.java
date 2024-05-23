@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.zerock.connect.entity.ProcurementPlan;
 import org.zerock.connect.repository.ProcurementPlanRepository;
 
+import java.util.List;
+
 @Service
 public class ProcurementPlanService {
 
@@ -14,6 +16,10 @@ public class ProcurementPlanService {
 
     public ProcurementPlan save(ProcurementPlan procurementPlan){
         return procurementPlanRepository.save(procurementPlan);
+    }
+
+    public int findAllprcurementPlancount(){
+        return procurementPlanRepository.findAllprcurementPlancount();
     }
 
 }

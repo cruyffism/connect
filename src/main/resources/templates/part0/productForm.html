@@ -75,15 +75,28 @@
                 <td colspan="2">
                     <div class="input-group">
                         <input type="date" class="form-control"
-                               aria-label="Dollar amount (with dot and two decimal places)" id="productEnddate" name="productEnddate" required>
+                               aria-label="Dollar amount (with dot and two decimal places)" id="productEnddate" name="productEnddate" required onchange="validateDates()">
                     </div>
                 </td>
             </tr>
 
+            <script>
+                function validateDates() {
+                    var startDate = document.getElementById('productStartdate').value;
+                    var endDate = document.getElementById('productEnddate').value;
+
+                    if (startDate && endDate) {
+                        if (startDate > endDate) {
+                            alert("생산종료일은 생산시작일 이후여야 합니다.");
+                            document.getElementById('productEnddate').value = ""; // 비워줌으로써 사용자가 다시 입력하도록 함
+                        }
+                    }
+                }
+            </script>
             </tbody>
         </table>
         <div style="margin: 40px 0 0 220px;">
-            <button type="submit" class="btn btn-outline-success">제품정보 등록</button>
+            <button type="submit" class="btn btn-outline-success" th:onclick="caldate()">제품정보 등록</button>
             <br>
             <br>
         </div>

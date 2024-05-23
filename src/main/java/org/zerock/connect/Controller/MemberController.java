@@ -33,6 +33,7 @@ public class MemberController {
 
         if(loginResult != null) {
             // 로그인 성공
+            
             System.out.println("로그인 성공");
             if ("1".equals(memberDep)) {
                 session.setAttribute("loginedUser",loginResult);

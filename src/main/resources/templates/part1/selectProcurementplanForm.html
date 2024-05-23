@@ -14,98 +14,25 @@
         .part::-webkit-scrollbar{
             display: none;
         }
+        .table th, .table td {
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+        .table th:nth-child(1), .table td:nth-child(1) { width: 120px; } /* 생산시작일 */
+        .table th:nth-child(2), .table td:nth-child(2) { width: 120px; } /* 생산종료일 */
+        .table th:nth-child(3), .table td:nth-child(3) { width: 150px; } /* 생산제품코드 */
+        .table th:nth-child(4), .table td:nth-child(4) { width: 150px; } /* 생산제품명 */
+        .table th:nth-child(5), .table td:nth-child(5) { width: 120px; } /* 품목코드 */
+        .table th:nth-child(6), .table td:nth-child(6) { width: 150px; } /* 품목명 */
+        .table th:nth-child(7), .table td:nth-child(7) { width: 150px; } /* 조달 납기일 */
+        .table th:nth-child(8), .table td:nth-child(8) { width: 100px; } /* 등록 버튼 */
 
     </style>
     <header th:replace="~{/fragments/common::navbar}">
     </header>
 <body>
 
-<!-- 네비바 배경 색상 변경하려면 여기 수정 -->
-<!--<nav class="navbar fixed-top" style="background-color: #59359a;">-->
-<!--    <div class="container-fluid"  >-->
-<!--        <a class="navbar-brand" href="#">Connect</a>-->
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">-->
-<!--            <div class="offcanvas-header">-->
-<!--                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Connect</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="offcanvas-body">-->
-<!--                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link active" aria-current="page" href="#">Home</a>-->
-<!--                    </li>-->
-<!--                    &lt;!&ndash; <li class="nav-item">-->
-<!--                      <a class="nav-link" href="#">Link</a>-->
-<!--                    </li> &ndash;&gt;-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            조달관리-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="part1_Insert_item.html">품목정보 등록</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part1_insert_company.html">업체 등록</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part1_insert_contract.html">계약 등록</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part1_insert_plan.html">조달 계획 등록</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
-<!--                            &lt;!&ndash; <li><a class="dropdown-item" href="#">Something else here</a></li> &ndash;&gt;-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            발주관리-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="part2_purchase_order.html">구매 발주서 관리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part2_purchase_orderList.html">진척 검수 처리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="#">발주진행 현황 관리</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
-<!--                            &lt;!&ndash; <li><a class="dropdown-item" href="#">Something else here</a></li> &ndash;&gt;-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            자재관리-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="part3_stock.html">입고 관리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part3_out.html">출고 관리</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part3_publish.html">거래 명세서 발행</a></li>-->
-<!--                            <li><a class="dropdown-item" href="part3_cal_inven.html">재고금액 현황 관리</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
-<!--                            &lt;!&ndash; <li><a class="dropdown-item" href="#">Something else here</a></li> &ndash;&gt;-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                            회원정보-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li><a class="dropdown-item" href="#">로그인</a></li>-->
-<!--                            <li><a class="dropdown-item" href="#">로그아웃</a></li>-->
-<!--                            &lt;!&ndash; <li>-->
-<!--                              <hr class="dropdown-divider">-->
-<!--                            </li> &ndash;&gt;-->
 
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                &lt;!&ndash; <form class="d-flex mt-3" role="search">-->
-<!--                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                  <button class="btn btn-outline-success" type="submit">Search</button>-->
-<!--                </form> &ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
 
 
 <div style=" overflow-y: scroll; width: 99%; margin: 0 30px 150px 15px; "  class="part">
@@ -135,21 +62,6 @@
         </div>
 
 
-        <script>
-            function caldate(){
-                var start_date = document.getElementById("start_date").value;
-                var end_date =document.getElementById("end_date").value;
-
-                if(start_date <= end_date){
-                }
-                else if(start_date > end_date){
-                    alert("종료날짜를 시작날짜보다 크게 입력하세요");
-                }
-                else{
-                    alert("날짜를 입력하세요");
-                }
-            }
-        </script>
 
         <!-- 업체 검색 태그 종료 -->
 
@@ -199,57 +111,49 @@
 
     <table class="table" style="margin: 30px 60px 0 10px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 98%;">
 
+        <script>
+            function validatePlanDate(event) {
+                var startDate = event.target.closest('tr').querySelector('.product-start-date').innerText;
+                var planDate = event.target.value;
+
+                if (startDate && planDate) {
+                    if (new Date(planDate) >= new Date(startDate)) {
+                        alert("조달 납기일은 생산시작일 이전이어야 합니다.");
+                        event.target.value = ""; // 비워줌으로써 사용자가 다시 입력하도록 함
+                    }
+                }
+            }
+        </script>
         <thead class="table-secondary">
         <tr>
             <th scope="col">생산시작일</th>
             <th scope="col">생산종료일</th>
             <th scope="col">생산제품코드</th>
             <th scope="col">생산제품명</th>
-
             <th scope="col">품목코드</th>
             <th scope="col">품목명</th>
-
             <th scope="col">조달 납기일</th>
-<!--            <th scope="col">삭제</th>-->
             <th scope="col">등록</th>
         </tr>
         </thead>
         <tbody>
-
-
-            <tr th:block th:each="selectContractItem:${selectContractItem}">
-                <!-- for문돌리기 -->
-                <!--                ContractItemLists-->
-                <input type="hidden" th:name="contractitemNo" th:value="${selectContractItem.conitemNo}">
-                <th scope="col" th:text="${selectContractItem.item.product.productStartdate}"></th>
-                <th scope="col" th:text="${selectContractItem.item.product.productEnddate}"></th>
-                <th scope="col" th:text="${selectContractItem.item.product.productId}"></th>
-                <th scope="col" th:text="${selectContractItem.item.product.productName}"></th>
-
-                <th scope="col" th:text="${selectContractItem.item.itemIndex}"></th>
-                <th scope="col" th:text="${selectContractItem.item.itemName}"></th>
-
-                <th scope="col"><input type="date" th:name="planDate"></th>
-<!--                <th scope="col"><button class="btn btn-outline-danger" th:onclick="|location.href='@{procurementPlan}'|">삭제</button></th>-->
-                <th scope="col"><button type="submit" class="btn btn-outline-success">등록</button></th>
-            </tr>
-
-
-<!--        <tr>-->
-<!--&lt;!&ndash;            selectContractItem&ndash;&gt;-->
-<!--            &lt;!&ndash; for문돌리기 &ndash;&gt;-->
-<!--            <th scope="col">선택한 생산시작일</th>-->
-<!--            <th scope="col">선택한 생산종료일</th>-->
-<!--            <th scope="col">선택한 생산제품코드</th>-->
-<!--            <th scope="col">선택한 생산제품명</th>-->
-
-<!--            <th scope="col">선택한 품목코드</th>-->
-<!--            <th scope="col">선택한 품목명</th>-->
-
-<!--            <th scope="col"><input type="date"></th>-->
-<!--            <th scope="col"><button type="submit" class="btn btn-outline-danger">삭제</button></th>-->
-<!--            <th scope="col"><button type="submit" class="btn btn-outline-success">등록</button></th>-->
-<!--        </tr>-->
+        <tr th:block th:each="selectContractItem : ${selectContractItem}">
+            <input type="hidden" th:name="contractitemNo" th:value="${selectContractItem.conitemNo}">
+            <th scope="col" class="product-start-date" th:text="${selectContractItem.item.product.productStartdate}"></th>
+            <th scope="col" th:text="${selectContractItem.item.product.productEnddate}"></th>
+            <th scope="col" th:text="${selectContractItem.item.product.productId}"></th>
+            <th scope="col" th:text="${selectContractItem.item.product.productName}"></th>
+            <th scope="col" th:text="${selectContractItem.item.itemIndex}"></th>
+            <th scope="col" th:text="${selectContractItem.item.itemName}"></th>
+            <th scope="col">
+<!--                <input type="date" th:name="planDate" onchange="validatePlanDate(event)">-->
+                <input type="date" class="form-control"
+                       aria-label="Dollar amount (with dot and two decimal places)" id="productStartdate" th:name="planDate" required onchange="validatePlanDate(event)" style="width: 150px;">
+            </th>
+            <th scope="col">
+                <button type="submit" class="btn btn-outline-success">등록</button>
+            </th>
+        </tr>
         </tbody>
     </table>
     </form>
