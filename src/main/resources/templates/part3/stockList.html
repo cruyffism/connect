@@ -36,9 +36,9 @@
     </div>
 
     <div style=" overflow-y: scroll; width: 99%; margin-left: 20px; margin-right: 30px; height: 1000px;"  class="part">
-        
+
       <br>
-      
+
       <h4 style="margin: 40px 0 10px 40px; ">재고 월별 금액</h4>
 
       <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 98%; margin-left: 5px; height: 880px;">
@@ -71,7 +71,7 @@
 
         <!-- 업체 검색 태그 종료 -->
 
-      
+
         <table class="table" style=" width: 99%; margin: 10px 0 0 8px;">
             <thead class="table-secondary">
               <tr>
@@ -92,10 +92,10 @@
                     <td th:text="${releasesList.product.productName}"></td>
                     <td th:text="${releasesList.item.itemIndex}"></td>
                     <td th:text="${releasesList.item.itemName}"></td>
+                    <td th:text="${releasesList.receive.receiveCount}"></td>
                     <td th:text="${releasesList.totalOrderCount}"></td>
-                    <td th:text="${releasesList.releases.releaseCount}"></td>
                     <td th:text="${releasesList.contractItem.contractPrice}"></td>
-                    <td th:text="${releasesList.releases.releaseCount} * ${releasesList.contractItem.contractPrice} + 원"></td>
+                    <td th:text="${releasesList.totalOrderCount} * ${releasesList.contractItem.contractPrice} + 원"></td>
                 </tr>
             </th:block>
             </tbody>
@@ -156,7 +156,7 @@
 
 
 
-    
+
 
     <script ></script>
   </body>
