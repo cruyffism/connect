@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "releases")
+//@ToString(exclude = "releases")
 @DynamicUpdate
 public class Receive {
 

@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Getter
 @DynamicUpdate
-@ToString(exclude = "items")
+//@ToString(exclude = "items")
 public class Product {
 
     @Id

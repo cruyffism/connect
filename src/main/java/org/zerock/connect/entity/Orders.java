@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "receive")
+//@ToString(exclude = "receive")
 @DynamicUpdate
 public class Orders {
 

@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "orders")
+//@ToString(exclude = "orders")
 @DynamicUpdate
 public class ProcurementPlan {
 

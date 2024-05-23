@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @Getter
 @DynamicUpdate
-@ToString(exclude = "contractItems")
+//@ToString(exclude = "contractItems")
 public class Item {
 
 

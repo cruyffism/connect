@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//@ToString
 @DynamicUpdate
 public class Publish {
 

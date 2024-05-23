@@ -7,7 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.time.LocalDate;
 
 @Entity
-@ToString(exclude = "procurementPlan")
+//@ToString(exclude = "procurementPlan")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
