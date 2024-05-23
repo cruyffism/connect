@@ -1,0 +1,34 @@
+<div>
+    <table class="table table-bordered text-center">
+        <colgroup>
+            <col width="15%">
+            <col width="30%">
+            <col width="20%">
+            <col width="20%">
+            <col width="15%">
+        </colgroup>
+        <tbody>
+        <tr class="table-secondary" style="font-weight: bold;">
+            <td>차수</td>
+            <td>검수일자</td>
+            <td>완료수량</td>
+            <td>검수결과</td>
+            <td>진척도</td>
+        </tr>
+        <th:block th:if="${not #lists.isEmpty(progressList)}">
+            <tr th:each="progress:${progressList}">
+                <td th:text="${progress.progressCount}+'차'"></td>
+                <td th:text="${progress.progressDate}"></td>
+                <td th:text="${progress.progressAmount}"></td>
+                <td th:text="${progress.progressResult}"></td>
+                <td th:text="${progress.progressPercent}+'%'"></td>
+            </tr>
+        </th:block>
+        <th:block th:if="${#lists.isEmpty(progressList)}">
+            <tr>
+                <td colspan="5">검수 리스트가 없습니다.</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
