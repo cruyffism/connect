@@ -83,8 +83,16 @@ public class ProgressController {
     public String progressChoiceAjax(@RequestParam("orderNum") Long orderNum, Model model) {
         Orders orders = progressService.progressChoiceAjax(orderNum);
         Progress progress = progressService.getMaxProgress(orderNum); // max 서비스 추가
+        Integer sumCount = progressService.totalAmount(orderNum) == null ? 0 : progressService.totalAmount(orderNum);
+        Integer remaining = 0;
+
+        if (orders != null) {
+            remaining = orders.getOrderCount() - sumCount;
+        }
+
         model.addAttribute("orders", orders);
         model.addAttribute("progress", progress);
+        model.addAttribute("remaining", remaining);
         return "/part2/progressChoiceAjax";
     }
 
@@ -96,7 +104,7 @@ public class ProgressController {
         Integer totalAmount = progressService.totalAmount(orders.getOrderNum()) == null ? 0 : progressService.totalAmount(orders.getOrderNum());
 
         //진척도 계산
-        double percent = (double)(progress.getProgressAmount() + totalAmount) / orders.getOrderCount() * 100;
+        double percent = (double) (progress.getProgressAmount() + totalAmount) / orders.getOrderCount() * 100;
 
         progress.setOrders(orders);
         progress.setProgressPercent((int) percent);
@@ -111,7 +119,7 @@ public class ProgressController {
         receive.setReceiveYn("N");
         receive.setOrders(orders);
 
-        if(percent == 100) {
+        if (percent == 100) {
             Receive outcome = progressService.save(receive);
         } else {
             System.out.println("receive = " + receive);
@@ -132,9 +140,15 @@ public class ProgressController {
 
         Orders orders2 = progressService.progressChoiceAjax(orders.getOrderNum());
         Progress progress2 = progressService.getMaxProgress(orders.getOrderNum()); // max 서비스 추가
+        Integer sumCount = progressService.totalAmount(orders.getOrderNum());
+        Integer remaining = 0;
 
+        if (orders != null) {
+            remaining = orders.getOrderCount() - sumCount;
+        }
         model.addAttribute("orders", orders2);
         model.addAttribute("progress", progress2);
+        model.addAttribute("remaining", remaining);
         return "/part2/progressChoiceAjax";
     }
 
@@ -147,7 +161,26 @@ public class ProgressController {
         return "/part2/progressListAjax";
     }
 
-    // 검수 리스트 삭제
+    // 검수 리스트 단건 삭제
+    @GetMapping("/deleteProgressAjax")
+    public String deleteProgressAjax(@RequestParam("progressNum") Long progressNum, @RequestParam("orderNum") Long orderNum, Model model, HttpServletResponse response) throws IOException {
+        Integer result = progressService.deleteProgressAjax(progressNum); //삭제 후
+        List<Progress> progress = progressService.progressListAjax(orderNum); // 리스트 다시 조회
 
+        if (result > 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('검수 내역이 삭제 되었습니다..');</script>");
+            writer.flush();
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('검수 내역 삭제에 실패 하였습니다.');</script>");
+            writer.flush();
+        }
+
+        model.addAttribute("progressList", progress); //삭제하고 남은 리스트 보여주기
+        return "/part2/progressListAjax";
+    }
 
 }

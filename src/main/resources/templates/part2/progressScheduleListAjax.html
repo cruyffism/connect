@@ -24,7 +24,7 @@
     <tbody>
     <th:block th:if="${progressScheduleList.totalElements != 0}"
               th:with="start=${(progressScheduleList.number * progressScheduleList.size) + 1}">
-        <tr th:each="progressSchedule, status:${progressScheduleList}" th:id="index + ${start + status.index}">
+        <tr th:each="progressSchedule, status:${progressScheduleList}" th:id="index + ${progressSchedule.orderNum}">
             <td th:text="'PN-'+${progressSchedule.orderNum}"></td>
             <td th:text="${progressSchedule.orderDate}"></td>
             <td th:text="${progressSchedule.receiveDueDate}"></td>
@@ -41,7 +41,7 @@
             </th:block>
             <td>
                 <button type="button"
-                        th:onclick="|javascript:progressChoiceAjax(${progressSchedule.orderNum},${start + status.index})|"
+                        th:onclick="|javascript:progressChoiceAjax(${progressSchedule.orderNum},${progressSchedule.orderNum})|"
                         class="btn btn-primary  btn-sm">검수
                 </button>
             </td>

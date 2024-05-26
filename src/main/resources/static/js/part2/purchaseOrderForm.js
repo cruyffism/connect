@@ -228,15 +228,42 @@ function updateTotalPrice(isCheck) {
 
 }
 
+// 모달 닫기
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
 
-// function show(orderPart) {
-//
-//     if (document.getElementById(orderPart).style.display == "none") {
-//
-//         document.getElementById(orderPart).style.display = "block"; //표시하게 하기
-//     } else {
-//         document.getElementById(orderPart).style.display = "none"; //안보이게 하기
-//
-//     }
-//
-// }
+// 모달 외부 클릭 시 닫기
+window.onclick = function (event) {
+    if (event.target == document.getElementById('myModal')) {
+        closeModal();
+    }
+}
+
+// PDF로 저장하기
+function saveAsPDF() {
+    var element = document.getElementById('myModal');
+
+    html2canvas(element).then(canvas => {
+        var imgData = canvas.toDataURL('image/png');
+        var pdf = new jsPDF('p', 'mm', 'a4');
+        var imgWidth = 210;
+        var pageHeight = 295;
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+
+        var position = 0;
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        pdf.save('document.pdf');
+    });
+}

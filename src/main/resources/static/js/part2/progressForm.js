@@ -54,6 +54,7 @@ function progressChoiceAjax(orderNum, index) { // 위에서 보낸 매개변수 
                 document.getElementById('index' + index).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
             }
             progressListAjax(-1);
+            document.getElementById('progressDate').value = new Date().toISOString().substring(0, 10);
             setTimeout(function () {
             }, 1000)
         },
@@ -67,6 +68,11 @@ function saveProgress() {
     const innerHtml = $("#progressChoice");
     document.getElementById('orderDate').value = new Date().toISOString().substring(0, 10);
     const f = document.getElementById("form2");
+    // Check if the form is valid
+    if (!f.checkValidity()) {
+        alert('필수값을 전부 입력해주세요');
+        return;
+    }
     $.ajax({
         url: "/part2/saveProgress", //백엔드 경로
         type: 'POST',
@@ -83,8 +89,9 @@ function saveProgress() {
             progressScheduleListAjax(1);
             // 검수버튼 누른상태 유지하기 (한줄 색칠된거 그대로 유지하려고 추가)
             const f = document.getElementById("form1");
+            console.log('orderNum : ',f.orderNum.value);
             document.getElementById('index' + f.orderNum.value).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
-
+            document.getElementById('progressDate').value = new Date().toISOString().substring(0, 10);
 
             setTimeout(function () {
             }, 1000)
@@ -140,11 +147,43 @@ function caldate() {
 //수량 제한 걸기
 //수량 제한 걸기
 function limitNumber() {
-    var progressAmount = document.getElementById("progressAmount").value;
-    var orderCount = document.getElementById("orderCount").value;
+    var progressAmount = parseInt(document.getElementById("progressAmount").value,10);
+    var remaining = parseInt(document.getElementById("remaining").textContent,10);
 
-    if(progressAmount > orderCount) {
+    if(progressAmount > remaining) {
         alert("발주 수량을 넘길수 없습니다.");
+        $("#progressAmount").val("");
         $("#progressAmount").focus();
     }
+}
+
+//검수 리스트 삭제 펑션
+function deleteProgressAjax(progressNum,orderNum) {
+    const innerHtml = $("#progressList"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
+    const f = document.getElementById("form3");
+    f.progressNum.value = progressNum;
+    f.orderNum.value = orderNum;
+    $.ajax({
+        url: "/part2/deleteProgressAjax",
+        type: 'GET',
+        cache: false,
+        data: $('#form3').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data)
+
+            // 첫번째 폼
+            progressScheduleListAjax(1);
+            // 두번째폼
+            progressChoiceAjax(orderNum,orderNum);
+
+
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
 }
