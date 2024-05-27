@@ -13,5 +13,7 @@ public interface PublishRepository extends JpaRepository<Publish, Long> {
 
     boolean existsByReceive_ReceiveNum(Long receiveNum);
 
+    Publish findByInvoiceNumber(Long invoiceNumber);
+
 
 }

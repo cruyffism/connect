@@ -40,4 +40,9 @@ public class PublishService {
     public List<Publish> getAllPublish() {
         return publishRepository.findAll();
     }
+
+    public Publish getInvoiceDetailsByNumber(Long invoiceNumber) {
+        return publishRepository.findByInvoiceNumber(invoiceNumber);
+    }
+
 }

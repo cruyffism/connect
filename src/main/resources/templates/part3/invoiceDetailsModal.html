@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- invoiceDetailsModal.html -->
+    <div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="invoiceModalLabel">명세서 상세</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" th:fragment="invoiceDetailsFragment">
+                    <!-- 데이터 표시 -->
+                    <p>거래명세서 번호: <span th:text="${invoiceDetails.invoiceNumber}"></span></p>
+                    <p>발주번호: <span th:text="${invoiceDetails.orderNum}"></span></p>
+                    <p>업체명: <span th:text="${invoiceDetails.comName}"></span></p>
+                    <!-- 필요한 다른 정보들 -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>`
+
+</body>
+</html>

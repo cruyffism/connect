@@ -4,6 +4,7 @@ package org.zerock.connect.Controller.part3;
 import jakarta.servlet.http.HttpSession;
 import lombok.experimental.PackagePrivate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,18 +46,7 @@ public class PublishFormController {
         return "part3/publishForm";
     }
 
-//    @GetMapping("publishSuccess")
-//    public String publishSuccess(Model model) {
-//        System.out.println("거래명세서 발행 완료 리스트");
-//
-//        List<Publish> publishList = publishService.getAllPublish();
-//        model.addAttribute("publishList", publishList);
-//
-//        return "part3/publishForm";
-//    }
-
-
-    // 거래명세서 저장 오예성공
+    // 거래명세서 저장
     @PostMapping("/savePublish")
     public String savePublish(Publish publish , HttpSession session, @RequestParam("receiveNum") Long receiveNum, RedirectAttributes redirectAttributes) {
 
@@ -100,12 +90,20 @@ public class PublishFormController {
         return "redirect:/part3/publishForm";
     }
 
-//
-//    // 완료된 거래명세서 보기
 //    @GetMapping("/successModal")
 //    public String successModal(Model model) {
-//
+//        System.out.println("완료된 거래명세서 모달창");
+//        return "redirect:/part3/publishForm";
 //    }
+
+
+    @GetMapping("/invoice/{invoiceNumber}")
+    public String getInvoiceDetails(@PathVariable Long invoiceNumber, Model model) {
+        System.out.println("완료된 거래명세서 모달창");
+        Publish invoiceDetails = publishService.getInvoiceDetailsByNumber(invoiceNumber);
+        model.addAttribute("invoiceDetails", invoiceDetails);
+        return "invoiceDetailsModal :: invoiceDetailsFragment"; // 부분 뷰를 반환
+    }
 
 
 

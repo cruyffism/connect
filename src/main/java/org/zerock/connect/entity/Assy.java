@@ -26,6 +26,7 @@ public class Assy {
     @Column(nullable = false ,length = 20)
     private String assyName;
 
+
     @OneToMany(mappedBy = "assy")
     private List<Item> items = new ArrayList<>();
 }
