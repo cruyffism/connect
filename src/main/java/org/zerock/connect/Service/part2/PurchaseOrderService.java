@@ -81,7 +81,4 @@ public class PurchaseOrderService {
         return receiveRepository.deleteReceive(orderNum);
     }
 
-    public Orders printOrderForm(Long orderNum) {
-        return ordersRepository.printOrderForm(orderNum);
-    }
 }

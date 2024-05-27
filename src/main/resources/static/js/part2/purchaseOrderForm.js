@@ -228,6 +228,60 @@ function updateTotalPrice(isCheck) {
 
 }
 
+// 모달 열기
+function printForm(orderNum) {
+    // 선택된 행에 대한 tr 요소 가져오기
+    // var idx = document.getElementById('index' + orderNum);
+
+    console.log("orderNum : ",orderNum)
+    var selectedRow = document.getElementById('index' + orderNum).closest('tr');
+    console.log("selectedRow : " , selectedRow)
+
+    // 선택된 행의 데이터 가져오기
+    var itemCode = selectedRow.querySelector('td:nth-child(3)').textContent;
+    var itemName = selectedRow.querySelector('td:nth-child(4)').textContent;
+    var orderCount = selectedRow.querySelector('td:nth-child(5)').textContent;
+    var orderDate = selectedRow.querySelector('td:nth-child(6)').textContent;
+    var receiveDueDate = selectedRow.querySelector('td:nth-child(7)').textContent;
+
+    // 숨겨진 입력 필드에서 값 가져오기
+    var comName = selectedRow.querySelector('.comName').value;
+    var comAdd = selectedRow.querySelector('.comAdd').value;
+    var businessId = selectedRow.querySelector('.businessId').value;
+    var comManager = selectedRow.querySelector('.comManager').value;
+    var itemWidth = selectedRow.querySelector('.itemWidth').value;
+    var itemLength = selectedRow.querySelector('.itemLength').value;
+    var itemHeight = selectedRow.querySelector('.itemHeight').value;
+    var itemMaterial = selectedRow.querySelector('.itemMaterial').value;
+    var contractPrice = selectedRow.querySelector('.contractPrice').value;
+    var orderInfo = selectedRow.querySelector('.orderInfo').value;
+    // totalPrice 추가
+    var totalPrice = parseInt(orderCount) * parseInt(contractPrice);
+    var itemSize = itemWidth + '*' + itemLength + '*' + itemHeight;
+
+    // 모달폼에 위에서 만든 변수 집어넣기
+    // document.getElementById('orderNum').textContent = orderNum;
+    document.getElementById('modalOrderDate').textContent = orderDate;
+    document.getElementById('modalComName').textContent = comName;
+    document.getElementById('modalBusinessId').textContent = businessId;
+    document.getElementById('modalComAdd').textContent = comAdd;
+    document.getElementById('modalComManager').textContent = comManager;
+    document.getElementById('modalItemCode').textContent = itemCode;
+    document.getElementById('modalItemName').textContent = itemName;
+    document.getElementById('modalItemSize').textContent = itemSize;
+    document.getElementById('modalItemMaterial').textContent = itemMaterial;
+    document.getElementById('modalOrderCount').textContent = orderCount;
+    document.getElementById('modalContractPrice').textContent = contractPrice;
+    document.getElementById('modalTotalPrice').textContent = totalPrice;
+    document.getElementById('modalReceiveDueDate').textContent = receiveDueDate;
+    document.getElementById('modalOrderInfo').textContent = orderInfo;
+    document.getElementById('modalTotalPrice2').textContent = totalPrice;
+
+    // 모달 열기
+    document.getElementById('myModal').style.display = 'block';
+}
+
+
 // 모달 닫기
 function closeModal() {
     document.getElementById('myModal').style.display = 'none';
@@ -241,33 +295,30 @@ window.onclick = function (event) {
 }
 
 // PDF로 저장하기
-function saveAsPDF() {
-    var element = document.getElementById('myModal');
+function savePDF() {
+    var element = document.getElementById('modal-content');
 
     html2canvas(element).then(canvas => {
         var imgData = canvas.toDataURL('image/png');
-        var pdf = new jsPDF('p', 'mm', 'a4');
-        var imgWidth = 210;
-        var pageHeight = 295;
+        var pdf = new jsPDF();
+        var imgWidth = pdf.internal.pageSize.width; // 페이지 너비
         var imgHeight = canvas.height * imgWidth / canvas.width;
-        var heightLeft = imgHeight;
 
-        var position = 0;
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        const isoString = new Date().toISOString();
+        const dateObject = new Date(isoString);
 
-        while (heightLeft >= 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-        }
+        const year = dateObject.getFullYear();
+        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObject.getDate()).padStart(2, '0');
+        const hours = String(dateObject.getHours()).padStart(2, '0');
+        const minutes = String(dateObject.getMinutes()).padStart(2, '0');
+        const seconds = String(dateObject.getSeconds()).padStart(2, '0');
 
-        pdf.save('document.pdf');
+        const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
+
+        var itemCode = document.getElementById('modalItemCode').textContent;
+        pdf.save(formattedDate + '_' + itemCode +'_발주서.pdf');
     });
-}
-
-function printForm() {
-
 }

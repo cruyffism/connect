@@ -80,11 +80,4 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     @Query(value = "select count(o) from Orders o")
     int findAllorderscount();
 
-    @Query("select o,pl,c,ci,i from Orders o " +
-            "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
-            "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
-            "inner join Company c on ci.company.businessId = c.businessId " +
-            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
-            "where o.orderNum =:orderNum")
-    Orders printOrderForm(@Param("orderNum") Long orderNum);
 }
