@@ -27,10 +27,13 @@
             <th:block>
                 <span style="margin-left: 800px; color: white; font-weight: bolder;" th:if="${session.loginedUser.getMemberDep() == '1'}">제품등록 , 업체등록 계정입니다</span>
                 <span style="margin-left: 900px; color: white; font-weight: bolder;" th:if="${session.loginedUser.getMemberDep() == '2'}">품목등록 계정입니다</span>
+                <a th:href="@{/Con/logout}"><button class="btn btn-danger" type="button" style="width: 100px; margin-right: 200px;">로그아웃
+                </button>
+                </a>
             </th:block>
 
             <!--            네브바 사용자 정보출력-->
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="background-color: white">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -95,15 +98,15 @@
                             </ul>
                         </li>
                         </th:block>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                회원정보
-                            </a>
-                            <ul class="dropdown-menu">
-<!--                                <li><a class="dropdown-item" href="#">로그인</a></li>-->
-                                <li><a class="dropdown-item" th:href="@{/Con/logout}">로그아웃</a></li>
-                            </ul>
-                        </li>
+<!--                        <li class="nav-item dropdown">-->
+<!--                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                                회원정보-->
+<!--                            </a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--&lt;!&ndash;                                <li><a class="dropdown-item" href="#">로그인</a></li>&ndash;&gt;-->
+<!--                                <li><a class="dropdown-item" th:href="@{/Con/logout}">로그아웃</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
                     </ul>
                 </div>
             </div>

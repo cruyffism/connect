@@ -27,4 +27,8 @@ public interface ProgressRepository extends JpaRepository<Progress, Long> {
 
     @Query("select sum(p.progressAmount) from Progress p where p.orders.orderNum =:orderNum")
     Integer totalAmount(@Param("orderNum") Long orderNum);
+
+    Integer deleteByProgressNum(Long progressNum);
+
+
 }

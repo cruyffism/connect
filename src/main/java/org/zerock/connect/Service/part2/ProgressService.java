@@ -1,5 +1,6 @@
 package org.zerock.connect.Service.part2;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.connect.entity.Orders;
@@ -58,5 +59,10 @@ public class ProgressService {
 
     public Receive save(Receive receive) {
         return  receiveRepository.save(receive);
+    }
+
+    @Transactional
+    public Integer deleteProgressAjax(Long progressNum) {
+        return progressRepository.deleteByProgressNum(progressNum);
     }
 }

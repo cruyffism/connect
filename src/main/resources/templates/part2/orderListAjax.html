@@ -1,22 +1,23 @@
 <div id="orderList">
     <table class="table table-bordered text-center">
         <colgroup>
+            <col width="8%">
+            <col width="10%">
+            <col width="10%">
+            <col width="8%">
+            <col width="8%">
             <col width="10%">
             <col width="10%">
             <col width="10%">
+            <col width="8%">
             <col width="10%">
-            <col width="10%">
-            <col width="10%">
-            <col width="10%">
-            <col width="10%">
-            <col width="10%">
-            <col width="10%">
+            <col width="8%">
         </colgroup>
         <thead>
         <tr class="table-secondary">
             <th scope="col">순번</th>
             <th scope="col">발주번호</th>
-            <th scope="col">업체명</th>
+            <th scope="col">품목코드</th>
             <th scope="col">품목명</th>
             <th scope="col">수량</th>
             <th scope="col">발주일</th>
@@ -24,6 +25,7 @@
             <th scope="col">발주상태</th>
             <th scope="col">마감</th>
             <th scope="col">발주서 삭제</th>
+            <th scope="col">인쇄</th>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +34,7 @@
             <tr th:each="orderList, status:${purchaseOrderList}">
                 <td th:text="${start + status.index}"></td>
                 <td th:text="'PN-'+${orderList.orderNum}"></td>
-                <td th:text="${orderList.procurementPlan.contractItem.company.comName}"></td>
+                <td th:text="${orderList.procurementPlan.contractItem.item.itemCode}"></td>
                 <td th:text="${orderList.procurementPlan.contractItem.item.itemName}"></td>
                 <td th:text="${orderList.orderCount}"></td>
                 <td th:text="${orderList.orderDate}"></td>
@@ -87,12 +89,14 @@
                         </td>
                     </th:block>
                 </th:block>
-
+                <td>
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="return window.print()">인쇄</button>
+                </td>
             </tr>
         </th:block>
         <th:block th:if="${purchaseOrderList.totalElements == 0}">
             <tr>
-                <td colspan="10">발주 리스트가 없습니다.</td>
+                <td colspan="11">발주 리스트가 없습니다.</td>
             </tr>
         </th:block>
         </tbody>
