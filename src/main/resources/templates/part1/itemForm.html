@@ -23,10 +23,11 @@
 <header th:replace="~{/fragments/common::navbar}">
 </header>
 
-<div style="margin-top: 80px; width: 1870px;  margin-left: 10px; margin-right: 70px; margin-bottom: 30px; max-height: 400px; overflow-y: scroll;">
+<div style="margin-top: 80px; width: 1870px;  margin-left: 10px; margin-right: 70px; margin-bottom: 30px; max-height: 400px;">
     <br>
-    <h4 style="margin: 20px 0 30px 30px;">선택한 제품 목록</h4>
-    <table class="table" style="margin: 10px 0 0 8px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); ">
+    <h4 style="margin: 20px 0 10px 30px;">선택한 제품 목록</h4>
+    <hr style="margin-left: 25px; width: 200px;">
+    <table class="table" style="margin: 10px 0 0 8px; box-shadow: 0 0 1px 1px rgba(114, 114, 114, 0.4); ">
         <thead class="table-secondary">
         <tr>
             <th scope="col">제품코드</th>
@@ -50,8 +51,10 @@
 
 <div class="part" style="margin: 50px 30px 0 0; height: 900px; width: 650px;">
     <h4 style="margin: 40px 0 15px 60px; ">품목등록</h4>
+<!--    <hr style="margin-left: 55px; width: 120px;">-->
+    <hr style="margin-left: 20px;">
     <form th:action="@{/part1/saveItem}"
-          style="width: 630px; height: 800px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;"
+          style="width: 630px; height: 800px; box-shadow: 0 0 1px 1px rgba(114, 114, 114, 0.4); margin: 0 0 0 20px; padding: 50px 30px 30px 30px;"
           th:method="post" enctype="multipart/form-data">
         <!-- <h4 style="margin: 30px 0 15px 60px; ">품목등록</h4> -->
         <input type="hidden" id="productId" name="productId" th:value="${product.productId}">
@@ -176,10 +179,11 @@
 </div>
 
 
-<div style=" overflow-y: scroll; width: 1200px; height: 1000px;" class="part">
+<div style="width: 1200px; height: 1000px;" class="part">
     <br>
     <h4 style="margin: 60px 0 20px 70px;">등록된 품목정보</h4>
-    <form id="form1" style="width: 1150px; margin-left: 10px; box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); height: 800px; padding: 1px 2px;">
+    <hr style="margin-left: 10px; width: 1150px;">
+    <form id="form1" style="width: 1150px; margin-left: 10px; box-shadow: 0 0 1px 1px rgba(114, 114, 114, 0.4); height: 800px; padding: 1px 2px;">
         <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
         <input id="productId" name="productId" type="hidden" th:value="${product.productId}">
         <div id="itemList"></div>
