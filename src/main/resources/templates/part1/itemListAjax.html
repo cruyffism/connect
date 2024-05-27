@@ -2,7 +2,7 @@
     <thead class="table-secondary">
     <tr>
         <th scope="col">품목코드</th>
-        <th scope="col">계약서</th>
+        <th scope="col">품목도면</th>
         <th scope="col">품목명</th>
         <th scope="col">가로</th>
         <th scope="col">세로</th>
@@ -19,7 +19,7 @@
 
             <td scope="col" th:text="${item.itemCode}"></td>
             <td scope="col">
-                <a th:href="@{/part1/download(downloadfile=${item.itemFile})}" th:name="downloadfile">Download</a>
+                <a th:href="@{/part1/download(downloadfile=${item.itemFile})}" th:name="downloadfile" th:text="${item.product.productName}+'_'+${item.itemName}+' '+'도면'"></a>
             </td>
             <td scope="col" th:text="${item.itemName}"></td>
             <td scope="col" th:text="${item.itemLength}"></td>

@@ -226,7 +226,7 @@
             <!--            <td th:text="${AllContractItem.itemIndex}"></td>-->
 <!--            <td th:text="${AllContractItem.contractFile}"></td>-->
             <td scope="col">
-              <a th:href="@{/part1/Condownload(downloadfile=${AllContractItem.contractFile})}" th:name="downloadfile">Download</a>
+              <a th:href="@{/part1/Condownload(downloadfile=${AllContractItem.contractFile})}" th:name="downloadfile" th:text="${AllContractItem.item.product.productName}+'_'+${AllContractItem.item.itemName}+'_'+${AllContractItem.company.comName}+'_'+${AllContractItem.getContractDate()}"></a>
             </td>
             <td th:text="${AllContractItem.contractDate}"></td>
             <td th:text="${AllContractItem.item.product.productId}"></td>
