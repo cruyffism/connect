@@ -37,12 +37,12 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     //발주 마감 아작스 API
     @Modifying
     @Query("update Orders set orderYn = 'Y' where orderNum =:orderNum")
-    Integer orderDeadlineAjax(@Param("orderNum")Long orderNum);
+    Integer orderDeadlineAjax(@Param("orderNum") Long orderNum);
 
     //발주서 삭제 AJAX api
     @Modifying
     @Query("delete from Orders where orderNum =:orderNum")
-    Integer deleteOrderAjax(@Param("orderNum")Long orderNum);
+    Integer deleteOrderAjax(@Param("orderNum") Long orderNum);
 
     //검수 예정 품목 리스트 아작스
     @Query("select o,p,r,pl,ci,i from Orders o " +
@@ -54,7 +54,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "where (p IS NULL OR (p.progressCount = (SELECT MAX(p2.progressCount) FROM Progress p2 WHERE p2.orders.orderNum = o.orderNum))) " +
             "and (r.receiveYn is null or r.receiveYn = 'N') and o.orderDate between :startDate and :endDate and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%') " +
             "order by o.orderNum ASC")
-    List<Orders> progressScheduleAjax(@Param("itemCode")String itemCode, @Param("itemName")String itemName, @Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
+    List<Orders> progressScheduleAjax(@Param("itemCode") String itemCode, @Param("itemName") String itemName, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Query("select o,p,r,pl,ci,i from Orders o " +
             "left join Progress p on o.orderNum = p.orders.orderNum " +
@@ -65,13 +65,13 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "where (p IS NULL OR (p.progressCount = (SELECT MAX(p2.progressCount) FROM Progress p2 WHERE p2.orders.orderNum = o.orderNum))) " +
             "and (r.receiveYn is null or r.receiveYn = 'N') and i.itemName like concat('%', :itemName, '%') and i.itemCode like concat('%', :itemCode, '%')" +
             "order by o.orderNum ASC")
-    List<Orders> findProgressScheduleList(@Param("itemCode")String itemCode, @Param("itemName")String itemName);
+    List<Orders> findProgressScheduleList(@Param("itemCode") String itemCode, @Param("itemName") String itemName);
 
     //검수 선택 api
     @Query("select o,pl,c,ci,i from Orders o " +
             "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
             "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
-            "inner join Company c on ci.company.businessId = c.businessId "+
+            "inner join Company c on ci.company.businessId = c.businessId " +
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "where o.orderNum =:orderNum ")
     Orders progressChoiceAjax(@Param("orderNum") Long orderNum);
@@ -79,4 +79,12 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
 
     @Query(value = "select count(o) from Orders o")
     int findAllorderscount();
+
+    @Query("select o,pl,c,ci,i from Orders o " +
+            "inner join ProcurementPlan pl on o.procurementPlan.planNum = pl.planNum " +
+            "inner join ContractItem ci on pl.contractItem.conitemNo = ci.conitemNo " +
+            "inner join Company c on ci.company.businessId = c.businessId " +
+            "inner join Item i on ci.item.itemIndex = i.itemIndex " +
+            "where o.orderNum =:orderNum")
+    Orders printOrderForm(@Param("orderNum") Long orderNum);
 }

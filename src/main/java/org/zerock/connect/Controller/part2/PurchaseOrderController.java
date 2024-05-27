@@ -227,4 +227,13 @@ public class PurchaseOrderController {
 
         return "/part2/orderListAjax";
     }
+
+    //인쇄 컨트롤러
+    @GetMapping("/printOrderForm")
+    public String printOrderForm(@RequestParam("orderNum") Long orderNum, Model model) {
+        Orders orders = purchaseOrderService.printOrderForm(orderNum);
+        System.out.println("orders = " + orders);
+        model.addAttribute("orders", orders);
+        return "/part2/purchaseOrderForm";
+    }
 }

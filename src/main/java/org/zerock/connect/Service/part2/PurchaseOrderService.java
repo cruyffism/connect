@@ -80,4 +80,8 @@ public class PurchaseOrderService {
     public Integer deleteReceive(Long orderNum) {
         return receiveRepository.deleteReceive(orderNum);
     }
+
+    public Orders printOrderForm(Long orderNum) {
+        return ordersRepository.printOrderForm(orderNum);
+    }
 }

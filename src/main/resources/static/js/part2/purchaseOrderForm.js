@@ -267,3 +267,7 @@ function saveAsPDF() {
         pdf.save('document.pdf');
     });
 }
+
+function printForm() {
+
+}
