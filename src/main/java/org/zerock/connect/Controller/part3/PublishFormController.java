@@ -97,12 +97,13 @@ public class PublishFormController {
 //    }
 
 
-    @GetMapping("/invoice/{invoiceNumber}")
-    public String getInvoiceDetails(@PathVariable Long invoiceNumber, Model model) {
+    @GetMapping("/invoice")
+    public String getInvoiceDetails(@RequestParam("invoiceNumber")Long invoiceNumber, Model model) {
         System.out.println("완료된 거래명세서 모달창");
         Publish invoiceDetails = publishService.getInvoiceDetailsByNumber(invoiceNumber);
         model.addAttribute("invoiceDetails", invoiceDetails);
-        return "invoiceDetailsModal :: invoiceDetailsFragment"; // 부분 뷰를 반환
+//        return "invoiceDetailsModal :: invoiceDetailsFragment"; // 부분 뷰를 반환
+        return "/part3/invoiceDetailsModal";
     }
 
 
