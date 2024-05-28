@@ -296,30 +296,47 @@ window.onclick = function (event) {
 
 // PDF로 저장하기
 function savePDF() {
+    // 다운로드할 특정 영역 지정
     var element = document.getElementById('modal-content');
 
-    html2canvas(element).then(canvas => {
+    html2canvas(element).then(function (canvas) {
         var imgData = canvas.toDataURL('image/png');
-        var pdf = new jsPDF();
-        var imgWidth = pdf.internal.pageSize.width; // 페이지 너비
-        var imgHeight = canvas.height * imgWidth / canvas.width;
+        const {jsPDF} = window.jspdf;
+        var pdf = new jsPDF('p', 'mm', 'a4');
 
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        var margin = 10; // 여백 크기 (단위: mm)
+        var pageWidth = pdf.internal.pageSize.getWidth();
+        var pageHeight = pdf.internal.pageSize.getHeight();
+        var imgWidth = pageWidth - 2 * margin; // 페이지 너비 - 2 * 여백
+        var imgHeight = canvas.height * imgWidth / canvas.width; // 원본 이미지 비율을 유지하기 위해 이미지 높이를 계산
 
+        // 이미지 높이가 페이지 높이를 초과할 경우
+        if (imgHeight > pageHeight - 2 * margin) {
+            imgHeight = pageHeight - 2 * margin; // 이미지를 페이지 높이에 맞춰 조정
+            imgWidth = canvas.width * imgHeight / canvas.height;
+        }
+
+        // pdf 이미지 생성
+        pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight);
+
+        // 파일명에 현재시간 추가
         const isoString = new Date().toISOString();
         const dateObject = new Date(isoString);
-
         const year = dateObject.getFullYear();
         const month = String(dateObject.getMonth() + 1).padStart(2, '0');
         const day = String(dateObject.getDate()).padStart(2, '0');
         const hours = String(dateObject.getHours()).padStart(2, '0');
         const minutes = String(dateObject.getMinutes()).padStart(2, '0');
         const seconds = String(dateObject.getSeconds()).padStart(2, '0');
-
         const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
 
+        // 파일명에 아이템코드 넣을려고
         var itemCode = document.getElementById('modalItemCode').textContent;
-        pdf.save(formattedDate + '_' + itemCode + '_발주서.pdf');
+
+        // 합쳐진 파일명으로 다운로드
+        pdf.save(`${formattedDate}_${itemCode}_발주서.pdf`);
+    }).catch(function (error) {
+        console.error("Error generating PDF: ", error);
     });
 }
 
