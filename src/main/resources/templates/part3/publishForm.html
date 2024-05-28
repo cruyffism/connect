@@ -83,18 +83,21 @@
     <div style="width: 99%; height: 550px;">
         <!-- 옵션 검색 -->
         <div style="margin-top: 10px; width: 98%; padding: 15px 0 0 15px;">
-            <select id="searchOption" style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189);">
-<!--                <option value="companyName">업체명</option>-->
-                <option value="itemName">품목명</option>
-            </select>
+<!--            <select id="searchOption" style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189);">-->
+<!--&lt;!&ndash;                <option value="companyName">업체명</option>&ndash;&gt;-->
+<!--                <option value="itemName">품목명</option>-->
+<!--            </select>-->
 
             <form th:action="@{/part3/searchReceive}" method="get">
-            <input type="text" id="searchInput" placeholder="검색어를 입력하세요..."
+            <input type="text" id="searchInput" placeholder="품목명 or 회사이름"
                    style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)" name="searchText">
             <button type="submit" class="btn btn-outline-success" id="searchButton"
                     style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색
             </button>
             </form>
+            <button type="button" class="btn btn-outline-success"
+                    style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;"><a th:href="@{/part3/publishForm}" style="text-decoration: none">전체보기</a>
+            </button>
 
             <button type="submit" class="btn btn-outline-success publishbtn" onclick="handlePublishButtonClick()"
                     style="float: right">발행
