@@ -5,7 +5,7 @@ $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실�
     document.getElementById('endDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅*/
     procurementPlanListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
     orderChoiceAjax(0, 0);
-    orderListAjax(1,0); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
+    orderListAjax(1, 0); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
     document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10);
 
 });
@@ -56,7 +56,7 @@ function orderChoiceAjax(planNum, index) {
             document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
             document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
             updateTotalPrice(1); // 가격계산 메소드 실행
-            orderListAjax(1,planNum);
+            orderListAjax(1, planNum);
             setTimeout(function () {
             }, 1000)
         },
@@ -82,7 +82,7 @@ function saveOrder() {
             document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
             document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
             updateTotalPrice(0); // 가격계산 메소드 실행/
-            orderListAjax(1,f.planNum.value);
+            orderListAjax(1, f.planNum.value);
             setTimeout(function () {
             }, 1000)
         },
@@ -92,11 +92,11 @@ function saveOrder() {
     })
 }
 
-function orderListAjax(page,planNum) {
+function orderListAjax(page, planNum) {
     const innerHtml = $("#orderListForm"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
     const f = document.getElementById("form3");
     f.page.value = page;
-    if(planNum !== -1){ // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
+    if (planNum !== -1) { // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
         f.planNum.value = planNum;
     }
     $.ajax({
@@ -119,12 +119,12 @@ function orderListAjax(page,planNum) {
 }
 
 //마감 펑션
-function orderDeadlineAjax(page,planNum,orderNum) {
+function orderDeadlineAjax(page, planNum, orderNum) {
     const innerHtml = $("#orderListForm"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
     const f = document.getElementById("form3");
     f.page.value = page;
     f.orderNum.value = orderNum;
-    if(planNum !== -1){ // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
+    if (planNum !== -1) { // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
         f.planNum.value = planNum;
     }
     $.ajax({
@@ -147,12 +147,12 @@ function orderDeadlineAjax(page,planNum,orderNum) {
 }
 
 //삭제 펑션
-function deleteOrderAjax(page,planNum,orderNum) {
+function deleteOrderAjax(page, planNum, orderNum) {
     const innerHtml = $("#orderListForm"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
     const f = document.getElementById("form3");
     f.page.value = page;
     f.orderNum.value = orderNum;
-    if(planNum !== -1){ // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
+    if (planNum !== -1) { // -1이 아니면 매개변수로 보내준 planNum 으루 넘어가게 , -1이면 히든으로 채워진 planNum이 넘어가게
         f.planNum.value = planNum;
     }
     $.ajax({
@@ -196,7 +196,7 @@ function caldate2() {
     var endDate = document.getElementById("endDate3").value;
     const f = document.getElementById("form3");
     if (startDate <= endDate) {
-        orderListAjax(1,f.planNum.value)
+        orderListAjax(1, f.planNum.value)
     } else if (startDate > endDate) {
         alert("종료날짜를 시작날짜보다 크게 입력하세요");
         $("#endDate").focus();
@@ -233,9 +233,9 @@ function printForm(orderNum) {
     // 선택된 행에 대한 tr 요소 가져오기
     // var idx = document.getElementById('index' + orderNum);
 
-    console.log("orderNum : ",orderNum)
+    console.log("orderNum : ", orderNum)
     var selectedRow = document.getElementById('index' + orderNum).closest('tr');
-    console.log("selectedRow : " , selectedRow)
+    console.log("selectedRow : ", selectedRow)
 
     // 선택된 행의 데이터 가져오기
     var itemCode = selectedRow.querySelector('td:nth-child(3)').textContent;
@@ -319,6 +319,23 @@ function savePDF() {
         const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
 
         var itemCode = document.getElementById('modalItemCode').textContent;
-        pdf.save(formattedDate + '_' + itemCode +'_발주서.pdf');
+        pdf.save(formattedDate + '_' + itemCode + '_발주서.pdf');
     });
 }
+
+
+
+//프린트하기
+function printStart() {
+    var g_oBeforeBody = document.getElementById('modal-content').innerHTML;
+
+    // 프린트를 보이는 그대로 나오기위한 셋팅
+    window.onbeforeprint = function (ev) {
+        document.body.innerHTML = g_oBeforeBody;
+    }
+
+    window.print();
+    location.reload();
+
+}
+
