@@ -52,6 +52,7 @@ public class ReceiveService {
         return receiveRepository.findReceiveNotInPublish();
     }
 
-    public List<Receive> searchReceive(String option, String keyword) {
+    public List<Receive> searchReceive(String keyword) {
+        return  receiveRepository.searchReceive(keyword);
     }
 }

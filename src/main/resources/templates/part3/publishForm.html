@@ -88,14 +88,15 @@
                 <option value="itemName">품목명</option>
             </select>
 
+            <form th:action="@{/part3/searchReceive}" method="get">
             <input type="text" id="searchInput" placeholder="검색어를 입력하세요..."
-                   style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)" th:name="searchText">
-
-            <button type="button" class="btn btn-outline-success" id="searchButton"
+                   style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)" name="searchText">
+            <button type="submit" class="btn btn-outline-success" id="searchButton"
                     style="margin: 0 0 10px 0; padding: 8px; border-radius: 10px;">검색
             </button>
+            </form>
 
-            <button type="button" class="btn btn-outline-success publishbtn" onclick="handlePublishButtonClick()"
+            <button type="submit" class="btn btn-outline-success publishbtn" onclick="handlePublishButtonClick()"
                     style="float: right">발행
             </button>
 
@@ -383,16 +384,16 @@
         }
         /*]]>*/
     </script>
-    <script>
-        document.getElementById("searchButton").addEventListener("click", function() {
-            const searchOption = document.getElementById("searchOption").value;
-            const searchInput = document.getElementById("searchInput").value;
+<!--    <script>-->
+<!--        document.getElementById("searchButton").addEventListener("click", function() {-->
+<!--            const searchOption = document.getElementById("searchOption").value;-->
+<!--            const searchInput = document.getElementById("searchInput").value;-->
 
-            // const url = `/publishForm?option=${searchOption}&keyword=${encodeURIComponent(searchInput)}`;
-            const url = '/part3/searchReceive';
-            window.location.href = url;
-        });
-    </script>
+<!--            // const url = `/publishForm?option=${searchOption}&keyword=${encodeURIComponent(searchInput)}`;-->
+<!--            const url = '/part3/searchReceive';-->
+<!--            window.location.href = url;-->
+<!--        });-->
+<!--    </script>-->
 
 </div>
 </body>

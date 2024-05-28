@@ -39,22 +39,20 @@ public class PublishFormController {
 
     // 거래명세서발행페이지
     @GetMapping("/publishForm")
-    public String publishForm(Model model,
-                              @RequestParam(required = false) String option,
-                              @RequestParam(required = false) String keyword) {
+    public String publishForm(Model model) {
         System.out.println("입고완료품목");
 
-//        // 입고 완료 품목
-//        List<Receive> receiveList = receiveService.findReceiveNotInPublish();
-//        model.addAttribute("receiveList", receiveList);
-
-        List<Receive> receiveList;
-        if (option != null && keyword != null && !keyword.isEmpty()) {
-            receiveList = receiveService.searchReceive(option, keyword);
-        } else {
-            receiveList = receiveService.findReceiveNotInPublish();
-        }
+        // 입고 완료 품목
+        List<Receive> receiveList = receiveService.findReceiveNotInPublish();
         model.addAttribute("receiveList", receiveList);
+
+//        List<Receive> receiveList;
+//        if (option != null && keyword != null && !keyword.isEmpty()) {
+//            receiveList = receiveService.searchReceive(option, keyword);
+//        } else {
+//            receiveList = receiveService.findReceiveNotInPublish();
+//        }
+//        model.addAttribute("receiveList", receiveList);
 
         System.out.println("거래명세서 발행 완료 리스트");
 
@@ -67,14 +65,16 @@ public class PublishFormController {
     // 검색
     @GetMapping("/searchReceive")
     public String searchReceive(
-            @RequestParam String option, // 선택한 옵션(업체명, 품목코드, 품목명)
-            @RequestParam String keyword, // 입력한 검색어
+            @RequestParam("searchText") String keyword, // 입력한 검색어
             Model model
     ) {
-        List<Receive> searchResult = receiveService.searchReceive(option, keyword);
+        List<Receive> searchResult = receiveService.searchReceive(keyword);
         model.addAttribute("receiveList", searchResult);
 
-        return "redirect:/part3/publishForm";
+        List<Publish> publishList = publishService.getAllPublish();
+        model.addAttribute("publishList", publishList);
+
+        return "/part3/publishForm";
     }
 
     // 거래명세서 저장

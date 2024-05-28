@@ -130,15 +130,15 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
             "join ProcurementPlan p on o.procurementPlan.planNum = p.planNum " +
             "join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
             "join Company c on ci.company.comName = c.comName " +
-            "join Item i on ci.item.itemName = i.itemName AND ci.item.itemIndex = i.itemIndex " +
-            "where r.receiveYn ='Y'")
-    List<Receive> searchReceive();
+            "join Item i on ci.item.itemName = i.itemName " +
+            "where r.receiveYn ='Y' and i.itemName like %:searchText%")
+    List<Receive> searchReceive(@Param("searchText") String searchText);
 
-    @Query("SELECT r FROM Receive r WHERE r.orders.procurementPlan.contractItem.company.comName LIKE %:keyword%")
-    List<Receive> searchReceiveByCompanyName(String keyword);
+//    @Query("SELECT r FROM Receive r WHERE r.orders.procurementPlan.contractItem.company.comName LIKE %:keyword%")
+//    List<Receive> searchReceiveByCompanyName(String keyword);
 
-    @Query("SELECT r FROM Receive r WHERE r.orders.procurementPlan.contractItem.item.itemName LIKE %:keyword%")
-    List<Receive> searchReceiveByItemName(String keyword);
+//    @Query("SELECT r FROM Receive r WHERE r.orders.procurementPlan.contractItem.item.itemName LIKE %:keyword%")
+//    List<Receive> searchReceiveByItemName(String keyword);
 
 
 
