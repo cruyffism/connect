@@ -24,8 +24,12 @@
                 <td th:text="${progress.progressAmount}"></td>
                 <td th:text="${progress.progressResult}"></td>
                 <td th:text="${progress.progressPercent}+'%'"></td>
-                <td><button class="btn btn-sm btn-danger" th:if="${status.last}" th:onclick="|javascript:deleteProgressAjax(${progress.progressNum},${progress.orders.orderNum})|">
-                    삭제</button></td>
+                <td>
+                        <button class="btn btn-sm btn-danger" th:if="${status.last and progress.progressPercent < 100}"
+                                th:onclick="|javascript:deleteProgressAjax(${progress.progressNum},${progress.orders.orderNum})|">
+                            삭제
+                        </button>
+                </td>
             </tr>
         </th:block>
         <th:block th:if="${#lists.isEmpty(progressList)}">
