@@ -2,9 +2,11 @@ package org.zerock.connect.Service.part3;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.zerock.connect.entity.Receive;
 import org.zerock.connect.repository.ReceiveRepository;
+
 
 import java.util.List;
 
@@ -45,5 +47,11 @@ public class ReceiveService {
         return receiveRepository.findByReceiveYn(status);
     }
 
+    // Publish 테이블에 속하지 않은 Receive 조회
+    public List<Receive> findReceiveNotInPublish() {
+        return receiveRepository.findReceiveNotInPublish();
+    }
 
+    public List<Receive> searchReceive(String option, String keyword) {
+    }
 }

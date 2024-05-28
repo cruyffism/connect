@@ -2,11 +2,15 @@ package org.zerock.connect.Service.part3;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.connect.entity.Publish;
 import org.zerock.connect.entity.Receive;
 import org.zerock.connect.repository.PublishRepository;
+import org.zerock.connect.repository.ReceiveRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PublishService {
@@ -14,13 +18,8 @@ public class PublishService {
     @Autowired
     PublishRepository publishRepository;
 
-//    public Publish save(Publish publish) {
-//        return publishRepository.save(publish);
-//    }
-
-//    public String publishReceiveNumCheck(Long receiveNum) {
-//        return publishRepository.publishReceiveNumCheck(receiveNum);
-//    }
+    @Autowired
+    ReceiveService receiveService;
 
     public Publish save(Publish publish) {
         // 이미 존재하는 receiveNum인지 확인
@@ -44,5 +43,10 @@ public class PublishService {
     public Publish getInvoiceDetailsByNumber(Long invoiceNumber) {
         return publishRepository.findByInvoiceNumber(invoiceNumber);
     }
+
+
+
+
+
 
 }

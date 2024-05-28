@@ -1,5 +1,7 @@
 package org.zerock.connect.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -58,7 +60,6 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
     int findByreceiveY();
 
 
-
 //    @Query(value = "SELECT r,re,o " +
 //            "FROM Receive r JOIN Releases re ON r.receiveNum=re.receive.receiveNum " +
 //            "JOIN Orders o ON re.receive.orders.orderNum=o.orderNum " +
@@ -78,7 +79,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
             "from Releases r " +
             "where r.releaseDate between :startDate and :endDate " +
             "group by r.receive.orders.procurementPlan.planNum")
-    List<ReleasesDTO> searchDateStockList(@Param("startDate") LocalDate startDate , @Param("endDate") LocalDate endDate);
+    List<ReleasesDTO> searchDateStockList(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Query(value = "SELECT u.unitName, SUM(r.releaseCount * c.contractPrice) as totalAmount " +
             "FROM Releases r " +
@@ -118,5 +119,29 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
 //    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
     List<Object[]> groupbyPartcode();
+
+    @Query("SELECT r FROM Receive r WHERE r.receiveNum NOT IN (SELECT p.receive.receiveNum FROM Publish p)")
+    List<Receive> findReceiveNotInPublish();
+
+
+    // 거래명세서 페이지 - 입고완료품목 - 검색
+    @Query("select r,o,p,ci,c,i from Receive r " +
+            "join Orders o on r.orders.orderNum = o.orderNum " +
+            "join ProcurementPlan p on o.procurementPlan.planNum = p.planNum " +
+            "join ContractItem ci on p.contractItem.conitemNo = ci.conitemNo " +
+            "join Company c on ci.company.comName = c.comName " +
+            "join Item i on ci.item.itemName = i.itemName AND ci.item.itemIndex = i.itemIndex " +
+            "where r.receiveYn ='Y'")
+    List<Receive> searchReceive();
+
+    @Query("SELECT r FROM Receive r WHERE r.orders.procurementPlan.contractItem.company.comName LIKE %:keyword%")
+    List<Receive> searchReceiveByCompanyName(String keyword);
+
+    @Query("SELECT r FROM Receive r WHERE r.orders.procurementPlan.contractItem.item.itemName LIKE %:keyword%")
+    List<Receive> searchReceiveByItemName(String keyword);
+
+
+
 }
+
 

@@ -4,6 +4,9 @@ package org.zerock.connect.Controller.part3;
 import jakarta.servlet.http.HttpSession;
 import lombok.experimental.PackagePrivate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +17,12 @@ import org.zerock.connect.Service.part3.ReceiveService;
 import org.zerock.connect.entity.Member;
 import org.zerock.connect.entity.Publish;
 import org.zerock.connect.entity.Receive;
+import org.zerock.connect.repository.ReceiveRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/part3")
@@ -28,14 +34,26 @@ public class PublishFormController {
     @Autowired
     PublishService publishService;
 
+    @Autowired
+    ReceiveRepository receiveRepository;
 
     // 거래명세서발행페이지
     @GetMapping("/publishForm")
-    public String publishForm(Model model) {
+    public String publishForm(Model model,
+                              @RequestParam(required = false) String option,
+                              @RequestParam(required = false) String keyword) {
         System.out.println("입고완료품목");
 
-        // 입고 완료 품목
-        List<Receive> receiveList = receiveService.getAllReceive();
+//        // 입고 완료 품목
+//        List<Receive> receiveList = receiveService.findReceiveNotInPublish();
+//        model.addAttribute("receiveList", receiveList);
+
+        List<Receive> receiveList;
+        if (option != null && keyword != null && !keyword.isEmpty()) {
+            receiveList = receiveService.searchReceive(option, keyword);
+        } else {
+            receiveList = receiveService.findReceiveNotInPublish();
+        }
         model.addAttribute("receiveList", receiveList);
 
         System.out.println("거래명세서 발행 완료 리스트");
@@ -44,6 +62,19 @@ public class PublishFormController {
         model.addAttribute("publishList", publishList);
 
         return "part3/publishForm";
+    }
+
+    // 검색
+    @GetMapping("/searchReceive")
+    public String searchReceive(
+            @RequestParam String option, // 선택한 옵션(업체명, 품목코드, 품목명)
+            @RequestParam String keyword, // 입력한 검색어
+            Model model
+    ) {
+        List<Receive> searchResult = receiveService.searchReceive(option, keyword);
+        model.addAttribute("receiveList", searchResult);
+
+        return "redirect:/part3/publishForm";
     }
 
     // 거래명세서 저장
@@ -61,50 +92,33 @@ public class PublishFormController {
             throw new IllegalArgumentException("Invalid receiveNum: " + receiveNum);
         }
 
-//        // 디버그 로그 추가
-//        System.out.println("publish receiveNum: " + publish.getReceive());
-//        System.out.println("publish invoiceNumber: " + publish.getInvoiceNumber());
-//        System.out.println("publish invoiceDate: " + publish.getInvoiceDate());
-//        System.out.println("publish invoiceMemo: " + publish.getInvoiceMemo());
-//        System.out.println("publish publisher: " + publish.getPublisher());
-
         // publish 객체의 receive 필드에 가져온 Receive 객체 설정
         publish.setReceive(receive);
         publish.setInvoiceDate(LocalDate.now());
         publish.setPublisher(loginedUser.getMemberId());
 
-//        // 받아온 publish 객체를 데이터베이스에 저장
-//        publishService.save(publish);
-
         try {
-            // 중복 체크를 수행하여 이미 존재하는 receiveNum인지 확인
+            // 중복 체크 -이미 존재하는 receiveNum인지 확인
             publishService.save(publish);
-            redirectAttributes.addFlashAttribute("successMessage", "거래명세서를 성공적으로 저장하였습니다.");
+            redirectAttributes.addFlashAttribute("successMessage", "거래명세서 발행 완료.");
             System.out.println("저장성공");
         } catch (IllegalArgumentException e) {
             // 중복이 있을 경우 예외를 받아 처리
-            redirectAttributes.addFlashAttribute("errorMessage", "이미 존재하는 receiveNum입니다. 저장을 거부하였습니다.");
+            redirectAttributes.addFlashAttribute("errorMessage", "이미 발행된 거래명세서입니다.");
             System.out.println("저장실패");
         }
 
         return "redirect:/part3/publishForm";
     }
 
-//    @GetMapping("/successModal")
-//    public String successModal(Model model) {
-//        System.out.println("완료된 거래명세서 모달창");
-//        return "redirect:/part3/publishForm";
-//    }
-
-
     @GetMapping("/invoice")
-    public String getInvoiceDetails(@RequestParam("invoiceNumber")Long invoiceNumber, Model model) {
+    public String getInvoiceDetails(@RequestParam("invoiceNumber") Long invoiceNumber, Model model) {
         System.out.println("완료된 거래명세서 모달창");
         Publish invoiceDetails = publishService.getInvoiceDetailsByNumber(invoiceNumber);
         model.addAttribute("invoiceDetails", invoiceDetails);
-//        return "invoiceDetailsModal :: invoiceDetailsFragment"; // 부분 뷰를 반환
-        return "/part3/invoiceDetailsModal";
+        return "part3/invoiceDetailsModal";
     }
+
 
 
 
