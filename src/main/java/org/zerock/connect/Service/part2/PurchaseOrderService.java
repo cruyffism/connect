@@ -80,4 +80,5 @@ public class PurchaseOrderService {
     public Integer deleteReceive(Long orderNum) {
         return receiveRepository.deleteReceive(orderNum);
     }
+
 }

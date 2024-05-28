@@ -28,7 +28,7 @@
             <th scope="row">주소</th>
             <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.company.comAdd}"></td>
             <th scope="row">담당자</th>
-            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.company.comName}"></td>
+            <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.company.comManager}"></td>
         </tr>
         </tbody>
     </table>
