@@ -69,6 +69,8 @@ function handlePublishButtonClick() {
     // 모달 열기
     document.getElementById('myModal').style.display = 'block';
 
+    // 발행된 거래명세서 품목 숨기기
+    selectedRow.style.display = 'none';
 
 }
 
@@ -113,19 +115,5 @@ function saveAsPDF() {
 }
 
 
-
-
-// // 저장 버튼 클릭 시
-// document.getElementById('saveSuccess').addEventListener('click', function() {
-//     // 모달 닫기
-//     closeModal();
-//
-//     // 성공 메시지
-//     var successMessage = "[[${successMessage}]]";
-//     console.log("Success message: ", successMessage); // 디버깅 메시지 추가
-//     if (successMessage) {
-//         alert(successMessage);
-//     }
-// });
 
 
