@@ -91,16 +91,16 @@
             <form th:action="@{/part3/searchReceive}" method="get" style="float:left; margin-bottom: 5px">
                 <input type="text" id="searchInput" placeholder="품목명 or 회사이름"
                        style="margin-bottom: 5px; height: 40px; width: 200px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189)" name="searchText">
-                <button type="submit" class="btn btn-outline-success" id="searchButton"
-                        style="margin: 0 0 10px 0; height: 40px; padding: 8px; border-radius: 10px;">검색
+                <button type="submit" class="btn btn-sm btn-success" id="searchButton"
+                        style="margin: 0 0 10px 0; height: 40px; padding: 8px; border-radius: 5px;">검색
                 </button>
             </form>
             <div style="float:right; margin-bottom: 5px">
-                <button type="submit" class="btn btn-outline-success publishbtn" onclick="handlePublishButtonClick()"
+                <button type="submit" class="btn btn-sm btn-primary" onclick="handlePublishButtonClick()"
                         style="float: right; height: 40px; ">발행
                 </button>
-                <button type="button" class="btn btn-outline-success"
-                        style="height: 40px; margin: 0 838px 10px 0; padding: 8px; border-radius: 10px;"><a th:href="@{/part3/publishForm}" style="text-decoration: none">전체보기</a>
+                <button type="button" class="btn btn-sm btn-primary"
+                        style="height:40px; margin: 0 838px 10px 0; padding: 8px; border-radius: 5px;"><a th:href="@{/part3/publishForm}" style="color:white; text-decoration: none">전체보기</a>
                 </button>
             </div>
           </div>
