@@ -68,6 +68,30 @@
             cursor: pointer;
         }
 
+        /*인쇄영역설정*/
+        @page {
+            size: A4 landscape; /* A4 용지 가로 방향 설정 */
+
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-area, .print-area * {
+                visibility: visible;
+            }
+            .print-area {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-70%) translateY(-20%);
+                width: 100%;
+            }
+            .table {
+                width: 140%; /* 인쇄 시 테이블 전체 너비 사용 */
+                margin: 0 auto;
+            }
+        }
 
     </style>
 </head>
@@ -175,141 +199,146 @@
                 <input type="hidden" id="hiddenComManager" name="comManager">
 
                 <h3 style="margin: 10px 0 15px 70px;">거래명세서 작성</h3>
+
                 <div style="box-shadow: 0 0 8px 8px rgba(114, 114, 114, 0.4); width: 96%;">
-                    <div id="orderList" style="width: 85%; margin: 15px 0 0 100px; padding: 2px 0 0 0;">
-                        <table class="table table-bordered text-center">
-                            <thead>
-                            <tr class="table-secondary">
-                                <th scope="col" colspan="4">거래명세서</th>
-                            </tr>
-                            <colgroup>
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">
-                            </colgroup>
-                            <tr>
-                                <th>거래명세서 번호</th>
-                                <td id="invoiceNumber"><input name="invoiceNumber" placeholder="invoiceNumber"></td>
-                                <th>입고번호</th>
-                                <td id="receiveNum"><input name="receiveNum" placeholder="receiveNum"></td>
+                    <div class="print-area">
+                        <div id="orderList" style="width: 85%; margin: 15px 0 0 100px; padding: 2px 0 0 0;">
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                <tr class="table-secondary">
+                                    <th scope="col" colspan="4">거래명세서</th>
+                                </tr>
+                                <colgroup>
+                                    <col width="25%">
+                                    <col width="25%">
+                                    <col width="25%">
+                                    <col width="25%">
+                                </colgroup>
+                                <tr>
+                                    <th>거래명세서 번호</th>
+                                    <td id="invoiceNumber"><input name="invoiceNumber" placeholder="invoiceNumber"></td>
+                                    <th>입고번호</th>
+                                    <td id="receiveNum"><input name="receiveNum" placeholder="receiveNum"></td>
 
-                                <!--                <th>발행일</th>-->
-                                <!--                <td id="invoiceDate"><input type="date" name="invoiceDate" th:value="${receiveList.}" placeholder="invoiceDate"></td>-->
-                            </tr>
-                            </thead>
-                        </table>
+                                    <!--                <th>발행일</th>-->
+                                    <!--                <td id="invoiceDate"><input type="date" name="invoiceDate" th:value="${receiveList.}" placeholder="invoiceDate"></td>-->
+                                </tr>
+                                </thead>
+                            </table>
 
-                        <table class="table table-bordered text-center">
-                            <colgroup>
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">
-                            </colgroup>
-                            <thead>
-                            <tr class="table-secondary">
-                                <th scope="col" colspan="4">공급자</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">발주일</th>
-                                <td id="orderDate"></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">업체명</th>
-                                <td id="comName"></td>
-                                <th scope="row">사업자 번호</th>
-                                <td><span id="businessId"></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">주소</th>
-                                <td><span id="comAdd"></span></td>
-                                <th scope="row">담당자</th>
-                                <td><span id="comManager"></span></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            <table class="table table-bordered text-center">
+                                <colgroup>
+                                    <col width="25%">
+                                    <col width="25%">
+                                    <col width="25%">
+                                    <col width="25%">
+                                </colgroup>
+                                <thead>
+                                <tr class="table-secondary">
+                                    <th scope="col" colspan="4">공급자</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">발주일</th>
+                                    <td id="orderDate"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">업체명</th>
+                                    <td id="comName"></td>
+                                    <th scope="row">사업자 번호</th>
+                                    <td><span id="businessId"></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">주소</th>
+                                    <td><span id="comAdd"></span></td>
+                                    <th scope="row">담당자</th>
+                                    <td><span id="comManager"></span></td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-                        <table class="table table-bordered text-center">
-                            <colgroup>
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">
-                            </colgroup>
-                            <thead>
-                            <tr class="table-secondary">
-                                <th scope="col" colspan="4">공급받는자</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">업체명</th>
-                                <td id="recipientCompanyName">(주)CONNECT</td>
-                                <th scope="row">사업자 번호</th>
-                                <td id="recipientBusinessNumber">123-45-6789</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">주소</th>
-                                <td id="recipientAddress">경기도 수원시 123</td>
-                                <th scope="row">담당자</th>
-                                <td id="Publisher" th:text="${session.loginedUser.memberId}"><input name="Publisher"
-                                                                                                    placeholder="Publisher">
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            <table class="table table-bordered text-center">
+                                <colgroup>
+                                    <col width="25%">
+                                    <col width="25%">
+                                    <col width="25%">
+                                    <col width="25%">
+                                </colgroup>
+                                <thead>
+                                <tr class="table-secondary">
+                                    <th scope="col" colspan="4">공급받는자</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">업체명</th>
+                                    <td id="recipientCompanyName">(주)CONNECT</td>
+                                    <th scope="row">사업자 번호</th>
+                                    <td id="recipientBusinessNumber">123-45-6789</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">주소</th>
+                                    <td id="recipientAddress">경기도 수원시 123</td>
+                                    <th scope="row">담당자</th>
+                                    <td id="Publisher" th:text="${session.loginedUser.memberId}"><input name="Publisher"
+                                                                                                        placeholder="Publisher">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="itemList" style="width: 85%; margin: 0 0 0 100px;">
+                            <table class="table table-bordered text-center">
+                                <colgroup>
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="15%">
+                                    <col width="8%">
+                                    <col width="8%">
+                                    <col width="10%">
+                                    <col width="15%">
+                                </colgroup>
+                                <thead>
+                                <tr class="table-secondary">
+                                    <th scope="col" colspan="10">품목정보</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>발주번호</th>
+                                    <th>품목코드</th>
+                                    <th>품목명</th>
+                                    <th>수량</th>
+                                    <th>단가</th>
+                                    <th>총액</th>
+                                    <th>비고</th>
+                                </tr>
+                                <tr>
+                                    <td id="orderNum"></td>
+                                    <td id="itemIndex"></td>
+                                    <td id="itemName"></td>
+                                    <td id="orderCount"></td>
+                                    <td id="contractPrice"></td>
+                                    <td id="totalPrice"></td>
+                                    <td id="invoiceMemo"><input type="text"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-                    <div id="itemList" style="width: 85%; margin: 0 0 0 100px;">
-                        <table class="table table-bordered text-center">
-                            <colgroup>
-                                <col width="10%">
-                                <col width="10%">
-                                <col width="15%">
-                                <col width="8%">
-                                <col width="8%">
-                                <col width="10%">
-                                <col width="15%">
-                            </colgroup>
-                            <thead>
-                            <tr class="table-secondary">
-                                <th scope="col" colspan="10">품목정보</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th>발주번호</th>
-                                <th>품목코드</th>
-                                <th>품목명</th>
-                                <th>수량</th>
-                                <th>단가</th>
-                                <th>총액</th>
-                                <th>비고</th>
-                            </tr>
-                            <tr>
-                                <td id="orderNum"></td>
-                                <td id="itemIndex"></td>
-                                <td id="itemName"></td>
-                                <td id="orderCount"></td>
-                                <td id="contractPrice"></td>
-                                <td id="totalPrice"></td>
-                                <td id="invoiceMemo"><input type="text"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div style="text-align: center; margin: 30px 0 0 0;">
-                        <!-- 발행 버튼 -->
-                        <button type="submit" class="btn btn-outline-success" id="saveSuccess">저장</button>
-                        <button type="button" class="btn btn-outline-success" onclick="window.print()">인쇄</button>
-                        <button type="button" class="btn btn-outline-success" onclick="saveAsPDF()">PDF로 저장</button>
-                        <br>
-                        <br>
+                    <div class="no-print">
+                        <div style="text-align: center; margin: 30px 0 0 0;">
+                            <!-- 발행 버튼 -->
+                            <button type="submit" class="btn btn-outline-success" id="saveSuccess">저장</button>
+                            <button type="button" class="btn btn-outline-success" onclick="window.print()">인쇄</button>
+                            <button type="button" class="btn btn-outline-success" onclick="saveAsPDF()">PDF로 저장</button>
+                            <br>
+                            <br>
+                        </div>
                     </div>
                 </div>
             </form>
