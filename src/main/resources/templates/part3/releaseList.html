@@ -156,7 +156,7 @@
                     <th scope="col">생산시작일</th>
                     <th scope="col">생산종료일</th>
                     <th scope="col">출고가능수량</th>
-                    <th scope="col">조달계획일</th>
+                    <th scope="col">발주날짜</th>
                     <th scope="col">비고</th>
                     <th scope="col">출고일자</th>
                     <th scope="col">출고수량</th>
@@ -178,7 +178,7 @@
                     <td th:text="${receive.orders.procurementPlan.contractItem.item.product.productStartdate}"></td>
                     <td th:text="${receive.orders.procurementPlan.contractItem.item.product.productEnddate}"></td>
                     <td th:text="${receive.receiveCount}"></td>
-                    <td th:text="${receive.orders.procurementPlan.planDate}"></td>
+                    <td th:text="${receive.orders.orderDate}"></td>
                     <td th:text="${receive.orders.orderInfo}"></td>
                     <td class="release-date">
                         <input type="date" name="releaseDate">
