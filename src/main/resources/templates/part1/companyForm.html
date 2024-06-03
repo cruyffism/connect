@@ -56,7 +56,7 @@
                                    aria-label="Dollar amount (with dot and two decimal places)" required>
                         </div>
                         <div>
-                            <button id="businessIdCheck" type="button" class="btn btn-outline-success"
+                            <button id="businessIdCheck" type="button" class="btn btn-sm btn-danger"
                                     onclick="return businessIdCheckAjax()">중복체크
                             </button>
                         </div>
@@ -117,8 +117,8 @@
 
             </tbody>
         </table>
-        <div style="margin-left: 230px; margin-top: 100px;">
-            <button type="submit" class="btn btn-outline-success">신규 업체 등록</button>
+        <div style="margin-left: 230px; margin-top: 50px;">
+            <button type="submit" class="btn btn-success">신규 업체 등록</button>
         </div>
     </form>
 </div>
@@ -135,8 +135,8 @@
             <div class="d-flex justify-content-between" style="width: 300px;">
                 <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
                 <input id="searchText" name="searchText" class="form-control me-2" type="text" placeholder="업체명으로 검색">
-                <button class="btn btn-outline-success" type="button" onclick="return companyListAjax(1);"
-                        style="width: 120px;">검색
+                <button class="btn btn-sm btn-success" type="button" onclick="return companyListAjax(1);"
+                        style="width: 100px;">검색
                 </button>
             </div>
             <!-- 업체 검색 태그 종료 -->
