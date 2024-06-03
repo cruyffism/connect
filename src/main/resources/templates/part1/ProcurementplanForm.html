@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-<html lang="en"
       xmlns:th="http://www.thymeleaf.org">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,30 +32,30 @@
     <header th:replace="~{/fragments/common::navbar}">
     </header>
 <body>
-
-<div style=" overflow-y: scroll; width: 99%; margin: 0 30px 150px 15px; "  class="part">
+<div style="height: 1200px">
+  <div style=" overflow-y: scroll; width: 99%; margin: 0 30px 150px 15px;"  class="part">
 
     <br>
 
-    <h4 style="margin: 50px 0 10px 40px; ">등록된 품목조회</h4>
+    <h4 style="margin: 30px 0 10px 40px; ">등록된 품목조회</h4>
     <hr style="width: 185px; margin-left: 35px;">
     <div style="width: 99%; margin: 0 0 0 5px; box-shadow: 0 0 0px 0px rgba(114, 114, 114, 0.4);">
-<div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between">
         <!-- 업체 검색 -->
-    <div>
-        <form class="d-flex" th:action="@{/part1/searchItem}" role="search" style="margin-top: 10px; width: 400px; margin-left: 10px; padding: 15px 0 5px 10px;">
-            <input class="form-control me-2" type="text" placeholder="품목명으로 검색" aria-label="Search" th:name="itemName" style="width: 300px" required>
-            <button  class="btn btn-sm btn-success" type="submit" style="width: 70px; height: 30px;" th:name="searchItem" >검색</button>
+            <div>
+                <form class="d-flex" th:action="@{/part1/searchItem}" role="search" style="margin-top: 10px; width: 400px; margin-left: 10px; padding: 15px 0 5px 10px;">
+                    <input class="form-control me-2" type="text" placeholder="품목명으로 검색" aria-label="Search" th:name="itemName" style="width: 300px" required>
+                    <button  class="btn btn-sm btn-success" type="submit" style="width: 70px; height: 30px;" th:name="searchItem" >검색</button>
 
-            <!-- <div style="margin-top: 15px; margin-left: 10px;">
-              <a href="#"><button class="btn btn-outline-success" style="width: 100px;">전체보기</button></a>
-            </div> -->
-        </form>
-    </div>
-    <div>
-        <a th:href="@{/part1/procurementPlan}"><button  class="btn btn-sm btn-primary" style="width: 80px; margin-left: 10px; margin-top: 25px; margin-right: 1600px; " >전체보기</button></a>
-    </div>
-</div>
+                    <!-- <div style="margin-top: 15px; margin-left: 10px;">
+                      <a href="#"><button class="btn btn-outline-success" style="width: 100px;">전체보기</button></a>
+                    </div> -->
+                </form>
+            </div>
+            <div>
+                <a th:href="@{/part1/procurementPlan}"><button  class="btn btn-sm btn-primary" style="width: 80px; margin-left: 10px; margin-top: 25px; margin-right: 1600px; " >전체보기</button></a>
+            </div>
+        </div>
 
         <script>
             function caldate(){
@@ -120,7 +119,7 @@
         <div class="buttons_wrap" style="margin: 30px auto; text-align: center">
             <tr class="pagination"
                 th:with="start=${(ContractItemLists.number div 10)*10 + 1},
-           last=${(start + 9 < ContractItemLists.totalPages ? start + 9 : ContractItemLists.totalPages)}">
+                last=${(start + 9 < ContractItemLists.totalPages ? start + 9 : ContractItemLists.totalPages)}">
                 <!--한 화면에 몇 페이지까지 보여줄지 계산한 코드-->
                 <td>
                     <a th:onclick="|javascript:ContractItemLists(1)|" aria-label="First">
@@ -166,11 +165,10 @@
             </tr>
         </div>
     </div>
+  </div>
 
-</div>
 
-
-<div style="margin: 30px 70px 10px 10px; width: 100%;">
+  <div style="margin: 10px 70px 100px 10px; width: 100%; height: 500px">
     <br>
     <h4 style="margin: 10px 0 0 40px ;">조달계획 등록</h4>
     <hr style="width: 170px; margin-left: 35px;">
@@ -208,6 +206,7 @@
         </tr>
         </tbody>
     </table>
+  </div>
 </div>
 
 
