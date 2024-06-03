@@ -25,7 +25,9 @@ function procurementPlanListAjax(page) { // 위에서 보낸 매개변수 1을 �
         //성공 시에 part1_insert_company.html의 form태그 위치에 백엔드 경로(part1_insert_company_ajax)에 연결 된 리턴 값인 프론트 cartListAjax.html을 넣어서 보여줌
         success: function (data) {
             $(innerHtml).html(data)
-
+            $("table tr").not(this).removeClass('table-info'); // 배경색 스타일 준 class 전체 제거
+            orderChoiceAjax(0, 0);
+            orderListAjax(1, 0); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
             setTimeout(function () {
             }, 1000)
         },
