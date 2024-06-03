@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -81,15 +80,47 @@
                 amounts.push(item[1]);
             });
 
+            // 현재 URL 경로를 가져옵니다.
+            var currentPath = window.location.pathname;
+
+            // 각 경로에 대한 라벨과 색상을 정의합니다.
+            var settings = {
+                "/part3/stockUnitlistgragh": {
+                    label: '대분류 총액',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)'
+                },
+                "/part3/stockAssylistgragh": {
+                    label: '중분류 총액',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)'
+                },
+                "/part3/stockPartlistgragh": {
+                    label: '소분류 총액',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)'
+                }
+            };
+
+            // 기본 설정 (경로가 없을 경우 대비)
+            var defaultSetting = {
+                label: '총 금액',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)'
+            };
+
+            // 현재 경로에 맞는 설정을 가져옵니다.
+            var currentSetting = settings[currentPath] || defaultSetting;
+
             new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: '총 금액',
+                        label: currentSetting.label,
                         data: amounts,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: currentSetting.backgroundColor,
+                        borderColor: currentSetting.borderColor,
                         borderWidth: 1
                     }]
                 },

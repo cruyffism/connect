@@ -112,7 +112,7 @@ public class ItemController {
     // 품목 등록 기능
     @PostMapping("/saveItem")
     public String saveItem(@RequestParam("productId") String productId,
-                           @RequestParam("itemCode") String itemCode,
+//                           @RequestParam("itemCode") String itemCode,
                            @RequestParam("itemName") String itemName,
                            @RequestParam("itemLength") Integer itemLength,
                            @RequestParam("itemWidth") Integer itemWidth,
@@ -151,7 +151,7 @@ public class ItemController {
         item.setUnit(unit);
         item.setAssy(assy);
         item.setPart(part);
-        item.setItemCode(item.getProduct().getProductId()+"_"+itemCode);
+        item.setItemCode(item.getProduct().getProductId()+unitCode+assyCode+partCode);
         item.setItemName(itemName);
         item.setItemLength(itemLength);
         item.setItemWidth(itemWidth);
