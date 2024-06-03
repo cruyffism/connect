@@ -44,8 +44,8 @@
         <!-- 업체 검색 -->
             <div>
                 <form class="d-flex" th:action="@{/part1/searchItem}" role="search" style="margin-top: 10px; width: 400px; margin-left: 10px; padding: 15px 0 5px 10px;">
-                    <input class="form-control me-2" type="text" placeholder="품목명으로 검색" aria-label="Search" th:name="itemName" style="width: 300px" required>
-                    <button  class="btn btn-sm btn-success" type="submit" style="width: 70px; height: 30px;" th:name="searchItem" >검색</button>
+                    <input class="form-control form-control-sm me-2" type="text" placeholder="품목명으로 검색" aria-label="Search" th:name="itemName" style="width: 300px" required>
+                    <button  class="btn btn-sm btn-success" type="submit" style="width: 70px;" th:name="searchItem" >검색</button>
 
                     <!-- <div style="margin-top: 15px; margin-left: 10px;">
                       <a href="#"><button class="btn btn-outline-success" style="width: 100px;">전체보기</button></a>
@@ -53,7 +53,7 @@
                 </form>
             </div>
             <div>
-                <a th:href="@{/part1/procurementPlan}"><button  class="btn btn-sm btn-primary" style="width: 80px; margin-left: 10px; margin-top: 25px; margin-right: 1600px; " >전체보기</button></a>
+                <a th:href="@{/part1/procurementPlan}"><button  class="btn btn-sm btn-primary" style="width: 100px; margin-left: 10px; margin-top: 25px; margin-right: 1600px; " >전체보기</button></a>
             </div>
         </div>
 
@@ -104,7 +104,7 @@
 <!--                <th scope="col" th:value="${ContractItemLists.conitemNo}" th:name="conitemNo">-->
 <!--                    <a th:href="@{selectProcurementItem(conitemNo =${ContractItemLists.conitemNo})}">선택</a></th>-->
 
-                <th scope="col"><button type="submit" class="btn btn-outline-success" th:onclick="|location.href='@{selectProcurementItem(conitemNo =${ContractItemLists.conitemNo})}'|">선택</button></th>
+                <th scope="col"><button type="submit" class="btn btn-sm btn-success" th:onclick="|location.href='@{selectProcurementItem(conitemNo =${ContractItemLists.conitemNo})}'|">선택</button></th>
             </tr>
 
 
@@ -192,15 +192,7 @@
         <tbody>
         <tr>
             <!-- for문돌리기 -->
-            <th scope="col">위에서 품목을 선택하세요</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-
-            <th scope="col"></th>
-            <th scope="col"></th>
-
-            <th scope="col"></th>
+            <th scope="col" colspan="7" style="text-align: center">위에서 품목을 선택하세요</th>
 <!--            <th scope="col"><button type="submit" class="btn btn-outline-danger">삭제</button></th>-->
 <!--            <th scope="col"><button type="submit" class="btn btn-outline-success">등록</button></th>-->
         </tr>
