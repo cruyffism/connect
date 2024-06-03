@@ -15,7 +15,7 @@ function handlePublishButtonClick() {
     // 선택된 행의 데이터 가져오기
     var orderNum = selectedRow.querySelector('td:nth-child(2)').textContent;
     var comName = selectedRow.querySelector('td:nth-child(3)').textContent;
-    var itemIndex = selectedRow.querySelector('td:nth-child(4)').textContent;
+    var itemCode = selectedRow.querySelector('td:nth-child(4)').textContent;
     var itemName = selectedRow.querySelector('td:nth-child(5)').textContent;
     var orderDate = selectedRow.querySelector('td:nth-child(6)').textContent;
     var orderCount = selectedRow.querySelector('td:nth-child(7)').textContent;
@@ -42,7 +42,7 @@ function handlePublishButtonClick() {
     // 거래명세서 폼에 데이터 출력하기
     document.getElementById('orderNum').textContent = orderNum;
     document.getElementById('comName').textContent = comName;
-    document.getElementById('itemIndex').textContent = itemIndex;
+    document.getElementById('itemCode').textContent = itemCode;
     document.getElementById('itemName').textContent = itemName;
     document.getElementById('orderDate').textContent = orderDate;
     document.getElementById('orderCount').textContent = orderCount;
