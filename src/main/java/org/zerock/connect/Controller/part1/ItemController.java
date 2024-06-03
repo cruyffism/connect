@@ -70,6 +70,7 @@ public class ItemController {
     @GetMapping("/itemForm")
     public String itemForm(Model model, @RequestParam("productId")String productId){
 
+//        분류별 리스트 불러와서 모델로 출력
         List<Unit> unitList = itemService.findUnitList();
         List<Part> partList = itemService.findPartList();
         List<Assy> assyList = itemService.findAssyList();
@@ -78,6 +79,7 @@ public class ItemController {
         model.addAttribute("partList",partList);
         model.addAttribute("assyList",assyList);
 
+//        등록된 품목 리스트불러와서 출력
         List<Item> itemList = itemService.findItemList();
         model.addAttribute("itemList",itemList);
 

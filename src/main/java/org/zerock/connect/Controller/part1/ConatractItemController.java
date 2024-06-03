@@ -99,6 +99,8 @@ public class ConatractItemController {
 //        List<ContractItem> AllContractItem = contractItemService.findAllContractItemList();
 //        model.addAttribute("AllContractItem",AllContractItem);
 
+        
+//       페이징 처리
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
         List<Item> NocontractItem = itemService.NocontractItem();
@@ -117,6 +119,7 @@ public class ConatractItemController {
     public String selectContractItem(@RequestParam("selectItemIndex")Long itemIndex , Model model ,@PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
         System.out.println(itemIndex);
 
+//선택한 item정보 모델로 출력하기
         Item selectItem = itemService.findByItemIndex(itemIndex);
         model.addAttribute("selectItem",selectItem);
 
@@ -141,6 +144,7 @@ public class ConatractItemController {
     @PostMapping("/saveContractitem")
     public String saveContractitem(@RequestParam("itemIndex") Long itemIndex , @RequestParam(value = "CompanyId") String businessId , ContractItem contractItem , @RequestParam("file")MultipartFile file){
 
+        //        파라미터로 받아온 itemIndex 를 리파지토리에서 조회한후 저장
         Item selectItem = itemService.findByItemIndex(itemIndex);
         contractItem.setItem(selectItem);
 
@@ -149,12 +153,16 @@ public class ConatractItemController {
 //        company.setBusinessId(businessId);
 //        contractItem.setCompany(company);
 
+        //        파라미터로 받아온 businessId 를 리파지토리에서 조회한후 저장
         Company selectCompany = companyService.findByBusinessId(businessId);
         contractItem.setCompany(selectCompany);
 
+
+        //        파라미터로 받아온 file 를 파일업로드 서비스를 사용해서 직접 contractitem에 저장하기
         String savedFile = uploadFileService.upload(file);
         contractItem.setContractFile(savedFile);
 
+//        contractitem의 계약시간을 현재시간으로 강제주입
         contractItem.setContractDate(LocalDate.now());
         contractItem.setContractYn("1");
 
