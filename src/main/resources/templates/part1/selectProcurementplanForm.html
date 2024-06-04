@@ -30,6 +30,7 @@
     </style>
     <header th:replace="~{/fragments/common::navbar}">
     </header>
+
 <body>
 
 
@@ -75,7 +76,7 @@
 
                 <th scope="col">품목코드</th>
                 <th scope="col">품목명</th>
-                <th scope="col">등록하기</th>
+<!--                <th scope="col">등록하기</th>-->
             </tr>
             </thead>
             <tbody>
@@ -94,7 +95,7 @@
 <!--                <th scope="col" th:value="${ContractItemLists.conitemNo}" th:name="conitemNo">-->
 <!--                    <a th:href="@{selectProcurementItem(conitemNo =${ContractItemLists.conitemNo})}">선택</a></th>-->
 
-                <th scope="col"><button type="submit" class="btn btn-sm btn-success" th:onclick="|location.href='@{selectProcurementItem(conitemNo =${ContractItemLists.conitemNo})}'|">선택</button></th>
+<!--                <th scope="col"><button type="submit" class="btn btn-sm btn-success" th:onclick="|location.href='@{selectProcurementItem(conitemNo =${ContractItemLists.conitemNo})}'|">선택</button></th>-->
             </tr>
             </th:block>
             </tbody>
@@ -133,8 +134,9 @@
             <th scope="col">생산제품명</th>
             <th scope="col">품목코드</th>
             <th scope="col">품목명</th>
+            <th scope="col">조달수량</th>
             <th scope="col">조달 납기일</th>
-            <th scope="col">등록</th>
+<!--            <th scope="col">등록</th>-->
         </tr>
         </thead>
         <tbody>
@@ -147,13 +149,16 @@
             <th scope="col" th:text="${selectContractItem.item.itemCode}"></th>
             <th scope="col" th:text="${selectContractItem.item.itemName}"></th>
             <th scope="col">
+                <input type="number" th:min="0" th:name="planCount">
+            </th>
+            <th scope="col">
 <!--                <input type="date" th:name="planDate" onchange="validatePlanDate(event)">-->
                 <input type="date" class="form-control"
                        aria-label="Dollar amount (with dot and two decimal places)" id="productStartdate" th:name="planDate" required onchange="validatePlanDate(event)" style="width: 150px;">
             </th>
-            <th scope="col">
-                <button type="submit" class="btn btn-sm btn-success">등록</button>
-            </th>
+<!--            <th scope="col">-->
+<!--                <button type="submit" class="btn btn-sm btn-success">등록</button>-->
+<!--            </th>-->
         </tr>
         </tbody>
     </table>

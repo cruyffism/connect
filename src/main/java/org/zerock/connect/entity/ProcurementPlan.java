@@ -4,6 +4,7 @@ package org.zerock.connect.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.mapping.ToOne;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,13 +26,15 @@ public class ProcurementPlan {
     @Column(nullable = false , length = 20)
     private Long planNum;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "conitemNo" , nullable = false)
     private ContractItem contractItem;
 
     @Column(nullable = false)
     private LocalDate planDate;
 
+    @Column(nullable = false)
+    private int planCount;
 
     @OneToMany(mappedBy = "procurementPlan" )
     private List<Orders> orders = new ArrayList<>();

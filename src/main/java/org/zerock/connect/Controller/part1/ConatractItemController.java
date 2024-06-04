@@ -41,7 +41,7 @@ public class ConatractItemController {
     DownloadFileService downloadFileService;
 
     @GetMapping("/contractItem")
-    public String contractItem(Company company , Item item , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String contractItem(Company company , Item item , Model model ,@PageableDefault(size = 1, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
 //      모든 업체 리스트 출력
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
@@ -88,16 +88,6 @@ public class ConatractItemController {
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
 
-//      등록된 품목정보 출력(계약 여부) 계약 x
-//        List<Item> AllItem = itemService.findItemList();
-//        model.addAttribute("AllItem",AllItem);
-
-//      등록된 품목정보 출력(계약 여부) 계약 o
-//        List<ContractItem> AllContractItem = contractItemService.findContractItemList();
-//        model.addAttribute("AllContractItem",AllContractItem);
-
-//        List<ContractItem> AllContractItem = contractItemService.findAllContractItemList();
-//        model.addAttribute("AllContractItem",AllContractItem);
 
         
 //       페이징 처리

@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 //@ToString(exclude = "procurementPlan")
@@ -28,8 +29,8 @@ public class ContractItem {
     @JoinColumn(name = "itemIndex")
     private Item item;
 
-    @OneToOne(mappedBy = "contractItem" )
-    private ProcurementPlan procurementPlan;
+    @OneToMany(mappedBy = "contractItem" )
+    private List<ProcurementPlan> procurementPlan;
 
     @Column(nullable = false , length = 200)
     private String contractFile;
