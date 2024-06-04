@@ -1,10 +1,11 @@
 <table class="table table-bordered text-center">
     <colgroup>
+        <col width="10%">
         <col width="20%">
         <col width="20%">
         <col width="20%">
         <col width="20%">
-        <col width="20%">
+        <col width="10%">
     </colgroup>
     <thead>
     <tr class="table-secondary">
@@ -12,6 +13,7 @@
         <th scope="col">업체명</th>
         <th scope="col">품목명</th>
         <th scope="col">조달납기일</th>
+        <th scope="col">조달수량</th>
         <th scope="col">선택</th>
     </tr>
     </thead>
@@ -22,8 +24,9 @@
             <td th:text="${procurementPlan.contractItem.company.comName}"></td>
             <td th:text="${procurementPlan.contractItem.item.itemName}"></td>
             <td th:text="${procurementPlan.planDate}"></td>
+            <td id="planCount" th:text="${procurementPlan.planCount}"></td>
             <td>
-                <button type="button" class="btn btn-sm btn-primary" th:onclick="|javascript:orderChoiceAjax(${procurementPlan.planNum},${procurementPlan.planNum})|">선택</button>
+                <button th:if="${procurementPlan.orders == null}" type="button" class="btn btn-sm btn-primary" th:onclick="|javascript:orderChoiceAjax(${procurementPlan.planNum},${procurementPlan.planNum},${procurementPlan.planCount})|">선택</button>
             </td>
         </tr>
     </th:block>

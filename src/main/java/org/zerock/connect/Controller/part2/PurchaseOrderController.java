@@ -108,7 +108,7 @@ public class PurchaseOrderController {
             writer.println("<script>alert('발주 등록에 실패 하였습니다.');</script>");
             writer.flush();
         }
-        ProcurementPlan plan = purchaseOrderService.orderChoiceAjax(procurementPlan.getPlanNum());
+        ProcurementPlan plan = purchaseOrderService.orderChoiceAjax(0L);
         model.addAttribute("procurementPlan", plan);
         return "/part2/orderChoiceAjax";
     }
@@ -119,7 +119,6 @@ public class PurchaseOrderController {
                                 @RequestParam(value = "searchType", required = false) String searchType,
                                 @RequestParam(value = "startDate", required = false) LocalDate startDate,
                                 @RequestParam(value = "endDate", required = false) LocalDate endDate,
-                                @RequestParam(value = "planNum") Long planNum,
                                 Model model,
                                 @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable) {
 
@@ -139,9 +138,9 @@ public class PurchaseOrderController {
         }
 
         if (!Objects.isNull(startDate) && !Objects.isNull(endDate)) {
-            orders = purchaseOrderService.orderListAjax(comName, itemName, startDate, endDate, planNum); // 날짜가 빈값 아닐때 이쪽
+            orders = purchaseOrderService.orderListAjax(comName, itemName, startDate, endDate); // 날짜가 빈값 아닐때 이쪽
         } else {
-            orders = purchaseOrderService.findOrderList(planNum, comName, itemName); //날짜가 비었을때 전체 검색 유도
+            orders = purchaseOrderService.findOrderList(comName, itemName); //날짜가 비었을때 전체 검색 유도
         }
 
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
@@ -157,7 +156,6 @@ public class PurchaseOrderController {
     //발주 마감 AJAX API
     @PostMapping("/orderDeadlineAjax")
     public String orderDeadlineAjax(@RequestParam(value = "orderNum") Long orderNum,
-                                    @RequestParam(value = "planNum") Long planNum,
                                     Model model,
                                     @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable, HttpServletResponse response) throws IOException {
 
@@ -166,7 +164,7 @@ public class PurchaseOrderController {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
 
-        List<Orders> orders = purchaseOrderService.findOrderList(planNum, "", "");
+        List<Orders> orders = purchaseOrderService.findOrderList("", "");
 
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
         int end = Math.min((start + pageable.getPageSize()), orders.size()); // 5을 계산한 구문
@@ -193,7 +191,6 @@ public class PurchaseOrderController {
     //발주서 삭제 AJAX api
     @PostMapping("/deleteOrderAjax")
     public String deleteOrderAjax(@RequestParam(value = "orderNum") Long orderNum,
-                                  @RequestParam(value = "planNum") Long planNum,
                                   Model model,
                                   @PageableDefault(size = 5, sort = "comName", direction = Sort.Direction.ASC) Pageable pageable, HttpServletResponse response) throws IOException {
 
@@ -204,7 +201,7 @@ public class PurchaseOrderController {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
 
-        List<Orders> orders = purchaseOrderService.findOrderList(planNum, "", "");
+        List<Orders> orders = purchaseOrderService.findOrderList("", "");
 
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 5으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
         int end = Math.min((start + pageable.getPageSize()), orders.size()); // 5을 계산한 구문

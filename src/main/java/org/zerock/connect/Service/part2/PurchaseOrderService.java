@@ -48,13 +48,13 @@ public class PurchaseOrderService {
     }
 
     //발주 리스트 아작스 구현
-    public List<Orders> orderListAjax(String comName, String itemName, LocalDate startDate, LocalDate endDate, Long planNum) {
-        return ordersRepository.orderListAjax(comName, itemName, startDate, endDate, planNum);
+    public List<Orders> orderListAjax(String comName, String itemName, LocalDate startDate, LocalDate endDate) {
+        return ordersRepository.orderListAjax(comName, itemName, startDate, endDate);
     }
 
     //발주 리스트 찾기
-    public List<Orders> findOrderList(Long planNum, String comName, String itemName) {
-        return ordersRepository.findOrderList(planNum, comName, itemName);
+    public List<Orders> findOrderList(String comName, String itemName) {
+        return ordersRepository.findOrderList(comName, itemName);
     }
 
     //발주 마감 아작스 API
