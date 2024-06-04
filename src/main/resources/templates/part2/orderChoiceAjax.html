@@ -83,3 +83,11 @@
         </tbody>
     </table>
 </div>
+<div th:if="${procurementPlan != null}" style="float: right; margin: 5px 0px 5px 0;">
+    <button id="btn4" type="button" class="btn btn-sm btn-primary" onclick="return saveOrder()">
+        발주
+    </button>
+    <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger" onclick="return updateTotalPrice(0)">
+        취소
+    </button>
+</div>

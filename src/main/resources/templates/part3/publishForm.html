@@ -70,25 +70,27 @@
 
         /*인쇄영역설정*/
         @page {
-            size: A4 landscape; /* A4 용지 가로 방향 설정 */
+            size: A4 portrait; /* A4 용지 가로 방향 설정 */
         }
         @media print {
             body * {
                 visibility: hidden;
             }
+
             .print-area, .print-area * {
                 visibility: visible;
             }
+
             .print-area {
                 position: absolute;
                 top: 0;
-                left: 50%;
-                transform: translateX(-70%) translateY(-20%); /* 가운데 맞춤 */
                 width: 100%;
             }
+
             .table {
-                width: 140%; /* 인쇄 시 테이블 너비 사용 */
+                width: 147.6%; /* 인쇄 시 테이블 너비 */
                 margin: 0 auto;
+                transform: translateX(-26.8%);
             }
         }
 
@@ -135,12 +137,13 @@
                 <colgroup>
                     <col width="5%">
                     <col width="13.5%">
+                    <col width="13%">
+                    <col width="15.5%">
+
                     <col width="13.5%">
-                    <col width="13.5%">
-                    <col width="13.5%">
-                    <col width="13.5%">
-                    <col width="13.5%">
-                    <col width="13.5%">
+                    <col width="13%">
+                    <col width="13%">
+                    <col width="13%">
                 </colgroup>
                 <thead class="table-secondary">
                 <tr>

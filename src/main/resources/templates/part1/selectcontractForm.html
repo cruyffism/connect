@@ -58,7 +58,7 @@
     </thead>
     <tbody>
     <tr>
-      <th scope="col" th:text="${selectItem.itemIndex}"></th>
+      <th scope="col" th:text="${selectItem.itemCode}"></th>
       <th scope="col" th:text="${selectItem.itemName}"></th>
       <th scope="col" th:text="${selectItem.itemLength}"></th>
       <th scope="col" th:text="${selectItem.itemWidth}"></th>
@@ -140,7 +140,7 @@
       </tbody>
     </table>
     <div style="text-align: center; margin-top: 40px;">
-      <button type="submit" class="btn btn-outline-success">신규 계약 등록</button>
+      <button type="submit" class="btn btn-sm btn-success">신규 계약 등록</button>
       <br>
       <br>
     </div>
@@ -162,8 +162,8 @@
 <!--    <a th:href="@{/part1/contractItem}"><input class="form-control me-2" type="button" aria-label="Search" id="start_date1" >계약완료</a>-->
 <!--    <a th:href="@{/part1/NocontractItem}"><input class="form-control me-2" type="button" aria-label="Search" id="start_date" >계약안됨</a>-->
     <div style="margin-left: 900px;">
-      <button type="submit" class="btn btn-outline-success" th:onclick="|location.href='@{/part1/contractItem}'|" style="margin-top: 15px">계약완료</button>
-      <button type="submit" class="btn btn-outline-success" th:onclick="|location.href='@{/part1/NocontractItem}'|" style="margin-top: 15px">미계약 품목</button>
+      <button type="submit" class="btn btn-sm btn-success" th:onclick="|location.href='@{/part1/contractItem}'|" style="margin-top: 15px">계약완료</button>
+      <button type="submit" class="btn btn-sm btn-danger" th:onclick="|location.href='@{/part1/NocontractItem}'|" style="margin-top: 15px">미계약 품목</button>
     </div>
     <!--      <input class="form-control me-2" type="date" placeholder="등록된 날짜 검색" aria-label="Search" id="end_date" >-->
     <!--      <button class="btn btn-outline-success" type="submit" style="width: 120px;" onclick="caldate()">검색</button>-->

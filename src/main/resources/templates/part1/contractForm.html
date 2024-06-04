@@ -37,7 +37,7 @@
 <header th:replace="~{/fragments/common::navbar}">
 </header>
 <!--  -->
-<div style=" width: 1870px;  margin-left: 20px; margin-right: 70px; margin-bottom: 30px; clear: both; margin-top: 80px;">
+<div style=" width: 97%;  margin-left: 20px; margin-right: 70px; margin-bottom: 30px; clear: both; margin-top: 80px;">
   <br>
   <h4 style="margin: 0 0 10px 30px;">선택한 품목정보</h4>
   <hr style="width: 190px; margin-left: 25px;">
@@ -58,7 +58,7 @@
     </thead>
     <tbody>
     <tr>
-      <th scope="col">품목을 선택하세요</th>
+      <th scope="col" colspan="9" style="text-align: center">품목을 선택하세요</th>
       <!--      <th scope="col">선택한 품목명</th>-->
       <!--      <th scope="col">선택한 생산수량</th>-->
       <!--      <th scope="col">선택한 생산시작일</th>-->
@@ -72,7 +72,7 @@
 
 
 <div class="part">
-  <h4 style="margin: 115px 0 0 60px; ">신규 계약 등록</h4>
+  <h4 style="margin: 113px 0 0 60px; ">신규 계약 등록</h4>
   <hr style=" margin-left: 25px;">
   <form action="" style="width: 600px; margin: 10px 0 30px 30px; padding: 50px 0 10px 30px; box-shadow: 0 0 1px 1px rgba(114, 114, 114, 0.4); height: 470px;">
 
@@ -144,7 +144,7 @@
 
 
 
-<div  class="part" style="margin: 0 0 0 30px; width: 1150px;">
+<div  class="part" style="margin: 0 0 0 30px; width: 1200px;">
   <br>
 
   <h4 style="margin: 90px 0 11px 30px;">등록된 품목정보</h4>
@@ -156,7 +156,7 @@
 <!--    <a th:href="@{/part1/contractItem}"><input class="form-control me-2" type="button" aria-label="Search" id="start_date1" >계약완료</a>-->
 <!--    <a th:href="@{/part1/NocontractItem}"><input class="form-control me-2" type="button" aria-label="Search" id="start_date" >계약안됨</a>-->
 
-    <div style="margin-left: 900px;">
+    <div style="margin-left: 1000px;">
       <button type="submit" class="btn btn-sm btn-success" th:onclick="|location.href='@{/part1/contractItem}'|" style="margin-top: 15px">계약완료</button>
       <button type="submit" class="btn btn-sm btn-danger" th:onclick="|location.href='@{/part1/NocontractItem}'|" style="margin-top: 15px">미계약 품목</button>
     </div>
@@ -197,7 +197,7 @@
 
     <!-- 업체 검색 태그 종료 -->
 
-    <div style="width: 1180px; max-height: 400px; margin: 10px 20px 30px 25px; height: 500px;" >
+    <div style="width: 1180px; max-height: 400px; margin: 10px 20px 30px 5PX; height: 500px;" >
 <!--      <form class="d-flex" id="form1" action="#" role="search" style="margin-top: 10px; width: 500px; padding: 20px 0 0 40px;">-->
 <!--        <input type="hidden" id="page" name="page" value="1"> &lt;!&ndash;page 값 넘기기&ndash;&gt;-->
 <!--        <input id="conitemNo" name="conitemNo" type="hidden">-->
@@ -205,7 +205,7 @@
 <!--      </form>-->
 
 <!--      <table class="table" style="margin: 20px 0 0 5px; width: 1000px; text-align: center;">-->
-      <table class="table" style="margin: 20px 0 0 5px; width: 1100px; text-align: center;">
+      <table class="table" style="margin: 20px 0 0 5px; width: 1180px; text-align: center;">
         <thead class="table-secondary">
         <tr>
           <!--        <th scope="col">사업자 번호</th>-->
@@ -242,7 +242,7 @@
         </th:block>
         <th:block th:if="${contractitemList.totalElements == 0}">
           <tr>
-            <td colspan="7">계약 품목이 없습니다.</td>
+            <td colspan="8" style="text-align: center">계약 품목이 없습니다.</td>
           </tr>
         </th:block>
         </tbody>
