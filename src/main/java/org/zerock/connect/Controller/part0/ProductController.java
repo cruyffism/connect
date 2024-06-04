@@ -61,8 +61,10 @@ public class ProductController {
     @PostMapping("/saveProduct")
     public String saveProduct(Product product ){
 //      인서트
-        Product InsertProduct = productService.saveProduct(product);
+
 //        System.out.println(AllProductList);
+        product.setProductId(product.getProductId()+"-"+product.getProductStartdate());
+        Product InsertProduct = productService.saveProduct(product);
         return "/part0/productForm";
     }
 

@@ -151,7 +151,7 @@ public class ItemController {
         item.setUnit(unit);
         item.setAssy(assy);
         item.setPart(part);
-        item.setItemCode(item.getProduct().getProductId()+unitCode+assyCode+partCode);
+        item.setItemCode(item.getProduct().getProductId()+"-"+unitCode+assyCode+partCode);
         item.setItemName(itemName);
         item.setItemLength(itemLength);
         item.setItemWidth(itemWidth);
