@@ -58,38 +58,13 @@ public class ConatractItemController {
 
         return "/part1/contractForm";
     }
-
-//    @GetMapping("/contractItem")
-//    public String contractItem(Company company , Item item , Model model , @PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable) {
-//        // 모든 업체 리스트 출력
-//        List<Company> AllCompany = companyService.findAllCompany();
-//        model.addAttribute("AllCompany", AllCompany);
-//
-//        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-//        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
-//        List<ContractItem> contractitemList = contractItemService.findAllContractItemList();
-//        int start = (int) pageable.getOffset();
-//        int end = Math.min((start + pageable.getPageSize()), contractitemList.size());
-//
-//        List<ContractItem> pageContent = contractitemList.subList(start, end);
-//        Page<ContractItem> contractItems = new PageImpl<>(pageContent, pageable, contractitemList.size());
-//        model.addAttribute("contractitemList", contractItems);
-//
-//        return "/part1/contractForm";
-//    }
-
-
-
-
+    
 
     @GetMapping("/NocontractItem")
-    public String NocontractItem(Company company , Item item , Model model ,@PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String NocontractItem(Company company , Item item , Model model ,@PageableDefault(size = 2, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
 //      모든 업체 리스트 출력
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
-
-
-        
 //       페이징 처리
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -100,7 +75,6 @@ public class ConatractItemController {
         List<Item> pageContent = NocontractItem.subList(start, end);
         Page<Item> NocontractItems = new PageImpl<>(pageContent, pageable, NocontractItem.size());
         model.addAttribute("NocontractItems", NocontractItems);
-
         return "/part1/NocontractForm";
     }
 
