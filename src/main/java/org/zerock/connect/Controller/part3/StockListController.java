@@ -29,7 +29,7 @@ public class StockListController {
     //  재고현황관리
 //    전체조회
     @GetMapping("/stockList")
-    public String stockList(Model model , @PageableDefault(size = 10, sort = "totalOrderCount", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String stockList(Model model , @PageableDefault(size = 1, sort = "totalOrderCount", direction = Sort.Direction.ASC) Pageable pageable) {
         System.out.println("재고현황관리");
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
@@ -46,7 +46,7 @@ public class StockListController {
     }
     //    날짜별로 조회
     @GetMapping("/stockDateList")
-    public String stockDateList(Model model , @RequestParam("start_date")LocalDate start_date, @RequestParam("end_date") LocalDate end_date ,@PageableDefault(size = 10, sort = "totalOrderCount", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String stockDateList(Model model , @RequestParam("start_date")LocalDate start_date, @RequestParam("end_date") LocalDate end_date ,@PageableDefault(size = 1, sort = "totalOrderCount", direction = Sort.Direction.ASC) Pageable pageable) {
         System.out.println("재고 날짜별 조회");
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);

@@ -41,8 +41,8 @@ public class ContractItemService {
         return contractItemRepository.selectByConitemName(itemName);
     }
 
-//    public ContractItem findByitemIndex(Long itemIndex){
-//        return contractItemRepository.findContractItemByItemItemIndex(itemIndex);
-//    }
+    public int countContractItemcount(){
+        return contractItemRepository.countContractItemcount();
+    }
 }
 

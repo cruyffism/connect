@@ -109,7 +109,7 @@
                 <th scope="col">재고수량</th>
                 <th scope="col">출고수량</th>
                 <th scope="col">품목가격</th>
-                <th scope="col">사용된 가격</th>
+                <th scope="col">남은 재고가격</th>
             </tr>
             </thead>
             <tbody>
@@ -122,7 +122,7 @@
                     <td th:text="${releasesList.totalReceiveCount}"></td>
                     <td th:text="${releasesList.totalOrderCount}"></td>
                     <td th:text="${releasesList.contractItem.contractPrice}"></td>
-                    <td th:text="${releasesList.totalOrderCount} * ${releasesList.contractItem.contractPrice} + 원"></td>
+                    <td th:text="${releasesList.totalReceiveCount} * ${releasesList.contractItem.contractPrice} + 원"></td>
                 </tr>
             </th:block>
             </tbody>

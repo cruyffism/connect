@@ -36,7 +36,7 @@
     var receiveYcount = [[${receiveYcount}]]; // 수령 발주 수
 
     // 그래프 데이터 설정
-    var labels = ['검수 예정 품목 수', '발주 리스트 수', '미수령 발주 수', '수령 발주 수'];
+    var labels = ['계약완료된 품목수', '발주 가능 품목 수', '진척검수 진행중', '수령 입고 수'];
     var data = [procurementPlanListCount, ordersListCount, receiveNcount, receiveYcount];
 
     // 그래프 생성
@@ -88,10 +88,10 @@
 
     <thead class="table-secondary">
     <tr>
-        <th scope="col">검수 예정 품목 수</th>
-        <th scope="col">발주 리스트 수</th>
-        <th scope="col">미수령 발주 수</th>
-        <th scope="col">수령 발주 수</th>
+        <th scope="col">계약완료된 품목수</th>
+        <th scope="col">발주 가능 품목 수</th>
+        <th scope="col">진척검수 진행중</th>
+        <th scope="col">수령 입고 수</th>
     </tr>
     </thead>
     <tbody>

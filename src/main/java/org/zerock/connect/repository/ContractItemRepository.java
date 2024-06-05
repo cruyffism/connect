@@ -41,5 +41,7 @@ public interface ContractItemRepository extends JpaRepository <ContractItem, Lon
             "and C.item.itemName = :itemName")
     List<ContractItem> selectByConitemName(@Param("itemName") String itemName);
 
-//    ContractItem findContractItemByItemItemIndex(Long itemIndex);
+
+    @Query(value = "select count(C) from ContractItem C ")
+    int countContractItemcount();
 }
