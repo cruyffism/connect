@@ -4,7 +4,7 @@ $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실�
     /*document.getElementById('startDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅
     document.getElementById('endDate').value = new Date().toISOString().substring(0, 10); //현재 날짜로 세팅*/
     procurementPlanListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
-    orderChoiceAjax(0, 0);
+    orderChoiceAjax(0, 0,0);
     orderListAjax(1, 0); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
     document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10);
 
@@ -26,7 +26,7 @@ function procurementPlanListAjax(page) { // 위에서 보낸 매개변수 1을 �
         success: function (data) {
             $(innerHtml).html(data)
             $("table tr").not(this).removeClass('table-info'); // 배경색 스타일 준 class 전체 제거
-            orderChoiceAjax(0, 0);
+            orderChoiceAjax(0, 0,0);
             orderListAjax(1, 0); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
             setTimeout(function () {
             }, 1000)
@@ -37,7 +37,7 @@ function procurementPlanListAjax(page) { // 위에서 보낸 매개변수 1을 �
     })
 }
 
-function orderChoiceAjax(planNum, index) {
+function orderChoiceAjax(planNum, index,planCount) {
     const innerHtml = $("#orderRegister");
     const f = document.getElementById("form1");
     f.planNum.value = planNum;
@@ -57,7 +57,7 @@ function orderChoiceAjax(planNum, index) {
             }
             document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
             document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
-            updateTotalPrice(1); // 가격계산 메소드 실행
+            updateTotalPrice(planCount); // 가격계산 메소드 실행
             orderListAjax(1, planNum);
             setTimeout(function () {
             }, 1000)
@@ -81,10 +81,12 @@ function saveOrder() {
         async: false,
         success: function (data) {
             $(innerHtml).html(data); // 발주폼 뿌리기
-            document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
-            document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
-            updateTotalPrice(0); // 가격계산 메소드 실행/
-            orderListAjax(1, f.planNum.value);
+            procurementPlanListAjax(1);
+            // $("table tr").not(this).removeClass('table-info'); // 배경색 스타일 준 class 전체 제거
+            // document.getElementById('orderDate2').textContent = new Date().toISOString().substring(0, 10); // 발주일 셋팅
+            // document.getElementById('receiveDueDate').value = new Date().toISOString().substring(0, 10);
+            // // updateTotalPrice(0); // 가격계산 메소드 실행/
+            // orderListAjax(1, f.planNum.value);
             setTimeout(function () {
             }, 1000)
         },
@@ -210,23 +212,19 @@ function caldate2() {
 
 
 //가격 계산
-function updateTotalPrice(isCheck) {
+function updateTotalPrice(planCount) {
     // 단가가격
     const onePrice = document.getElementById('onePrice').value;
     // 수량
-    const amount = document.getElementById('orderCount').value;
-    if (isCheck === 0) { //취소 버튼 눌렀을때 1개 가격으로 초기화
-        document.getElementById('totalPrice1').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
-        document.getElementById('totalPrice2').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
-
-    } else { // 가격 계산 해주는 코드
-
-        // 단가 * 수량 계산 및 합계/공급가격 금액 형식 추가
-        document.getElementById('totalPrice1').textContent = (onePrice * amount).toLocaleString("ko-KR") + '원';
-        document.getElementById('totalPrice2').textContent = (onePrice * amount).toLocaleString("ko-KR") + '원';
-        // 단가 금액 형식 추가
-        document.getElementById('orderPrice').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
+    if(planCount === -1){
+        planCount = document.getElementById('orderCount').value;
     }
+
+    // 단가 * 수량 계산 및 합계/공급가격 금액 형식 추가
+    document.getElementById('totalPrice1').textContent = (onePrice * planCount).toLocaleString("ko-KR") + '원';
+    document.getElementById('totalPrice2').textContent = (onePrice * planCount).toLocaleString("ko-KR") + '원';
+    // 단가 금액 형식 추가
+    document.getElementById('orderPrice').textContent = (onePrice * 1).toLocaleString("ko-KR") + '원';
 
 }
 
@@ -236,7 +234,7 @@ function printForm(orderNum) {
     // var idx = document.getElementById('index' + orderNum);
 
     console.log("orderNum : ", orderNum)
-    var selectedRow = document.getElementById('index' + orderNum).closest('tr');
+    var selectedRow = document.getElementById('orderIndex' + orderNum).closest('tr');
     console.log("selectedRow : ", selectedRow)
 
     // 선택된 행의 데이터 가져오기
@@ -341,7 +339,6 @@ function savePDF() {
         console.error("Error generating PDF: ", error);
     });
 }
-
 
 
 //프린트하기

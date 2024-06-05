@@ -31,7 +31,7 @@
         <tbody>
         <th:block th:if="${purchaseOrderList.totalElements != 0}"
                   th:with="start=${(purchaseOrderList.number * purchaseOrderList.size) + 1}">
-            <tr th:each="orderList, status:${purchaseOrderList}" th:id="index + ${orderList.orderNum}">
+            <tr th:each="orderList, status:${purchaseOrderList}" th:id="orderIndex + ${orderList.orderNum}">
                 <td th:text="${start + status.index}"></td>
                 <td th:text="'PN-'+${orderList.orderNum}"></td>
                 <td th:text="${orderList.procurementPlan.contractItem.item.itemCode}"></td>

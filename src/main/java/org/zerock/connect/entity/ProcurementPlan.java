@@ -36,6 +36,6 @@ public class ProcurementPlan {
     @Column(nullable = false)
     private int planCount;
 
-    @OneToMany(mappedBy = "procurementPlan" )
-    private List<Orders> orders = new ArrayList<>();
+    @OneToOne(mappedBy = "procurementPlan" )
+    private Orders orders;
 }

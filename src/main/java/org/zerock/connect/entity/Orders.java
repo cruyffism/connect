@@ -26,7 +26,7 @@ public class Orders {
     @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY )
     private List<Progress> progresses = new ArrayList<>();
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "planNum" ,nullable = false)
     private ProcurementPlan procurementPlan;
 

@@ -69,7 +69,7 @@
             <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.item.itemName}"></td>
             <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.item.itemWidth}+'*'+${procurementPlan.contractItem.item.itemLength}+'*'+${procurementPlan.contractItem.item.itemHeight}"></td>
             <td th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.item.itemMaterial}"></td>
-            <td><input id="orderCount" name="orderCount" value="1" class="form-control form-control-sm" type="number" onchange="updateTotalPrice(1)" required></td>
+            <td><input id="orderCount" name="orderCount" th:value="${procurementPlan == null} ? '' : ${procurementPlan.planCount}" class="form-control form-control-sm" type="number" th:onchange="|javascript:updateTotalPrice(-1)|" required></td>
             <td id="orderPrice" th:text="${procurementPlan == null} ? '' : ${procurementPlan.contractItem.contractPrice}"></td>
             <td id="totalPrice1"></td>
             <td><input id="receiveDueDate" name="receiveDueDate" class="form-control form-control-sm" type="date"></td>
@@ -87,7 +87,7 @@
     <button id="btn4" type="button" class="btn btn-sm btn-primary" onclick="return saveOrder()">
         발주
     </button>
-    <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger" onclick="return updateTotalPrice(0)">
+    <button id="cancleBtn" type="reset" class="btn btn-sm btn-danger" th:onclick="|javascript:updateTotalPrice(${procurementPlan.planCount})|">
         취소
     </button>
 </div>
