@@ -47,9 +47,11 @@ public class GraphController {
         System.out.println(progresscount);
         model.addAttribute("receiveNcount", progresscount);
 
+        int orderList = ordersService.findAllorderscount();
+
 
 //발주가능품목수
-        int ordersListCount = ordersService.findAllorderscount()-progresscount-receiveYcount;
+        int ordersListCount = procurementPlanService.findAllprcurementPlancount()-orderList-progresscount-receiveYcount;
         System.out.println(ordersListCount);
         model.addAttribute("ordersListCount", ordersListCount);
 
