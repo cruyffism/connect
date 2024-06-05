@@ -103,37 +103,60 @@
                 </th:block>
                 </tbody>
             </table>
-            <div class="pagination-wrapper" style="margin: 30px auto; text-align: center">
-                <nav>
-                    <ul class="pagination">
-                        <li th:class="${ContractItemLists.first} ? 'page-item disabled' : 'page-item'">
-                            <a class="page-link" href="javascript:void(0)" th:onclick="|loadPage(1)|" aria-label="First">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li th:class="${ContractItemLists.first} ? 'page-item disabled' : 'page-item'">
-                            <a class="page-link" href="javascript:void(0)" th:onclick="|loadPage(${ContractItemLists.number})|" aria-label="Previous">
-                                <span aria-hidden="true">&lt;</span>
-                            </a>
-                        </li>
-                        <th:block th:each="page: ${#numbers.sequence(1, ContractItemLists.totalPages)}">
-                            <li th:class="${page} == ${ContractItemLists.number + 1} ? 'page-item active' : 'page-item'">
-                                <a class="page-link" href="javascript:void(0)" th:onclick="|loadPage(${page})|" th:text="${page}"></a>
-                            </li>
-                        </th:block>
-                        <li th:class="${ContractItemLists.last} ? 'page-item disabled' : 'page-item'">
-                            <a class="page-link" href="javascript:void(0)" th:onclick="|loadPage(${ContractItemLists.number + 2})|" aria-label="Next">
-                                <span aria-hidden="true">&gt;</span>
-                            </a>
-                        </li>
-                        <li th:class="${ContractItemLists.last} ? 'page-item disabled' : 'page-item'">
-                            <a class="page-link" href="javascript:void(0)" th:onclick="|loadPage(${ContractItemLists.totalPages})|" aria-label="Last">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+
+
+
+            <div class="buttons_wrap" style="margin: 30px auto; text-align: center">
+                <tr class="pagination"
+                    th:with="start=${(ContractItemLists.number div 10) * 10 + 1},
+                 last=${(start + 9 < ContractItemLists.totalPages ? start + 9 : ContractItemLists.totalPages)}">
+                    <!-- Calculate how many pages to show on one screen -->
+                    <td>
+                        <a th:onclick="|javascript:loadPage(1)|" aria-label="First">
+                            <!-- Onclick is asynchronous, goes through AJAX, function name matches with js -->
+                            <span aria-hidden="true">첫 페이지</span> <!-- Click on the first page to bring up page 1 -->
+                        </a>
+                    </td>
+
+                    <td th:class="${ContractItemLists.first} ? 'disabled'">
+                        <a th:onclick="${ContractItemLists.first} ? '' : 'javascript:loadPage('+${ContractItemLists.number}+')'"
+                           aria-label="Previous">
+                            <span aria-hidden="true"><</span>
+                        </a> <!-- If it's the first page, keep it as is, otherwise go to the previous page -->
+                    </td>
+
+                    <th:block th:if="${last != 0}"> <!-- If not the first page -->
+                        <td th:each="page: ${#numbers.sequence(start, last)}"
+                            th:class="${page == ContractItemLists.number + 1} ? 'active'">
+                            <a th:text="${page}" th:onclick="|javascript:loadPage(${page})|"></a>
+                            <!-- Show pages as many times as there are pages -->
+                        </td>
+                    </th:block>
+                    <th:block th:if="${last == 0}"> <!-- If it's the first page -->
+                        <td class="active">
+                            <a th:text="1" th:onclick="|javascript:loadPage(1)|"></a> <!-- Always show the number 1 -->
+                        </td>
+                    </th:block>
+
+                    <td th:class="${ContractItemLists.last} ? 'disabled'">
+                        <a th:onclick="${ContractItemLists.last} ? '' : 'javascript:loadPage('+${ContractItemLists.number + 2}+')'"
+                           aria-label="Next">
+                            <span aria-hidden="true">></span> <!-- If it's the last page, keep it as is, otherwise go to the next page -->
+                        </a>
+                    </td>
+
+                    <td>
+                        <a th:onclick="|javascript:loadPage(${ContractItemLists.totalPages})|" aria-label="Last">
+                            <!-- Click on the last page to bring up the last page -->
+                            <span aria-hidden="true">마지막 페이지</span>
+                        </a>
+                    </td>
+                </tr>
             </div>
+
+
+
+
         </div>
     </div>
     <div style="margin: 10px 70px 100px 10px; width: 100%; height: 500px">

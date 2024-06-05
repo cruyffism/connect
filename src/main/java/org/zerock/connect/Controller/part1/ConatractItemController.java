@@ -41,7 +41,7 @@ public class ConatractItemController {
     DownloadFileService downloadFileService;
 
     @GetMapping("/contractItem")
-    public String contractItem(Company company , Item item , Model model ,@PageableDefault(size = 1, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String contractItem(Company company , Item item , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
 //      모든 업체 리스트 출력
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
@@ -61,7 +61,7 @@ public class ConatractItemController {
     
 
     @GetMapping("/NocontractItem")
-    public String NocontractItem(Company company , Item item , Model model ,@PageableDefault(size = 2, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String NocontractItem(Company company , Item item , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
 //      모든 업체 리스트 출력
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
@@ -80,7 +80,7 @@ public class ConatractItemController {
 
 //   제품선택하기
     @GetMapping("selectContractItem")
-    public String selectContractItem(@RequestParam("selectItemIndex")Long itemIndex , Model model ,@PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String selectContractItem(@RequestParam("selectItemIndex")Long itemIndex , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
         System.out.println(itemIndex);
 
 //선택한 item정보 모델로 출력하기
@@ -129,9 +129,6 @@ public class ConatractItemController {
 //        contractitem의 계약시간을 현재시간으로 강제주입
         contractItem.setContractDate(LocalDate.now());
         contractItem.setContractYn("1");
-
-
-
         ContractItem resultContract = contractItemService.saveContractItem(contractItem);
 
 

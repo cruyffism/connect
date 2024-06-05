@@ -32,7 +32,7 @@ public class ProcurementPlanController {
     
 //    조달 계획 등록폼
     @GetMapping("/procurementPlan")
-    public String procurementPlan(Model model , ContractItem contractItem,@PageableDefault(size = 1, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String procurementPlan(Model model , ContractItem contractItem,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -53,7 +53,7 @@ public class ProcurementPlanController {
     }
 
     @GetMapping("/selectProcurementItem")
-    public String selectProcurementItem(@RequestParam("conitemNo") Long conitemNo , Model model ,@PageableDefault(size = 1, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String selectProcurementItem(@RequestParam("conitemNo") Long conitemNo , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
