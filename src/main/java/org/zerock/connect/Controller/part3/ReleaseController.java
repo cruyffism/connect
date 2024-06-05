@@ -41,7 +41,7 @@ public class ReleaseController {
         System.out.println("출고관리");
 
         // 입고 완료 품목
-        List<Receive> receiveList = receiveService.getAllReceive();
+        List<Receive> receiveList = receiveService.getAllReceiveSortedByReceiveDate();
         model.addAttribute("receiveList", receiveList);
 
         return "part3/releaseList";

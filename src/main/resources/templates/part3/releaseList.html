@@ -149,6 +149,7 @@
                 <thead class="table-secondary">
                 <tr>
                     <th scope="col"></th>
+                    <th scope="col">입고일자</th>
                     <th scope="col">제품명</th>
                     <th scope="col">품목코드</th>
                     <th scope="col">품목명</th>
@@ -171,6 +172,7 @@
                             <input type="radio" name="selectedReceiveNum" th:value="${receive.receiveNum}">
                         </label>
                     </td>
+                    <td th:text="${receive.receiveDate}"></td>
                     <td th:text="${receive.orders.procurementPlan.contractItem.item.product.productName}"></td>
                     <td th:text="${receive.orders.procurementPlan.contractItem.item.itemCode}"></td>
                     <td th:text="${receive.orders.procurementPlan.contractItem.item.itemName}"></td>
