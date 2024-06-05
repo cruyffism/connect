@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.connect.Service.part1.ContractItemService;
 import org.zerock.connect.Service.part1.ProcurementPlanService;
 import org.zerock.connect.Service.part2.OrdersService;
 import org.zerock.connect.Service.part3.ReceiveService;
@@ -30,25 +31,33 @@ public class GraphController {
     @Autowired
     ReceiveService receiveService;
 
+    @Autowired
+    ContractItemService contractItemService;
+
 
     @GetMapping("/graph")
     public String graph(ProcurementPlan procurementPlan, Orders orders, Receive receive, Model model) {
-
-        int procurementPlanListCount = procurementPlanService.findAllprcurementPlancount();
-        System.out.println(procurementPlanListCount);
-        model.addAttribute("procurementPlanListCount", procurementPlanListCount);
-
-        int ordersListCount = ordersService.findAllorderscount();
-        System.out.println(ordersListCount);
-        model.addAttribute("ordersListCount", ordersListCount);
-
-        int receiveNcount = receiveService.findByreceiveN();
-        System.out.println(receiveNcount);
-        model.addAttribute("receiveNcount", receiveNcount);
-
+//수령입고수
         int receiveYcount = receiveService.findByreceiveY();
         System.out.println(receiveYcount);
         model.addAttribute("receiveYcount", receiveYcount);
+
+//진척검수 진행중
+        int progresscount = receiveService.progresscount()-receiveYcount;
+        System.out.println(progresscount);
+        model.addAttribute("receiveNcount", progresscount);
+
+
+//발주가능품목수
+        int ordersListCount = ordersService.findAllorderscount()-progresscount-receiveYcount;
+        System.out.println(ordersListCount);
+        model.addAttribute("ordersListCount", ordersListCount);
+
+
+//계약완료된 품목수
+        int procurementPlanListCount = contractItemService.countContractItemcount();
+        System.out.println(procurementPlanListCount);
+        model.addAttribute("procurementPlanListCount", procurementPlanListCount);
 
         return "/part2/GraphForm";
     }
