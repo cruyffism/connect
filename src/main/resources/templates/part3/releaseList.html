@@ -40,6 +40,35 @@
             justify-content: center;
             align-items: center;
         }
+
+        /*필터링드롭다운*/
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+            width: 40px; /* 작은 칸 크기로 설정 */
+            padding: 0 0 0 0;
+        }
+        .dropdown-container select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: none;
+            border: none;
+            width: 100%; /* 부모 크기에 맞춤 */
+            cursor: pointer;
+        }
+        .dropdown-container::after {
+            content: '▼';
+            position: absolute;
+            right: 5px; /* 위치 조정 */
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            padding: 0 0 0 0;
+        }
+        .dropdown-container select:invalid {
+            color: gray; /* 선택되지 않았을 때의 색상 */
+        }
     </style>
 
     <script>
@@ -130,20 +159,84 @@
         </div>
         <!-- 옵션 검색 -->
 
+        <script>
+            //테이블필터링
+            document.addEventListener('DOMContentLoaded', function () {
+                addDropdownFilters();
+            });
+
+            function addDropdownFilters() {
+                const table = document.querySelector('table');
+                const headers = table.querySelectorAll('thead th');
+                const tbody = table.querySelector('tbody');
+
+                headers.forEach((header, colIndex) => {
+                    if (colIndex === 0 || colIndex > 10) return;
+                    const dropdownContainer = document.createElement('div');
+                    dropdownContainer.classList.add('dropdown-container');
+
+                    const dropdown = document.createElement('select');
+                    dropdown.classList.add('form-select', 'form-select-sm');
+                    dropdown.required = true; // 필수 선택을 강제
+                    dropdown.style.width = '100%';
+
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '';
+                    defaultOption.text = 'All';
+                    defaultOption.selected = true;
+                    dropdown.appendChild(defaultOption);
+
+                    const uniqueValues = new Set();
+                    tbody.querySelectorAll(`tr td:nth-child(${colIndex + 1})`).forEach(cell => {
+                        uniqueValues.add(cell.textContent.trim());
+                    });
+
+                    uniqueValues.forEach(value => {
+                        const option = document.createElement('option');
+                        option.value = value;
+                        option.text = value;
+                        dropdown.appendChild(option);
+                    });
+
+                    dropdown.addEventListener('change', function () {
+                        filterTable(colIndex, this.value);
+                    });
+
+                    dropdownContainer.appendChild(dropdown);
+                    header.appendChild(dropdownContainer);
+                });
+            }
+
+            function filterTable(colIndex, filterValue) {
+                const rows = document.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const cell = row.querySelector(`td:nth-child(${colIndex + 1})`);
+                    if (filterValue === '' || cell.textContent.trim() === filterValue) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+
 
         <div style="min-height: 300px; width: 100%; margin-left: 10px;">
             <table class="table" style="width: 99%; margin-top: 8px; text-align: center;">
                 <colgroup>
-                    <col width="5%">
+                    <col width="3%">
                     <col width="9.5%">
                     <col width="9.5%">
                     <col width="9.5%">
                     <col width="9.5%">
+                    <col width="10%">
                     <col width="9.5%">
                     <col width="9.5%">
+                    <col width="11%">
+                    <col width="9%">
+                    <col width="7%">
                     <col width="9.5%">
-                    <col width="9.5%">
-                    <col width="9.5%">
+                    <col width="7%">
                     <col width="9.5%">
                 </colgroup>
                 <thead class="table-secondary">
@@ -154,12 +247,12 @@
                     <th scope="col">품목코드</th>
                     <th scope="col">품목명</th>
                     <th scope="col">조달납기일</th>
-                    <th scope="col">생산시작일</th>
-                    <th scope="col">생산종료일</th>
+                    <th scope="col">생산시작</th>
+                    <th scope="col">생산종료</th>
                     <th scope="col">출고가능수량</th>
-                    <th scope="col">발주날짜</th>
+                    <th scope="col">발주일</th>
                     <th scope="col">비고</th>
-                    <th scope="col">출고일자</th>
+                    <th scope="col">출고일</th>
                     <th scope="col">출고수량</th>
                     <th scope="col"></th>
                 </tr>
@@ -187,7 +280,7 @@
                     </td>
                     <td>
                         <label>
-                            <input type="number" style="width: 120px" name="releaseCount">
+                            <input type="number" style="width: 90px" name="releaseCount">
                         </label>
                     </td>
                     <td>

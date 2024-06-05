@@ -1,6 +1,7 @@
 .container {
   margin: 70px auto;
   height: 100%;
+  max-width: 1600px;
 }
 
 #header {
@@ -106,8 +107,4 @@ h3{
 
 #itemList {
   margin-top: 30px;
-}
-
-a:not([href]):not([class]), a:not([href]):not([class]):hover {
-  cursor: pointer;
 }

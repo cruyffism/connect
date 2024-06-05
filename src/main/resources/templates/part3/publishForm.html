@@ -13,13 +13,13 @@
     <!-- PDF로 저장하기 위해 -->
     <script type="text/javascript" th:src="@{/js/part3/publishForm.js}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!--임포트: jquery를 js에서 사용하기 위해서 -->
-    <link href="/css/part3/receiveList.css" rel="stylesheet">
+    <link href="/css/part3/publishForm.css" rel="stylesheet">
     <style>
 
-        .container {
+        /*.container {
             margin: 70px auto;
             height: 100%;
-        }
+        }*/
 
         .part {
             float: left;
@@ -354,7 +354,7 @@
     <!-- 거래명세서 작성 -->
 
     <!-- 거래명세서 발행 완료 -->
-    <div>
+    <div style="width: 100%;">
         <br>
         <h3 style="margin-bottom: 15px;">거래명세서 발행 리스트</h3>
         <hr>
@@ -362,7 +362,7 @@
         <!--    <button type="button" class="btn btn-outline-success show"  onclick="handlePublishButtonClick()" style="float: right; margin: 20px 40px 20px 0;">명세서 보기</button>-->
 
         <table class="table"
-               style="text-align: center;">
+               style="text-align: center; width: 100%;">
             <colgroup>
                 <col width="8%">
                 <col width="10%">

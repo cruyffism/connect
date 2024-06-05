@@ -145,3 +145,6 @@ h3{
   cursor: pointer;
 }
 
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+  cursor: pointer;
+}

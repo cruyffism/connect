@@ -28,6 +28,17 @@
         .table th.assy-code, .table td.assy-code { width: 100px; }
         .table th.part-code, .table td.part-code { width: 100px; }
         .table th.item-material, .table td.item-material { width: 120px; }
+
+        /*.pagination td a {*/
+        /*    cursor: pointer;*/
+        /*}*/
+        /*.pagination td a:hover {*/
+        /*    text-decoration: underline;*/
+        /*}*/
+
+        a:not([href]):not([class]), a:not([href]):not([class]):hover {
+            cursor: pointer;
+        }
     </style>
     <script>
         function loadPage(page) {
