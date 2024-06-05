@@ -139,6 +139,11 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
 //    @Query("SELECT r FROM Receive r WHERE r.orders.procurementPlan.contractItem.item.itemName LIKE %:keyword%")
 //    List<Receive> searchReceiveByItemName(String keyword);
+
+    @Query("SELECT r FROM Receive r WHERE r.receiveYn = 'Y' AND r.receiveNum NOT IN (SELECT p.receive.receiveNum FROM Publish p)")
+    List<Receive> findReceiveNotInPublishAndReceiveYn();
+
+
 }
 
 

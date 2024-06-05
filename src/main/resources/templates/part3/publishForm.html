@@ -105,9 +105,9 @@
     <br>
     <h3>입고 완료 품목</h3>
     <hr>
-    <div style="width: 99%; height: 550px;">
+    <div style="width: 100%; height: 550px;">
         <!-- 옵션 검색 -->
-        <div style="margin: 8px 0 0 0; width: 98%; padding: 0 0 10px 15px;">
+        <div style="margin: 8px 0 0 0; width: 99%; padding: 0 0 10px 15px;">
 <!--            <select id="searchOption" style="margin: 0 0 5px 20px; padding: 8px; border-radius: 10px; border-color: rgb(190, 189, 189);">-->
 <!--&lt;!&ndash;                <option value="companyName">업체명</option>&ndash;&gt;-->
 <!--                <option value="itemName">품목명</option>-->
@@ -135,25 +135,28 @@
         <div style="min-height: 300px; width: 99%; margin-left: 10px;">
             <table class="table" style="margin-top: 15px; text-align: center;">
                 <colgroup>
-                    <col width="5%">
-                    <col width="13.5%">
+                    <col width="3">
+                    <col width="10%">
+                    <col width="8%">
                     <col width="13%">
-                    <col width="15.5%">
-
-                    <col width="13.5%">
-                    <col width="13%">
-                    <col width="13%">
-                    <col width="13%">
+                    <col width="15%">
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
                 </colgroup>
                 <thead class="table-secondary">
                 <tr>
                     <th scope="col"></th>
+                    <th scope="col">입고일자</th>
                     <th scope="col">발주번호</th>
                     <th scope="col">업체명</th>
                     <th scope="col">품목코드</th>
                     <th scope="col">품목명</th>
                     <th scope="col">발주일</th>
                     <th scope="col">발주수량</th>
+                    <th scope="col">입고수량</th>
                     <th scope="col">단가</th>
                 </tr>
                 </thead>
@@ -173,11 +176,13 @@
                         <input type="hidden" class="comManager"
                                th:value="${receiveList.orders.procurementPlan.contractItem.company.comManager}">
                     </td>
+                    <td th:text="${receiveList.receiveDate}"></td>
                     <td th:text="${receiveList.orders.orderNum}"></td>
                     <td th:text="${receiveList.orders.procurementPlan.contractItem.company.comName}"></td>
                     <td th:text="${receiveList.orders.procurementPlan.contractItem.item.itemCode}"></td>
                     <td th:text="${receiveList.orders.procurementPlan.contractItem.item.itemName}"></td>
                     <td th:text="${receiveList.orders.orderDate}"></td>
+                    <td th:text="${receiveList.orders.orderCount}"></td>
                     <td th:text="${receiveList.orders.orderCount}"></td>
                     <td th:text="${receiveList.orders.procurementPlan.contractItem.contractPrice}">
                 </tr>
@@ -359,25 +364,29 @@
         <table class="table"
                style="text-align: center;">
             <colgroup>
-                <col width="11%">
-                <col width="11%">
-                <col width="11%">
-                <col width="11%">
-                <col width="11%">
-                <col width="11%">
-                <col width="11%">
-                <col width="11%">
-                <col width="11%">
+                <col width="8%">
+                <col width="10%">
+                <col width="10%">
+                <col width="8%">
+                <col width="10%">
+                <col width="13%">
+                <col width="12%">
+                <col width="8%">
+                <col width="8%">
+                <col width="8%">
+                <col width="5%">
             </colgroup>
             <thead class="table-secondary">
             <tr>
-                <th scope="col">거래명세서 번호</th>
+                <th scope="col">명세서 번호</th>
                 <th scope="col">발행일</th>
+                <th scope="col">입고일자</th>
                 <th scope="col">발주번호</th>
                 <th scope="col">업체명</th>
                 <th scope="col">품목코드</th>
                 <th scope="col">품목명</th>
                 <th scope="col">발주수량</th>
+                <th scope="col">입고수량</th>
                 <th scope="col">발행담당자</th>
                 <th scope="col"></th>
             </tr>
@@ -386,13 +395,15 @@
             <tr th:each="publish : ${publishList}">
                 <td th:text="${publish.invoiceNumber}"></td>
                 <td th:text="${publish.invoiceDate}"></td>
+                <td th:text="${publish.receive.receiveDate}"></td>
                 <td th:text="${publish.receive.orders.orderNum}"></td>
                 <td th:text="${publish.receive.orders.procurementPlan.contractItem.company.comName}"></td>
                 <td th:text="${publish.receive.orders.procurementPlan.contractItem.item.itemCode}"></td>
                 <td th:text="${publish.receive.orders.procurementPlan.contractItem.item.itemName}"></td>
                 <td th:text="${publish.receive.orders.orderCount}"></td>
+                <td th:text="${publish.receive.orders.orderCount}"></td>
                 <td th:text="${publish.publisher}"></td>
-                <td><a th:href="@{/part3/invoice(invoiceNumber=${publish.getInvoiceNumber()})}">명세서 보기</a></td>
+                <td><a th:href="@{/part3/invoice(invoiceNumber=${publish.getInvoiceNumber()})}">명세서</a></td>
             </tr>
             </tbody>
         </table>

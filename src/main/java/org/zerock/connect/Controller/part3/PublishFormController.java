@@ -43,16 +43,8 @@ public class PublishFormController {
         System.out.println("입고완료품목");
 
         // 입고 완료 품목
-        List<Receive> receiveList = receiveService.findReceiveNotInPublish();
+        List<Receive> receiveList = receiveService.findReceiveNotInPublishAndReceiveYn();
         model.addAttribute("receiveList", receiveList);
-
-//        List<Receive> receiveList;
-//        if (option != null && keyword != null && !keyword.isEmpty()) {
-//            receiveList = receiveService.searchReceive(option, keyword);
-//        } else {
-//            receiveList = receiveService.findReceiveNotInPublish();
-//        }
-//        model.addAttribute("receiveList", receiveList);
 
         System.out.println("거래명세서 발행 완료 리스트");
 
