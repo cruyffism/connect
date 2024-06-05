@@ -234,7 +234,7 @@ function printForm(orderNum) {
     // var idx = document.getElementById('index' + orderNum);
 
     console.log("orderNum : ", orderNum)
-    var selectedRow = document.getElementById('index' + orderNum).closest('tr');
+    var selectedRow = document.getElementById('orderIndex' + orderNum).closest('tr');
     console.log("selectedRow : ", selectedRow)
 
     // 선택된 행의 데이터 가져오기
