@@ -48,6 +48,11 @@
     .table th.part-code, .table td.part-code { width: 100px; }
     .table th.item-material, .table td.item-material { width: 120px; }
 
+    /*.w1 {*/
+    /*  white-space: nowrap; !* 텍스트가 줄 바꿈되지 않도록 설정 *!*/
+    /*  overflow: hidden; !* 텍스트가 요소를 넘어가면 숨김 처리 *!*/
+    /*  text-overflow: ellipsis; !* 텍스트가 요소를 넘어가면 '...'으로 대체 *!*/
+    /*}*/
   </style>
 </head>
 <body>
@@ -214,7 +219,7 @@
 
     <!-- 업체 검색 태그 종료 -->
 
-    <div style="width: 1180px; max-height: 400px; margin: 10px 20px 30px 5PX; height: 500px;" >
+    <div style="width: 100%; max-height: 400px; margin: 10px 20px 30px 5PX; height: 500px;" >
 <!--      <form class="d-flex" id="form1" action="#" role="search" style="margin-top: 10px; width: 500px; padding: 20px 0 0 40px;">-->
 <!--        <input type="hidden" id="page" name="page" value="1"> &lt;!&ndash;page 값 넘기기&ndash;&gt;-->
 <!--        <input id="conitemNo" name="conitemNo" type="hidden">-->
@@ -222,7 +227,17 @@
 <!--      </form>-->
 
 <!--      <table class="table" style="margin: 20px 0 0 5px; width: 1000px; text-align: center;">-->
-      <table class="table" style="margin: 20px 0 0 5px; width: 1180px; text-align: center;">
+      <table class="table" style="margin: 20px 0 0 0; width: 99%; text-align: center;">
+        <colgroup>
+          <col width="9%">
+          <col width="13%">
+          <col width="13%">
+          <col width="13%">
+          <col width="14%">
+          <col width="15%">
+          <col width="10%">
+          <col width="13%">
+        </colgroup>
         <thead class="table-secondary">
         <tr>
           <!--        <th scope="col">사업자 번호</th>-->
@@ -245,7 +260,7 @@
             <!--            <td th:text="${AllContractItem.itemIndex}"></td>-->
 <!--            <td th:text="${AllContractItem.contractFile}"></td>-->
             <td scope="col">
-              <a th:href="@{/part1/Condownload(downloadfile=${AllContractItem.contractFile})}" th:name="downloadfile" th:text="${AllContractItem.item.product.productName}+'_'+${AllContractItem.item.itemName}+'_'+${AllContractItem.company.comName}+'_'+${AllContractItem.getContractDate()}"></a>
+              <a class="w1" th:href="@{/part1/Condownload(downloadfile=${AllContractItem.contractFile})}" th:name="downloadfile" th:text="${AllContractItem.item.product.productName}+'_'+${AllContractItem.item.itemName}+'_'+${AllContractItem.company.comName}+'_'+${AllContractItem.getContractDate()}"></a>
             </td>
             <td th:text="${AllContractItem.contractDate}"></td>
             <td th:text="${AllContractItem.item.product.productId}"></td>
@@ -264,6 +279,45 @@
         </th:block>
         </tbody>
       </table>
+
+      <script>
+        // 텍스트를 자르고 '...'을 추가하는 함수
+        function truncateText(element, maxLength) {
+          var text = element.innerText;
+          if (text.length > maxLength) {
+            element.innerText = text.substring(0, maxLength) + '...';
+          }
+        }
+
+        // 테이블의 각 열에 대해 텍스트를 자르고 '...'을 추가
+        function applyTruncation() {
+          var maxLength = 15; // 최대 길이 설정
+          var cells = document.querySelectorAll('.w1'); // 클래스가 'w1'인 모든 요소 선택
+          cells.forEach(function (cell) {
+            truncateText(cell, maxLength); // 텍스트 자르기 함수 호출
+          });
+        }
+
+        // 페이지 로드 후 실행 및 Mutation Observer 생성
+        document.addEventListener('DOMContentLoaded', function () {
+          applyTruncation(); // 페이지가 로드될 때 텍스트 자르기 적용
+
+          // Mutation Observer 생성
+          var observer = new MutationObserver(function(mutationsList) {
+            for(var mutation of mutationsList) {
+              if (mutation.type === 'childList') {
+                applyTruncation(); // 새로운 콘텐츠가 추가될 때마다 텍스트 자르기 적용
+              }
+            }
+          });
+
+          // 관찰 대상 엘리먼트 설정 - 테이블의 tbody 요소)
+          var targetNode = document.getElementById('contractList');
+
+          // Mutation Observer 시작
+          observer.observe(targetNode, { childList: true });
+        });
+      </script>
 
       <div class="buttons_wrap" style="margin: 30px auto; text-align: center">
         <tr class="pagination"
