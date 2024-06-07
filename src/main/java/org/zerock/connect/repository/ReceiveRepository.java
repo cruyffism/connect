@@ -81,43 +81,50 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
             "group by r.receive.orders.procurementPlan.planNum")
     List<ReleasesDTO> searchDateStockList(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query(value = "SELECT u.unitName, SUM(r.receive.receiveCount * c.contractPrice) as totalAmount " +
-            "FROM Releases r " +
-            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
-            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
-            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
-            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
-            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
-            "JOIN Unit u ON i.unit.unitCode = u.unitCode " +
-            "GROUP BY u.unitCode")
+//    @Query(value = "SELECT u.unitName, SUM(r.receive.receiveCount * c.contractPrice) as totalAmount " +
+//            "FROM Releases r " +
+//            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
+//            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
+//            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
+//            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
+//            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
+//            "JOIN Unit u ON i.unit.unitCode = u.unitCode " +
+//            "GROUP BY u.unitCode")
+    @Query(value = "select r.orders.procurementPlan.contractItem.item.unit.unitName, sum(r.receiveCount * r.orders.procurementPlan.contractItem.contractPrice) " +
+            "from Receive r group by r.orders.procurementPlan.contractItem.item.unit.unitCode")
 
 //    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
     List<Object[]> groupbyUnitcode();
 
-    @Query(value = "SELECT a.assyName, SUM(r.receive.receiveCount * c.contractPrice) as totalAmount " +
-            "FROM Releases r " +
-            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
-            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
-            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
-            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
-            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
-            "JOIN Assy a ON i.assy.assyCode = a.assyCode " +
-            "GROUP BY a.assyCode")
+//    @Query(value = "SELECT a.assyName, SUM(r.receive.receiveCount * c.contractPrice) as totalAmount " +
+//            "FROM Releases r " +
+//            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
+//            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
+//            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
+//            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
+//            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
+//            "JOIN Assy a ON i.assy.assyCode = a.assyCode " +
+//            "GROUP BY a.assyCode")
 
-//    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
+    @Query(value = "select r.orders.procurementPlan.contractItem.item.assy.assyName, sum(r.receiveCount * r.orders.procurementPlan.contractItem.contractPrice) " +
+            "from Receive r group by r.orders.procurementPlan.contractItem.item.assy.assyCode")
+
+
     List<Object[]> groupbyAssycode();
 
-    @Query(value = "SELECT part.partName, SUM(r.receive.receiveCount * c.contractPrice) as totalAmount " +
-            "FROM Releases r " +
-            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
-            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
-            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
-            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
-            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
-            "JOIN Part part ON i.part.partCode = part.partCode " +
-            "GROUP BY part.partCode")
+//    @Query(value = "SELECT part.partName, SUM(r.receive.receiveCount * c.contractPrice) as totalAmount " +
+//            "FROM Releases r " +
+//            "JOIN Receive re ON r.receive.receiveNum = re.receiveNum " +
+//            "JOIN Orders o ON re.orders.orderNum = o.orderNum " +
+//            "JOIN ProcurementPlan p ON o.procurementPlan.planNum = p.planNum " +
+//            "JOIN ContractItem c ON p.contractItem.conitemNo = c.conitemNo " +
+//            "JOIN Item i ON c.item.itemIndex = i.itemIndex " +
+//            "JOIN Part part ON i.part.partCode = part.partCode " +
+//            "GROUP BY part.partCode")
 
-//    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
+    @Query(value = "select r.orders.procurementPlan.contractItem.item.part.partName, sum(r.receiveCount * r.orders.procurementPlan.contractItem.contractPrice) " +
+            "from Receive r group by r.orders.procurementPlan.contractItem.item.part.partCode")
+
     List<Object[]> groupbyPartcode();
 
     @Query("SELECT r FROM Receive r WHERE r.receiveNum NOT IN (SELECT p.receive.receiveNum FROM Publish p)")
@@ -143,6 +150,9 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
     @Query("SELECT r FROM Receive r WHERE r.receiveYn = 'Y' AND r.receiveNum NOT IN (SELECT p.receive.receiveNum FROM Publish p)")
     List<Receive> findReceiveNotInPublishAndReceiveYn();
 
+
+    @Query("select r from  Receive r where r.receiveDate between :startDate and :endDate ")
+    List<Receive> searchReceiveDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
 }
 

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.zerock.connect.Service.part3.ReceiveService;
 import org.zerock.connect.Service.part3.ReleasesDTO;
 import org.zerock.connect.Service.part3.ReleasesService;
 import org.zerock.connect.entity.ContractItem;
@@ -25,6 +26,9 @@ public class StockListController {
     @Autowired
     ReleasesService releasesService;
 
+    @Autowired
+    ReceiveService receiveService;
+
 
     //  재고현황관리
 //    전체조회
@@ -34,14 +38,14 @@ public class StockListController {
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
-        List<ReleasesDTO> releasesList = releasesService.groupbyReleases();
+        List<Receive> receiveList = receiveService.getAllReceive();
         int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), releasesList.size());
+        int end = Math.min((start + pageable.getPageSize()), receiveList.size());
 
 
-        List<ReleasesDTO> pageContent = releasesList.subList(start, end);
-        Page<ReleasesDTO> releasesLists = new PageImpl<>(pageContent, pageable, releasesList.size());
-        model.addAttribute("releasesList", releasesLists);
+        List<Receive> pageContent = receiveList.subList(start, end);
+        Page<Receive> receivesLists = new PageImpl<>(pageContent, pageable, receiveList.size());
+        model.addAttribute("receivesLists", receivesLists);
         return "part3/stockList";
     }
     //    날짜별로 조회
@@ -51,14 +55,14 @@ public class StockListController {
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
-        List<ReleasesDTO> releasesList = releasesService.searchDateStockList(start_date , end_date);
+        List<Receive> receiveList = receiveService.searchReceiveDate(start_date,end_date);
         int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), releasesList.size());
+        int end = Math.min((start + pageable.getPageSize()), receiveList.size());
 
 
-        List<ReleasesDTO> pageContent = releasesList.subList(start, end);
-        Page<ReleasesDTO> releasesLists = new PageImpl<>(pageContent, pageable, releasesList.size());
-        model.addAttribute("releasesList", releasesLists);
+        List<Receive> pageContent = receiveList.subList(start, end);
+        Page<Receive> receivesLists = new PageImpl<>(pageContent, pageable, receiveList.size());
+        model.addAttribute("receivesLists", receivesLists);
         return "part3/stockList";
     }
 

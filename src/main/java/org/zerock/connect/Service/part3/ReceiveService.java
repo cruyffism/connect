@@ -9,6 +9,7 @@ import org.zerock.connect.entity.Receive;
 import org.zerock.connect.repository.ReceiveRepository;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -61,5 +62,9 @@ public class ReceiveService {
     // 정렬된 입고 완료 품목
     public List<Receive> getAllReceiveSortedByReceiveDate() {
         return receiveRepository.findAll(Sort.by(Sort.Direction.ASC, "receiveDate"));
+    }
+
+    public List<Receive> searchReceiveDate(LocalDate startDate , LocalDate endDate){
+        return receiveRepository.searchReceiveDate(startDate,endDate);
     }
 }
