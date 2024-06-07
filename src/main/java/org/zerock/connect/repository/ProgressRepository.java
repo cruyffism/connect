@@ -30,5 +30,13 @@ public interface ProgressRepository extends JpaRepository<Progress, Long> {
 
     Integer deleteByProgressNum(Long progressNum);
 
+    //검수 처리 저장
+    @Modifying
+    @Query("update Progress p set p.progressAmount =:progressAmount, p.progressResult =:progressResult,  p.progressPercent =:percent where p.progressNum =:progressNum ")
+    Integer updateProgress(@Param("progressAmount") Integer progressAmount, @Param("progressResult") String progressResult, @Param("percent") Integer percent, @Param("progressNum") Long progressNum);
 
+    // 100% 이면 남은 등록 차수를 지우기
+    @Modifying
+    @Query("delete from Progress p where p.orders.orderNum =:orderNum and p.progressNum >:progressNum")
+    Integer deleteProgress(@Param("orderNum") Long orderNum, @Param("progressNum") Long progressNum);
 }

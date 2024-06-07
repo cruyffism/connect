@@ -75,7 +75,7 @@ public class ReleaseController {
             releases.setReceive(selectReceive);
             // 출고테이블 인서트
             Releases resultReleases = releasesService.save(releases);
-            return "redirect:/part3/releaseList";
+            return null;
         }
 
         // 출고 저장

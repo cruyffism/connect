@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <td style="font-weight: bold;">발주일자</td>
-            <td id="orderDate" th:text="${orders == null} ? '-' : ${orders.orderDate}"></td>
+            <td id="orderDate22" th:text="${orders == null} ? '-' : ${orders.orderDate}"></td>
         </tr>
         <tr>
             <td style="font-weight: bold;">입고예정일자</td>
@@ -73,11 +73,8 @@
         </tr>
         <tr>
             <td th:text="${progress == null} ? '1차' : ${progress.progressCount + 1 } +'차'"></td>
-            <td><input id="progressDate" name="progressDate" class="form-control form-control-sm" type="date"></td>
-            <!--<td><input id="progressAmount" name="progressAmount" class="form-control form-control-sm" type="number" onchange="limitNumber()" required></td>-->
-            <!--<td id="remaining" name="remaining" th:text="${orders == null} ? '-' : ${remaining}"></td>-->
-            <td><button id="btn3" type="button" class="btn btn-sm btn-success">등록</button></td>
-            <!--<td><input id="progressResult" name="progressResult" class="form-control form-control-sm" type="text" required></td>-->
+            <td><input id="progressDate" name="progressDate" class="form-control form-control-sm" type="date" onchange="return progressDateCheck()"></td>
+            <td><button th:if="${orders != null && remaining != 0}" id="btn3" type="button" class="btn btn-sm btn-success" onclick="return saveProgress()">등록</button></td>
         </tr>
         </tbody>
     </table>

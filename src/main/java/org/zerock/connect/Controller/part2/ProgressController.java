@@ -100,47 +100,47 @@ public class ProgressController {
     @PostMapping("/saveProgress")
     public String saveProgress(@ModelAttribute Progress progress, @ModelAttribute Orders orders, Model model, HttpServletResponse response) throws IOException {
 
-        //누적합계 계산
-        Integer totalAmount = progressService.totalAmount(orders.getOrderNum()) == null ? 0 : progressService.totalAmount(orders.getOrderNum());
-
-        //진척도 계산
-        double percent = (double) (progress.getProgressAmount() + totalAmount) / orders.getOrderCount() * 100;
+//        //누적합계 계산
+//        Integer totalAmount = progressService.totalAmount(orders.getOrderNum()) == null ? 0 : progressService.totalAmount(orders.getOrderNum());
+//
+//        //진척도 계산
+//        double percent = (double) (progress.getProgressAmount() + totalAmount) / orders.getOrderCount() * 100;
 
         progress.setOrders(orders);
-        progress.setProgressPercent((int) percent);
+        progress.setProgressPercent(0);
         Progress result = progressService.saveProgress(progress);
 
-        //입고 예정 테이블에 값을 넣기
-        Receive receive = new Receive();
+//        //입고 예정 테이블에 값을 넣기
+//        Receive receive = new Receive();
+//
+//        receive.setReceiveCount(orders.getOrderCount());
+//        receive.setReceiveDate(orders.getReceiveDueDate());
+//        receive.setReceiveInfo(orders.getOrderInfo());
+//        receive.setReceiveYn("N");
+//        receive.setOrders(orders);
 
-        receive.setReceiveCount(orders.getOrderCount());
-        receive.setReceiveDate(orders.getReceiveDueDate());
-        receive.setReceiveInfo(orders.getOrderInfo());
-        receive.setReceiveYn("N");
-        receive.setOrders(orders);
-
-        if (percent == 100) {
-            Receive outcome = progressService.save(receive);
-        } else {
-            System.out.println("receive = " + receive);
-        }
+//        if (percent == 100) {
+//            Receive outcome = progressService.save(receive);
+//        } else {
+//            System.out.println("receive = " + receive);
+//        }
 
 
         if (result != null) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
-            writer.println("<script>alert('검수 처리가 완료되었습니다.');</script>");
+            writer.println("<script>alert('검수계획 등록이 완료되었습니다.');</script>");
             writer.flush();
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
-            writer.println("<script>alert('검수 처리에 실패 하였습니다.');</script>");
+            writer.println("<script>alert('검수계획 등록에 실패 하였습니다.');</script>");
             writer.flush();
         }
 
         Orders orders2 = progressService.progressChoiceAjax(orders.getOrderNum());
         Progress progress2 = progressService.getMaxProgress(orders.getOrderNum()); // max 서비스 추가
-        Integer sumCount = progressService.totalAmount(orders.getOrderNum());
+        Integer sumCount = progressService.totalAmount(orders.getOrderNum()) == null ? 0 : progressService.totalAmount(orders.getOrderNum());
         Integer remaining = 0;
 
         if (orders != null) {
@@ -152,12 +152,92 @@ public class ProgressController {
         return "/part2/progressChoiceAjax";
     }
 
-    //검수 리스트 아작스
+    //검수 처리 아작스
     @GetMapping("/progressListAjax")
     public String progressListAjax(@RequestParam("orderNum") Long orderNum, Model model) {
         List<Progress> progress = progressService.progressListAjax(orderNum);
         System.out.println("progress = " + progress);
+        // result가 null인것중에 첫번째 행 찾기
+        Progress progress1 = progress.stream().filter(x -> x.getProgressResult() == null)
+                .findFirst().orElse(null);
+        Long progressNum = progress1 == null ? 0 : progress1.getProgressNum();
+
+        Orders orders = progressService.getOrderCount(orderNum);
+        Integer sumCount = progressService.totalAmount(orderNum) == null ? 0 : progressService.totalAmount(orderNum);
+        Integer remaining = 0;
+
+        if (orders != null) {
+            remaining = orders.getOrderCount() - sumCount;
+        }
         model.addAttribute("progressList", progress);
+        model.addAttribute("remaining", remaining);
+        model.addAttribute("progressNum", progressNum);
+        return "/part2/progressListAjax";
+    }
+
+    //검수 처리 저장
+    @PostMapping("/updateProgress")
+    public String updateProgress(@ModelAttribute Progress progress, @ModelAttribute Orders orders, Model model, HttpServletResponse response) throws IOException {
+        //누적합계 계산
+        Integer totalAmount = progressService.totalAmount(orders.getOrderNum()) == null ? 0 : progressService.totalAmount(orders.getOrderNum());
+
+        Orders orders2 = progressService.getOrderCount(orders.getOrderNum());
+
+        //진척도 계산
+        double percent = (double) (progress.getProgressAmount() + totalAmount) / orders2.getOrderCount() * 100;
+
+        Integer result = progressService.updateProgress(progress.getProgressAmount(), progress.getProgressResult(), percent, progress.getProgressNum());
+
+        if (percent == 100) {
+            // 100% 이면 남은 등록 차수를 지우기
+            Integer deleteProgress = progressService.deleteProgress(orders.getOrderNum(), progress.getProgressNum());
+        }
+
+
+        //입고 예정 테이블에 값을 넣기
+        Receive receive = new Receive();
+
+        receive.setReceiveCount(orders2.getOrderCount());
+        receive.setReceiveDate(orders2.getReceiveDueDate());
+        receive.setReceiveInfo(orders2.getOrderInfo());
+        receive.setReceiveYn("N");
+        receive.setOrders(orders2);
+
+        if (percent == 100) {
+            Receive outcome = progressService.save(receive);
+        }
+
+        if (result > 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('검수계획 등록이 완료되었습니다.');</script>");
+            writer.flush();
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('검수계획 등록에 실패 하였습니다.');</script>");
+            writer.flush();
+        }
+
+        Progress progress2 = progressService.getMaxProgress(orders.getOrderNum()); // max 서비스 추가
+        Integer sumCount = progressService.totalAmount(orders.getOrderNum()) == null ? 0 : progressService.totalAmount(orders.getOrderNum());
+        Integer remaining = 0;
+
+        if (orders != null) {
+            remaining = orders2.getOrderCount() - sumCount;
+        }
+        List<Progress> progressList = progressService.progressListAjax(orders.getOrderNum());
+        // result가 null인것중에 첫번째 행 찾기
+        Progress progress1 = progressList.stream().filter(x -> x.getProgressResult() == null)
+                .findFirst().orElse(null);
+        Long progressNum = progress1 == null ? 0 : progress1.getProgressNum();
+
+        model.addAttribute("orders", orders2);
+        model.addAttribute("progress", progress2);
+        model.addAttribute("progressNum", progressNum);
+        model.addAttribute("remaining", remaining);
+
+
         return "/part2/progressListAjax";
     }
 
@@ -166,7 +246,10 @@ public class ProgressController {
     public String deleteProgressAjax(@RequestParam("progressNum") Long progressNum, @RequestParam("orderNum") Long orderNum, Model model, HttpServletResponse response) throws IOException {
         Integer result = progressService.deleteProgressAjax(progressNum); //삭제 후
         List<Progress> progress = progressService.progressListAjax(orderNum); // 리스트 다시 조회
-
+      // result가 null인것중에 첫번째 행 찾기
+        Progress progress1 = progress.stream().filter(x -> x.getProgressResult() == null)
+                .findFirst().orElse(null);
+        Long progressNum2 = progress1 == null ? 0 : progress1.getProgressNum();
         if (result > 0) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
@@ -180,6 +263,7 @@ public class ProgressController {
         }
 
         model.addAttribute("progressList", progress); //삭제하고 남은 리스트 보여주기
+        model.addAttribute("progressNum", progressNum2);
         return "/part2/progressListAjax";
     }
 
