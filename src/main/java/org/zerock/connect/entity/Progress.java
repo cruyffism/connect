@@ -25,13 +25,13 @@ public class Progress {
     private Long progressNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="orderNum")
+    @JoinColumn(name="orderNum", nullable = false)
     private Orders orders;
 
     @Column
     private Integer progressAmount;
 
-    @Column
+    @Column(nullable = false)
     private LocalDate progressDate;
 
     @Column(nullable = false)
@@ -40,7 +40,7 @@ public class Progress {
     @Column(nullable = false)
     private Integer progressPercent;
 
-    @Column(nullable = false)
+    @Column
     private String progressResult;
 
 }

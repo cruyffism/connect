@@ -65,4 +65,20 @@ public class ProgressService {
     public Integer deleteProgressAjax(Long progressNum) {
         return progressRepository.deleteByProgressNum(progressNum);
     }
+
+    //검수 처리 저장
+    @Transactional
+    public Integer updateProgress(Integer progressAmount, String progressResult, double percent, Long progressNum) {
+        return progressRepository.updateProgress(progressAmount, progressResult, (int) percent, progressNum);
+    }
+
+    public Orders getOrderCount(Long orderNum) {
+        return ordersRepository.progressChoiceAjax(orderNum);
+    }
+
+    // 100% 이면 남은 등록 차수를 지우기
+    @Transactional
+    public Integer deleteProgress(Long orderNum, Long progressNum) {
+        return progressRepository.deleteProgress(orderNum, progressNum);
+    }
 }

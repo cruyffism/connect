@@ -58,7 +58,7 @@ function progressChoiceAjax(orderNum, index) { // 위에서 보낸 매개변수 
                 document.getElementById('index' + index).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
             }
             progressListAjax(-1);
-            document.getElementById('progressDate').value = new Date().toISOString().substring(0, 10);
+            // document.getElementById('progressDate').value = new Date().toISOString().substring(0, 10);
             setTimeout(function () {
             }, 1000)
         },
@@ -96,7 +96,7 @@ function saveProgress() {
             const f = document.getElementById("form1");
             console.log('orderNum : ', f.orderNum.value);
             document.getElementById('index' + f.orderNum.value).className += "table-info";// 배경색 스타일 선택 누른부분만 class 추가
-            document.getElementById('progressDate').value = new Date().toISOString().substring(0, 10);
+            // document.getElementById('progressDate').value = new Date().toISOString().substring(0, 10);
 
             setTimeout(function () {
             }, 1000)
@@ -149,16 +149,38 @@ function caldate() {
     }
 }
 
-//수량 제한 걸기
-//수량 제한 걸기
-function limitNumber() {
-    var progressAmount = parseInt(document.getElementById("progressAmount").value, 10);
-    var remaining = parseInt(document.getElementById("remaining").textContent, 10);
+//날짜 계산
+function progressDateCheck() {
+    var orderDate = document.getElementById("orderDate22").textContent;
+    var receiveDueDate = document.getElementById("receiveDueDate").textContent;
+    console.log("orderDate : ",orderDate)
+    console.log("receiveDueDate : ",receiveDueDate)
+    const f2 = document.getElementById("form2");
+    console.log("progressDate : ",f2.progressDate.value)
+    if (orderDate > f2.progressDate.value) {
+        alert("발주일자 이후로 선택해주세요.");
+        $("#progressDate").val("");
+        $("#progressDate").focus();
+    } else if (receiveDueDate < f2.progressDate.value) {
+        alert("입고예정일 이전으로 선택해주세요.");
+        $("#progressDate").val("");
+        $("#progressDate").focus();
+    }
+}
 
+
+//수량 제한 걸기
+function limitNumber(progressNum) {
+    console.log("p : ",progressNum)
+    var progressAmount = parseInt(document.getElementById("amount"+progressNum).value, 10);
+    var remaining = parseInt(document.getElementById("remaining").value, 10);
+
+    console.log(progressAmount)
+    console.log(remaining)
     if (progressAmount > remaining) {
         alert("발주 수량을 넘길수 없습니다.");
-        $("#progressAmount").val("");
-        $("#progressAmount").focus();
+        document.getElementById("amount"+progressNum).value="";
+        document.getElementById("amount"+progressNum).focus();
     }
 }
 
@@ -172,6 +194,40 @@ function deleteProgressAjax(progressNum, orderNum) {
     $.ajax({
         url: "/part2/deleteProgressAjax",
         type: 'GET',
+        cache: false,
+        data: $('#form3').serialize(),
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data)
+
+            // 첫번째 폼
+            progressScheduleListAjax(f1.page.value,0);
+            // 두번째폼
+            progressChoiceAjax(orderNum, orderNum);
+
+
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
+
+//검수 처리 저장
+function updateProgress(progressNum, orderNum) {
+    const innerHtml = $("#progressList"); // innerHtml의 위치를 선정해줌 (html의 아이디값과 일치 시킴!)
+    const f = document.getElementById("form3");
+    const f1 = document.getElementById("form1");
+    f.progressNum.value = progressNum;
+    f.progressAmount.value = document.getElementById("amount"+progressNum).value;
+    f.progressResult.value = document.getElementById("result"+progressNum).value;
+    f.orderNum.value = orderNum;
+    $.ajax({
+        url: "/part2/updateProgress",
+        type: 'POST',
         cache: false,
         data: $('#form3').serialize(),
         dataType: "html",
