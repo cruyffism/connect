@@ -210,12 +210,12 @@ public class ProgressController {
         if (result > 0) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
-            writer.println("<script>alert('검수계획 등록이 완료되었습니다.');</script>");
+            writer.println("<script>alert('검수처리가 완료되었습니다.');</script>");
             writer.flush();
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
-            writer.println("<script>alert('검수계획 등록에 실패 하였습니다.');</script>");
+            writer.println("<script>alert('검수처리에 실패 하였습니다.');</script>");
             writer.flush();
         }
 
