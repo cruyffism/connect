@@ -1,6 +1,7 @@
 .container {
-  margin: 70px auto;
+  margin: 30px auto;
   height: 100%;
+  width: 1700px !important;
 }
 
 #header {
@@ -13,7 +14,7 @@ h3{
 }
 
 #titleBox {
-  margin:60px 0px 0px 0px;
+  margin:60px 0 0 0;
 }
 
 #btn1 {

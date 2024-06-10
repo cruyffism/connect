@@ -75,3 +75,10 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   cursor: pointer;
 }
 
+#searchContainer.d-flex.align-items-center.mx-auto {
+  margin: 0 400px 0 20px !important;
+}
+
+#productList.mx-auto {
+  margin-top: 10px !important;
+}

@@ -14,6 +14,7 @@ import org.zerock.connect.Service.part0.ProductService;
 import org.zerock.connect.Service.part1.ItemService;
 import org.zerock.connect.entity.Product;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -63,7 +64,13 @@ public class ProductController {
 //      인서트
 
 //        System.out.println(AllProductList);
-        product.setProductId(product.getProductId()+"-"+product.getProductStartdate());
+        // LocalDate 타입의 날짜를 문자열로 변환 > "-"를 제거
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String formattedDate = product.getProductStartdate().format(formatter);
+
+        // 제품 ID와 날짜 합치기
+        product.setProductId(product.getProductId() + formattedDate);
+//        product.setProductId(product.getProductId()+product.getProductStartdate());
         Product InsertProduct = productService.saveProduct(product);
         return "/part0/productForm";
     }
