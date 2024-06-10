@@ -33,7 +33,7 @@ public class StockListController {
     //  재고현황관리
 //    전체조회
     @GetMapping("/stockList")
-    public String stockList(Model model , @PageableDefault(size = 1, sort = "totalOrderCount", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String stockList(Model model , @PageableDefault(size = 15, sort = "totalOrderCount", direction = Sort.Direction.ASC) Pageable pageable) {
         System.out.println("재고현황관리");
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);

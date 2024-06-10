@@ -124,8 +124,8 @@
                 <th scope="col">품목코드</th>
                 <th scope="col">품목명</th>
                 <th scope="col">재고수량</th>
-                <th scope="col">출고수량</th>
-                <th scope="col">품목가격</th>
+<!--                <th scope="col">출고수량</th>-->
+                <th scope="col">입고날짜</th>
                 <th scope="col">남은 재고가격</th>
             </tr>
             </thead>
@@ -137,7 +137,7 @@
                     <td th:text="${receivesLists.orders.procurementPlan.contractItem.item.itemIndex}"></td>
                     <td th:text="${receivesLists.orders.procurementPlan.contractItem.item.itemName}"></td>
                     <td th:text="${receivesLists.receiveCount}"></td>
-                    <td th:text="${receivesLists.orders.orderDate}"></td>
+<!--                    <td th:text="${receivesLists.orders.orderDate}"></td>-->
                     <td th:text="${receivesLists.receiveDate}"></td>
                     <td th:text="${receivesLists.receiveCount} * ${receivesLists.orders.procurementPlan.contractItem.contractPrice} + 원"></td>
                 </tr>
