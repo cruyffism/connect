@@ -21,7 +21,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "inner join Company c on ci.company.businessId = c.businessId " +
             "left join Receive r on o.orderNum = r.orders.orderNum " +
-            "where o.orderDate between :startDate and :endDate and c.comName like concat('%', :comName, '%') and i.itemName like concat('%',:itemName,'%')")
+            "where o.orderDate between :startDate and :endDate and c.comName like concat('%', :comName, '%') and i.itemName like concat('%',:itemName,'%') " +
+            "order by p.orders.receiveDueDate")
     List<Orders> orderListAjax(@Param("comName") String comName, @Param("itemName") String itemName, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     //발주 리스트 전체 조회
@@ -31,7 +32,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
             "inner join Item i on ci.item.itemIndex = i.itemIndex " +
             "inner join Company c on ci.company.businessId = c.businessId " +
             "left join Receive r on o.orderNum = r.orders.orderNum " +
-            "where c.comName like concat('%', :comName, '%') and i.itemName like concat('%',:itemName,'%')")
+            "where c.comName like concat('%', :comName, '%') and i.itemName like concat('%',:itemName,'%') " +
+            "order by p.orders.receiveDueDate")
     List<Orders> findOrderList(@Param("comName") String comName, @Param("itemName") String itemName);
 
     //발주 마감 아작스 API

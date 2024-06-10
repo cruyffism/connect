@@ -73,7 +73,7 @@
         </tr>
         <tr>
             <td th:text="${progress == null} ? '1차' : ${progress.progressCount + 1 } +'차'"></td>
-            <td><input id="progressDate" name="progressDate" class="form-control form-control-sm" type="date" onchange="return progressDateCheck()"></td>
+            <td><input id="progressDate" name="progressDate" class="form-control form-control-sm" type="date" onchange="return progressDateCheck()" required></td>
             <td><button th:if="${orders != null && remaining != 0}" id="btn3" type="button" class="btn btn-sm btn-success" onclick="return saveProgress()">등록</button></td>
         </tr>
         </tbody>

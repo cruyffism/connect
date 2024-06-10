@@ -168,7 +168,7 @@ function deleteOrderAjax(page, planNum, orderNum) {
         async: false,
         success: function (data) {
             $(innerHtml).html(data)
-
+            procurementPlanListAjax(1);
             setTimeout(function () {
             }, 1000)
         },
