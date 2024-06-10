@@ -61,14 +61,22 @@
             content: '▼';
             position: absolute;
             right: 5px; /* 위치 조정 */
-            top: 50%;
-            transform: translateY(-50%);
+            top: 20%;
+            transform: translateY(-80%);
             pointer-events: none;
             padding: 0 0 0 0;
         }
         .dropdown-container select:invalid {
             color: gray; /* 선택되지 않았을 때의 색상 */
         }
+
+        .dropdown-container select:invalid {
+            display: none;
+        }
+        th {
+            padding: 8px 3px !important;
+        }
+
     </style>
 
     <script>
@@ -225,18 +233,18 @@
             <table class="table" style="width: 99%; margin-top: 8px; text-align: center;">
                 <colgroup>
                     <col width="3%">
-                    <col width="9.5%">
-                    <col width="9.5%">
-                    <col width="9.5%">
-                    <col width="10%">
-                    <col width="9.5%">
-                    <col width="9.5%">
-                    <col width="11%">
-                    <col width="9%">
-<!--                    <col width="7%">-->
-                    <col width="9.5%">
                     <col width="7%">
                     <col width="9.5%">
+                    <col width="14%">
+                    <col width="10%">
+                    <col width="7%">
+                    <col width="7%">
+                    <col width="10%">
+                    <col width="7%">
+<!--                    <col width="7%">-->
+                    <col width="9.5%">
+                    <col width="8%">
+                    <col width="8%">
                 </colgroup>
                 <thead class="table-secondary">
                 <tr>

@@ -13,13 +13,14 @@ function handlePublishButtonClick() {
     var selectedRow = selectedRadioButton.closest('tr');
 
     // 선택된 행의 데이터 가져오기
-    var orderNum = selectedRow.querySelector('td:nth-child(2)').textContent;
-    var comName = selectedRow.querySelector('td:nth-child(3)').textContent;
-    var itemCode = selectedRow.querySelector('td:nth-child(4)').textContent;
-    var itemName = selectedRow.querySelector('td:nth-child(5)').textContent;
-    var orderDate = selectedRow.querySelector('td:nth-child(6)').textContent;
-    var orderCount = selectedRow.querySelector('td:nth-child(7)').textContent;
-    var contractPrice = selectedRow.querySelector('td:nth-child(8)').textContent;
+    var receiveDate = selectedRow.querySelector('td:nth-child(2)').textContent;
+    var orderNum = selectedRow.querySelector('td:nth-child(3)').textContent;
+    var comName = selectedRow.querySelector('td:nth-child(4)').textContent;
+    var itemCode = selectedRow.querySelector('td:nth-child(5)').textContent;
+    var itemName = selectedRow.querySelector('td:nth-child(6)').textContent;
+    var orderDate = selectedRow.querySelector('td:nth-child(7)').textContent;
+    var orderCount = selectedRow.querySelector('td:nth-child(8)').textContent;
+    var contractPrice = selectedRow.querySelector('td:nth-child(10)').textContent;
 
     // // 숨겨진 입력 필드에서 값 가져오기
     // var comAdd = document.getElementById('comAdd').value;
@@ -40,6 +41,7 @@ function handlePublishButtonClick() {
     var totalPrice = parseInt(orderCount) * parseInt(contractPrice);
 
     // 거래명세서 폼에 데이터 출력하기
+    document.getElementById('receiveDate').textContent = receiveDate;
     document.getElementById('orderNum').textContent = orderNum;
     document.getElementById('comName').textContent = comName;
     document.getElementById('itemCode').textContent = itemCode;
