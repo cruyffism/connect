@@ -46,7 +46,7 @@ public class StockListController {
         List<Receive> pageContent = receiveList.subList(start, end);
         Page<Receive> receivesLists = new PageImpl<>(pageContent, pageable, receiveList.size());
         model.addAttribute("receivesLists", receivesLists);
-        return "part3/stockList";
+        return "/part3/stockList";
     }
     //    날짜별로 조회
     @GetMapping("/stockDateList")
@@ -63,7 +63,7 @@ public class StockListController {
         List<Receive> pageContent = receiveList.subList(start, end);
         Page<Receive> receivesLists = new PageImpl<>(pageContent, pageable, receiveList.size());
         model.addAttribute("receivesLists", receivesLists);
-        return "part3/stockList";
+        return "/part3/stockList";
     }
 
 //    자재관리 그래프 대분류 , 중분류 , 소분류로 보여주기
@@ -74,7 +74,7 @@ public class StockListController {
         model.addAttribute("graphData",graphData);
         System.out.println("그래프 데이터"+graphData);
 
-        return "part3/StockgraphForm";
+        return "/part3/StockgraphForm";
     }
 
     @GetMapping("/stockAssylistgragh")
@@ -84,7 +84,7 @@ public class StockListController {
         model.addAttribute("graphData",graphData);
         System.out.println("그래프 데이터"+graphData);
 
-        return "part3/StockgraphForm";
+        return "/part3/StockgraphForm";
     }
 
     @GetMapping("/stockPartlistgragh")
@@ -94,7 +94,7 @@ public class StockListController {
         model.addAttribute("graphData",graphData);
         System.out.println("그래프 데이터"+graphData);
 
-        return "part3/StockgraphForm";
+        return "/part3/StockgraphForm";
     }
 
 

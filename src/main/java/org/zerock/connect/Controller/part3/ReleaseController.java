@@ -44,7 +44,7 @@ public class ReleaseController {
         List<Receive> receiveList = receiveService.getAllReceiveSortedByReceiveDate();
         model.addAttribute("receiveList", receiveList);
 
-        return "part3/releaseList";
+        return "/part3/releaseList";
     }
 
     // 출고수량 저장

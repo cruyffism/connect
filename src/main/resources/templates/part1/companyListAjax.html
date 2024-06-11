@@ -15,10 +15,10 @@
         <tr th:each="company:${companyList}"> <!--백엔드에서 companyList로 보내준 값을 company에 저장-->
             <!-- for문돌리기 -->
             <td th:text="${company.comName}"></td> <!--꺼내서 사용-->
-            <td th:text="${#strings.substring(company.businessId, 0, 3) + '-' + #strings.substring(company.businessId, 3, 5) + '-' + #strings.substring(company.businessId, 5)}"></td>
+            <td th:text="${company.businessId}"></td>
             <td th:text="${company.comAdd}"></td>
             <td th:text="${company.comManager}"></td>
-            <td th:text="${#strings.substring(company.comPhone, 0, 3) + '-' + #strings.substring(company.comPhone, 3, 7) + '-' + #strings.substring(company.comPhone, 7)}"></td>
+            <td th:text="${company.comPhone}"></td>
             <td th:text="${company.comEmail}"></td>
             <td th:text="${company.comAccount}"></td>
         </tr>

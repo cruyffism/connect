@@ -43,7 +43,7 @@ public class ItemController {
     //    제품선택화면폼
     @GetMapping("/productList")
     public String productList(){
-        return "part1/productList";
+        return "/part1/productList";
     }
 
     //제품선택화면 AJAX + 검색
@@ -62,7 +62,7 @@ public class ItemController {
         List<Product> pageContent = productList.subList(start, end);
         Page<Product> product = new PageImpl<>(pageContent, pageable, productList.size());
         model.addAttribute("productList",product);
-        return "part1/productListAjax";
+        return "/part1/productListAjax";
     }
 
 

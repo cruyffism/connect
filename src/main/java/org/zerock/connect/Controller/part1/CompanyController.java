@@ -67,13 +67,14 @@ public class CompanyController {
         int start = (int) pageable.getOffset();//페이지러블 객체에서 알아서 나오는거 >> 사이즈 10으로 설정 싯 페이지를 1로 넘기면 1페이지에 1~10나옴(size가 10이니까) 2면(11~20)
         int end = Math.min((start + pageable.getPageSize()), companyList.size()); // 10을 계산한 구문
 
-        logger.info("companyList : {}", companyList);
+//        logger.info("companyList : {}", companyList);
 
         List<Company> pageContent = companyList.subList(start, end); // 데이터가 30개 쌓여있으면  1~10, 11~20, 21~30 이렇게 짤라라
         Page<Company> company = new PageImpl<>(pageContent, pageable, companyList.size()); //현재페이지의 보여줄 리스트, 페이지러블 객체, 전체 리스트 개수(예를 들면 글 30개)
         model.addAttribute("companyList", company);//리스트 객체를 페이징 처리 후  보냄
         return "/part1/companyListAjax";
     }
+
 
     //업체 등록 중복체크
     @GetMapping("/businessIdCheck")

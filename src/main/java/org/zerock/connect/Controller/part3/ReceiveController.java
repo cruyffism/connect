@@ -60,7 +60,7 @@ public class ReceiveController {
         Page<Receive> receiveList = new PageImpl<>(pageContent, pageable, receive.size()); //현재페이지의 보여줄 리스트, 페이지러블 객체, 전체 리스트 개수(예를 들면 글 30개)
         model.addAttribute("noReceiveList", receiveList);//리스트 객체를 페이징 처리 후  보냄
 
-        return "part3/noReceiveListAjax"; // 해당 뷰로 이동
+        return "/part3/noReceiveListAjax"; // 해당 뷰로 이동
     }
 
     // 입고 완료 품목 리스트 아작스

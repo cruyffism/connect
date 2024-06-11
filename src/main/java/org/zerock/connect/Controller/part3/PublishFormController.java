@@ -51,7 +51,7 @@ public class PublishFormController {
         List<Publish> publishList = publishService.getAllPublish();
         model.addAttribute("publishList", publishList);
 
-        return "part3/publishForm";
+        return "/part3/publishForm";
     }
 
     // 검색
@@ -108,7 +108,7 @@ public class PublishFormController {
         System.out.println("완료된 거래명세서 모달창");
         Publish invoiceDetails = publishService.getInvoiceDetailsByNumber(invoiceNumber);
         model.addAttribute("invoiceDetails", invoiceDetails);
-        return "part3/invoiceDetailsModal";
+        return "/part3/invoiceDetailsModal";
     }
 
 
