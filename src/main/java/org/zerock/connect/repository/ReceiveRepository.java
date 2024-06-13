@@ -20,6 +20,10 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 
     List<Receive> findByReceiveYn(String receiveYn);
 
+
+    @Query(value = "select r from Receive r where r.receiveYn='Y'")
+    List<Receive> findAllReceiveYn();
+
     // 입고 예정 품목 리스트 아작스
     @Query("select r,o,p,ci,c,i from Receive r " +
             "inner join Orders o on r.orders.orderNum = o.orderNum " +

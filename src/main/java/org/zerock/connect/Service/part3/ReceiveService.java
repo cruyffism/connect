@@ -61,7 +61,7 @@ public class ReceiveService {
 
     // 정렬된 입고 완료 품목
     public List<Receive> getAllReceiveSortedByReceiveDate() {
-        return receiveRepository.findAll(Sort.by(Sort.Direction.ASC, "receiveDate"));
+        return receiveRepository.findAllReceiveYn();
     }
 
     public List<Receive> searchReceiveDate(LocalDate startDate , LocalDate endDate){
