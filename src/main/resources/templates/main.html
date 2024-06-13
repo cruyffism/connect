@@ -103,7 +103,7 @@
             margin-right: 100px;
             padding: 20px 20px;
             /*border-radius: 5px;*/
-            height: 400px;
+            height: 450px;
             background-color: white;
         }
 
@@ -117,7 +117,7 @@
             box-shadow: 0 0 1px 1px rgba(114, 114, 114, 0.4);
             padding: 20px 20px;
             /*border-radius: 5px;*/
-            height: 400px;
+            height: 450px;
             background-color: white;
         }
 
@@ -202,6 +202,17 @@
             <h1 class="h3 mb-3 fw-normal" style="text-align: center; padding-top: 20px;">조달관리</h1>
             <hr>
             <div class="box1">
+                <th:block th:if="${session.loginedUser.getMemberDep() =='3'}">
+                <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
+                        th:onclick="|location.href='@{/part0/productForm}'|">제품정보등록
+                </button>
+                <!--      <div style="margin-top: 30px;">-->
+                <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
+                        th:onclick="|location.href='@{/part1/companyForm}'|">업체등록
+                </button>
+                </th:block>
+
+
                 <button class="btn btn-primary w-100 py-2" type="submit" style="margin-bottom: 10px;"
                         th:onclick="|location.href='@{/part1/productList}'|">품목정보등록
                 </button>

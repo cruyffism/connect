@@ -45,8 +45,13 @@ public class MemberController {
                 session.setMaxInactiveInterval(60*30);
                 // member_dep가 2인 경우
                 return "redirect:/Con/main";
-            } else {
+            } else if("3".equals(memberDep)){
+                session.setAttribute("loginedUser",loginResult);
+                session.setMaxInactiveInterval(60*30);
                 // member_dep가 다른 경우
+                return "redirect:/Con/main";
+            }
+            else {
                 return "redirect:/Con/main";
             }
         } else {
