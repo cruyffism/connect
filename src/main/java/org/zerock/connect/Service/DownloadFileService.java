@@ -12,7 +12,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class DownloadFileService {
 
-    private static final String UPLOAD_DIR = "C:\\upload\\";
+    
+//    윈도우 경로
+//    private static final String UPLOAD_DIR = "C:\\upload\\";
+    
+    
+//    우분투 경로
+    private static final String UPLOAD_DIR = "/home/mit305/back/connect/images/";
+
 
     public void download(String fileName, HttpServletResponse response) {
         File file = new File(UPLOAD_DIR + fileName);

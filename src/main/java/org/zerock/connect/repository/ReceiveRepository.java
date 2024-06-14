@@ -21,7 +21,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
     List<Receive> findByReceiveYn(String receiveYn);
 
 
-    @Query(value = "select r from Receive r where r.receiveYn='Y'")
+    @Query(value = "select r from Receive r where r.receiveYn='Y' order by r.receiveDate asc")
     List<Receive> findAllReceiveYn();
 
     // 입고 예정 품목 리스트 아작스
@@ -95,7 +95,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 //            "JOIN Unit u ON i.unit.unitCode = u.unitCode " +
 //            "GROUP BY u.unitCode")
     @Query(value = "select r.orders.procurementPlan.contractItem.item.unit.unitName, sum(r.receiveCount * r.orders.procurementPlan.contractItem.contractPrice) " +
-            "from Receive r group by r.orders.procurementPlan.contractItem.item.unit.unitCode")
+            "from Receive r where r.receiveYn='Y' group by r.orders.procurementPlan.contractItem.item.unit.unitCode")
 
 //    @Query(value = "select r from Releases r group by r.receive.orders.procurementPlan.planNum")
     List<Object[]> groupbyUnitcode();
@@ -111,7 +111,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 //            "GROUP BY a.assyCode")
 
     @Query(value = "select r.orders.procurementPlan.contractItem.item.assy.assyName, sum(r.receiveCount * r.orders.procurementPlan.contractItem.contractPrice) " +
-            "from Receive r group by r.orders.procurementPlan.contractItem.item.assy.assyCode")
+            "from Receive r where r.receiveYn='Y' group by r.orders.procurementPlan.contractItem.item.assy.assyCode")
 
 
     List<Object[]> groupbyAssycode();
@@ -127,7 +127,7 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 //            "GROUP BY part.partCode")
 
     @Query(value = "select r.orders.procurementPlan.contractItem.item.part.partName, sum(r.receiveCount * r.orders.procurementPlan.contractItem.contractPrice) " +
-            "from Receive r group by r.orders.procurementPlan.contractItem.item.part.partCode")
+            "from Receive r where r.receiveYn='Y' group by r.orders.procurementPlan.contractItem.item.part.partCode")
 
     List<Object[]> groupbyPartcode();
 
