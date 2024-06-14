@@ -37,8 +37,8 @@ public interface ContractItemRepository extends JpaRepository <ContractItem, Lon
             "ON C.item.itemIndex = I.itemIndex " +
             "JOIN  Product P " +
             "on I.product.productId = P.productId " +
-            "where C.conitemNo != ALL (select pro.contractItem.conitemNo from ProcurementPlan pro) " +
-            "and C.item.itemName = :itemName")
+            "where " +
+            "C.item.itemName = :itemName")
     List<ContractItem> selectByConitemName(@Param("itemName") String itemName);
 
 
