@@ -39,7 +39,13 @@ public class PublishFormController {
 
     // 거래명세서발행페이지
     @GetMapping("/publishForm")
-    public String publishForm(Model model) {
+    public String publishForm(Model model,HttpSession session) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         System.out.println("입고완료품목");
 
         // 입고 완료 품목
@@ -58,8 +64,14 @@ public class PublishFormController {
     @GetMapping("/searchReceive")
     public String searchReceive(
             @RequestParam("searchText") String keyword, // 입력한 검색어
-            Model model
+            Model model,HttpSession session
     ) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         List<Receive> searchResult = receiveService.searchReceive(keyword);
         model.addAttribute("receiveList", searchResult);
 

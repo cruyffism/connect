@@ -1,6 +1,7 @@
 package org.zerock.connect.Controller.part3;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.connect.Service.part3.ReceiveService;
 import org.zerock.connect.Service.part3.ReleasesService;
+import org.zerock.connect.entity.Member;
 import org.zerock.connect.entity.Product;
 import org.zerock.connect.entity.Receive;
 import org.zerock.connect.entity.Releases;
@@ -37,7 +39,13 @@ public class ReleaseController {
 
     // 출고 리스트 뷰
     @GetMapping("/releaseList")
-    public String getAllReleases(Model model) {
+    public String getAllReleases(Model model, HttpSession session) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         System.out.println("출고관리");
 
         // 입고 완료 품목
@@ -83,7 +91,13 @@ public class ReleaseController {
 
 
     @GetMapping("searchreleaselist")
-    public String searchreleaselist(@RequestParam("itemName") String itemName,Model model) {
+    public String searchreleaselist(@RequestParam("itemName") String itemName,Model model,HttpSession session) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
 
         List<Receive> searchreleaselist = receiveService.searchreleaselist(itemName);
 

@@ -3,6 +3,7 @@ package org.zerock.connect.Controller.part1;
 
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,13 @@ public class ItemController {
 
     //    제품선택화면폼
     @GetMapping("/productList")
-    public String productList(){
+    public String productList(HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         return "/part1/productList";
     }
 
@@ -68,8 +75,14 @@ public class ItemController {
 
     //    품목 등록 화면폼
     @GetMapping("/itemForm")
-    public String itemForm(Model model, @RequestParam("productId")String productId){
+    public String itemForm(Model model, @RequestParam("productId")String productId ,HttpSession session){
 
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
 //        분류별 리스트 불러와서 모델로 출력
         List<Unit> unitList = itemService.findUnitList();
         List<Part> partList = itemService.findPartList();
@@ -122,7 +135,14 @@ public class ItemController {
                            @RequestParam("partCode") String partCode,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("itemMaterial") String itemMaterial,
-                           Model model){
+                           Model model,HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
+
         logger.info("productId : {}", productId);
         Product product = new Product(); //객체 생성
         product.setProductId(productId); //객체로 만들어서 조인 값을 저장

@@ -2,6 +2,7 @@ package org.zerock.connect.Controller.part2;
 
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.zerock.connect.Controller.part1.CompanyController;
 import org.zerock.connect.Service.part2.PurchaseOrderService;
 import org.zerock.connect.entity.Company;
+import org.zerock.connect.entity.Member;
 import org.zerock.connect.entity.Orders;
 import org.zerock.connect.entity.ProcurementPlan;
 
@@ -35,7 +37,13 @@ public class PurchaseOrderController {
 
     //빈곽 폼 조회
     @GetMapping("/purchaseOrderForm")
-    public String purchaseOrderForm() {
+    public String purchaseOrderForm(HttpSession session) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         return "/part2/purchaseOrderForm";
     }
 

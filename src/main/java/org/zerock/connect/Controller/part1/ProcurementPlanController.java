@@ -1,6 +1,7 @@
 package org.zerock.connect.Controller.part1;
 
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
@@ -12,6 +13,7 @@ import org.zerock.connect.Service.part1.ItemService;
 import org.zerock.connect.Service.part1.ProcurementPlanService;
 import org.zerock.connect.entity.ContractItem;
 import org.zerock.connect.entity.Item;
+import org.zerock.connect.entity.Member;
 import org.zerock.connect.entity.ProcurementPlan;
 
 import java.util.List;
@@ -32,7 +34,13 @@ public class ProcurementPlanController {
     
 //    조달 계획 등록폼
     @GetMapping("/procurementPlan")
-    public String procurementPlan(Model model , ContractItem contractItem,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String procurementPlan(Model model , ContractItem contractItem,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable,HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -53,7 +61,13 @@ public class ProcurementPlanController {
     }
 
     @GetMapping("/selectProcurementItem")
-    public String selectProcurementItem(@RequestParam("conitemNo") Long conitemNo , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String selectProcurementItem(@RequestParam("conitemNo") Long conitemNo , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable,HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -82,7 +96,13 @@ public class ProcurementPlanController {
     }
 
     @GetMapping("/searchItem")
-    public String searchItem(@RequestParam("itemName") String itemName , @PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable , Model model){
+    public String searchItem(@RequestParam("itemName") String itemName , @PageableDefault(size = 7, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable , Model model, HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
 
 
         System.out.println(itemName + "으로 검색");

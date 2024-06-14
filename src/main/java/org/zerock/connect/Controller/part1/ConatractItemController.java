@@ -1,6 +1,7 @@
 package org.zerock.connect.Controller.part1;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
@@ -16,6 +17,7 @@ import org.zerock.connect.Service.part1.ItemService;
 import org.zerock.connect.entity.Company;
 import org.zerock.connect.entity.ContractItem;
 import org.zerock.connect.entity.Item;
+import org.zerock.connect.entity.Member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -41,7 +43,14 @@ public class ConatractItemController {
     DownloadFileService downloadFileService;
 
     @GetMapping("/contractItem")
-    public String contractItem(Company company , Item item , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String contractItem(Company company , Item item , Model model , @PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable, HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
+
 //      모든 업체 리스트 출력
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
@@ -61,7 +70,13 @@ public class ConatractItemController {
     
 
     @GetMapping("/NocontractItem")
-    public String NocontractItem(Company company , Item item , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String NocontractItem(Company company , Item item , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable ,HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
 //      모든 업체 리스트 출력
         List<Company> AllCompany = companyService.findAllCompany();
         model.addAttribute("AllCompany",AllCompany);
@@ -80,7 +95,13 @@ public class ConatractItemController {
 
 //   제품선택하기
     @GetMapping("selectContractItem")
-    public String selectContractItem(@RequestParam("selectItemIndex")Long itemIndex , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable){
+    public String selectContractItem(@RequestParam("selectItemIndex")Long itemIndex , Model model ,@PageableDefault(size = 5, sort = "conitemNo", direction = Sort.Direction.ASC) Pageable pageable ,HttpSession session){
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         System.out.println(itemIndex);
 
 //선택한 item정보 모델로 출력하기

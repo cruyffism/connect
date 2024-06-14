@@ -1,6 +1,7 @@
 package org.zerock.connect.Controller.part2;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
@@ -25,7 +26,13 @@ public class ProgressController {
 
     //빈곽 폼 조회
     @GetMapping("/progressForm")
-    public String progressForm() {
+    public String progressForm(HttpSession session) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         return "/part2/progressForm";
     }
 

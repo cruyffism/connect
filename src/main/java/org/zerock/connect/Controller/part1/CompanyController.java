@@ -3,6 +3,7 @@ package org.zerock.connect.Controller.part1;
 
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.zerock.connect.Service.part1.CompanyService;
 import org.zerock.connect.entity.Company;
 import org.springframework.ui.Model;
+import org.zerock.connect.entity.Member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,7 +32,13 @@ public class CompanyController {
 
     //단순 업체 등록 화면 조회
     @GetMapping("/companyForm")
-    public String companyForm() {
+    public String companyForm(HttpSession session) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         return "/part1/companyForm";
     }
 

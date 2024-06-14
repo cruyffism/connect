@@ -1,6 +1,7 @@
 package org.zerock.connect.Controller.part3;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.connect.Service.part3.ReceiveService;
+import org.zerock.connect.entity.Member;
 import org.zerock.connect.entity.Receive;
 
 import java.io.IOException;
@@ -25,7 +27,13 @@ public class ReceiveController {
 
     //단순 입고 화면 페이지 조회
     @GetMapping("/receiveList")
-    public String receiveListForm() {
+    public String receiveListForm(HttpSession session) {
+        session.getAttribute("loginedUser");
+        Member member= (Member) session.getAttribute("loginedUser");
+        if (member==null){
+            System.out.println("로그인하세요");
+            return "redirect:/Con/login";
+        }
         return "/part3/receiveList";
     }
 
