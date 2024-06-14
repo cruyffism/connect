@@ -82,6 +82,14 @@ public class ReleaseController {
     }
 
 
+    @GetMapping("searchreleaselist")
+    public String searchreleaselist(@RequestParam("itemName") String itemName,Model model) {
 
+        List<Receive> searchreleaselist = receiveService.searchreleaselist(itemName);
+
+        model.addAttribute("receiveList",searchreleaselist);
+
+        return "/part3/releaseList";
+    }
 
 }

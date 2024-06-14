@@ -158,6 +158,12 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
     @Query("select r from  Receive r where r.receiveDate between :startDate and :endDate ")
     List<Receive> searchReceiveDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
+    @Query(value = "select r " +
+            "from Receive r " +
+            "where r.orders.procurementPlan.contractItem.item.itemName like %:itemName% " +
+            "and r.receiveYn='Y' order by r.receiveDate asc ")
+    List<Receive> searchreleaselist(@Param("itemName")String itemName);
+
 }
 
 

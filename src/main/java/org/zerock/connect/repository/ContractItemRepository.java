@@ -38,7 +38,7 @@ public interface ContractItemRepository extends JpaRepository <ContractItem, Lon
             "JOIN  Product P " +
             "on I.product.productId = P.productId " +
             "where " +
-            "C.item.itemName = :itemName")
+            "C.item.itemName like %:itemName%")
     List<ContractItem> selectByConitemName(@Param("itemName") String itemName);
 
 

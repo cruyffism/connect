@@ -67,4 +67,8 @@ public class ReceiveService {
     public List<Receive> searchReceiveDate(LocalDate startDate , LocalDate endDate){
         return receiveRepository.searchReceiveDate(startDate,endDate);
     }
+
+    public List<Receive> searchreleaselist(String itemName){
+        return receiveRepository.searchreleaselist(itemName);
+    }
 }
