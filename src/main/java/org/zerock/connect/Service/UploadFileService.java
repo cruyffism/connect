@@ -19,11 +19,11 @@ public class UploadFileService {
         //지정 문자열 추출        ( .부터 끝까지  = 확장자 가져옴)
 
 //        우분투 경로
-        String uploadDir = "/home/mit305/back/connect/images";
+//        String uploadDir = "/home/mit305/back/connect/images";
 
 
 //        윈도우 경로
-        //String uploadDir = "C:\\upload\\";
+        String uploadDir = "C:\\upload\\";
 
         //universally unique idenfitier 각 개체를 자동으로 고유하게 식별 (중복 방지)
         //고유성을 충족하기 위해 사용(기존 파일 이름을 사용하면 중복으로 오류 발생가능 ㅠㅠ)

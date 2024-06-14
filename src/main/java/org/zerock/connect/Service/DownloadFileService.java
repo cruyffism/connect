@@ -14,11 +14,11 @@ public class DownloadFileService {
 
     
 //    윈도우 경로
-//    private static final String UPLOAD_DIR = "C:\\upload\\";
+    private static final String UPLOAD_DIR = "C:\\upload\\";
     
     
 //    우분투 경로
-    private static final String UPLOAD_DIR = "/home/mit305/back/connect/images/";
+//    private static final String UPLOAD_DIR = "/home/mit305/back/connect/images/";
 
 
     public void download(String fileName, HttpServletResponse response) {
